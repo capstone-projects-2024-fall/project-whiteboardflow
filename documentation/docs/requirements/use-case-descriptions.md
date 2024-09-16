@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Use-case descriptions
 
-#### Use Case 1
+## Use Case 1-practise interview
 A generally uncertain student who just graduated wants to practice their problem solving skills before their job interview.
 1. User opens the WhiteboardFlow application.
 2. User logs into their WhiteboardFlow account.
@@ -15,14 +15,14 @@ A generally uncertain student who just graduated wants to practice their problem
 7. AI determines that the user provided an adequate thought process and was not hesitant overall.
 8. User receives a passing grade of 70%.
 
-#### Use Case 2
+## Use Case 2-delete account
 A user wants to delete their account.
 1. User navigates to the preferences drop-down menu.
 2. User selects ‘delete account’.
 3. User must confirm that they want to delete their account by typing in their password.
 4. System deletes all of the user's profile and information from the Firebase database.
 
-#### Use Case 3
+## Use Case 3-unexpected exit
 A user accidentally exits the app mid-interview but is able to restore their session.
 1. User is currently answering a question.
 2. User accidentally exits out of the WhiteboardFlow tab.
@@ -31,7 +31,7 @@ A user accidentally exits the app mid-interview but is able to restore their ses
 5. User selects ‘Yes’.
 6. User continues their interview question, with their previous whiteboard drawings and time remaining saved from the previous session.
 
-#### Use Case 4
+## Use Case 4-review history
 A user wants to review their performance history.
 1. User logs into their WhiteboardFlow account.
 2. On the homepage, the user selects the "Previous Questions" table in the upper left corner.
@@ -39,7 +39,7 @@ A user wants to review their performance history.
 4. The system displays the question, the AI-generated feedback, and the user’s speech emotion score.
 5. User reviews the feedback and closes the expanded view.
 
-#### Use Case 5
+## Use Case 5-request a different question
 A user requests a more challenging question.
 1. User logs into WhiteboardFlow and starts an interview.
 2. After completing the first question, the user selects the “New Question” option
@@ -48,7 +48,7 @@ A user requests a more challenging question.
 5. User begins solving the problem on the whiteboard, with Ai monitoring their progress.
 6. User finishes some questions, clicks on the exit button, and logs out from the application.
 
-#### Use Case 6
+## Use Case 6-profile name
 A user wants to update their display name.
 1. User logs into their WhiteboardFlow account.
 2. User navigates to the drop-down menu.
@@ -57,7 +57,7 @@ A user wants to update their display name.
 5. User saves the changes. (select save button)
 6. System confirms the change, and the new display name will be reflected in the profile immediately.
 
-#### Use Case 7
+## Use Case 7-reset password
 A user wants to reset their password.
 1. User opens the WhiteboardFlow application and navigates to the login page
 2. User clicks the “Forgot Password” option.
@@ -67,7 +67,7 @@ A user wants to reset their password.
 6. User click the link, enter a new password in the designated field.
 7. User logs in with the updated credentials.
 
-#### Use Case 8
+## Use Case 8-further explaination on hint
 A user requests clarification on a hint provided by the AI.
 1. User is solving a question and requests a hint.
 2. AI provides an initial hint, but the user is still unsure about how to proceed.
