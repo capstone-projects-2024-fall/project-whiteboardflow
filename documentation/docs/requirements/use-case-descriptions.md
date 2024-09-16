@@ -5,7 +5,7 @@ sidebar_position: 5
 # Use-case descriptions
 
 ## Use Case 1-practise interview
-A generally uncertain student who just graduated wants to practice their problem solving skills before their job interview.
+A user wants to practice their problem solving skills before their job interview.
 1. User opens the WhiteboardFlow application.
 2. User logs into their WhiteboardFlow account.
 3. After logging in, the user generates a practice interview question.
