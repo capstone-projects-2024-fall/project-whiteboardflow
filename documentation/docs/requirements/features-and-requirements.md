@@ -35,9 +35,6 @@ sidebar_position: 4
 #### To simulate an interview scenario, the system will begin the written test before the oral test.
 - A score of 65% is considered passing for each test.
 - Feedback will be tailored for each test based on content and performance.
-
-## Nonfunctional Requirements
-
 #### WhiteboardFlow will present the user with an intuitive interface.
 - There will be a prominent “performance” table
     - Important historical data like written or oral test scores
@@ -47,6 +44,9 @@ sidebar_position: 4
     - In the oral test, the user will receive appropriate prompts based on the analysis of their speech emotion recognition and correctness of their response and give relevant feedback.
     - Each message will assure that the user is moving in the right direction.
 - “Don’t panic!” will be incorporated somewhere in the UI.
+  
+## Nonfunctional Requirements
+
 #### The app utilizes speech emotion recognition to analyze the mood or emotional state of the speaker.
 - The speaker’s tone is analyzed using pitch, intensity, rate and timbre.
 - The confidence of the speaker is also analyzed based on duration of speech and pauses, speech patterns, word choice, and content analysis.
