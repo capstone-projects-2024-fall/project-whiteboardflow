@@ -16,7 +16,7 @@ Section 001, Coding exercises, speech-to-text/dictation software, handwriting de
 
 ## Project Abstract
 
-This document proposes a tool to help professionals and students entering the development workforce practice whiteboard-style interview questions.product will generate interview-style coding questions and prompt the user to reason out their solution, either through text or voice dictation, and generate feedback on the thought process to guide the user through the correct thought process to solve the problem. The user can then attempt the problem with actual code or using handwriting dictation to determine correctness, optimization, and efficiency and then provide feedback.
+This document proposes a tool to help professionals and students entering the development workforce practice whiteboard-style interview questions.product will generate interview-style coding questions and prompt the user to reason out their solution, either through text or voice dictation, and generate feedback on the thought process to guide the user through the correct thought process to solve the problem. The user can then attempt the problem with actual code or using handwriting dictation to determine correctness, optimization, and efficiency and then provide the feedback.
 
 ## High Level Requirement
 
