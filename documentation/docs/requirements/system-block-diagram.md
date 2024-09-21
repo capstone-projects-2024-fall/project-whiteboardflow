@@ -3,7 +3,7 @@ sidebar_position: 2
 ---
 
 # System Block Diagram
-![Diagram](./firefox_2024-09-15_21-37-18.png)
+##![Diagram](./firefox_2024-09-15_21-37-18.png)
 ![image](https://github.com/user-attachments/assets/d549ceb3-2ca2-4a0e-93b6-0d9affba805a)
 
 #### Figure 1. High-level design of the WhiteboardFlow application.
