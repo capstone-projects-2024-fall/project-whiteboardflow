@@ -6,6 +6,36 @@ sidebar_position: 4
 
 ## Functional Requirements
 
+#### WhiteboardFlow must implement mock interviews.
+- The interviews will accurately simulate real-world technical and behavioral
+  interviews.
+- Users will be presented with coding problems typically found in technical
+  interviews, relating to topics such as algorithms, data structures, or
+  software design. 
+- Each problem or question will have a set time limit to replicate the time
+  pressures common in real interview settings.
+
+#### The application must include an AI assistant.
+- The user may request hints from the assistant during mock interviews when
+  they are stuck on a problem.
+- The assistant will be able to detect a user's hesitation during a problem,
+  in which case, it will intervene by providing hints.
+- Feedback will be generated from the assistant after the interview is
+  complete, detailing to the user:
+  - Number of hesitations/pauses.
+  - The amount of time taken for the question compared to the set time limit. 
+  - Feedback on the correctness of code solutions, including any errors, along
+    with suggested improvements.
+  - How the user’s performance compares to their past mock interviews, helping
+    them to track their progress over time.
+
+#### The application must include a digital whiteboard.
+- The whiteboard will allow users to describe their thought process to the AI assistant during a mock interview.
+- A minimal number of features will be included in the digital whiteboard:
+  - Pencil tool.
+  - Eraser tool, clear screen.
+  - Undo/redo of draw strokes.
+
 #### WhiteboardFlow will require the user to register through a Facebook/Google account.
 - Account preferences related to a profile may be changed/updated such as the display name, password, or the Google account connected to the profile.
 - User profiles will be stored securely in a database using Firebase.
