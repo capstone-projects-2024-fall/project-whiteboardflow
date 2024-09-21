@@ -6,45 +6,102 @@ sidebar_position: 4
 
 ## Functional Requirements
 
-#### WhiteboardFlow will require the user to register through a Facebook/Google account.
-- Account preferences related to a profile may be changed/updated such as the display name, password, or the Google account connected to the profile.
+#### WhiteboardFlow must implement mock interviews.
+- The interviews will accurately simulate real-world technical and behavioral
+  interviews.
+- Users will be presented with coding problems typically found in technical
+  interviews, relating to topics such as algorithms, data structures, or
+  software design.
+- Each problem or question will have a set time limit to replicate the time
+  pressures common in real interview settings.
+
+#### The application must include an AI assistant.
+- The user may request hints from the assistant during mock interviews when
+  they are stuck on a problem.
+- The assistant will be able to detect a user's hesitation during a problem,
+  in which case, it will intervene by providing hints.
+- Feedback will be generated from the assistant after the interview is
+  complete, detailing to the user:
+  - Number of hesitations/pauses.
+  - The amount of time taken for the question compared to the set time limit.
+  - Feedback on the correctness of code solutions, including any errors, along
+    with suggested improvements.
+  - How the user’s performance compares to their past mock interviews, helping
+    them to track their progress over time.
+
+#### The application must include a digital whiteboard.
+- The whiteboard will allow users to describe their thought process to the AI
+  assistant during a mock interview.
+- For simplicity, a minimal number of features will be included in the digital
+  whiteboard:
+  - Pencil tool.
+  - Eraser tool, clear screen.
+  - Undo/redo of draw strokes.
+
+#### Account sign-up and login.
+- The user will be required to register through a Facebook/Google account.
 - User profiles will be stored securely in a database using Firebase.
-- A forgot password option will allow users to change their password.
-#### After signing-in, the app will navigate to the home page.
-- The home page will contain a button to start the interview.
-- An icon in the upper right corner will be available, which drops down to give access to account preferences and a logout button.
-- A table in the upper left corner will show the user’s previous question history.
+- After signing-in, the app will navigate to the home page.
+
+#### A home page containing the following:
+- A button to start a mock interview.
+- An icon in the upper right corner will be available, which drops down to give
+  access to account preferences and a logout button.
+- A table in the upper left corner will show the user’s previous question
+  history.
+
 #### In the account preferences option, the user will be able to change various account options.
-- The user may change their password, display name, or the Google account which is connected to their profile.
+- The user may change their display name or the Facebook/Google account which
+  is connected to their profile.
 - The user may delete their account.
-#### In the user’s previous question history, they will be able to see the previous questions they answered. 
-- The question is shown, along with being able to expand the tab to show AI feedback received, including written feedback and a speech emotion score.
-#### After the user initiates the written test, the question will appear on the top of the whiteboard screen.
-- A question time limit will appear immediately on the top right, with its duration depending on the question’s complexity.
-- The whiteboard will appear for the user to demonstrate their written solution and thought process.
+
+#### Account deletion.
+- When a user chooses to delete their account, they are prompted to
+  re-authenticate through their OAuth provider (Facebook or Google).
+- After confirmation, an email is sent to the user notifying them of their
+  account deletion.
+- The user's authentication record is then deleted from the Firebase database.
+
+#### User's previous question history.
+- The user will be able to see the previous questions they answered.
+- The question is shown, along with being able to expand the tab to show AI
+  feedback received, including written feedback and a speech emotion score.
+
+#### After the user initiates a written test, a question will appear on the top of the whiteboard screen.
+- A question time limit will appear immediately on the top right, with its
+  duration depending on the question’s complexity.
+- The whiteboard will appear for the user to demonstrate their written solution
+  and thought process.
 - The option for a new question will be available for the user.
+
 #### During the oral test, the user must explain their thought process verbally for the AI to determine their level of confidence.
-- Microphone input must be detected in real-time to check for any hesitation/uncertainty.
-- Speaker output must be detected to determine that the user can hear the voice prompts.
+- Microphone input must be detected in real-time to check for any
+  hesitation/uncertainty.
+- Speaker output must be detected to determine that the user can hear the voice
+  prompts.
+
 #### If the user is stuck on a problem, they may be given a hint from the AI to point them in the right direction.
-- Bigger hints will be given if it is detected that the user is highly uncertain about their answer—for example, if the user is immediately stuck on the problem, or if the user continues to have difficulty with the same problem.
-#### The whiteboard will contain a minimal amount of features.
-- Pencil tool.
-- Eraser and clear screen.
-- Undo/redo for draw strokes.
+- Bigger hints will be given if it is detected that the user is highly
+  uncertain about their answer—for example, if the user is immediately stuck
+  on the problem, or if the user continues to have difficulty with the same
+  problem.
+
 #### To simulate an interview scenario, the system will begin the written test before the oral test.
-- A score of 65% is considered passing for each test.
 - Feedback will be tailored for each test based on content and performance.
+
 #### WhiteboardFlow will present the user with an intuitive interface.
 - There will be a prominent “performance” table
-    - Important historical data like written or oral test scores
-    - Number of attempts
+    - Important historical data like written or oral test scores.
+    - Number of attempts.
 - The system will display reassuring AI-generated messages and prompts.
-    - In the written test, the user will receive alerts with hints, code examples, and relevant feedback
-    - In the oral test, the user will receive appropriate prompts based on the analysis of their speech emotion recognition and correctness of their response and give relevant feedback.
+    - In the written test, the user will receive alerts with hints, code
+      examples, and relevant feedback.
+    - In the oral test, the user will receive appropriate prompts based on the
+      analysis of their speech emotion recognition and correctness of their
+      response and give relevant feedback.
     - Each message will assure that the user is moving in the right direction.
 - “Don’t panic!” will be incorporated somewhere in the UI.
-  
+
 ## Nonfunctional Requirements
 
 #### The app utilizes speech emotion recognition to analyze the mood or emotional state of the speaker.
