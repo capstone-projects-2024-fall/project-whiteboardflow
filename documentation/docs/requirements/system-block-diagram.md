@@ -3,7 +3,8 @@ sidebar_position: 2
 ---
 
 # System Block Diagram
-![image](https://github.com/user-attachments/assets/c9a61983-d4b4-48a3-b936-c94029d1f56d)
+![image](https://github.com/user-attachments/assets/f6a9eeb6-b8be-4018-a935-8196ddd9fdb2)
+
 
 
 #### Figure 1. High-level design of the WhiteboardFlow application.
