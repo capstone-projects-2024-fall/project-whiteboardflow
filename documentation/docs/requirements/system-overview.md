@@ -13,10 +13,6 @@ sidebar_position: 1
   
 ## Background
 	
-	WhiteboardFlow is designed to help job seekers prepare for technical interviews by providing a realistic simulation of whiteboard problem-solving scenarios. The application generates coding and Fermi approximation questions, monitors user input and verbal explanation, and uses AI to analyze their responses while offering real-time feedback and suggestions for improvement.	
- 
-    Current offerings for whiteboard practice leave a bit to be desired. Websites like LeetCode allow users to practice coding problems, along with community-driven solutions or forums. While these solutions are helpful, they do not focus on the specific simulation of whiteboard interviews or provide feedback on the user's verbal explanation and handwritten inputs.
- 
-    WhiteboardFlow will leverage open source tools such as Tensorflow for handwriting recognition and natural language processing. The use of alternative open source software to accomplish AI/ML tasks allows us to bypass the current high pricing model that chatGPT has in place. The system will build a unique interface and feedback system tailored to whiteboard interview practices.
+	There are existing products such as [MockAI]((https://mock-ai.com/home#home-function-href) and [Final Round AI](https://www.finalroundai.com/) that have similar functionalities. These platforms are designed to enhance interview preparation through AI-driven simulations. MockAI focuses on creating coding interviews that provide real-time feedback, allowing for performance analysis to help users improve their skills. Similarly, Final Round AI offers a set of tools including real-time transcription and personalized support based on industry-specific scenarios. WhiteboardFlow also aims to utilize advanced AI technologies to prepare users for interviews. However, this software introduces unique features like handwriting recognition, which aims to simulate a more realistic interview environment, particularly for roles requiring technical demonstrations or extensive problem-solving discussions, thus preparing users effectively for both digital and in-person interactions.
 
 
