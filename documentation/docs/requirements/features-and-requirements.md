@@ -80,14 +80,12 @@ sidebar_position: 4
 - Speaker output must be detected to determine that the user can hear the voice
   prompts.
 
-#### If the user is stuck on a problem, they may be given a hint from the AI to point them in the right direction.
-- Bigger hints will be given if it is detected that the user is highly
-  uncertain about their answer—for example, if the user is immediately stuck
-  on the problem, or if the user continues to have difficulty with the same
-  problem.
+#### User can request clarity from a hint given by AI assistant
+- AI assistant will be able to rephrase assistance to give user multiple perspectives
+- AI assistance will be able to generate multiple leading questions to guide user through prompt.
 
-#### To simulate an interview scenario, the system will begin the written test before the oral test.
-- Feedback will be tailored for each test based on content and performance.
+<!-- #### To simulate an interview scenario, the system will begin the written test before the oral test.
+- Feedback will be tailored for each test based on content and performance. -->
 
 #### WhiteboardFlow will present the user with an intuitive interface.
 - There will be a prominent “performance” table
