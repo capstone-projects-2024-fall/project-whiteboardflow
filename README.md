@@ -4,7 +4,7 @@
 # WhiteboardFlow(WF)
 [![Report Issue on Jira](https://img.shields.io/badge/Report%20Issues-Jira-0052CC?style=flat&logo=jira-software)](https://temple-cis-projects-in-cs.atlassian.net/jira/software/c/projects/DT/issues)
 [![Deploy Docs](https://github.com/ApplebaumIan/tu-cis-4398-docs-template/actions/workflows/deploy.yml/badge.svg)](https://github.com/ApplebaumIan/tu-cis-4398-docs-template/actions/workflows/deploy.yml)
-[![Documentation Website Link](https://img.shields.io/badge/-Documentation%20Website-brightgreen)](https://applebaumian.github.io/tu-cis-4398-docs-template/)
+[![Documentation Website Link](https://img.shields.io/badge/-Documentation%20Website-brightgreen)](https://capstone-projects-2024-fall.github.io/project-whiteboardflow/)
 
 
 </div>
@@ -50,17 +50,38 @@ This project would require background knowledge of large language models and res
 <table>
 <tr>
     <td align="center">
-        <a href="https://github.com/ApplebaumIan">
-            <img src="https://avatars.githubusercontent.com/u/9451941?v=4" width="100;" alt="ApplebaumIan"/>
+        <a href="https://github.com/DeanRoos">
+            <img src="https://avatars.githubusercontent.com/u/143642744?v=4" width="100;" alt="DeanRoos"/>
             <br />
-            <sub><b>Ian Tyler Applebaum</b></sub>
+            <sub><b>Dean Roos</b></sub>
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/leighflagg">
-            <img src="https://avatars.githubusercontent.com/u/77810293?v=4" width="100;" alt="leighflagg"/>
+        <a href="https://github.com/bstephe9">
+            <img src="https://avatars.githubusercontent.com/u/123014920?v=4" width="100;" alt="bstephe9"/>
             <br />
-            <sub><b>Null</b></sub>
+            <sub><b>Ben Stephenson</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/VinceLukban">
+            <img src="https://avatars.githubusercontent.com/u/112022481?v=4" width="100;" alt="VinceLubkan"/>
+            <br />
+            <sub><b>Vince Lubkan</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/Edwardd02">
+            <img src="https://avatars.githubusercontent.com/u/122767943?v=4" width="100;" alt="Edwardd02"/>
+            <br />
+            <sub><b>Renxuan Yao</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/dhruvilpatel999">
+            <img src="https://avatars.githubusercontent.com/u/112565839?v=4" width="100;" alt="dhruvilpatel999"/>
+            <br />
+            <sub><b>Dhruvil Patel</b></sub>
         </a>
     </td></tr>
 </table>
