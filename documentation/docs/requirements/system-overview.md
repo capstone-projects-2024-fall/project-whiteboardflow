@@ -14,7 +14,4 @@ sidebar_position: 1
 ## Background
 	
 	There are existing products such as [MockAI](https://mock-ai.com/home#home-function-href) and [Final Round AI](https://www.finalroundai.com/) that have similar functionalities. These platforms are designed to enhance interview preparation through AI-driven simulations. MockAI focuses on creating coding interviews that provide real-time feedback, allowing for performance analysis to help users improve their skills. Final Round AI offers a set of tools including real-time transcription and personalized support based on industry-specific scenarios. Whiteboard Assist aims to utilize AI technologies to prepare users for interviews. However, this software introduces features like handwriting recognition, which aims to simulate a interview environment that particularly for roles requiring technical demonstrations or extensive problem-solving discussions, thus preparing users effectively for both digital and in-person interactions.
-	
- 	
-  	[Google Keep](https://keep.google.com/u/0/) and [Microsoft OneNote](https://www.onenote.com/notebooks?auth=2&nf=1) both work effectively in transcribing handwriting to text. By combining such functionality with interview practice, Whiteboard Assist provides users with more options to mock an interview based on their specific situations, helping them achieve career success.
 
