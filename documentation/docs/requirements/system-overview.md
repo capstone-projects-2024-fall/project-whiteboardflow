@@ -9,7 +9,7 @@ sidebar_position: 1
 
 ## Conceptual Design
 
-	The frontend in HTML5 with JavaScript frameworks like React that will provide a dynamic and responsive user interface; for instance, this could be implemented to render drawings and input using the implementation of the Canvas API or SVG. Node.js will be used for the architecture of the backend, allowing the handling of API requests and real-time communication by using WebSocket, while Python-based frameworks like Flask or Django will be used for the incorporation of AI/ML components, such as handwriting recognition and natural language processing. The integration of AI and ML will include the use of TensorFlow or PyTorch for machine learning models, while the use of NLTK or spaCy will provide support for NLP analysis in verbal inputs. The application will store user information securely, question banks, and user progress using Firebase, while authentication is done via SSO, allowing users to access the system using their Facebook or Google accounts.
+	The frontend will be handled with HTML5, to render drawings and input using the implementation of the Canvas API or SVG. Node.js will be used for the backend, to handle API requests and real-time communication by using WebSocket. Flask or Django will be used for the incorporation of AI/ML components, such as handwriting recognition and natural language processing.
   
 ## Background
 	
