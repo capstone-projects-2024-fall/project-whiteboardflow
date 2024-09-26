@@ -7,14 +7,14 @@ sidebar_position: 4
 ## Functional Requirements
 
 #### Interview questions
-- The application will have a database of interview questions with which it will ask the user.
+- The application will have a database of interview questions it will ask the user.
 - The application will contain Fermi Approximation questions.
 - The application will contain coding interview questions.
 
 #### Question process
 - The application's questions flow will be:
   - Select question and propt user to answer on digital whiteboard.
-  - After user is finished, application will prompt user to orally explain throught process.
+  - After user is finished, application will prompt user to orally explain their thought process.
   - After user is done explaining, AI assistant will analyse work and give feedback.
 
 #### Digital whiteboard
@@ -66,9 +66,12 @@ sidebar_position: 4
 
 #### Home page
 - Application will contain a home page featuring:
+  - User greeting 
   - A button to start a mock interview.
-  - An icon in the upper right corner will be available, which drops down to give access to account preferences and a logout button.
-  - A table in the upper left corner will show the user’s previous question history.
+  - A hamburger menu in the upper left corner containing:
+    - User preferences.
+    - Log out.
+    - Previous questions and results.
 
 #### Account preferences 
 - The application will feature a preferences page which allows the user to:
