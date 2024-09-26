@@ -13,7 +13,7 @@ sidebar_position: 4
 
 #### Question process
 - The application's questions flow will be:
-  - Select question and propt user to answer on digital whitebaord.
+  - Select question and propt user to answer on digital whiteboard.
   - After user is finished, application will prompt user to orally explain throught process.
   - After user is done explaining, AI assistant will analyse work and give feedback.
 
