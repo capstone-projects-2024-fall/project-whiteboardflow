@@ -62,7 +62,7 @@ A user wants to review their performance history.
 4. The system displays the question, the AI-generated feedback, and the user’s speech emotion score.
 5. User reviews the feedback and closes the expanded view.
 
-## Use Case 5-request a different question
+## Use Case 7: Request a different question
 A user requests a more challenging question.
 1. User logs into WhiteboardFlow and starts an interview.
 2. After completing the first question, the user selects the “New Question” option
@@ -71,25 +71,6 @@ A user requests a more challenging question.
 5. User begins solving the problem on the whiteboard, with Ai monitoring their progress.
 6. User finishes some questions, clicks on the exit button, and logs out from the application.
 
-## Use Case 6: Profile name
-A user wants to update their display name.
-1. User logs into their WhiteboardFlow account.
-2. User navigates to the drop-down menu.
-3. User selects the option “My Profile” and clicks on the “Edit” button.
-4. User updates their display name in the designated field.
-5. User saves the changes. (select save button)
-6. System confirms the change, and the new display name will be reflected in the profile immediately.
-
-## Use Case 7: Reset password
-A user wants to reset their password.
-1. User opens the WhiteboardFlow application and navigates to the login page
-2. User clicks the “Forgot Password” option.
-3. System prompts the user to enter their registered email address.
-4. User enters the required information and submits.
-5. System sends a password reset link to the user’s email.
-6. User click the link, enter a new password in the designated field.
-7. User logs in with the updated credentials.
-
 ## Use Case 8: Further explaination on hint
 A user requests clarification on a hint provided by the AI.
 1. User is solving a question and requests a hint.
@@ -97,4 +78,3 @@ A user requests clarification on a hint provided by the AI.
 3. User clicks the “More Help” option
 4. System provides additional, more detailed guidance, such as a code snippet or further explanation.
 5. User applies the hint and continues solving the problem.
-
