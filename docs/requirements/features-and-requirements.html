@@ -4,46 +4,32 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.3.2">
 <title data-rh="true">Features and Requirements | Project Whiteboardflow</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://capstone-projects-2024-fall.github.io/project-whiteboardflow/docs/requirements/features-and-requirements"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Features and Requirements | Project Whiteboardflow"><meta data-rh="true" name="description" content="Functional Requirements"><meta data-rh="true" property="og:description" content="Functional Requirements"><link data-rh="true" rel="icon" href="/project-whiteboardflow/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://capstone-projects-2024-fall.github.io/project-whiteboardflow/docs/requirements/features-and-requirements"><link data-rh="true" rel="alternate" href="https://capstone-projects-2024-fall.github.io/project-whiteboardflow/docs/requirements/features-and-requirements" hreflang="en"><link data-rh="true" rel="alternate" href="https://capstone-projects-2024-fall.github.io/project-whiteboardflow/docs/requirements/features-and-requirements" hreflang="x-default"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><link rel="stylesheet" href="/project-whiteboardflow/assets/css/styles.e4cc120d.css">
-<script src="/project-whiteboardflow/assets/js/runtime~main.2ae7300d.js" defer="defer"></script>
+<script src="/project-whiteboardflow/assets/js/runtime~main.4eaaba94.js" defer="defer"></script>
 <script src="/project-whiteboardflow/assets/js/main.9b5c60fc.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/project-whiteboardflow/"><div class="navbar__logo"><img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Temple_T_logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Temple_T_logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Project Whiteboardflow</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/project-whiteboardflow/docs/intro">Documentation</a><a class="navbar__item navbar__link" href="/project-whiteboardflow/tutorial/Intro">Docusaurus Tutorial</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/capstone-projects-2024-fall/project-whiteboardflow" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/project-whiteboardflow/docs/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/project-whiteboardflow/docs/category/requirements-specification">Requirements Specification</a><button aria-label="Collapse sidebar category &#x27;Requirements Specification&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/project-whiteboardflow/docs/requirements/system-overview">System Overview</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/project-whiteboardflow/docs/requirements/system-block-diagram">System Block Diagram</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/project-whiteboardflow/docs/requirements/general-requirements">General Requirements</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/project-whiteboardflow/docs/requirements/features-and-requirements">Features and Requirements</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/project-whiteboardflow/docs/requirements/use-case-descriptions">Use-case descriptions</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/project-whiteboardflow/docs/category/system-architecture">System Architecture</a><button aria-label="Expand sidebar category &#x27;System Architecture&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/project-whiteboardflow/docs/category/api-specification">API Specification</a><button aria-label="Expand sidebar category &#x27;API Specification&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/project-whiteboardflow/docs/category/test-procedures">Test Procedures</a><button aria-label="Expand sidebar category &#x27;Test Procedures&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/project-whiteboardflow/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/project-whiteboardflow/docs/category/requirements-specification"><span itemprop="name">Requirements Specification</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Features and Requirements</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><h1>Features and Requirements</h1>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="functional-requirements">Functional Requirements<a href="#functional-requirements" class="hash-link" aria-label="Direct link to Functional Requirements" title="Direct link to Functional Requirements">​</a></h2>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="whiteboardflow-must-implement-mock-interviews">WhiteboardFlow must implement mock interviews.<a href="#whiteboardflow-must-implement-mock-interviews" class="hash-link" aria-label="Direct link to WhiteboardFlow must implement mock interviews." title="Direct link to WhiteboardFlow must implement mock interviews.">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="interview-questions">Interview questions<a href="#interview-questions" class="hash-link" aria-label="Direct link to Interview questions" title="Direct link to Interview questions">​</a></h4>
 <ul>
-<li>The interviews will accurately simulate real-world technical and behavioral
-interviews.</li>
-<li>Users will be presented with coding problems typically found in technical
-interviews, relating to topics such as algorithms, data structures, or
-software design.</li>
-<li>Each problem or question will have a set time limit to replicate the time
-pressures common in real interview settings.</li>
+<li>The application will have a database of interview questions with which it will ask the user.</li>
+<li>The application will contain Fermi Approximation questions.</li>
+<li>The application will contain coding interview questions.</li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="the-application-must-include-an-ai-assistant">The application must include an AI assistant.<a href="#the-application-must-include-an-ai-assistant" class="hash-link" aria-label="Direct link to The application must include an AI assistant." title="Direct link to The application must include an AI assistant.">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="question-process">Question process<a href="#question-process" class="hash-link" aria-label="Direct link to Question process" title="Direct link to Question process">​</a></h4>
 <ul>
-<li>The user may request hints from the assistant during mock interviews when
-they are stuck on a problem.</li>
-<li>The assistant will be able to detect a user&#x27;s hesitation during a problem,
-in which case, it will intervene by providing hints.</li>
-<li>Feedback will be generated from the assistant after the interview is
-complete, detailing to the user:<!-- -->
+<li>The application&#x27;s questions flow will be:<!-- -->
 <ul>
-<li>Number of hesitations/pauses.</li>
-<li>The amount of time taken for the question compared to the set time limit.</li>
-<li>Feedback on the correctness of code solutions, including any errors, along
-with suggested improvements.</li>
-<li>How the user’s performance compares to their past mock interviews, helping
-them to track their progress over time.</li>
+<li>Select question and propt user to answer on digital whitebaord.</li>
+<li>After user is finished, application will prompt user to orally explain throught process.</li>
+<li>After user is done explaining, AI assistant will analyse work and give feedback.</li>
 </ul>
 </li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="the-application-must-include-a-digital-whiteboard">The application must include a digital whiteboard.<a href="#the-application-must-include-a-digital-whiteboard" class="hash-link" aria-label="Direct link to The application must include a digital whiteboard." title="Direct link to The application must include a digital whiteboard.">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="digital-whiteboard">Digital whiteboard<a href="#digital-whiteboard" class="hash-link" aria-label="Direct link to Digital whiteboard" title="Direct link to Digital whiteboard">​</a></h4>
 <ul>
-<li>The whiteboard will allow users to describe their thought process to the AI
-assistant during a mock interview.</li>
-<li>For simplicity, a minimal number of features will be included in the digital
-whiteboard:<!-- -->
+<li>The application will allow users to write out answers to the problems</li>
+<li>Whiteboard will include the following feaures:<!-- -->
 <ul>
 <li>Pencil tool.</li>
 <li>Eraser tool, clear screen.</li>
@@ -51,90 +37,97 @@ whiteboard:<!-- -->
 </ul>
 </li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="account-sign-up-and-login">Account sign-up and login.<a href="#account-sign-up-and-login" class="hash-link" aria-label="Direct link to Account sign-up and login." title="Direct link to Account sign-up and login.">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="speech-to-text">Speech to text<a href="#speech-to-text" class="hash-link" aria-label="Direct link to Speech to text" title="Direct link to Speech to text">​</a></h4>
+<ul>
+<li>The application will transcribe the user&#x27;s speech for use in problem solving analysis.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="ai-assistant">AI assistant<a href="#ai-assistant" class="hash-link" aria-label="Direct link to AI assistant" title="Direct link to AI assistant">​</a></h4>
+<ul>
+<li>The application will feature an AI assistant that will:<!-- -->
+<ul>
+<li>Analyse user&#x27;s handwriting and code.</li>
+<li>Analyze the user&#x27;s solutions for correctness and logic.</li>
+<li>Analyze the user&#x27;s thought process and approach to solving questions.</li>
+<li>Give feedback on user&#x27;s weaknesses.</li>
+<li>Give hints/feedback during questions when requested by the user based on work done already.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="account-sign-up-and-login">Account sign-up and login<a href="#account-sign-up-and-login" class="hash-link" aria-label="Direct link to Account sign-up and login" title="Direct link to Account sign-up and login">​</a></h4>
 <ul>
 <li>The user will be required to register through a Facebook/Google account.</li>
 <li>User profiles will be stored securely in a database using Firebase.</li>
 <li>After signing-in, the app will navigate to the home page.</li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="a-home-page-containing-the-following">A home page containing the following:<a href="#a-home-page-containing-the-following" class="hash-link" aria-label="Direct link to A home page containing the following:" title="Direct link to A home page containing the following:">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="home-page">Home page<a href="#home-page" class="hash-link" aria-label="Direct link to Home page" title="Direct link to Home page">​</a></h4>
+<ul>
+<li>Application will contain a home page featuring:<!-- -->
 <ul>
 <li>A button to start a mock interview.</li>
-<li>An icon in the upper right corner will be available, which drops down to give
-access to account preferences and a logout button.</li>
-<li>A table in the upper left corner will show the user’s previous question
-history.</li>
+<li>An icon in the upper right corner will be available, which drops down to give access to account preferences and a logout button.</li>
+<li>A table in the upper left corner will show the user’s previous question history.</li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="in-the-account-preferences-option-the-user-will-be-able-to-change-various-account-options">In the account preferences option, the user will be able to change various account options.<a href="#in-the-account-preferences-option-the-user-will-be-able-to-change-various-account-options" class="hash-link" aria-label="Direct link to In the account preferences option, the user will be able to change various account options." title="Direct link to In the account preferences option, the user will be able to change various account options.">​</a></h4>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="account-preferences">Account preferences<a href="#account-preferences" class="hash-link" aria-label="Direct link to Account preferences" title="Direct link to Account preferences">​</a></h4>
 <ul>
-<li>The user may change their display name or the Facebook/Google account which
-is connected to their profile.</li>
-<li>The user may delete their account.</li>
+<li>The application will feature a preferences page which allows the user to:<!-- -->
+<ul>
+<li>Change their display name or the Facebook/Google account which is connected to their profile.</li>
+<li>Delete their account.</li>
+<li>Change Language settings</li>
+</ul>
+</li>
 </ul>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="account-deletion">Account deletion.<a href="#account-deletion" class="hash-link" aria-label="Direct link to Account deletion." title="Direct link to Account deletion.">​</a></h4>
 <ul>
-<li>When a user chooses to delete their account, they are prompted to
-re-authenticate through their OAuth provider (Facebook or Google).</li>
-<li>After confirmation, an email is sent to the user notifying them of their
-account deletion.</li>
-<li>The user&#x27;s authentication record is then deleted from the Firebase database.</li>
-</ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="users-previous-question-history">User&#x27;s previous question history.<a href="#users-previous-question-history" class="hash-link" aria-label="Direct link to User&#x27;s previous question history." title="Direct link to User&#x27;s previous question history.">​</a></h4>
+<li>The application will allow users to delete their account which will:<!-- -->
 <ul>
-<li>The user will be able to see the previous questions they answered.</li>
-<li>The question is shown, along with being able to expand the tab to show AI
-feedback received, including written feedback and a speech emotion score.</li>
-</ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="after-the-user-initiates-a-written-test-a-question-will-appear-on-the-top-of-the-whiteboard-screen">After the user initiates a written test, a question will appear on the top of the whiteboard screen.<a href="#after-the-user-initiates-a-written-test-a-question-will-appear-on-the-top-of-the-whiteboard-screen" class="hash-link" aria-label="Direct link to After the user initiates a written test, a question will appear on the top of the whiteboard screen." title="Direct link to After the user initiates a written test, a question will appear on the top of the whiteboard screen.">​</a></h4>
-<ul>
-<li>A question time limit will appear immediately on the top right, with its
-duration depending on the question’s complexity.</li>
-<li>The whiteboard will appear for the user to demonstrate their written solution
-and thought process.</li>
-<li>The option for a new question will be available for the user.</li>
-</ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="during-the-oral-test-the-user-must-explain-their-thought-process-verbally-for-the-ai-to-determine-their-level-of-confidence">During the oral test, the user must explain their thought process verbally for the AI to determine their level of confidence.<a href="#during-the-oral-test-the-user-must-explain-their-thought-process-verbally-for-the-ai-to-determine-their-level-of-confidence" class="hash-link" aria-label="Direct link to During the oral test, the user must explain their thought process verbally for the AI to determine their level of confidence." title="Direct link to During the oral test, the user must explain their thought process verbally for the AI to determine their level of confidence.">​</a></h4>
-<ul>
-<li>Microphone input must be detected in real-time to check for any
-hesitation/uncertainty.</li>
-<li>Speaker output must be detected to determine that the user can hear the voice
-prompts.</li>
-</ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="user-can-request-clarity-from-a-hint-given-by-ai-assistant">User can request clarity from a hint given by AI assistant<a href="#user-can-request-clarity-from-a-hint-given-by-ai-assistant" class="hash-link" aria-label="Direct link to User can request clarity from a hint given by AI assistant" title="Direct link to User can request clarity from a hint given by AI assistant">​</a></h4>
-<ul>
-<li>AI assistant will be able to rephrase assistance to give user multiple perspectives</li>
-<li>AI assistance will be able to generate multiple leading questions to guide user through prompt.</li>
-</ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="whiteboardflow-will-present-the-user-with-an-intuitive-interface">WhiteboardFlow will present the user with an intuitive interface.<a href="#whiteboardflow-will-present-the-user-with-an-intuitive-interface" class="hash-link" aria-label="Direct link to WhiteboardFlow will present the user with an intuitive interface." title="Direct link to WhiteboardFlow will present the user with an intuitive interface.">​</a></h4>
-<ul>
-<li>There will be a prominent “performance” table<!-- -->
-<ul>
-<li>Important historical data like written or oral test scores.</li>
-<li>Number of attempts.</li>
+<li>Be secure by prompting re-authentication through their OAuth provider (Facebook or Google).</li>
+<li>Send a confirmation email.</li>
+<li>Delete user&#x27;s records from Firebase database.</li>
 </ul>
 </li>
-<li>The system will display reassuring AI-generated messages and prompts.<!-- -->
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="question-history">Question history.<a href="#question-history" class="hash-link" aria-label="Direct link to Question history." title="Direct link to Question history.">​</a></h4>
 <ul>
-<li>In the written test, the user will receive alerts with hints, code
-examples, and relevant feedback.</li>
-<li>In the oral test, the user will receive appropriate prompts based on the
-analysis of their speech emotion recognition and correctness of their
-response and give relevant feedback.</li>
-<li>Each message will assure that the user is moving in the right direction.</li>
+<li>The application will allow user to:<!-- -->
+<ul>
+<li>See all previous questions they have answered.</li>
+<li>See all feeback recieved from AI assistant.</li>
 </ul>
 </li>
-<li>“Don’t panic!” will be incorporated somewhere in the UI.</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="nonfunctional-requirements">Nonfunctional Requirements<a href="#nonfunctional-requirements" class="hash-link" aria-label="Direct link to Nonfunctional Requirements" title="Direct link to Nonfunctional Requirements">​</a></h2>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="the-app-utilizes-speech-emotion-recognition-to-analyze-the-mood-or-emotional-state-of-the-speaker">The app utilizes speech emotion recognition to analyze the mood or emotional state of the speaker.<a href="#the-app-utilizes-speech-emotion-recognition-to-analyze-the-mood-or-emotional-state-of-the-speaker" class="hash-link" aria-label="Direct link to The app utilizes speech emotion recognition to analyze the mood or emotional state of the speaker." title="Direct link to The app utilizes speech emotion recognition to analyze the mood or emotional state of the speaker.">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="ai-assistant-flexibility">AI assistant flexibility<a href="#ai-assistant-flexibility" class="hash-link" aria-label="Direct link to AI assistant flexibility" title="Direct link to AI assistant flexibility">​</a></h4>
 <ul>
-<li>The speaker’s tone is analyzed using pitch, intensity, rate and timbre.</li>
-<li>The confidence of the speaker is also analyzed based on duration of speech and pauses, speech patterns, word choice, and content analysis.</li>
+<li>AI assistant will be able to analyze the user&#x27;s work and give specific feedback to what they&#x27;ve done</li>
+<li>AI assistant will be able to reword hints or feedback if user requests</li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="use-of-firebase-for-the-backend-will-allow-the-app-to-be-scalable-and-easier-to-work-with-as-well-as-ensuring-an-acceptable-level-of-availability-and-performance">Use of Firebase for the backend will allow the app to be scalable and easier to work with, as well as ensuring an acceptable level of availability and performance.<a href="#use-of-firebase-for-the-backend-will-allow-the-app-to-be-scalable-and-easier-to-work-with-as-well-as-ensuring-an-acceptable-level-of-availability-and-performance" class="hash-link" aria-label="Direct link to Use of Firebase for the backend will allow the app to be scalable and easier to work with, as well as ensuring an acceptable level of availability and performance." title="Direct link to Use of Firebase for the backend will allow the app to be scalable and easier to work with, as well as ensuring an acceptable level of availability and performance.">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="accessability">Accessability<a href="#accessability" class="hash-link" aria-label="Direct link to Accessability" title="Direct link to Accessability">​</a></h4>
 <ul>
-<li>User login information will be securely stored in Firebase and linked with either FaceBook or Google’s authentication system.</li>
-<li>We will also store user historical data on Firebase.</li>
+<li>Written portions of the application will be able to be completed with:<!-- -->
+<ul>
+<li>Stylus and touch device</li>
+<li>Finger and touch device</li>
+<li>Mouse</li>
+<li>Keyboard</li>
+</ul>
+</li>
+<li>Oral portions of the application will be able to be completed with:<!-- -->
+<ul>
+<li>Microphone</li>
+<li>Keyboard</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="interface">Interface<a href="#interface" class="hash-link" aria-label="Direct link to Interface" title="Direct link to Interface">​</a></h4>
+<ul>
+<li>The application will be designed with the goal of a simple and intuitive user interface using modern design principles.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="security">Security<a href="#security" class="hash-link" aria-label="Direct link to Security" title="Direct link to Security">​</a></h4>
+<ul>
+<li>The applicationm will make use of secure data solutions such as Firebase and OAuth for security.</li>
 </ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/capstone-projects-2024-fall/project-whiteboardflow/edit/main/documentation/docs/requirements/features-and-requirements.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"><details><summary>Revision History</summary><table><thead><tr><th scope="row">Author</th><th scope="row">Revision</th><th scope="row">Date</th></tr></thead><tbody>nothing</tbody></table></details><span class="theme-last-updated">Last updated<!-- --> by <b>DeanRoos</b></span></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/project-whiteboardflow/docs/requirements/general-requirements"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">General Requirements</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/project-whiteboardflow/docs/requirements/use-case-descriptions"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Use-case descriptions</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functional-requirements" class="table-of-contents__link toc-highlight">Functional Requirements</a></li><li><a href="#nonfunctional-requirements" class="table-of-contents__link toc-highlight">Nonfunctional Requirements</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/project-whiteboardflow/docs/intro">Documentation</a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/capstone-projects-2024-fall/project-whiteboardflow" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="margin-bottom--sm"><img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Temple_T_logo.svg" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Temple_T_logo.svg" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></div><div class="footer__copyright">Copyright © 2024 Project Whiteboardflow, Inc. Built with Docusaurus.</div></div></div></footer></div>
 </body>
 </html>
