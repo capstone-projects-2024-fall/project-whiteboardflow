@@ -33,16 +33,16 @@ User needs help with a practice problem..
 User wants to sign up for an account.
 1. User opens WhiteboardFlow application.
 2. User selects "Create Account."
-3. User is given option to link an existingn account or use an email address.
-4. User chooses option to create account with email address. 
-5. User chooses a user name and password and connects an account to email.
-6. User verifies email and account is created.
+3. User links an existing Google/Facebook account to their new account through
+   OAuth.
+4. User verifies account is created.
 
 ## Use Case 5: Account deletion
 A user wants to delete their account.
 1. User navigates to the preferences drop-down menu.
 2. User selects ‘delete account’.
-3. User must confirm that they want to delete their account by typing in their password.
+3. User must confirm that they want to delete their account by re-signing in
+   through OAuth.
 4. System deletes all of the user's profile and information from the Firebase database.
 
 <!-- ## Use Case 3-unexpected exit
