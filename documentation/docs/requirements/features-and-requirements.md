@@ -75,7 +75,7 @@ sidebar_position: 4
 
 #### Account preferences 
 - The application will feature a preferences page which allows the user to:
-  - Change their display name or the Facebook/Google account which is connected to their profile.
+  - Change the Facebook/Google account which is connected to their profile.
   - Delete their account.
   - Change Language settings
 
