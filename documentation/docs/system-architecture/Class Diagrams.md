@@ -4,9 +4,14 @@ sidebar_position: 2
 
 # Class Diagrams
 
+```mermaid
 classDiagram
 
-App --> Main
+  App --> Main
+```
+
+```mermaid
+classDiagram
 
 %% Class definitions
 
@@ -126,3 +131,4 @@ AI interfaces with Backend: AI functionalities are served via backend services.
 User and AI: A user receives feedback from AI.
 Backend interfaces with Flask and Django: Indicates that backend functionalities could be handled using Flask or Django.
 Frontend interfaces with ReactJS: Indicates the frontend is built using ReactJS.
+```
