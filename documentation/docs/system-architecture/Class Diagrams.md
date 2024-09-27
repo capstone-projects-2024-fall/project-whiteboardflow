@@ -17,31 +17,38 @@ classDiagram
   Main --> MicPrompt
   MicPrompt --> AIAssistant
   WhiteBoard --> AIAssistant
+  Main --> Result
+  PreviousQuestions --> Result
+  Result --> AIAssistant
 
+  Whiteboard -string question
   WhiteBoard: -draw()
   WhiteBoard: -erase()
   WhiteBoard: -undo()
   WhiteBoard: -redo()
 
+  Main: + string question
   Main: +start()
 
   Menu: +display()
   Menu: +hide()
 
+  MicPrompt: -string question
   MicPrompt: -record()
-
+  
+  AIAssistant: -string data
   AIAssistant: +hint()
   AIAssistant: +grade()
 
   Settings: +string displayMode
   Settings: +inputMode
 
+  Profile: -delete()
+
 
 
 
 ```
-
-
 <!--
 ```mermaid
 classDiagram
