@@ -90,48 +90,5 @@ Backend "1" --|> Flask
 Backend "1" --|> Django
 Frontend "1" --|> ReactJS
 
-Explanation of the Diagram
 
-Classes and Attributes:
-
-User:
-
-Attributes: userID, name, email, password, questionHistory
-Methods: login(), register()
-Question:
-
-Attributes: questionID, questionText, questionType, testCases
-Methods: submitAnswer(), getFeedback()
-QuestionHistory:
-
-Attributes: questionID, answer, timestamp, isCorrect, feedback
-Whiteboard:
-
-Attributes: whiteboardID, sessionID
-Methods: draw(), erase()
-Microphone:
-
-Attributes: micID, sessionID
-Methods: startRecording(), stopRecording(), analyzeSpeech()
-AI:
-
-Attributes: aiID, sessionID
-Methods: analyzeHandwriting(), provideFeedback(), assistUser()
-Backend:
-
-Methods: handleAPIRequest(), handleRealTimeComms()
-Frontend:
-
-Methods: renderUI(), useCanvasAPI(), useSVG()
-Relationships:
-User and QuestionHistory: A user logs many question histories.
-User and Whiteboard: A user uses many whiteboards.
-Whiteboard and Microphone: A whiteboard has one microphone.
-Question and TestCase: A question contains many test cases.
-Whiteboard inherits Frontend: Indicates that the whiteboard UI is part of the frontend.
-Microphone inherits Backend: Indicates microphone functionality is handled by the backend.
-AI interfaces with Backend: AI functionalities are served via backend services.
-User and AI: A user receives feedback from AI.
-Backend interfaces with Flask and Django: Indicates that backend functionalities could be handled using Flask or Django.
-Frontend interfaces with ReactJS: Indicates the frontend is built using ReactJS.
-``` mermaid
+```
