@@ -35,6 +35,9 @@ classDiagram
 
   MicPrompt: -string question
   MicPrompt: -record()
+
+  Result: +int score
+  Result: +string Feedback
   
   AIAssistant: -string data
   AIAssistant: +hint()
