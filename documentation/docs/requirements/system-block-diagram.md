@@ -3,7 +3,8 @@ sidebar_position: 2
 ---
 
 # System Block Diagram
-![image](https://github.com/user-attachments/assets/7d646ad2-8071-481a-b332-d08a1cc842c3)
+![image](https://github.com/user-attachments/assets/95b72f8a-221f-49cf-902e-9ec1616e3a3f)
+
 
 
 
