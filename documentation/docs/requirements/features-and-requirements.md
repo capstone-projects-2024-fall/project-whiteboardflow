@@ -148,6 +148,7 @@ sidebar_position: 4
 
 #### Interface
 - The application will be designed with the goal of a simple and intuitive user interface using modern design principles.
+- The application will have a dark and light mode
 
 #### Security
 - The applicationm will make use of secure data solutions such as Firebase and OAuth for security.
