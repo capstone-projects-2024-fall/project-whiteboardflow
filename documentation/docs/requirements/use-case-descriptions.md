@@ -62,13 +62,12 @@ A user requests a more challenging question.
 5. User begins solving the problem on the whiteboard, with Ai monitoring their progress.
 6. User finishes some questions, clicks on the exit button, and logs out from the application. -->
 
-## Use Case 7: Further explaination on hint
-A user requests clarification on a hint provided by the AI.
-1. User is solving a question and requests a hint.
-2. AI provides an initial hint, but the user is still unsure about how to proceed.
-3. User clicks the “More Help” option
-4. System provides additional, more detailed guidance, such as a code snippet or further explanation.
-5. User applies the hint and continues solving the problem.
+## Use Case 7: Hints
+A user requests a hint from the AI assistant.
+1. User begins answer a question but is unsure how to proceed after a certain point.
+2. User presses "Hint" button.
+3. User's current work is sent to AI assistant.
+4. User receives a hint or is asked a leading question based on work done so far.
 
 ## Use Case 8: Unexpected exit
 A user accidentally exits the app mid-interview but is able to restore their session.
@@ -77,4 +76,4 @@ A user accidentally exits the app mid-interview but is able to restore their ses
 3. User logs back in to the homepage.
 4. A prompt appears, asking if the user wants to continue their session.
 5. User selects ‘Yes’.
-6. User continues their interview question, with their previous whiteboard drawings and time remaining saved from the previous session. -->
+6. User continues their interview question, with their previous whiteboard drawings and time remaining saved from the previous session.
