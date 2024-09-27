@@ -5,11 +5,44 @@ sidebar_position: 2
 # Class Diagrams
 
 ```mermaid
+
 classDiagram
 
   App --> Main
+  Main --> Menu
+  Menu --> Settings
+  Menu --> Profile
+  Menu --> PreviousQuestions
+  Main --> WhiteBoard
+  Main --> MicPrompt
+  MicPrompt --> AIAssistant
+  WhiteBoard --> AIAssistant
+
+  WhiteBoard: -draw()
+  WhiteBoard: -erase()
+  WhiteBoard: -undo()
+  WhiteBoard: -redo()
+
+  Main: +start()
+
+  Menu: +display()
+  Menu: +hide()
+
+  MicPrompt: -record()
+
+  AIAssistant: +hint()
+  AIAssistant: +grade()
+
+  Settings: +string displayMode
+  Settings: +inputMode
+
+
+
+
 ```
 
+
+<!--
 ```mermaid
 classDiagram
 
@@ -91,4 +124,5 @@ Backend "1" --|> Django
 Frontend "1" --|> ReactJS
 
 
-```
+
+``` -->
