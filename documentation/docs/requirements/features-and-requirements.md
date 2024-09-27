@@ -151,3 +151,6 @@ sidebar_position: 4
 
 #### Security
 - The applicationm will make use of secure data solutions such as Firebase and OAuth for security.
+
+#### Resiliency
+- The application will be able to handle an unexpected exit by saving the user's progress within a question
