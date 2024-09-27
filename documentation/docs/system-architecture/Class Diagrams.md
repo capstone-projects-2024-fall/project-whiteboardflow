@@ -89,8 +89,11 @@ User "1" --o "many" AI : receives feedback from
 Backend "1" --|> Flask
 Backend "1" --|> Django
 Frontend "1" --|> ReactJS
+
 Explanation of the Diagram
+
 Classes and Attributes:
+
 User:
 
 Attributes: userID, name, email, password, questionHistory
