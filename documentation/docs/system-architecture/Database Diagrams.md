@@ -75,4 +75,4 @@ QUESTION contains the coding and estimation problems available for user interact
 CATEGORY organizes questions into distinct categories based on their content or difficulty level (one-to-many with QUESTION). </br>
 ANALYSIS stores results from handwriting, speech, and natural language processing analysis related to user inputs during sessions (many-to-one with SESSION). </br>
 FEEDBACK captures feedback provided to users based on their session performance, linked directly to SESSION (one-to-one with SESSION). </br>
-USER_PREFERENCES: Holds user-configured settings that affect how the application behaves and interacts with the user, such as feedback options and interface preferences (one-to-one with USER).
+USER_PREFERENCES holds user-configured settings that affect how the application behaves and interacts with the user, such as feedback options and interface preferences (one-to-one with USER).
