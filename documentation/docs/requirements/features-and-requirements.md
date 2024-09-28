@@ -13,26 +13,26 @@ sidebar_position: 4
 
 #### Question process
 - The application's questions flow will be:
-  - Select question and prompt user to answer on digital whiteboard.
-  - After user is finished, application will prompt user to orally explain their thought process.
-  - After user is done explaining, AI assistant will analyze work and give feedback.
+  - Select a question and prompt the user to answer on the digital whiteboard.
+  - After the user is finished, the application will prompt the user to explain their thought process orally.
+  - After the user is done explaining, the AI assistant will analyze the work and give feedback.
 
 #### Digital whiteboard
 - The application will allow users to write out answers to the problems
-- Whiteboard will include the following features:
+- The Whiteboard will include the following features:
   - Pencil tool.
   - Eraser tool, clear screen.
   - Undo/redo of draw strokes.
  
 #### Speech to text
-- The application will transcribe the user's speech for use in problem solving analysis.
+- The application will transcribe the user's speech for use in problem-solving analysis.
 
 #### AI assistant
 - The application will feature an AI assistant that will interface with the openAI API to:
-   - Analyze user's handwriting and code.
+   - Analyze the user's handwriting and code.
    - Analyze the user's solutions for correctness and logic.
    - Analyze the user's thought process and approach to solving questions.
-   - Give feedback on user's weaknesses.
+   - Give feedback on the user's weaknesses.
    - Give hints/feedback during questions when requested by the user based on work done already.
 
 <!-- The user may request hints from the assistant during mock interviews when
@@ -51,7 +51,7 @@ sidebar_position: 4
 #### Account sign-up and login
 - The user will be required to register through a Facebook/Google account.
 - User profiles will be stored securely in a database using Firebase.
-- After signing-in, the app will navigate to the home page.
+- After signing in, the app will navigate to the home page.
 
 
 <!--#### The application must include a digital whiteboard.
@@ -77,35 +77,35 @@ sidebar_position: 4
 - The application will feature a preferences page which allows the user to:
   - Change the Facebook/Google account which is connected to their profile.
   - Delete their account.
-  - Change Language settings
+  - Change language settings
 
 #### Account deletion.
 - The application will allow users to delete their account which will:
   - Be secure by prompting re-authentication through their OAuth provider (Facebook or Google).
   - Send a confirmation email.
-  - Delete user's records from Firebase database.
+  - Delete user's records from the Firebase database.
 
 #### Question history.
-- The application will allow user to:
+- The application will allow the user to:
   - See all previous questions they have answered.
-  - See all feedback received from AI assistant.
+  - See all feedback received from the AI assistant.
 
 <!--#### After the user initiates a written test, a question will appear on the top of the whiteboard screen.
 - A question time limit will appear immediately on the top right, with its
   duration depending on the question’s complexity.
 - The whiteboard will appear for the user to demonstrate their written solution
   and thought process.
-- The option for a new question will be available for the user.
+- The user will be able to access a new question.
 
-#### During the oral test, the user must explain their thought process verbally for the AI to determine their level of confidence.
+#### During the oral test, the user must explain their thought process verbally to the AI to determine their level of confidence.
 - Microphone input must be detected in real-time to check for any
   hesitation/uncertainty.
 - Speaker output must be detected to determine that the user can hear the voice
   prompts.
 
-#### User can request clarity from a hint given by AI assistant
-- AI assistant will be able to rephrase assistance to give user multiple perspectives
-- AI assistance will be able to generate multiple leading questions to guide user through prompt.
+#### User can request clarity from a hint given by the AI assistant
+- AI assistant will be able to rephrase assistance to give users multiple perspectives
+- AI assistance will be able to generate multiple leading questions to guide users through prompts.
 
 #### To simulate an interview scenario, the system will begin the written test before the oral test.
 - Feedback will be tailored for each test based on content and performance.
@@ -115,11 +115,9 @@ sidebar_position: 4
     - Important historical data like written or oral test scores.
     - Number of attempts.
 - The system will display reassuring AI-generated messages and prompts.
-    - In the written test, the user will receive alerts with hints, code
+    - After the written test, the user will receive alerts with hints, code
       examples, and relevant feedback.
-    - In the oral test, the user will receive appropriate prompts based on the
-      analysis of their speech emotion recognition and correctness of their
-      response and give relevant feedback.
+    - After completing the oral test, the user will receive tailored prompts based on an analysis of their speech emotions, the accuracy of their responses, and will be provided with relevant feedback.
     - Each message will assure that the user is moving in the right direction.
 - “Don’t panic!” will be incorporated somewhere in the UI. -->
 
