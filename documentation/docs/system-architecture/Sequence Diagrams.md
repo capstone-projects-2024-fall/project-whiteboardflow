@@ -15,40 +15,46 @@ participant Server
 participant Database
 participant AI
 
-User->>Server:Generate interview question
+activate User
+User ->> Server: Generate interview question
+deactivate User
 
 activate Server
-Server->>Database:Get random question
+Server ->> Database: Get random question
 deactivate Server
 
 activate Database
-Database-->>Server:Return question and time limit
+Database -->> Server: Return question and time limit
 deactivate Database
 
 activate Server
-note right of Server:Display question, time limit, and \nwhiteboard for user
-Server-->>User:Begin written test
+Server -->> User: Display question, time <br/>limit, and whiteboard
+Server -->> User: Begin written test
 deactivate Server
 
-User->>Server:Written test complete
+activate User
+User ->> Server: Written test complete
+deactivate User
 
 activate Server
-Server-->>User:Begin oral test
+Server -->> User: Begin oral test
 deactivate Server
 
-User->>Server:Oral test complete
+activate User
+User ->> Server: Oral test complete
+deactivate User
 
 activate Server
-Server->>AI:Send user's written and oral answers
+Server ->> AI: Send user's written and oral answers
 deactivate Server
 
 activate AI
-AI-->>Server:Return AI response
+AI -->> Server: Return AI response
 deactivate AI
 
 activate Server
-Server-->>Database:Store question, user's answer, and AI response
-Server-->>User:Display AI response
+Server -->> Database: Store question, user's answer, and AI response
+Server -->> User: Display AI response
 deactivate Server
 
 ```
@@ -64,23 +70,28 @@ participant Server
 participant Whiteboard
 
 activate Server
-Server-->>User:Generate question
+Server -->> User: Generate question
 deactivate Server
 
-User->>*Whiteboard:new()
-User->>Whiteboard:Send touchscreen input to draw
+activate User
+User ->> Whiteboard: new()
+activate Whiteboard
+deactivate Whiteboard
+User ->> Whiteboard: Send touchscreen input to draw
+deactivate User
 
 activate Whiteboard
-Whiteboard-->>User:Display pencil strokes
+Whiteboard -->> User: Display pencil strokes
 deactivate Whiteboard
 
-User->>Whiteboard:Send touchscreen input to erase
+activate User
+User ->> Whiteboard: Send touchscreen input to erase
+deactivate User
 
 activate Whiteboard
-Whiteboard-->>User:Erase pencil strokes
+Whiteboard -->> User: Erase pencil strokes
 deactivate Whiteboard
 
- 
 ```
 
 ## 3: AI Assistant
@@ -94,19 +105,20 @@ participant Server
 participant AI
 
 activate Server
-Server-->>User:Generate question
+Server -->> User: Generate question
 deactivate Server
 
-User->>AI:Request hint (send question)
+activate User
+User ->> AI: Request hint (send question)
+deactivate User
 
 activate AI
-AI-->>Server:Return hint
+AI -->> Server: Return hint
 deactivate AI
 
 activate Server
-Server-->>User:Display hint
+Server -->> User: Display hint
 deactivate Server
-
 
 ```
 
@@ -121,28 +133,32 @@ participant Server
 participant OAuth Provider
 participant Database
 
-User->>Server:User selects "Create Account"
+activate User
+User ->> Server: User selects "Create Account"
+deactivate User
 
 activate Server
-Server-->>User:Redirect to OAuth login
+Server -->> User: Redirect to OAuth login
 deactivate Server
 
-User->>OAuth Provider:Enter credentials
+activate User
+User ->> OAuth Provider: Enter credentials
+deactivate User
 
 activate OAuth Provider
-OAuth Provider-->>Server:Verify credentials
+OAuth Provider -->> Server: Verify credentials
 deactivate OAuth Provider
 
 activate Server
-Server->>Database:Store credentials
+Server ->> Database: Store credentials
 deactivate Server
 
 activate Database
-Database-->>Server:Return success
+Database -->> Server: Return success
 deactivate Database
 
 activate Server
-Server-->>User:Redirect to home page
+Server -->> User: Redirect to home page
 deactivate Server
 
 ```
@@ -157,15 +173,28 @@ participant User
 participant Server
 participant Database
 
-User->>Server:User request account deletion
+activate User
+User ->> Server: Request account deletion
+deactivate User
+
 activate Server
-Server->>User:Oauth confirmation request
-User-->>Server:Oauth confirmation
-Server->>Database:Server requests account deletion
+Server -->> User: OAuth confirmation request
+deactivate Server
+
+activate User
+User ->> Server: OAuth confirmation
+deactivate User
+
+activate Server
+Server ->> Database: Request account deletion
+deactivate Server
+
 activate Database
-Database-->>Server:Success message
+Database -->> Server: Return success
 deactivate Database
-Server-->>User:Deletion success
+
+activate Server
+Server -->> User: Deletion success
 deactivate Server
 
 ```
@@ -178,30 +207,39 @@ sequenceDiagram
 
 participant User
 participant Server
-participant Oauth Provider
+participant OAuth Provider
 participant Database
 
-User->>Server:Oauth login request
+activate User
+User ->> Server: OAuth login request
+deactivate User
+
 activate Server
-
-Server->>Oauth Provider:Oauth request
-activate Oauth Provider
-Oauth Provider-->>Server:Oauth success
-deactivate Oauth Provider
-
-Server-->>User:Oauth success
+Server ->> OAuth Provider: OAuth request
 deactivate Server
 
-User->>Server:Request question history
+activate OAuth Provider
+OAuth Provider -->> Server: OAuth success
+deactivate OAuth Provider
+
 activate Server
+Server -->> User: OAuth success
+deactivate Server
 
-Server->>Database:Request question history
+activate User
+User ->> Server: Request question history
+deactivate User
+
+activate Server
+Server ->> Database: Request question history
+deactivate Server
+
 activate Database
-
-Database-->>Server:Questio/Score history data
+Database -->> Server: Question/score history data
 deactivate Database
 
-Server-->>User:Displays question history
+activate Server
+Server -->> User: Displays question history
 deactivate Server
 
 ```
@@ -217,17 +255,22 @@ participant Server
 participant AI Assistant
 
 activate Server
-Server-->>User:User is given prompt to answer
+Server -->> User: User is given prompt to answer
 deactivate Server
 
-User->>Server: User requests hint from AI assistant
+activate User
+User ->> Server: User requests hint from AI assistant
+deactivate User
+
 activate Server
 Server ->> AI Assistant: Sends current user progress
-activate AI Assistant
+deactivate Server
 
+activate AI Assistant
 AI Assistant -->> Server: Returns result of analysis
 deactivate AI Assistant
 
+activate Server
 Server -->> User: Displays feedback from AI Assistant
 deactivate Server
 
@@ -243,21 +286,36 @@ participant User
 participant Server
 participant Database
 
+activate User
 User ->> Server: Unexpected exit
+deactivate User
+
 activate Server
 Server ->> Database: Sends current data to store
-activate Database
-Database -->> Server: success
-deactivate Database
 deactivate Server
 
+activate Database
+Database -->> Server: Return success
+deactivate Database
+
+activate Server
+Server -->> User: Return success
+deactivate Server
+
+activate User
 User ->> Server: Requests to load previous progress
+deactivate User
+
 activate Server
 Server ->> Database: Requests previous progress
+deactivate Server
+
 activate Database
-Database -->> Server: Returns data
+Database -->> Server: Return data
 deactivate Database
-Server -->> User: Returns data
+
+activate Server
+Server -->> User: Return data
 deactivate Server
 
 ```
