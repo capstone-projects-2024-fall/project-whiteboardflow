@@ -74,9 +74,9 @@ erDiagram
     SESSION ||--o{ ANALYSIS: "generates"
     QUESTION ||--o{ CATEGORY: "classified in"
 ```
-USER manages user authentication and profile information.</br>
-SESSION manages user sessions, detailing each instance where a user engages with coding and estimation problems on the digital whiteboard (one-to-many with USER). </br>
-QUESTION contains the coding and estimation problems available for user interaction within sessions, classified into categories (many-to-one with CATEGORY). </br>
-CATEGORY organizes questions into distinct categories based on their content or difficulty level (one-to-many with QUESTION). </br>
-ANALYSIS stores results from handwriting, speech, and natural language processing analysis related to user inputs during sessions (many-to-one with SESSION). </br>
+USER manages user authentication and profile information.<br/>
+SESSION manages user sessions, detailing each instance where a user engages with coding and estimation problems on the digital whiteboard (one-to-many with USER). <br/>
+QUESTION contains the coding and estimation problems available for user interaction within sessions, classified into categories (many-to-one with CATEGORY). <br/>
+CATEGORY organizes questions into distinct categories based on their content or difficulty level (one-to-many with QUESTION). <br/>
+ANALYSIS stores results from handwriting, speech, and natural language processing analysis related to user inputs during sessions (many-to-one with SESSION). <br/>
 AUTHENTICATION tracks details of user authentication methods and sessions (one-to-one with USER).
