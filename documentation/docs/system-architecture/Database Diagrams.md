@@ -61,14 +61,6 @@ erDiagram
         Float speech_confidence
     }
 
-    %% AUTHENTICATION entity
-    AUTHENTICATION {
-        String auth_id PK
-        String user_id FK
-        Date auth_date
-        String provider
-    }
-
     %% Relationships
     USER ||--o{ SESSION: "owns"
     USER ||--o{ AUTHENTICATION: "uses"
@@ -76,12 +68,11 @@ erDiagram
     SESSION ||--o{ QUESTION: "contains"
     SESSION ||--o{ ANALYSIS: "generates"
     QUESTION ||--o{ CATEGORY: "classified in"
-```
-USER manages user authentication and profile information.
-SESSION manages user sessions, detailing each instance where a user engages with coding and estimation problems on the digital whiteboard (one-to-many with USER).
-QUESTION contains the coding and estimation problems available for user interaction within sessions, classified into categories (many-to-one with CATEGORY).
-CATEGORY organizes questions into distinct categories based on their content or difficulty level (one-to-many with QUESTION).
-ANALYSIS stores results from handwriting, speech, and natural language processing analysis related to user inputs during sessions (many-to-one with SESSION).
-FEEDBACK captures feedback provided to users based on their session performance, linked directly to SESSION (one-to-one with SESSION).
-AUTHENTICATION tracks details of user authentication methods and sessions, potentially including external providers (one-to-one with USER).
+
+USER manages user authentication and profile information.</br>
+SESSION manages user sessions, detailing each instance where a user engages with coding and estimation problems on the digital whiteboard (one-to-many with USER). </br>
+QUESTION contains the coding and estimation problems available for user interaction within sessions, classified into categories (many-to-one with CATEGORY). </br>
+CATEGORY organizes questions into distinct categories based on their content or difficulty level (one-to-many with QUESTION). </br>
+ANALYSIS stores results from handwriting, speech, and natural language processing analysis related to user inputs during sessions (many-to-one with SESSION). </br>
+FEEDBACK captures feedback provided to users based on their session performance, linked directly to SESSION (one-to-one with SESSION). </br>
 USER_PREFERENCES: Holds user-configured settings that affect how the application behaves and interacts with the user, such as feedback options and interface preferences (one-to-one with USER).
