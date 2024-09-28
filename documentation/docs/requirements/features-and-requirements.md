@@ -28,8 +28,8 @@ sidebar_position: 4
 - The application will transcribe the user's speech for use in problem solving analysis.
 
 #### AI assistant
-- The application will feature an AI assistant that will:
-   - Analyse user's handwriting and code.
+- The application will feature an AI assistant that will interface with the openAI API to:
+   - Analyze user's handwriting and code.
    - Analyze the user's solutions for correctness and logic.
    - Analyze the user's thought process and approach to solving questions.
    - Give feedback on user's weaknesses.
