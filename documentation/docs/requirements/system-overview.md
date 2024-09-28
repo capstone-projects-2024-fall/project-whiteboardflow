@@ -16,7 +16,7 @@ WhiteBoardFlow is a web application designed to help job seekers prepare for int
 
 ## Conceptual Design
 
-	The frontend will use React.JS to create the layout for the UI as well as the whiteboard element which will make use of the Canvas API or SVG. Node.js will be used for the backend to handle API requests and real-time communication by using WebSocket. Flask or Django will be used for the incorporation of AI/ML components, such as handwriting recognition and natural language processing.
+	The frontend will use React.JS to create the layout for the UI as well as the whiteboard element which will make use of iink-ts. Node.js will be used for the backend to handle API requests and real-time communication by using WebSocket. Flask or Django will be used for the incorporation of AI/ML components, such as handwriting recognition and natural language processing.
   
 ## Background
 	
