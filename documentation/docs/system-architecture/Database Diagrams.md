@@ -68,7 +68,7 @@ erDiagram
     SESSION ||--o{ QUESTION: "contains"
     SESSION ||--o{ ANALYSIS: "generates"
     QUESTION ||--o{ CATEGORY: "classified in"
-
+```
 USER manages user authentication and profile information.</br>
 SESSION manages user sessions, detailing each instance where a user engages with coding and estimation problems on the digital whiteboard (one-to-many with USER). </br>
 QUESTION contains the coding and estimation problems available for user interaction within sessions, classified into categories (many-to-one with CATEGORY). </br>
