@@ -3,7 +3,7 @@ sidebar_position: 4
 ---
 
 # Database Diagrams
---- Mermaid
+```mermaid
 erDiagram
     %% Entities and their attributes
 
@@ -76,4 +76,4 @@ erDiagram
     QUESTION ||--o{ QUESTION_HISTORY: "is part of"
     WHITEBOARD_SESSION ||--o{ HANDWRITING_ANALYSIS: "includes"
     WHITEBOARD_SESSION ||--o{ NLP_ANALYSIS: "includes"
-    ---
+    ```
