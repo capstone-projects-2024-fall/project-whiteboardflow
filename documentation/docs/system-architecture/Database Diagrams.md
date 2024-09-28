@@ -6,11 +6,10 @@ sidebar_position: 4
 ## Entity-Relation Diagram
 ```mermaid
 erDiagram
-
-     %% Entities and their attributes
+    %% Entities and their attributes
 
     USER ||--o{ SESSION: "owns"
-    USER ||--o{ USER_PREFERENCES: "configures"
+    USER ||--o{ AUTHENTICATION: "uses"
     SESSION ||--o{ QUESTION: "contains"
     SESSION ||--o{ ANALYSIS: "generates"
     QUESTION ||--o{ CATEGORY: "classified in"
@@ -21,6 +20,9 @@ erDiagram
         String name
         String email
         String password
+        Boolean audio_feedback_enabled
+        Boolean handwriting_feedback_enabled
+        String preferred_difficulty
     }
 
     %% SESSION entity
@@ -56,18 +58,18 @@ erDiagram
         Text speech_transcription
         Float speech_confidence
     }
-    %% USER_PREFERENCES entity
-    USER_PREFERENCES {
-        String preference_id PK   
+
+    %% AUTHENTICATION entity
+    AUTHENTICATION {
+        String auth_id PK
         String user_id FK
-        String preferred_difficulty
-        Boolean handwriting_feedback_enabled
-        Boolean audio_feedback_enabled
+        Date auth_date
+        String provider
     }
+
     %% Relationships
     USER ||--o{ SESSION: "owns"
     USER ||--o{ AUTHENTICATION: "uses"
-    USER ||--o{ USER_PREFERENCES: "configures"
     SESSION ||--o{ QUESTION: "contains"
     SESSION ||--o{ ANALYSIS: "generates"
     QUESTION ||--o{ CATEGORY: "classified in"
@@ -78,4 +80,4 @@ QUESTION contains the coding and estimation problems available for user interact
 CATEGORY organizes questions into distinct categories based on their content or difficulty level (one-to-many with QUESTION). </br>
 ANALYSIS stores results from handwriting, speech, and natural language processing analysis related to user inputs during sessions (many-to-one with SESSION). </br>
 FEEDBACK captures feedback provided to users based on their session performance, linked directly to SESSION (one-to-one with SESSION). </br>
-USER_PREFERENCES holds user-configured settings that affect how the application behaves and interacts with the user. (one-to-one with USER).
+AUTHENTICATION tracks details of user authentication methods and sessions, potentially including external providers (one-to-one with USER).
