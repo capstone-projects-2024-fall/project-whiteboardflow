@@ -80,4 +80,4 @@ QUESTION contains the coding and estimation problems available for user interact
 CATEGORY organizes questions into distinct categories based on their content or difficulty level (one-to-many with QUESTION). </br>
 ANALYSIS stores results from handwriting, speech, and natural language processing analysis related to user inputs during sessions (many-to-one with SESSION). </br>
 FEEDBACK captures feedback provided to users based on their session performance, linked directly to SESSION (one-to-one with SESSION). </br>
-AUTHENTICATION tracks details of user authentication methods and sessions, potentially including external providers (one-to-one with USER).
+AUTHENTICATION tracks details of user authentication methods and sessions (one-to-one with USER).
