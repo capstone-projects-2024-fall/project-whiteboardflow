@@ -5,6 +5,7 @@ sidebar_position: 4
 # Database Diagrams
 
 ```mermaid
+erDiagram
     %% Entities and their attributes
     
     USER ||--o{ QUESTION_HISTORY: "logs"
