@@ -13,13 +13,13 @@ sidebar_position: 4
 
 #### Question process
 - The application's questions flow will be:
-  - Select question and propt user to answer on digital whiteboard.
+  - Select question and prompt user to answer on digital whiteboard.
   - After user is finished, application will prompt user to orally explain their thought process.
-  - After user is done explaining, AI assistant will analyse work and give feedback.
+  - After user is done explaining, AI assistant will analyze work and give feedback.
 
 #### Digital whiteboard
 - The application will allow users to write out answers to the problems
-- Whiteboard will include the following feaures:
+- Whiteboard will include the following features:
   - Pencil tool.
   - Eraser tool, clear screen.
   - Undo/redo of draw strokes.
@@ -88,7 +88,7 @@ sidebar_position: 4
 #### Question history.
 - The application will allow user to:
   - See all previous questions they have answered.
-  - See all feeback recieved from AI assistant.
+  - See all feedback received from AI assistant.
 
 <!--#### After the user initiates a written test, a question will appear on the top of the whiteboard screen.
 - A question time limit will appear immediately on the top right, with its
@@ -129,14 +129,14 @@ sidebar_position: 4
 - The speaker’s tone is analyzed using pitch, intensity, rate and timbre.
 - The confidence of the speaker is also analyzed based on duration of speech and pauses, speech patterns, word choice, and content analysis.
 #### Use of Firebase for the backend will allow the app to be scalable and easier to work with, as well as ensuring an acceptable level of availability and performance.
-- User login information will be securely stored in Firebase and linked with either FaceBook or Google’s authentication system.
+- User login information will be securely stored in Firebase and linked with either Facebook or Google’s authentication system.
 - We will also store user historical data on Firebase.-->
 
 #### AI assistant flexibility
 - AI assistant will be able to analyze the user's work and give specific feedback to what they've done
 - AI assistant will be able to reword hints or feedback if user requests
 
-#### Accessability
+#### Accessibility
 - Written portions of the application will be able to be completed with:
   - Stylus and touch device
   - Finger and touch device
@@ -151,7 +151,7 @@ sidebar_position: 4
 - The application will have a dark and light mode
 
 #### Security
-- The applicationm will make use of secure data solutions such as Firebase and OAuth for security.
+- The application will make use of secure data solutions such as Firebase and OAuth for security.
 
 #### Resiliency
 - The application will prompt user to confirm they want to navigate away from page if work is in progress.
