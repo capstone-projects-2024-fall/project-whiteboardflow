@@ -3,7 +3,7 @@ sidebar_position: 4
 ---
 
 # Database Diagrams
-
+## Entity-Relation Diagram
 ```mermaid
 erDiagram
 
