@@ -7,7 +7,7 @@ sidebar_position: 4
 ```mermaid
 erDiagram
 
-    %% Entities and their attributes
+     %% Entities and their attributes
 
     USER ||--o{ SESSION: "owns"
     USER ||--o{ AUTHENTICATION: "uses"
@@ -74,5 +74,5 @@ erDiagram
     USER ||--o{ AUTHENTICATION: "uses"
     USER ||--o{ USER_PREFERENCES: "configures"
     SESSION ||--o{ QUESTION: "contains"
-    SESSION ||--o
-
+    SESSION ||--o{ ANALYSIS: "generates"
+    QUESTION ||--o{ CATEGORY: "classified in"
