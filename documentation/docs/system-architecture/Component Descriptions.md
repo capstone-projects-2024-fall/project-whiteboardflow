@@ -3,7 +3,7 @@ sidebar_position: 1
 ---
 # Component Descriptions
 ## React.js
-  A JavaScript library for building dynamic user interfaces.
+  A JavaScript library for building dynamic user interfaces.</br>
   It will be employed to develop the frontend components
 ## iink-ts
   A TypeScript library for integrating handwriting recognition and digital ink management. 
