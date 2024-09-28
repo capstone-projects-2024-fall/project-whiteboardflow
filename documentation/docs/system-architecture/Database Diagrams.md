@@ -21,9 +21,6 @@ erDiagram
         String name
         String email
         String password
-        Boolean audio_feedback_enabled
-        Boolean handwriting_feedback_enabled
-        String preferred_difficulty
     }
 
     %% SESSION entity
