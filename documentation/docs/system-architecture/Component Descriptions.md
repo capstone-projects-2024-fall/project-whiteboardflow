@@ -20,3 +20,9 @@ sidebar_position: 1
 ## MySQL
   A open-source relational database management system.<br/>
   It will handle data storage, including user accounts, session data, and performance metrics for the application.
+## GitHub
+  Online software development tool for collaboration on coding projects.<br/>
+  We will use GitHub for version control and code merging.
+## Jira
+  Jira is an online agile project management tool that allows teams to track and assign tasks.
+  We will use Jira to construct our backlog, create user stories, bugs, and epics, assign tasks, and map out effort.
