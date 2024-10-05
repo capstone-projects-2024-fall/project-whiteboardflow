@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from './firebase'; // Import Firebase config
+//import { auth } from './firebase'; // Import Firebase config
+import { auth } from './firebase.js'; // Add .js extension
+
 import { getFirestore, setDoc, doc } from 'firebase/firestore'; // Firestore functions
 
 const db = getFirestore(); // Initialize Firestore

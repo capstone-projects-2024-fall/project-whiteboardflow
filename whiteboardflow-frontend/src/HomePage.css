@@ -1,0 +1,107 @@
+/* General styling */
+body,
+html
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Container */
+.homepage-container
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.navbar
+{
+    display: flex;
+    justify-content: space-between;
+    background-color: #4CAF50;
+    padding: 1rem;
+}
+
+.logo
+{
+    color: white;
+    font-size: 1.8rem;
+}
+
+.nav-links
+{
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links li
+{
+    display: inline;
+}
+
+.nav-links a
+{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hero Section */
+.hero-section
+{
+    height: 80vh;
+    background: linear-gradient(135deg, #4CAF50, #2196F3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.cta-button
+{
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: white;
+    color: #4CAF50;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.cta-button:hover
+{
+    background-color: #2196F3;
+    color: white;
+}
+
+/* Login Section */
+.login-section
+{
+    background-color: #f5f5f5;
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.login-heading
+{
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Footer */
+.footer
+{
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
