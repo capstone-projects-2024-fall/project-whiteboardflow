@@ -5,10 +5,20 @@ import { getFirestore, setDoc, doc } from 'firebase/firestore'; // Firestore fun
 
 const db = getFirestore(); // Initialize Firestore
 
+/**
+ * Login component that handles Google authentication and saves user information to Firebase Firestore.
+ * @component
+ */
 function Login() {
     const [error, setError] = useState(null);
 
-    // Google Login function
+    /**
+     * Handles Google Login using Firebase Authentication.
+     * If login is successful, the user's information is saved to Firestore.
+     * @async
+     * @function handleGoogleLogin
+     * @throws Will throw an error if authentication fails.
+     */
     const handleGoogleLogin = async () => {
         const provider = new GoogleAuthProvider();
         try {
