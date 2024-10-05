@@ -1,5 +1,7 @@
 import React from 'react';
-import Login from './Login.js'; // Import the Login component
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Login from './Login.js';
 import './HomePage.css'; // External CSS for fancy styling
 
 function HomePage() {
@@ -18,9 +20,14 @@ function HomePage() {
 
             <section className="intro-section">
                 <div className="intro-content">
-                    <h2>Collaborate, Organize, Create</h2>
-                    <p>Whiteboard Assistant makes remote collaboration seamless. Jump into a session, share ideas, and work together in real-time!</p>
-                    <a href="#login" className="cta-button">Get Started</a>
+                    <h2>Practice, practice, practice</h2>
+                    <p>Whiteboard Assistant helps you to prepare for your whiteboard interview!</p>
+
+                    {/* MUI Button for "Let's Go!" */}
+                    {/* MUI Button choices: text, contained, outlined */}
+                    <Button variant="contained" href="#login" style={{ marginTop: '20px' }}>
+                        Let's Go!
+                    </Button>
                 </div>
             </section>
 
