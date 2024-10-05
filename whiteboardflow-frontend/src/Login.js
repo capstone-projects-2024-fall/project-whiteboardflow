@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from './firebase'; // Import Firebase configuration
+import { auth } from './firebase'; // Firebase configuration
 
+/**
+ * Login component that allows users to sign in using a username and password.
+ * Utilizes Firebase Authentication for login functionality.
+ * 
+ * @component
+ */
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
+    /**
+     * Handles the login form submission.
+     * Attempts to sign in the user using Firebase Authentication.
+     *
+     * @param {Object} e - The event object from form submission.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await signInWithEmailAndPassword(auth, username, password);
-            // Redirect or show a success message
+            // Success handling (e.g., redirect)
         } catch (error) {
             setError(error.message);
         }
