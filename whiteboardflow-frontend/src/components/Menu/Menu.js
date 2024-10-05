@@ -1,7 +1,29 @@
 import React from 'react';
 
-export default function Menu() {
+/**
+ * Menu component that manages the visibility of a menu.
+ * @component
+ */
+const Menu = () => {
+  
+  /**
+   * Displays the menu.
+   */
+  const display = () => {
+
+  };
+
+  /**
+   * Hides the menu.
+   */
+  const hide = () => {
+    
+  };
+
   return (
-    <div></div>
+    <div>
+    </div>
   );
-}
+};
+
+export default Menu;

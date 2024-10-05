@@ -1,7 +1,23 @@
 import React from 'react';
 
-export default function MicPrompt() {
+/**
+ * Microphone prompt which allows the user to record their response during the
+ * oral test.
+ * @component
+ */
+const MicPrompt = () => {
+
+  /**
+   * Records the user's response.
+   */
+  const record = () => {
+
+  };
+
   return (
-    <div></div>
+    <div>
+    </div>
   );
-}
+};
+
+export default MicPrompt;
