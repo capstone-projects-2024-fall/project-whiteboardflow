@@ -1,30 +1,42 @@
 import React from 'react';
-import Stack from '@mui/material/Stack';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 import Login from './Login.js';
-import './HomePage.css'; // External CSS for fancy styling
+import './HomePage.css';
 
 function HomePage() {
     return (
         <div className="homepage-container">
-            <header className="homepage-header">
-                <nav className="navbar">
-                    <h1 className="logo">Whiteboard Assistant</h1>
-                    <ul className="nav-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </nav>
-            </header>
+            {/* MUI AppBar Component */}
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{ mr: 2 }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            Whiteboard Assistant
+                        </Typography>
+                        <Button color="inherit">Login</Button>
+                    </Toolbar>
+                </AppBar>
+            </Box>
 
             <section className="intro-section">
                 <div className="intro-content">
                     <h2>Practice, practice, practice</h2>
                     <p>Whiteboard Assistant helps you to prepare for your whiteboard interview!</p>
-
-                    {/* MUI Button for "Let's Go!" */}
-                    {/* MUI Button choices: text, contained, outlined */}
                     <Button variant="contained" href="#login" style={{ marginTop: '20px' }}>
                         Let's Go!
                     </Button>
@@ -33,7 +45,7 @@ function HomePage() {
 
             <section id="login" className="login-section">
                 <h2 className="login-heading">Login to Your Account</h2>
-                <Login /> {/* Embed the Login component */}
+                <Login />
             </section>
 
             <footer className="footer">
