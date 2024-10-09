@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-router-dom": "^6.26.2",
+    "ws": "^8.18.0"
+  }
+}

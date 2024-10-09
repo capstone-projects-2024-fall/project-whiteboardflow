@@ -1,0 +1,47 @@
+/* General styling */
+body,
+html
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Container */
+.homepage-container
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 10vh;
+}
+
+/* AppBar fixes */
+.intro-section
+{
+    padding: 40px 0;
+    text-align: center;
+    margin-top: -50px;
+    /* Adjust the spacing under the AppBar */
+}
+
+/* Login Section */
+.login-section
+{
+    background-color: #f5f5f5;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 40px;
+    /* Adjust for desired space */
+}
+
+/* Footer */
+.footer
+{
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
