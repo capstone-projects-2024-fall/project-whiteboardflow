@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Login from './Login.js';
+import Login from './pages/Login/Login.js';
 import './HomePage.css';
 
 function HomePage() {
