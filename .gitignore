@@ -10,3 +10,4 @@
 .env
 node_modules
 /whiteboardflow-frontend/public/server-configuration.json
+.vscode/
