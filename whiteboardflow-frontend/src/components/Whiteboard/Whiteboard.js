@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import HelpButton from './HelpButton';
 import './css/reset.css';
 import './css/components.css';
 import './css/examples.css';
@@ -38,6 +39,8 @@ const Whiteboard = () => {
         };
 
         editor = new window.iink.Editor(editorElementRef.current, options);
+        console.log('iink Editor initialized successfully.');
+        console.log(editor);
         await editor.initialize();
         window.addEventListener("resize", handleResize);
       } catch (error) {
@@ -59,19 +62,23 @@ const Whiteboard = () => {
         }
       }
     };
-  }, []); // Empty dependency array ensures this runs only once after the component mounts
+  },
+      );
 
   return (
-      <div
-          id="editor"
-          ref={editorElementRef}
-          style={{
-            width: '100%',
-            height: '100vh',
-            touchAction: 'none',
-          }}
-      />
+      <div style={{ width: '100%', height: '100vh', position: 'relative' }}>
+        <div
+            id="editor"
+            ref={editorElementRef}
+            style={{
+              width: '100%',
+              height: '100%',
+              touchAction: 'none',
+            }}
+        />
+        <HelpButton /> {/* Using the HelpButton component */}
+      </div>
   );
-};
 
+};
 export default Whiteboard;
