@@ -28,4 +28,13 @@ describe('Whiteboard component tests', () => {
         render(<Whiteboard/>);
         expect(screen.getByText('Help')).toBeInTheDocument();
     });
+
+    test('fetches server configuration and initializes editor on mount', async () => {
+        render(<Whiteboard />);
+        await waitFor(() => expect(fetch).toHaveBeenCalled());
+        expect(fetch).toHaveBeenCalledWith("server-configuration.json");
+        await waitFor(() => expect(window.iink.Editor).toHaveBeenCalledTimes(1));
+    });
+
+
 });
