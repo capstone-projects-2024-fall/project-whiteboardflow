@@ -1,4 +1,8 @@
 import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import './css/reset.css';
+import './css/components.css';
+import './css/examples.css';
 
 /** Draws on the whiteboard. */
 export const draw = () => { };
@@ -12,10 +16,7 @@ export const undo = () => { };
 /** Redoes the last undone action on the whiteboard. */
 export const redo = () => { };
 
-import React, { useEffect, useRef } from 'react';
-import './css/reset.css';
-import './css/components.css';
-import './css/examples.css';
+
 
 const Whiteboard = () => {
 
