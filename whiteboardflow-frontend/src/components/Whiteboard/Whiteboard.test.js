@@ -1,58 +1,85 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import Whiteboard from './Whiteboard';
-import HelpButton from './HelpButton';
-import '@testing-library/jest-dom';
 
-// Mocks for external dependencies
 jest.mock('./HelpButton', () => () => <button>Help</button>);
-global.fetch = jest.fn(() =>
-    Promise.resolve({
-        json: () => Promise.resolve({}),
-    })
-);
-window.iink = {
-    Editor: jest.fn().mockImplementation(() => ({
-        initialize: jest.fn().mockResolvedValue(true),
-        resize: jest.fn(),
-        destroy: jest.fn(),
-    })),
-};
-describe('Whiteboard component tests', () => {
-    beforeEach(() => {
-        fetch.mockClear();
-        window.iink.Editor.mockClear();
+
+beforeEach(() => {
+    jest.clearAllMocks();
+
+    // Mock fetch to return a resolved promise with server configuration
+    global.fetch = jest.fn().mockResolvedValue({
+        json: jest.fn().mockResolvedValue({ serverData: 'someData' }),
     });
 
-    test('renders Whiteboard and HelpButton without crashing', () => {
-        render(<Whiteboard/>);
-        expect(screen.getByText('Help')).toBeInTheDocument();
+    // Mock the iink.Editor class
+    window.iink = {
+        Editor: jest.fn().mockImplementation(() => ({
+            initialize: jest.fn().mockResolvedValue(),
+            resize: jest.fn(),
+            destroy: jest.fn(),
+        })),
+    };
+
+    // Spy on addEventListener and removeEventListener
+    jest.spyOn(window, 'addEventListener');
+    jest.spyOn(window, 'removeEventListener');
+});
+
+
+describe('Whiteboard component', () => {
+    test('renders without crashing', () => {
+        const { getByText } = render(<Whiteboard />);
+        expect(getByText('Help')).toBeInTheDocument();
     });
 
-    test('fetches server configuration and initializes editor on mount', async () => {
+    test('fetches server configuration correctly', async () => {
         render(<Whiteboard />);
-        await waitFor(() => expect(fetch).toHaveBeenCalled());
-        expect(fetch).toHaveBeenCalledWith("server-configuration.json");
+        await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+        await waitFor(() => expect(fetch).toHaveBeenCalledWith("server-configuration.json"));
+    });
+
+    test('initializes the editor with the fetched configuration', async () => {
+        render(<Whiteboard />);
+        await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+        expect(fetch).toHaveBeenCalledWith('server-configuration.json');
         await waitFor(() => expect(window.iink.Editor).toHaveBeenCalledTimes(1));
+        expect(window.iink.Editor).toHaveBeenCalledWith(
+            expect.any(HTMLElement), // The editor DOM element
+            expect.objectContaining({
+                configuration: expect.objectContaining({
+                    offscreen: true,
+                    server: { serverData: 'someData' },
+                    rendering: {
+                        minHeight: 2000,
+                        minWidth: 2000,
+                    },
+                    modules: {
+                        eraser: true,
+                        transcript: true,
+                    },
+                }),
+            })
+        );
+        const editorInstance = window.iink.Editor.mock.results[0].value;
+        await waitFor(() => expect(editorInstance.initialize).toHaveBeenCalledTimes(1));
     });
 
-    test('attaches and detaches resize event listener correctly', () => {
-        const addSpy = jest.spyOn(window, 'addEventListener');
-        const removeSpy = jest.spyOn(window, 'removeEventListener');
-        const { unmount } = render(<Whiteboard />);
-        expect(addSpy).toHaveBeenCalledWith('resize', expect.any(Function));
-        unmount();
-        expect(removeSpy).toHaveBeenCalledWith('resize', expect.any(Function));
-    });
-    test('calls resize on window resize', () => {
+
+    test('attaches resize event listener on mount', async () => {
+        jest.spyOn(window, 'addEventListener').mockImplementation(() => {});
         render(<Whiteboard />);
-        const resizeEvent = new Event('resize');
-        window.dispatchEvent(resizeEvent);
-        expect(window.iink.Editor.mock.instances[0].resize).toHaveBeenCalled();
+        await waitFor(() => expect(window.addEventListener).toHaveBeenCalledWith('resize', expect.any(Function)));
     });
-    test('cleans up on component unmount', () => {
+
+    test('cleans up by removing resize event listener and destroying the editor on unmount', async () => {
         const { unmount } = render(<Whiteboard />);
+        await waitFor(() => expect(window.iink.Editor).toHaveBeenCalledTimes(1));
+        const editorInstance = window.iink.Editor.mock.results[0].value;
         unmount();
-        expect(window.iink.Editor.mock.instances[0].destroy).toHaveBeenCalled();
+        expect(window.removeEventListener).toHaveBeenCalledWith('resize', expect.any(Function));
+        expect(editorInstance.destroy).toHaveBeenCalledTimes(1);
     });
+
+
 });

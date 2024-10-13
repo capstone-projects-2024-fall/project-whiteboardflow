@@ -39,6 +39,8 @@ const Whiteboard = () => {
         };
 
         editor = new window.iink.Editor(editorElementRef.current, options);
+        console.log('iink Editor initialized successfully.');
+        console.log(editor);
         await editor.initialize();
         window.addEventListener("resize", handleResize);
       } catch (error) {
@@ -60,7 +62,8 @@ const Whiteboard = () => {
         }
       }
     };
-  }, []); // Empty dependency array ensures this runs only once after the component mounts
+  },
+      );
 
   return (
       <div style={{ width: '100%', height: '100vh', position: 'relative' }}>
