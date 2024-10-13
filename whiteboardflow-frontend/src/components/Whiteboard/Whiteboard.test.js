@@ -36,5 +36,14 @@ describe('Whiteboard component tests', () => {
         await waitFor(() => expect(window.iink.Editor).toHaveBeenCalledTimes(1));
     });
 
+    test('attaches and detaches resize event listener correctly', () => {
+        const addSpy = jest.spyOn(window, 'addEventListener');
+        const removeSpy = jest.spyOn(window, 'removeEventListener');
+        const { unmount } = render(<Whiteboard />);
+        expect(addSpy).toHaveBeenCalledWith('resize', expect.any(Function));
+        unmount();
+        expect(removeSpy).toHaveBeenCalledWith('resize', expect.any(Function));
+    });
+
 
 });
