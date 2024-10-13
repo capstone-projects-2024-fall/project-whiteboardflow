@@ -44,6 +44,15 @@ describe('Whiteboard component tests', () => {
         unmount();
         expect(removeSpy).toHaveBeenCalledWith('resize', expect.any(Function));
     });
-
-
+    test('calls resize on window resize', () => {
+        render(<Whiteboard />);
+        const resizeEvent = new Event('resize');
+        window.dispatchEvent(resizeEvent);
+        expect(window.iink.Editor.mock.instances[0].resize).toHaveBeenCalled();
+    });
+    test('cleans up on component unmount', () => {
+        const { unmount } = render(<Whiteboard />);
+        unmount();
+        expect(window.iink.Editor.mock.instances[0].destroy).toHaveBeenCalled();
+    });
 });
