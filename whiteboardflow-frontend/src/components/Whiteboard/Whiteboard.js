@@ -64,7 +64,8 @@ const Whiteboard = () => {
 
   return (
       <div
-          id="editor"
+      //id="editor"
+      data-testid = "editor"
           ref={editorElementRef}
           style={{
             width: '100%',
