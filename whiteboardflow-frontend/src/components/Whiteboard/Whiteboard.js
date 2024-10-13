@@ -12,14 +12,43 @@ export const undo = () => { };
 /** Redoes the last undone action on the whiteboard. */
 export const redo = () => { };
 
-/**
- * Whiteboard available for the user during a written test.
- * @component
- */
+import React, { useEffect, useRef } from 'react';
+import './css/reset.css';
+import './css/components.css';
+import './css/examples.css';
+
 const Whiteboard = () => {
+
+  /**
+   * Draws on the whiteboard.
+   */
+  const draw = () => {
+
+  };
+
+  /**
+   * Erases part of the whiteboard.
+   */
+  const erase = () => {
+
+  };
+
+  /**
+   * Undoes the last action on the whiteboard.
+   */
+  const undo = () => {
+
+  };
+
+  /**
+   * Redoes the last undone action on the whiteboard.
+   */
+  const redo = () => {
+
+  };
+
   return (
-    <div role="region" aria-label="whiteboard">
-      {/* Whiteboard content */}
+    <div>
     </div>
   );
 };
