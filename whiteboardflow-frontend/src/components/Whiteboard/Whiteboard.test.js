@@ -79,8 +79,6 @@ describe('Whiteboard component', () => {
     });
 
     test('attaches resize event listener on mount', async () => {
-        // Re-spy on addEventListener to ensure a fresh spy for this test
-        jest.spyOn(window, 'addEventListener').mockImplementation(() => {});
         // Render the Whiteboard component
         render(<Whiteboard />);
         // Wait for addEventListener to be called with 'resize' event
