@@ -5,6 +5,8 @@ html
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
+    width: 100%;
+    height: 100%;
 }
 
 /* Container */
@@ -12,16 +14,24 @@ html
 {
     display: flex;
     flex-direction: column;
-    min-height: 10vh;
+    min-height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
-/* AppBar fixes */
+/* AppBar Section */
+.appbar
+{
+    width: 100%;
+}
+
+/* Intro Section */
 .intro-section
 {
     padding: 40px 0;
     text-align: center;
-    margin-top: -50px;
-    /* Adjust the spacing under the AppBar */
+    margin-top: 0;
 }
 
 /* Login Section */
@@ -30,8 +40,7 @@ html
     background-color: #f5f5f5;
     padding: 40px 0;
     text-align: center;
-    margin-top: 40px;
-    /* Adjust for desired space */
+    width: 100%;
 }
 
 /* Footer */
@@ -41,7 +50,6 @@ html
     color: white;
     text-align: center;
     padding: 1rem;
-    position: relative;
-    bottom: 0;
     width: 100%;
+    margin-top: auto;
 }

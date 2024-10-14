@@ -9,6 +9,7 @@ import React from 'react';
 const Settings = ({ displayMode, inputMode }) => {
   return (
     <div>
+      <h1>Welcome to the Settings page!</h1>
     </div>
   );
 };
