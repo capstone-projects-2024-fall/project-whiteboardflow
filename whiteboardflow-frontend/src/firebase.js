@@ -1,16 +1,19 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyAHSgatn-IUZ6Eg084aC6NMfEgy-7qzqbE",
+    authDomain: "whiteboardassistant.firebaseapp.com",
+    databaseURL: "https://whiteboardassistant-default-rtdb.firebaseio.com",
+    projectId: "whiteboardassistant",
+    storageBucket: "whiteboardassistant.appspot.com",
+    messagingSenderId: "313231108308",
+    appId: "1:313231108308:web:5bb43d6b0ff6b802fdb341",
+    measurementId: "G-PLPD6Q8WPC"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-export { auth };
+export { auth, provider, signInWithPopup };
