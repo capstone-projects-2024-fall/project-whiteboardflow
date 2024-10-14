@@ -1,18 +1,20 @@
-// Layout.js
-import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem } from '@mui/material';
-import { useNavigate, Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useNavigate } from 'react-router-dom';
+import { auth, provider, signInWithPopup } from './firebase';
 
-const Layout = () => {
+
+
+const Layout = ({ children }) => {
     const [anchorEl, setAnchorEl] = useState(null);
+    const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const pages = [
         { name: 'Home', path: '/' },
         { name: 'Whiteboard', path: '/whiteboard' },
         { name: 'Oral Test', path: '/OralTest' },
-        { name: 'Settings', path: '/Settings' }
-        
+        { name: 'Settings', path: '/Settings' },
     ];
 
     const handleOpenMenu = (event) => setAnchorEl(event.currentTarget);
@@ -22,8 +24,21 @@ const Layout = () => {
         handleCloseMenu();
     };
 
+    const signInWithGoogle = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => setUser(result.user))
+            .catch((error) => console.error('Login failed:', error));
+    };
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            setUser(user);
+        });
+        return () => unsubscribe();
+    }, []);
+
     return (
-        <>
+        <div>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
@@ -49,10 +64,19 @@ const Layout = () => {
                             </MenuItem>
                         ))}
                     </Menu>
+                    {user ? (
+                        <Typography variant="h6" component="div">
+                            Welcome, {user.displayName}
+                        </Typography>
+                    ) : (
+                        <Button color="inherit" onClick={signInWithGoogle}>
+                            Login with Google
+                        </Button>
+                    )}
                 </Toolbar>
             </AppBar>
-            <Outlet />
-        </>
+            {children}
+        </div>
     );
 };
 
