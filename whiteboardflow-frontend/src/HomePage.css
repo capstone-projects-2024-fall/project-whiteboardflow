@@ -53,3 +53,25 @@ html
     width: 100%;
     margin-top: auto;
 }
+
+.styled-heading
+{
+    font-size: 2.5em;
+    /* Adjust the font size as needed */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heading-main
+{
+    color: #2D3748;
+    /* Dark color for "Mock" */
+}
+
+.heading-highlight
+{
+    color: #007BFF;
+    /* Vibrant blue for ".ai" */
+}

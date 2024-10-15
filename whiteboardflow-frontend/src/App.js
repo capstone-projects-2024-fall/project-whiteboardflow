@@ -4,9 +4,11 @@ import HomePage from './HomePage.js';
 
 function App() {
     return (
-        <div>
+        <><div>
             <h1>Welcome to Whiteboard Assistant!</h1>
-        </div>
+        </div><div>
+                RotatingText
+            </div></>
     );
 }
 
