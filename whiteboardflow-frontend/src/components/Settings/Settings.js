@@ -4,7 +4,40 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AccountSettings = () => {
     const [activeTab, setActiveTab] = useState('account-general');
+    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [company, setCompany] = useState('');
+    const [bio, setBio] = useState('');
+    const [country, setCountry] = useState('Canada');
+    const [color, setColor] = useState('#000000');
     const handleTabChange = (tab) => setActiveTab(tab);
+    const handleSaveChanges = () => {
+        // Create the data to be saved
+        const userConfig = {
+            username,
+            name,
+            email,
+            company,
+            bio,
+            country,
+            color
+        };
+        // Convert the data to a JSON string
+        const data = JSON.stringify(userConfig, null, 2);
+
+        // Create a Blob from the data
+        const blob = new Blob([data], { type: 'application/json' });
+
+        // Create a link element and trigger a download
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'user_config.json';
+        link.click();
+
+        // Release the object URL after download
+        URL.revokeObjectURL(link.href);
+    };
     const handleResendConfirmation = () => {
         console.log('Resend confirmation clicked');
     };
@@ -65,15 +98,15 @@ const AccountSettings = () => {
                                     <div className="card-body">
                                         <div className="form-group">
                                             <label className="form-label">Username</label>
-                                            <input type="text" className="form-control mb-1"/>
+                                            <input type="text" className="form-control mb-1" value={username} onChange={(e) => setUsername(e.target.value)} />
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Name</label>
-                                            <input type="text" className="form-control"/>
+                                            <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} />
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">E-mail</label>
-                                            <input type="text" className="form-control mb-1"/>
+                                            <input type="text" className="form-control mb-1" value={email} onChange={(e) => setEmail(e.target.value)} />
                                             {/*<div className="alert alert-warning mt-3">*/}
                                             {/*    Your email is not confirmed. Please check your inbox.*/}
                                             {/*    <br />*/}
@@ -83,16 +116,16 @@ const AccountSettings = () => {
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Company</label>
-                                            <input type="text" className="form-control"/>
+                                            <input type="text" className="form-control" value={company} onChange={(e) => setCompany(e.target.value)} />
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Bio</label>
-                                            <textarea className="form-control" rows="5"></textarea>
+                                            <textarea className="form-control" rows="5" value={bio} onChange={(e) => setBio(e.target.value)}></textarea>
                                         </div>
                                         <div className="form-group">
-                                            <label className="form-label">Country</label><br/>
-                                            <select className="custom-select">
-                                                <option>Canada</option>
+                                            <label className="form-label">Country</label><br />
+                                            <select className="custom-select" value={country} onChange={(e) => setCountry(e.target.value)}>
+                                            <option>Canada</option>
                                                 <option>USA</option>
                                                 <option>UK</option>
                                                 <option>Germany</option>
@@ -124,20 +157,12 @@ const AccountSettings = () => {
                             )}
 
                             {/* Personalize */}
-                            {activeTab === 'account-social-links' && (
-                                <div className="tab-pane active show" id="account-social-links">
+                            {activeTab === 'personalize' && (
+                                <div className="tab-pane active show" id="personalize">
                                     <div className="card-body pb-2">
                                         <div className="form-group">
-                                            <label className="form-label">Twitter</label>
-                                            <input type="text" className="form-control"/>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="form-label">Facebook</label>
-                                            <input type="text" className="form-control"/>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="form-label">Github</label>
-                                            <input type="text" className="form-control"/>
+                                            <label className="form-label">Color</label>
+                                            <input type="color" className="form-control" value={color} onChange={(e) => setColor(e.target.value)} />
                                         </div>
                                     </div>
                                 </div>
@@ -146,6 +171,10 @@ const AccountSettings = () => {
                             {/* Connections */}
                             {activeTab === 'account-connections' && (
                                 <div className="tab-pane active show" id="account-connections">
+                                    <div className="card-body">
+                                        <button type="button" className="btn btn-twitter">Connect to <strong>Twitter</strong></button>
+                                    </div>
+                                    <hr className="border-light m-0" />
                                     <div className="card-body">
                                         <h5 className="mb-2">
                                             <a href="javascript:void(0)" className="float-right text-muted text-tiny"><i
@@ -162,7 +191,7 @@ const AccountSettings = () => {
                 </div>
             </div>
             <div className="text-right mt-3">
-                <button type="button" className="btn btn-primary">Save changes</button>
+                <button type="button" className="btn btn-primary" onClick={handleSaveChanges}>Save changes</button>
                 &nbsp;
                 <button type="button" className="btn btn-default">Cancel</button>
             </div>
