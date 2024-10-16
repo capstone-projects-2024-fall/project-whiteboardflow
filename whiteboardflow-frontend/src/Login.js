@@ -13,7 +13,7 @@ function Login() {
     };
 
     return (
-        <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+        <GoogleOAuthProvider clientId="86154437771-hspemdt0smpqrj49rnaah6vrvol1rjds.apps.googleusercontent.com">
             <GoogleLogin
                 onSuccess={handleGoogleLoginSuccess}
                 onError={() => console.log('Login Failed')}
