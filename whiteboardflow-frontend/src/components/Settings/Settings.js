@@ -172,13 +172,15 @@ const AccountSettings = () => {
                             {activeTab === 'account-connections' && (
                                 <div className="tab-pane active show" id="account-connections">
                                     <div className="card-body">
-                                        <button type="button" className="btn btn-twitter">Connect to <strong>Twitter</strong></button>
+                                        <button type="button" className="btn btn-google">Connect to <strong>Google</strong></button>
                                     </div>
                                     <hr className="border-light m-0" />
                                     <div className="card-body">
                                         <h5 className="mb-2">
-                                            <a href="javascript:void(0)" className="float-right text-muted text-tiny"><i
-                                                className="ion ion-md-close"></i> Remove</a>
+                                            <a href="javascript:void(0)" className="float-right text-muted text-tiny">
+                                                <i className="ion ion-md-close"></i> Remove
+                                            </a>
+
                                             <i className="ion ion-logo-google text-google"></i>
                                             You are connected to Google:
                                         </h5>

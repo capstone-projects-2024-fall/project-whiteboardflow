@@ -98,3 +98,17 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
     border-color: rgba(24,28,33,0.03) !important;
 }
 
+.float-right {
+    float: right !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+    text-decoration: none;
+}
+a.text-muted:hover {
+    text-decoration: underline;
+}
+.text-tiny {
+    font-size: 1.5rem !important;
+}
