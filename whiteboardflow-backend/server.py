@@ -1,11 +1,26 @@
 import uvicorn
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from routers.voice import router as voice_router
+
 
 app = FastAPI()
 
+origins = ["http://localhost:3000", "localhost:3000"]
 
-@app.get("/hello")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(voice_router, prefix="/api")
+
+
+@app.get("/")
 def read_root():
     return {"test_data": ["data1", "data2"]}
 
