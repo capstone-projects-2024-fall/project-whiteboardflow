@@ -1,10 +1,15 @@
-from flask import Flask
+import uvicorn
 
-app = Flask(__name__)
+from fastapi import FastAPI
 
-@app.route("/hello")
-def hello():
-  return {"test_data": ["data1", "data2"]}
+app = FastAPI()
+
+
+@app.get("/hello")
+def read_root():
+    return {"test_data": ["data1", "data2"]}
+
 
 if __name__ == "__main__":
-  app.run(debug=True)
+    # TODO Remove reload parameter in production
+    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
