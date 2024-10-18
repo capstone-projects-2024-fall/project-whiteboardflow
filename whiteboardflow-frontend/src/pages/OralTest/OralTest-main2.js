@@ -3,11 +3,12 @@ import { Button } from '@mui/material';
 
 function OralTest() {
     const handleButtonClick = () => {
-        fetch('/api/record')
+        fetch('record')
             .then((response) => response.json())
             .then((data) => {
+                const resultTextElement = document.querySelector('.result-text');
                 console.log(data);
-                alert(data.message);
+                resultTextElement.innerText = data.message;
           })
             .catch((error) => {
                 console.error('Error:', error);
@@ -20,6 +21,7 @@ function OralTest() {
             <Button variant="contained" onClick={handleButtonClick}>
                 Record
             </Button>
+            <h2 className="result-text">[output]</h2>
         </div>
     );
 }
