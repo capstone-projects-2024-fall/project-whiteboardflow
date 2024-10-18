@@ -21,15 +21,15 @@ const Whiteboard = () => {
         console.log('Fetching server configuration...');
         const response = await fetch("server-configuration.json");
         const server = await response.json();
-        console.log('Server configuration fetched successfully.');
+        console.log('Server configuration:', server);
 
         const options = {
           configuration: {
             offscreen: true,
             server,
             rendering: {
-              minHeight: 2000,
               minWidth: 2000,
+              maxHeight: 2000,
             },
             modules: {
               eraser: true,
@@ -40,7 +40,8 @@ const Whiteboard = () => {
 
         editor = new window.iink.Editor(editorElementRef.current, options);
         console.log('iink Editor initialized successfully.');
-        console.log(editor);
+        console.log('Editor configuration:', editor.configuration);
+
         await editor.initialize();
         window.addEventListener("resize", handleResize);
       } catch (error) {
@@ -66,7 +67,7 @@ const Whiteboard = () => {
       );
 
   return (
-      <div style={{ width: '100%', height: '100vh', position: 'relative' }}>
+      <div style={{ width: '100%', height: '90vh', position: 'relative' }}>
         <div
             id="editor"
             ref={editorElementRef}
