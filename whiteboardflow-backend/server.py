@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from routers.voice import router as voice_router
 
 
-app = FastAPI()
+app = FastAPI(debug=True)
 
 origins = ["http://localhost:3000", "localhost:3000"]
 
