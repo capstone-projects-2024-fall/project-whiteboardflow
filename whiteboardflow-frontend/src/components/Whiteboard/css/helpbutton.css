@@ -1,6 +1,6 @@
 .help-button {
     position: absolute;
-    top: 0px;
+    top: 0;
     right: 15%;
     z-index: 1000;
     width: 100px;
