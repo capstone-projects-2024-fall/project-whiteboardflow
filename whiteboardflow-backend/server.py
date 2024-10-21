@@ -1,12 +1,13 @@
 import uvicorn
-
+import f
 from fastapi import FastAPI
+import fastapi.middleware.cors
 from fastapi.middleware.cors import CORSMiddleware
 from routers.voice import router as voice_router
 
 
 app = FastAPI(debug=True)
-
+fastapi.middleware.cors(app)
 origins = ["http://localhost:3000", "localhost:3000"]
 
 app.add_middleware(
@@ -27,4 +28,4 @@ def read_root():
 
 if __name__ == "__main__":
     # TODO Remove reload parameter in production
-    uvicorn.run("server:app", host="127.0.0.1", port=5000, reload=True)
+    uvicorn.run("server:app", host="127.0.0.1", port=4398, reload=True)
