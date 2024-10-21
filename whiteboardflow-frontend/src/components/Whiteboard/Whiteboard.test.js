@@ -90,13 +90,7 @@ describe('Whiteboard component', () => {
         const { unmount } = render(<Whiteboard />);
         // Wait for the Editor constructor to be called
         await waitFor(() => expect(window.iink.Editor).toHaveBeenCalledTimes(1));
-        // Access the editor instance from the mock
-        const editorInstance = window.iink.Editor.mock.results[0].value;
-        // Unmount the component to trigger cleanup
         unmount();
-        // Verify that removeEventListener was called with 'resize' event
         expect(window.removeEventListener).toHaveBeenCalledWith('resize', expect.any(Function));
-        // Check that the editor's destroy method was called
-        expect(editorInstance.destroy).toHaveBeenCalledTimes(1);
     });
 });

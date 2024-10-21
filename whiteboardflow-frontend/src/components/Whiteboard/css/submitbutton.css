@@ -1,7 +1,7 @@
-.help-button {
+.export-button {
     position: absolute;
     top: 0;
-    right: 15%;
+    right: 25%;
     z-index: 1000;
     width: 100px;
     height: 40px;
@@ -15,6 +15,6 @@
     transition: background-color 0.3s; /* Smooth transition for background color */
 }
 
-.help-button:hover {
+.export-button:hover {
     background-color: #e2e2e2; /* Slightly darker shade on hover */
 }
