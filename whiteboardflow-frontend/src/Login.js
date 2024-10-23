@@ -2,6 +2,7 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { auth } from '../firebase';
 import { signInWithCredential, GoogleAuthProvider } from 'firebase/auth';
 
+
 function Login() {
     const handleGoogleLoginSuccess = (response) => {
         if (response.credential) {
@@ -32,3 +33,15 @@ function Login() {
 }
 
 export default Login;
+
+/* import { auth, provider } from '../firebase'; // Make sure to import provider
+import { signInWithPopup } from 'firebase/auth';
+
+const handleGoogleLogin = async () => {
+    try {
+        const result = await signInWithPopup(auth, provider);
+        console.log('User logged in:', result.user);
+    } catch (error) {
+        console.error('Login failed:', error);
+    }
+}; */
