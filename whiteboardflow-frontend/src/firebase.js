@@ -10,7 +10,15 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
+let app;
+
+try {
+    app = initializeApp(firebaseConfig);
+    console.log("Firebase initialized successfully");
+} catch (error) {
+    console.error("Firebase initialization error:", error);
+}
+
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
