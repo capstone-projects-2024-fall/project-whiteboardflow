@@ -3,70 +3,70 @@
 
 
 "@popperjs/core@^2.11.8":
-  version "2.11.8"
-  resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
-  integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
+  "integrity" "sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A=="
+  "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
+  "version" "2.11.8"
 
 "@remix-run/router@1.19.2":
-  version "1.19.2"
-  resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.19.2.tgz"
-  integrity sha512-baiMx18+IMuD1yyvOGaHM9QrVUPGGG0jC+z+IPHnRJWUAUvaKuWKyE8gjDj2rzv3sz9zOGoRSPgeBVHRhZnBlA==
+  "integrity" "sha512-baiMx18+IMuD1yyvOGaHM9QrVUPGGG0jC+z+IPHnRJWUAUvaKuWKyE8gjDj2rzv3sz9zOGoRSPgeBVHRhZnBlA=="
+  "resolved" "https://registry.npmjs.org/@remix-run/router/-/router-1.19.2.tgz"
+  "version" "1.19.2"
 
-bootstrap@^5.3.3:
-  version "5.3.3"
-  resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-5.3.3.tgz"
-  integrity sha512-8HLCdWgyoMguSO9o+aH+iuZ+aht+mzW0u3HIMzVu7Srrpv7EBBxTnrFlSCskwdY1+EOFQSm7uMJhNQHkdPcmjg==
+"bootstrap@^5.3.3":
+  "integrity" "sha512-8HLCdWgyoMguSO9o+aH+iuZ+aht+mzW0u3HIMzVu7Srrpv7EBBxTnrFlSCskwdY1+EOFQSm7uMJhNQHkdPcmjg=="
+  "resolved" "https://registry.npmjs.org/bootstrap/-/bootstrap-5.3.3.tgz"
+  "version" "5.3.3"
 
 "js-tokens@^3.0.0 || ^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz"
-  integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+  "integrity" "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
+  "resolved" "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz"
+  "version" "4.0.0"
 
-loose-envify@^1.1.0:
-  version "1.4.0"
-  resolved "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz"
-  integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
+"loose-envify@^1.1.0":
+  "integrity" "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q=="
+  "resolved" "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz"
+  "version" "1.4.0"
   dependencies:
-    js-tokens "^3.0.0 || ^4.0.0"
+    "js-tokens" "^3.0.0 || ^4.0.0"
 
-react-dom@>=16.8:
-  version "18.3.1"
-  resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz"
-  integrity sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==
+"react-dom@>=16.8":
+  "integrity" "sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw=="
+  "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz"
+  "version" "18.3.1"
   dependencies:
-    loose-envify "^1.1.0"
-    scheduler "^0.23.2"
+    "loose-envify" "^1.1.0"
+    "scheduler" "^0.23.2"
 
-react-router-dom@^6.26.2:
-  version "6.26.2"
-  resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.26.2.tgz"
-  integrity sha512-z7YkaEW0Dy35T3/QKPYB1LjMK2R1fxnHO8kWpUMTBdfVzZrWOiY9a7CtN8HqdWtDUWd5FY6Dl8HFsqVwH4uOtQ==
-  dependencies:
-    "@remix-run/router" "1.19.2"
-    react-router "6.26.2"
-
-react-router@6.26.2:
-  version "6.26.2"
-  resolved "https://registry.npmjs.org/react-router/-/react-router-6.26.2.tgz"
-  integrity sha512-tvN1iuT03kHgOFnLPfLJ8V95eijteveqdOSk+srqfePtQvqCExB8eHOYnlilbOcyJyKnYkr1vJvf7YqotAJu1A==
+"react-router-dom@^6.26.2":
+  "integrity" "sha512-z7YkaEW0Dy35T3/QKPYB1LjMK2R1fxnHO8kWpUMTBdfVzZrWOiY9a7CtN8HqdWtDUWd5FY6Dl8HFsqVwH4uOtQ=="
+  "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.26.2.tgz"
+  "version" "6.26.2"
   dependencies:
     "@remix-run/router" "1.19.2"
+    "react-router" "6.26.2"
 
-react@^18.3.1, react@>=16.8:
-  version "18.3.1"
-  resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
-  integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
+"react-router@6.26.2":
+  "integrity" "sha512-tvN1iuT03kHgOFnLPfLJ8V95eijteveqdOSk+srqfePtQvqCExB8eHOYnlilbOcyJyKnYkr1vJvf7YqotAJu1A=="
+  "resolved" "https://registry.npmjs.org/react-router/-/react-router-6.26.2.tgz"
+  "version" "6.26.2"
   dependencies:
-    loose-envify "^1.1.0"
+    "@remix-run/router" "1.19.2"
 
-scheduler@^0.23.2:
-  version "0.23.2"
-  resolved "https://registry.npmjs.org/scheduler/-/scheduler-0.23.2.tgz"
-  integrity sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==
+"react@^18.3.1", "react@>=16.8":
+  "integrity" "sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ=="
+  "resolved" "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
+  "version" "18.3.1"
   dependencies:
-    loose-envify "^1.1.0"
+    "loose-envify" "^1.1.0"
 
-ws@^8.18.0:
-  version "8.18.0"
-  resolved "https://registry.npmjs.org/ws/-/ws-8.18.0.tgz"
-  integrity sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==
+"scheduler@^0.23.2":
+  "integrity" "sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ=="
+  "resolved" "https://registry.npmjs.org/scheduler/-/scheduler-0.23.2.tgz"
+  "version" "0.23.2"
+  dependencies:
+    "loose-envify" "^1.1.0"
+
+"ws@^8.18.0":
+  "integrity" "sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw=="
+  "resolved" "https://registry.npmjs.org/ws/-/ws-8.18.0.tgz"
+  "version" "8.18.0"

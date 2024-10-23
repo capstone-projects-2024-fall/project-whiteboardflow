@@ -5,7 +5,8 @@ import HomePage from './HomePage';
 import Whiteboard from './components/Whiteboard/Whiteboard';
 import OralTest from './pages/OralTest/OralTest';
 import Settings from './components/Settings/Settings';
-import BackEndTest from './BackEndTest';
+import BackEndTest from './BackEndTest 2';
+import Help from './pages/Help/Help';
 
 function Main() {
     return (
@@ -17,6 +18,8 @@ function Main() {
                     <Route path="OralTest" element={<OralTest />} />
                     <Route path="Settings" element={<Settings />} />
                     <Route path="BackEndTest" element={<BackEndTest />} />
+                    <Route path="Help" element={<Help />} />
+
                 </Routes>
             </Layout>
         </Router>
