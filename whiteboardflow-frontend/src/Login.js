@@ -2,24 +2,46 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { auth } from '../firebase';
 import { signInWithCredential, GoogleAuthProvider } from 'firebase/auth';
 
+
 function Login() {
     const handleGoogleLoginSuccess = (response) => {
-        const credential = GoogleAuthProvider.credential(response.credential);
-        signInWithCredential(auth, credential)
-            .then((result) => {
-                console.log('User logged in:', result.user);
-            })
-            .catch((error) => console.error('Login failed:', error));
+        if (response.credential) {
+            const credential = GoogleAuthProvider.credential(response.credential);
+            signInWithCredential(auth, credential)
+                .then((result) => {
+                    console.log('User logged in:', result.user);
+                })
+                .catch((error) => {
+                    console.error('Login failed:', error);
+                });
+        } else {
+            console.error('No credential received:', response);
+        }
     };
 
     return (
-        <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
-            <GoogleLogin
-                onSuccess={handleGoogleLoginSuccess}
-                onError={() => console.log('Login Failed')}
-            />
-        </GoogleOAuthProvider>
+        <div>
+            <h1>Login Page</h1>
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+                <GoogleLogin
+                    onSuccess={handleGoogleLoginSuccess}
+                    onFailure={() => console.log('Login Failed')}
+                />
+            </GoogleOAuthProvider>
+        </div>
     );
 }
 
 export default Login;
+
+/* import { auth, provider } from '../firebase'; // Make sure to import provider
+import { signInWithPopup } from 'firebase/auth';
+
+const handleGoogleLogin = async () => {
+    try {
+        const result = await signInWithPopup(auth, provider);
+        console.log('User logged in:', result.user);
+    } catch (error) {
+        console.error('Login failed:', error);
+    }
+}; */

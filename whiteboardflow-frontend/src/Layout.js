@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Button } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Button, Snackbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
-import { auth, provider, signInWithPopup } from './firebase';
-
-
+import { auth, provider, signInWithPopup, signOut } from './firebase';
 
 const Layout = ({ children }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [user, setUser] = useState(null);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const navigate = useNavigate();
+
     const pages = [
         { name: 'Home', path: '/' },
         { name: 'Whiteboard', path: '/whiteboard' },
@@ -26,8 +27,28 @@ const Layout = ({ children }) => {
 
     const signInWithGoogle = () => {
         signInWithPopup(auth, provider)
-            .then((result) => setUser(result.user))
-            .catch((error) => console.error('Login failed:', error));
+            .then((result) => {
+                setUser(result.user);
+            })
+            .catch((error) => {
+                console.error('Login failed:', error);
+                setSnackbarMessage('Login failed. Please try again.');
+                setSnackbarOpen(true);
+            });
+    };
+
+    const handleLogout = () => {
+        signOut(auth)
+            .then(() => {
+                setUser(null);
+                setSnackbarMessage('Successfully logged out.');
+                setSnackbarOpen(true);
+            })
+            .catch((error) => {
+                console.error('Logout failed:', error);
+                setSnackbarMessage('Logout failed. Please try again.');
+                setSnackbarOpen(true);
+            });
     };
 
     useEffect(() => {
@@ -36,6 +57,10 @@ const Layout = ({ children }) => {
         });
         return () => unsubscribe();
     }, []);
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
     return (
         <div>
@@ -65,9 +90,14 @@ const Layout = ({ children }) => {
                         ))}
                     </Menu>
                     {user ? (
-                        <Typography variant="h6" component="div">
-                            Welcome, {user.displayName}
-                        </Typography>
+                        <>
+                            <Typography variant="h6" component="div" sx={{ mr: 2 }}>
+                                Welcome, {user.displayName}
+                            </Typography>
+                            <Button color="inherit" onClick={handleLogout}>
+                                Logout
+                            </Button>
+                        </>
                     ) : (
                         <Button color="inherit" onClick={signInWithGoogle}>
                             Login with Google
@@ -76,6 +106,12 @@ const Layout = ({ children }) => {
                 </Toolbar>
             </AppBar>
             {children}
+            <Snackbar
+                open={snackbarOpen}
+                onClose={handleSnackbarClose}
+                message={snackbarMessage}
+                autoHideDuration={6000}
+            />
         </div>
     );
 };

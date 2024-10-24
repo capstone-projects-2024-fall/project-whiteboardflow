@@ -7,8 +7,8 @@ import './HomePage.css'; // Import the CSS file for styling
 const HomePage = () => {
     return (
         <Container>
-            <section style={{ padding: '40px 0', textAlign: 'center' }}>
-                <Typography variant="h7" gutterBottom className="styled-heading">
+            <section style={{ padding: '40px 0', textAlign: 'center', fontSize: '2rem', fontWeight: 'bold' }}>
+                <Typography variant="h8" gutterBottom className="styled-heading">
                     <span className="heading-main">Whiteboard</span>
                     <span className="heading-highlight">.assistant</span>
                 </Typography>
@@ -21,7 +21,7 @@ const HomePage = () => {
             </section>
 
             {/* Add the rotating text at the bottom */}
-            <section style={{ marginTop: '40px', textAlign: 'center' }}>
+            <section style={{ marginTop: '100px', textAlign: 'center' }}>
                 <RotatingText />
             </section>
         </Container>
@@ -29,3 +29,8 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
+<Typography variant="h6" component="div" sx={{ flexGrow: 1, fontSize: '2rem', fontWeight: 'bold' }}>
+    Whiteboard Assistant
+</Typography>
