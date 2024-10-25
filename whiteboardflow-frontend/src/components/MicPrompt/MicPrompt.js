@@ -1,75 +1,86 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import { Button } from '@mui/material';
 
-/**
- * Microphone prompt which allows the user to record their response during the
- * oral test.
- * @component
- */
-function MicPrompt() {
-	const [transcript, setTranscript] = useState("");
-	const [isListening, setIsListening] = useState(false);
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
 
-	// Initialize Speech Recognition
-	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-	const recognition = new SpeechRecognition();
+recognition.continuous = true;
+recognition.interimResults = true;
+recognition.lang = 'en-US';
 
-	// Set options
-	recognition.lang = 'en-US'; // Set language (can be changed based on requirements)
-	recognition.continuous = true; // If true, keeps recognizing until stopped
-	recognition.interimResults = false; // If true, it returns partial (interim) results while speaking
+const MicPrompt = () => {
+	const [listening, setListening] = useState(false);
 
-	// Define events
-	recognition.onstart = function () {
-		console.log('Speech recognition started.');
-	};
+	const handleListen = () => {
+		console.log('listening?', listening);
 
-	recognition.onresult = (event) => {
-		const newTranscript = event.results[0][0].transcript;
-		// event.results is an array that contains transcript data
-		setTranscript(newTranscript);
-		console.log('You said: ', newTranscript);
-	};
-
-	recognition.onerror = function (event) {
-		console.log('Error occurred: ', event.error);
-	};
-
-	recognition.onaudioend = function() {
-		console.log("Audio ended");
-	}
-
-	recognition.onend = function () {
-		console.log('Speech recognition ended.');
-	};
-	
-	// Start recognition
-	function startRecognition() {
-		if (!isListening) {
+		if (listening) {
 			recognition.start();
-			setIsListening(true);
+			recognition.onend = () => {
+				console.log("...continue listening...");
+				recognition.start();
+			};
+		} else {
+			recognition.stop();
+			recognition.onend = () => {
+				console.log("Stopped listening per click");
+			};
 		}
-	}
 
-	function stopRecognition() {
-		if (isListening) {
-			let t = recognition.stop();
-			recognition.abort();
-			console.log(t);
-			setTranscript()
-			setIsListening(false);
-		}
-	}
+		recognition.onstart = () => {
+			console.log("Listening!");
+		};
+
+		let finalTranscript = '';
+		recognition.onresult = (event) => {
+			let interimTranscript = '';
+
+			for (let i = event.resultIndex; i < event.results.length; i++) {
+				const transcript = event.results[i][0].transcript;
+				if (event.results[i].isFinal) finalTranscript += transcript + ' ';
+				else interimTranscript += transcript;
+			}
+			document.getElementById('interim').innerHTML = interimTranscript;
+			document.getElementById('final').innerHTML = finalTranscript;
+
+			const transcriptArr = finalTranscript.split(' ');
+			const stopCmd = transcriptArr.slice(-3, -1);
+			console.log('stopCmd', stopCmd);
+
+			if (stopCmd[0] === 'stop' && stopCmd[1] === 'listening') {
+				recognition.stop();
+				recognition.onend = () => {
+					console.log('Stopped listening per command');
+					const finalText = transcriptArr.slice(0, -3).join(' ');
+					document.getElementById('final').innerHTML = finalText;
+				};
+			}
+		};
+
+		recognition.onerror = (event) => {
+			console.log("Error occurred in recognition: " + event.error);
+		};
+	};
+
+	const toggleListen = () => {
+		setListening((prevListening) => !prevListening);
+	};
+
+	useEffect(() => {
+		handleListen();
+	}, [listening]);
 
 	return (
 		<div>
-			<h2>Speech to Text Demo</h2>
-			<button onClick={isListening ? stopRecognition : startRecognition}>
-				{isListening ? "Stop Listening" : "Start Listening"}
-			</button>
-			<div>
-				<h3>Transcript:</h3>
-				<p>{transcript || "No speech detected yet..."}</p>
-			</div>
+			<Button
+				id='microphone-btn' 
+				onClick={toggleListen}
+				variant="contained"
+			>
+				{listening ? "Stop recording" : "Record"}
+			</Button>
+			<div id='interim'></div>
+			<div id='final'></div>
 		</div>
 	);
 };

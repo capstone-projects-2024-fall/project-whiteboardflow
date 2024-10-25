@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
+import MicPrompt from '../../components/MicPrompt/MicPrompt';
 
 var canRecord = true;
 
@@ -49,12 +50,7 @@ function OralTest() {
     return (
         <div>
             <h1>Welcome to the Oral practice!</h1>
-            <Button variant="contained" 
-                onClick={handleButtonClick}>
-                {!isRecording ? "Record" : "Stop Recording"}
-            </Button>
-            <h2 className="result-text">{resultText}</h2>
-            <h2>{canRecord}</h2>
+            <MicPrompt></MicPrompt>
         </div>
     );
 }
