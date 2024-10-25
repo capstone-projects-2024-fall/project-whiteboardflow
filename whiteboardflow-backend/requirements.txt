@@ -3,3 +3,4 @@ uvicorn
 SpeechRecognition
 PyAudio
 openai
+python-dotenv
