@@ -1,11 +1,13 @@
 import speech_recognition as sr
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
+import time
 
 router = APIRouter()
 recognizer = sr.Recognizer()
 
 def event_stream():
+    time.sleep(5)
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
         print("recording actually started")
