@@ -3,6 +3,7 @@ import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Button, Snackb
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { auth, provider, signInWithPopup, signOut } from './firebase';
+import Footer from './Footer'; // Import the Footer component
 
 const Layout = ({ children }) => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -106,6 +107,7 @@ const Layout = ({ children }) => {
                 </Toolbar>
             </AppBar>
             {children}
+            <Footer /> {/* Add the Footer here */}
             <Snackbar
                 open={snackbarOpen}
                 onClose={handleSnackbarClose}
