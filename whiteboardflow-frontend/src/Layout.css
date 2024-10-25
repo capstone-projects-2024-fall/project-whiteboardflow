@@ -8,3 +8,16 @@
 .content-container {
     flex: 1; 
 }
+/* Dark mode styles */
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode .MuiAppBar-root {
+    background-color: #333;
+}
+
+.dark-mode .MuiButtonBase-root {
+    color: white;
+}
