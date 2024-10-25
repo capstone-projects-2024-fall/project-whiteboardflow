@@ -1,11 +1,51 @@
 /* Footer.css */
-footer {
+.footer {
     background-color: #f8f9fa;
     padding: 20px 0;
+    margin-top: 40px;
     text-align: center;
 }
 
-footer p {
-    margin: 0;
-    color: #6c757d;
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.footer-links {
+    margin-bottom: 20px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin: 5px 0;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-social .MuiIconButton-root {
+    margin: 0 10px;
+}
+
+.back-to-top {
+    margin-top: 20px;
 }
