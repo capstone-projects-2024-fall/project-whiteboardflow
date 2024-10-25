@@ -42,19 +42,6 @@ const MicPrompt = () => {
 			}
 			document.getElementById('interim').innerHTML = interimTranscript;
 			document.getElementById('final').innerHTML = finalTranscript;
-
-			const transcriptArr = finalTranscript.split(' ');
-			const stopCmd = transcriptArr.slice(-3, -1);
-			console.log('stopCmd', stopCmd);
-
-			if (stopCmd[0] === 'stop' && stopCmd[1] === 'listening') {
-				recognition.stop();
-				recognition.onend = () => {
-					console.log('Stopped listening per command');
-					const finalText = transcriptArr.slice(0, -3).join(' ');
-					document.getElementById('final').innerHTML = finalText;
-				};
-			}
 		};
 
 		recognition.onerror = (event) => {
