@@ -16,5 +16,16 @@ class AIData(BaseModel):
 
 @router.post("/get-response/")
 def get_ai_response(data: AIData):
-    print(data)
-    return {"message": "Data received successfully"}
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": "Tell me what you think I mean by these words.",
+            },
+            {"role": "user", "content": data.transcript},
+        ],
+        max_tokens=200,
+    )
+
+    return {"message": response.choices[0].message.content}

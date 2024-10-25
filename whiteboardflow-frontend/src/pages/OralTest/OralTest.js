@@ -14,14 +14,15 @@ function OralTest() {
 					// Data to send to FastAPI
 					question: '[insert question]',
 					image: '[insert image]',
-					transcript: '[value3]'
+					transcript: localStorage.getItem("finalTranscript")
 				})
 			});
-			if (response.ok) {
-				console.log("Data sent successfully");
-			} else {
-				console.error("Failed to send data");
-			}
+
+			// Get ChatGPT response
+			const result = await response.json();
+			localStorage.setItem("AIResponse", result.message);
+			alert(result.message)
+
 		} catch (error) {
 			console.error("Error:", error);
 		}
