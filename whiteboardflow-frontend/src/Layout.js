@@ -4,6 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { auth, provider, signInWithPopup, signOut } from './firebase';
 import Footer from './Footer'; // Import the Footer component
+import './Layout.css'; // Import the CSS file for layout styling
 
 const Layout = ({ children }) => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -64,7 +65,7 @@ const Layout = ({ children }) => {
     };
 
     return (
-        <div>
+        <div className="layout-container">
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
@@ -106,8 +107,10 @@ const Layout = ({ children }) => {
                     )}
                 </Toolbar>
             </AppBar>
-            {children}
-            <Footer /> {/* Add the Footer here */}
+            <div className="content-container">
+                {children}
+            </div>
+            <Footer /> {/* Add Footer here */}
             <Snackbar
                 open={snackbarOpen}
                 onClose={handleSnackbarClose}
