@@ -1,8 +1,9 @@
 import uvicorn
 
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from routers.voice import router as voice_router
+
 
 
 app = FastAPI(debug=True)
