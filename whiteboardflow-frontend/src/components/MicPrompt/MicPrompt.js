@@ -42,6 +42,7 @@ const MicPrompt = () => {
 			}
 			document.getElementById('interim').innerHTML = interimTranscript;
 			document.getElementById('final').innerHTML = finalTranscript;
+			localStorage.setItem("finalTranscript", finalTranscript);
 		};
 
 		recognition.onerror = (event) => {
