@@ -1,0 +1,20 @@
+.export-button {
+    position: absolute;
+    top: 0;
+    right: 25%;
+    z-index: 1000;
+    width: 100px;
+    height: 40px;
+    font-size: 22px;
+    padding: 2px 5px;
+    color: #424242;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.export-button:hover {
+    background-color: #e2e2e2; /* Slightly darker shade on hover */
+}

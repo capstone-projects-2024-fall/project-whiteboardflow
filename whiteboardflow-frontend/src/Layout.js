@@ -66,15 +66,18 @@ const Layout = ({ children }) => {
         <div>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        onClick={handleOpenMenu}
-                    >
+                    {user && (
+                    
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            onClick={handleOpenMenu}
+                        >
                         <MenuIcon />
                     </IconButton>
+                        )}
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Whiteboard Assistant
                     </Typography>
