@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 
-var kanRecord = true;
+var canRecord = true;
 
 function OralTest() {
     const [resultText, setResultText] = useState('[output]');
     const [isRecording, setIsRecording] = useState(false);
-    const [canRecord, setCanRecord] = useState(true);
 
      useEffect(() => {
     }, [isRecording]);
 
     function handleButtonClick() {
-        if (kanRecord) {
+        if (canRecord) {
             startRecording();
         }
     }
 
     function startRecording() {
         console.log('\n\n\n')
-        // setCanRecord(false);
-        kanRecord = false;
+        canRecord = false;
 
         console.log("Entered startRecording") // TODO
         const eventSource = new EventSource('/api/record');
@@ -32,7 +30,6 @@ function OralTest() {
                 setIsRecording(true);
             } else {
                 stopRecording();
-                kanRecord = true;
                 setResultText(event.data); // Update the result after recording
                 eventSource.close();       // Close the EventSource once done
             }
@@ -46,7 +43,7 @@ function OralTest() {
 
     function stopRecording() {
         setIsRecording(false);
-        setCanRecord(true);
+        canRecord = true;
     }
 
     return (
@@ -57,7 +54,7 @@ function OralTest() {
                 {!isRecording ? "Record" : "Stop Recording"}
             </Button>
             <h2 className="result-text">{resultText}</h2>
-            <h2>{kanRecord}</h2>
+            <h2>{canRecord}</h2>
         </div>
     );
 }
