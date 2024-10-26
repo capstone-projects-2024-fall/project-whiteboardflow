@@ -57,7 +57,7 @@ const Whiteboard = () => {
 
     const handleExportAndSubmit = async () => {
         try {
-            await editor.behaviors.sendSVGToServer(0);
+            await editor.behaviors.sendPNGToServer(editor.behaviors.haveSymbolsSelected);
         } catch (error) {
             console.error('Error during export or send:', error);
         }
