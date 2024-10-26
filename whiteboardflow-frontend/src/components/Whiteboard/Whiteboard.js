@@ -5,6 +5,9 @@ import './css/reset.css';
 import './css/components.css';
 import './css/examples.css';
 
+
+
+
 const Whiteboard = () => {
     const editorElementRef = useRef(null);
     let editor = null;
