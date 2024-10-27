@@ -1,8 +1,8 @@
 import { Button } from '@mui/material';
 import MicPrompt from '../../components/MicPrompt/MicPrompt';
+import './OralTest.css';
 
 function OralTest() {
-
 	const submitResponseData = async () => {
 		try {
 			const response = await fetch("/api/get-response", {
@@ -21,7 +21,7 @@ function OralTest() {
 			// Get ChatGPT response
 			const result = await response.json();
 			localStorage.setItem("AIResponse", result.message);
-			alert(result.message)
+			alert(result.message);
 
 		} catch (error) {
 			console.error("Error:", error);
@@ -30,9 +30,21 @@ function OralTest() {
 
 	return (
 		<div>
-			<h1>Welcome to the Oral practice!</h1>
-			<MicPrompt></MicPrompt>
+			<div class="container">
+				<h1>Welcome to the oral portion of the test!</h1>
+				<h4>Instructions:</h4>
+				<ol>
+					<li>Click the 'Record' button, then explain your thought process for your written answer.</li>
+					<li>Click 'Stop Recording' when you are finished.</li>
+					<li>Click 'Submit' to submit your response and receive AI-generated feedback.</li>
+				</ol>
+
+				<div class="container">
+					<MicPrompt></MicPrompt>
+				</div>
+			</div>
 			<Button
+				className="submit-button"
 				variant="contained"
 				onClick={submitResponseData}
 			>Submit
