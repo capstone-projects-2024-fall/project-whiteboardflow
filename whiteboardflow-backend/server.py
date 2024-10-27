@@ -65,4 +65,4 @@ def read_root():
 
 if __name__ == "__main__":
     # TODO Remove reload parameter in production
-    uvicorn.run("server:app", host="127.0.0.1", port=5000, reload=True)
+    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)

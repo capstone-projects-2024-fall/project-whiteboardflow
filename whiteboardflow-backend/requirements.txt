@@ -4,3 +4,4 @@ SpeechRecognition
 PyAudio
 openai
 python-dotenv
+python-multipart
