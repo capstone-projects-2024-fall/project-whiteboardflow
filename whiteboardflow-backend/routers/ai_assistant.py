@@ -19,10 +19,6 @@ def get_ai_response(data: AIData):
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {
-                "role": "system",
-                "content": "Tell me what you think I mean by these words.",
-            },
             {"role": "user", "content": data.transcript},
         ],
         max_tokens=200,
