@@ -1,6 +1,5 @@
-// Results.js
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Box } from '@mui/material';
+import { Container, Typography, Box, Paper } from '@mui/material';
 import './Results.css';
 
 const Results = () => {
@@ -21,7 +20,9 @@ const Results = () => {
                 <Typography variant="h6" color="textSecondary" gutterBottom>
                     Handwriting Response
                 </Typography>
-                <img src={imageUrl} alt="User's Handwriting Response" className="written-image" />
+                <Paper elevation={3} style={{ padding: '20px', backgroundColor: '#f9f9f9' }}>
+                    <img src={imageUrl} alt="User's Handwriting Response" className="written-image" style={{ maxWidth: '100%', borderRadius: '8px' }} />
+                </Paper>
             </Box>
 
             {/* Results Analysis Label */}
@@ -32,11 +33,25 @@ const Results = () => {
             </Box>
 
             {/* AI Analysis for Oral Response */}
-            <Box textAlign="center" mt={3} mb={5} p={3} className="analysis-box">
-                <Typography variant="body1" color="textSecondary">
+            <Paper 
+                elevation={3} 
+                className="analysis-box" 
+                style={{ 
+                    padding: '20px', 
+                    backgroundColor: '#f7f9fc', 
+                    lineHeight: '1.8', 
+                    fontSize: '1.2rem', 
+                    color: '#333', 
+                    maxHeight: '300px', 
+                    overflowY: 'auto',
+                    textAlign: 'left',
+                    whiteSpace: 'pre-wrap'
+                }}
+            >
+                <Typography variant="body1">
                     {oralAnalysis}
                 </Typography>
-            </Box>
+            </Paper>
 
             {/* Placeholder for Future Metrics */}
             <Box textAlign="center" mt={4} mb={2}>
@@ -44,12 +59,12 @@ const Results = () => {
                     Completion Time
                 </Typography>
             </Box>
-            <Box textAlign="center" mt={3} mb={5} p={3} className="completion-time-box">
+            <Paper elevation={3} className="completion-time-box" style={{ padding: '20px', backgroundColor: '#f9f9f9', lineHeight: '1.6' }}>
                 <Typography variant="body1" color="textSecondary">
                     {/* Display the completion time when available; placeholder text for now */}
                     Completion time will be displayed here.
                 </Typography>
-            </Box>
+            </Paper>
         </Container>
     );
 };
