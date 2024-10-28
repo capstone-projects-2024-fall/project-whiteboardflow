@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Typography, Box } from '@mui/material';
 import HelpButton from './HelpButton';
 import SubmitButton from './SubmitButton';
 import './css/reset.css';
@@ -69,20 +70,38 @@ const Whiteboard = () => {
     };
 
     return (
-        <div style={{width: '100%', height: '90vh', position: 'relative'}}>
+        <div style={{ width: '100%', height: '100vh', position: 'relative', padding: '20px' }}>
+            {/* Question Label */}
+            <Typography variant="subtitle2" style={{ color: '#888', marginBottom: '5px', fontWeight: 'bold' }}>
+                Question
+            </Typography>
+
+            {/* Question Text */}
+            <Typography variant="h6" style={{ color: '#3f51b5', fontWeight: 'bold', marginBottom: '20px' }}>
+                Write a `helloWorld` function.
+            </Typography>
+            
+            {/* Editor Section */}
             <div
                 id="editor"
                 ref={editorElementRef}
                 style={{
                     width: '100%',
-                    height: '100%',
+                    height: '80%',  // Adjust height to fit the question above
                     touchAction: 'none',
+                    borderRadius: '8px',
+                    border: '1px solid #ddd',
+                    padding: '10px',
+                    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+                    backgroundColor: '#fff',
                 }}
             />
-            <HelpButton/>
-            <SubmitButton onExport={handleExportAndSubmit} />
-
-
+            
+            {/* Buttons */}
+            <Box sx={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+                <HelpButton />
+                <SubmitButton onExport={handleExportAndSubmit} />
+            </Box>
         </div>
     );
 };
