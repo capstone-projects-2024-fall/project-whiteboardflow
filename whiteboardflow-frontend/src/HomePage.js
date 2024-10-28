@@ -1,8 +1,8 @@
-// HomePage.js
 import React from 'react';
 import { Button, Typography, Container } from '@mui/material';
-import RotatingText from './RotatingText'; // Import the RotatingText component
-import './HomePage.css'; // Import the CSS file for styling
+import { Link } from 'react-router-dom';
+import RotatingText from './RotatingText';
+import './HomePage.css';
 
 const HomePage = () => {
     return (
@@ -15,9 +15,11 @@ const HomePage = () => {
                 <Typography variant="body1" paragraph>
                     Prepare for your whiteboard interview with hands-on practice.
                 </Typography>
-                <Button variant="contained" href="#login" style={{ marginTop: '20px' }}>
-                    Get Started
-                </Button>
+                <Link to="/whiteboard" style={{ textDecoration: 'none' }}>
+                    <Button variant="contained" style={{ marginTop: '20px' }}>
+                        Get Started
+                    </Button>
+                </Link>
             </section>
 
             {/* Add the rotating text at the bottom */}
@@ -29,8 +31,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-
-<Typography variant="h6" component="div" sx={{ flexGrow: 1, fontSize: '2rem', fontWeight: 'bold' }}>
-    Whiteboard Assistant
-</Typography>
