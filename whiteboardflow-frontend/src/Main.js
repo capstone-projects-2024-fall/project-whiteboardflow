@@ -6,6 +6,7 @@ import Whiteboard from './components/Whiteboard/Whiteboard';
 import OralTest from './pages/OralTest/OralTest';
 import Settings from './components/Settings/Settings';
 import BackEndTest from './BackEndTest';
+import Results from './components/Result/Result';
 
 function Main() {
     return (
@@ -17,6 +18,7 @@ function Main() {
                     <Route path="OralTest" element={<OralTest />} />
                     <Route path="Settings" element={<Settings />} />
                     <Route path="BackEndTest" element={<BackEndTest />} />
+                    <Route path="results" element={<Results />} /> 
                 </Routes>
             </Layout>
         </Router>
