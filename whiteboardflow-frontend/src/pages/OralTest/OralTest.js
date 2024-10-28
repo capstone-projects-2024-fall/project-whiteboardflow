@@ -1,8 +1,11 @@
 import { Button } from '@mui/material';
 import MicPrompt from '../../components/MicPrompt/MicPrompt';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './OralTest.css';
 
 function OralTest() {
+	const navigate = useNavigate(); // Initialize navigate hook
+
 	const submitResponseData = async () => {
 		try {
 			const response = await fetch("/api/get-response", {
@@ -23,6 +26,9 @@ function OralTest() {
 			localStorage.setItem("AIResponse", result.message);
 			alert(result.message);
 
+			// Navigate to Results page after successful response
+			navigate('/results');
+
 		} catch (error) {
 			console.error("Error:", error);
 		}
@@ -30,7 +36,7 @@ function OralTest() {
 
 	return (
 		<div>
-			<div class="container">
+			<div className="container">
 				<h1>Welcome to the oral portion of the test!</h1>
 				<h4>Instructions:</h4>
 				<ol>
@@ -39,15 +45,16 @@ function OralTest() {
 					<li>Click 'Submit' to submit your response and receive AI-generated feedback.</li>
 				</ol>
 
-				<div class="container">
-					<MicPrompt></MicPrompt>
+				<div className="container">
+					<MicPrompt />
 				</div>
 			</div>
 			<Button
 				className="submit-button"
 				variant="contained"
 				onClick={submitResponseData}
-			>Submit
+			>
+				Submit
 			</Button>
 		</div>
 	);
