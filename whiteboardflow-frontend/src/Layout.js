@@ -7,19 +7,17 @@ import { auth, provider, signInWithPopup, signOut } from './firebase';
 import Footer from './Footer';
 import './Layout.css';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, user }) => { // Accept user as a prop
     const [anchorEl, setAnchorEl] = useState(null);
-    const [user, setUser] = useState(null);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [loading, setLoading] = useState(false); // New: Loading spinner state
-    const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true'); // New: Dark mode state
+    const [loading, setLoading] = useState(false);
+    const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
     const navigate = useNavigate();
 
     const pages = [
         { name: 'Home', path: '/' },
         { name: 'Get Started', path: '/whiteboard' },
-        //{ name: 'Oral Test', path: '/OralTest' },
         { name: 'Settings', path: '/Settings' },
         { name: 'Results', path: '/results' }
     ];
@@ -35,7 +33,8 @@ const Layout = ({ children }) => {
         setLoading(true);
         signInWithPopup(auth, provider)
             .then((result) => {
-                setUser(result.user);
+                setSnackbarMessage(`Welcome, ${result.user.displayName}`);
+                setSnackbarOpen(true);
                 setLoading(false);
             })
             .catch((error) => {
@@ -50,7 +49,6 @@ const Layout = ({ children }) => {
         setLoading(true);
         signOut(auth)
             .then(() => {
-                setUser(null);
                 setSnackbarMessage('Successfully logged out.');
                 setSnackbarOpen(true);
                 setLoading(false);
@@ -58,7 +56,6 @@ const Layout = ({ children }) => {
             .catch((error) => {
                 console.error('Logout failed:', error);
                 setSnackbarMessage('Logout failed. Please try again.');
-                setSnackbarOpen(true);
                 setLoading(false);
             });
     };
@@ -67,13 +64,6 @@ const Layout = ({ children }) => {
         setDarkMode((prev) => !prev);
         localStorage.setItem('darkMode', !darkMode);
     };
-
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            setUser(user);
-        });
-        return () => unsubscribe();
-    }, []);
 
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
@@ -132,7 +122,7 @@ const Layout = ({ children }) => {
             </AppBar>
 
             <div className="content-container">
-                {children}
+                {children} {/* Render content based on the route */}
             </div>
 
             <Footer />
