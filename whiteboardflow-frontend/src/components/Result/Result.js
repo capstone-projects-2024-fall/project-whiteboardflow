@@ -5,7 +5,7 @@ import './Results.css';
 
 const Results = () => {
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
-    const imageUrl = "http://127.0.0.1:8000/images/image.png"; // URL for the handwriting image
+    const imageUrl = "http://127.0.0.1:8000/static/image.png"; // URL for the handwriting image
 
     // Load data from localStorage
     useEffect(() => {
