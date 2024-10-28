@@ -24,7 +24,7 @@ function OralTest() {
 			// Get ChatGPT response
 			const result = await response.json();
 			localStorage.setItem("AIResponse", result.message);
-			alert(result.message);
+			//alert(result.message);
 
 			// Navigate to Results page after successful response
 			navigate('/results');

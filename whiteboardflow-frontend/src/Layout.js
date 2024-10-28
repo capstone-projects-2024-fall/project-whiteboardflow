@@ -18,8 +18,8 @@ const Layout = ({ children }) => {
 
     const pages = [
         { name: 'Home', path: '/' },
-        { name: 'Whiteboard', path: '/whiteboard' },
-        { name: 'Oral Test', path: '/OralTest' },
+        { name: 'Get Started', path: '/whiteboard' },
+        //{ name: 'Oral Test', path: '/OralTest' },
         { name: 'Settings', path: '/Settings' },
         { name: 'Results', path: '/results' }
     ];
