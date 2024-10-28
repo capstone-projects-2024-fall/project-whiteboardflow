@@ -15,17 +15,7 @@ const Footer = () => {
         <footer className="footer">
             <Container>
                 <div className="footer-content">
-                    {/* Quick Links */}
-                    <div className="footer-links">
-                        <Typography variant="h6">Quick Links</Typography>
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/whiteboard">Whiteboard</a></li>
-                            <li><a href="/OralTest">Oral Test</a></li>
-                            <li><a href="/Settings">Settings</a></li>
-                        </ul>
-                    </div>
-
+                    
                     {/* Social Media Links */}
                     <div className="footer-social">
                         <Typography variant="h6">Follow Us</Typography>

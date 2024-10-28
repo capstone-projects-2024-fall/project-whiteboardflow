@@ -1,25 +1,25 @@
+// Layout.js
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Button, Snackbar, CircularProgress, Avatar, Switch } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { auth, provider, signInWithPopup, signOut } from './firebase';
-import Footer from './Footer'; // Import the Footer component
-import './Layout.css'; // Import the CSS file for layout styling
+import Footer from './Footer';
+import './Layout.css';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, user }) => { // Accept user as a prop
     const [anchorEl, setAnchorEl] = useState(null);
-    const [user, setUser] = useState(null);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [loading, setLoading] = useState(false); // New: Loading spinner state
-    const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true'); // New: Dark mode state
+    const [loading, setLoading] = useState(false);
+    const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
     const navigate = useNavigate();
 
     const pages = [
         { name: 'Home', path: '/' },
-        { name: 'Whiteboard', path: '/whiteboard' },
-        { name: 'Oral Test', path: '/OralTest' },
+        { name: 'Get Started', path: '/whiteboard' },
         { name: 'Settings', path: '/Settings' },
+        { name: 'Results', path: '/results' }
     ];
 
     const handleOpenMenu = (event) => setAnchorEl(event.currentTarget);
@@ -30,34 +30,33 @@ const Layout = ({ children }) => {
     };
 
     const signInWithGoogle = () => {
-        setLoading(true); // Show loading spinner
+        setLoading(true);
         signInWithPopup(auth, provider)
             .then((result) => {
-                setUser(result.user);
-                setLoading(false); // Hide loading spinner
+                setSnackbarMessage(`Welcome, ${result.user.displayName}`);
+                setSnackbarOpen(true);
+                setLoading(false);
             })
             .catch((error) => {
                 console.error('Login failed:', error);
                 setSnackbarMessage('Login failed. Please try again.');
                 setSnackbarOpen(true);
-                setLoading(false); // Hide loading spinner
+                setLoading(false);
             });
     };
 
     const handleLogout = () => {
-        setLoading(true); // Show loading spinner
+        setLoading(true);
         signOut(auth)
             .then(() => {
-                setUser(null);
                 setSnackbarMessage('Successfully logged out.');
                 setSnackbarOpen(true);
-                setLoading(false); // Hide loading spinner
+                setLoading(false);
             })
             .catch((error) => {
                 console.error('Logout failed:', error);
                 setSnackbarMessage('Logout failed. Please try again.');
-                setSnackbarOpen(true);
-                setLoading(false); // Hide loading spinner
+                setLoading(false);
             });
     };
 
@@ -66,23 +65,15 @@ const Layout = ({ children }) => {
         localStorage.setItem('darkMode', !darkMode);
     };
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            setUser(user);
-        });
-        return () => unsubscribe();
-    }, []);
-
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
     };
 
     return (
-        <div className={`layout-container ${darkMode ? 'dark-mode' : ''}`}> {/* Apply dark mode class */}
+        <div className={`layout-container ${darkMode ? 'dark-mode' : ''}`}>
             <AppBar position="static">
                 <Toolbar>
                     {user && (
-                    
                         <IconButton
                             size="large"
                             edge="start"
@@ -90,9 +81,9 @@ const Layout = ({ children }) => {
                             aria-label="menu"
                             onClick={handleOpenMenu}
                         >
-                        <MenuIcon />
-                    </IconButton>
-                        )}
+                            <MenuIcon />
+                        </IconButton>
+                    )}
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Whiteboard Assistant
                     </Typography>
@@ -108,15 +99,12 @@ const Layout = ({ children }) => {
                         ))}
                     </Menu>
 
-                    {/* New: Dark Mode Toggle */}
                     <Switch checked={darkMode} onChange={toggleDarkMode} color="default" />
 
-                    {/* New: Loading Spinner */}
                     {loading && <CircularProgress size={24} color="inherit" />}
 
                     {user ? (
                         <>
-                            {/* New: User Avatar */}
                             <Avatar alt={user.displayName} src={user.photoURL} sx={{ marginRight: 2 }} />
                             <Typography variant="h6" component="div" sx={{ mr: 2 }}>
                                 Welcome, {user.displayName}
@@ -132,10 +120,13 @@ const Layout = ({ children }) => {
                     )}
                 </Toolbar>
             </AppBar>
+
             <div className="content-container">
-                {children}
+                {children} {/* Render content based on the route */}
             </div>
-            <Footer /> {/* Add Footer here */}
+
+            <Footer />
+
             <Snackbar
                 open={snackbarOpen}
                 onClose={handleSnackbarClose}
