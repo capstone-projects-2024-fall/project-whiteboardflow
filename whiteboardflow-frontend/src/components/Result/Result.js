@@ -1,59 +1,55 @@
 // Results.js
-import React from 'react';
-import { Container, Typography, Card, CardContent, Grid, Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Container, Typography, Box } from '@mui/material';
 import './Results.css';
 
 const Results = () => {
-    const writtenImageUrl = ""; // Placeholder for the image URL of what the user wrote
+    const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
+    const imageUrl = "http://127.0.0.1:8000/images/image.png"; // URL for the handwriting image
 
-    const metrics = [
-        { name: 'Score', value: '' },
-        { name: 'Accuracy', value: '' },
-        { name: 'Speed', value: '' },
-        { name: 'Completion Time', value: '' },
-        { name: 'Attempt Count', value: '' },
-    ];
+    // Load data from localStorage
+    useEffect(() => {
+        // Retrieve AI analysis from localStorage
+        const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
+        setOralAnalysis(aiResponse);
+    }, []);
 
     return (
         <Container className="results-container" maxWidth="md">
-            {/* Written Response Image Section - Displayed at the Top */}
+            {/* Handwriting Image Section - Displayed at the Top */}
             <Box className="written-image-section" textAlign="center" mt={5} mb={5}>
                 <Typography variant="h6" color="textSecondary" gutterBottom>
-                    Written Response
+                    Handwriting Response
                 </Typography>
-                {writtenImageUrl ? (
-                    <img src={writtenImageUrl} alt="User's Written Response" className="written-image" />
-                ) : (
-                    <Typography variant="body2" color="textSecondary">
-                        No image available
-                    </Typography>
-                )}
+                <img src={imageUrl} alt="User's Handwriting Response" className="written-image" />
             </Box>
 
-            {/* Results Label */}
+            {/* Results Analysis Label */}
             <Box textAlign="center" mt={4} mb={2}>
                 <Typography variant="h5" color="primary">
-                    Test Results
+                    AI Analysis of Oral Response
                 </Typography>
             </Box>
 
-            {/* Metrics Grid - Displayed Below the Results Label */}
-            <Grid container spacing={3} className="metrics-grid">
-                {metrics.map((metric, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                        <Card className="metric-card">
-                            <CardContent>
-                                <Typography variant="h6" color="primary" className="metric-name">
-                                    {metric.name}
-                                </Typography>
-                                <Typography variant="h4" className="metric-value">
-                                    {metric.value || "-"}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid>
+            {/* AI Analysis for Oral Response */}
+            <Box textAlign="center" mt={3} mb={5} p={3} className="analysis-box">
+                <Typography variant="body1" color="textSecondary">
+                    {oralAnalysis}
+                </Typography>
+            </Box>
+
+            {/* Placeholder for Future Metrics */}
+            <Box textAlign="center" mt={4} mb={2}>
+                <Typography variant="h5" color="primary">
+                    Completion Time
+                </Typography>
+            </Box>
+            <Box textAlign="center" mt={3} mb={5} p={3} className="completion-time-box">
+                <Typography variant="body1" color="textSecondary">
+                    {/* Display the completion time when available; placeholder text for now */}
+                    Completion time will be displayed here.
+                </Typography>
+            </Box>
         </Container>
     );
 };
