@@ -85,21 +85,14 @@ const Whiteboard = () => {
     };
 
     // Handle resizing stop event
-    const handleResizeStop = (e, direction, ref, d) => {
-        if (ref.style.width) {
-            const width = parseInt(ref.style.width);
-            if (width < 100) { // Assuming 100px is the minimum size at which to hide
-                setQuestionVisible(false);
-            } else {
-                setQuestionVisible(true);
-            }
-        }
+    const handleResizeStop = (e, direction, ref) => {
+        const width = parseInt(ref.style.width, 10);
+        setQuestionVisible(width > 10);  // Toggle visibility based on the width threshold
     };
 
     return (
         <div style={{width: '100%', height: '100vh', display: 'flex', position: 'relative'}}>
-            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop}/>
-
+            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop} />
             {/* Editor Section */}
             <div
                 ref={editorElement}
