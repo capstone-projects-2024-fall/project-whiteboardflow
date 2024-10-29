@@ -1,30 +1,28 @@
 // React.js Imports
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Resizable } from 're-resizable';
 
 // Material-UI Imports for UI components
-import { Typography, Box, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Typography, Box } from '@mui/material';
 
-// Custom button components
-import HelpButton from './HelpButton';
+// Import components
+import QuestionArea from './QuestionArea';
 import SubmitButton from './SubmitButton';
 
 // Style imports
-import './css/reset.css';
-import './css/components.css';
-import './css/examples.css';
+import './css/reset.css';          // Resets default browser styling
+import './css/components.css';     // Styles specific to components
+import './css/examples.css';       // Example-specific styles
 
 const Whiteboard = () => {
     // Refs for DOM elements and editor instance
-    const editorElement = useRef(null);
-    const editor = useRef(null);
+    const editor = useRef(null)
+    const editorElement = useRef(null)
     const navigate = useNavigate();
+    const [isQuestionVisible, setQuestionVisible] = useState(true); // State to toggle question visibility
 
-    // State for managing the accordion's expanded or collapsed state
-    const [expanded, setExpanded] = useState(true);
-
-    // Functions related to the editor initialization and resizing
+    // Effect for editor initialization and event handling
     useEffect(() => {
         // Function to handle window resizing to adjust editor dimensions
         const handleResize = () => {
@@ -74,11 +72,6 @@ const Whiteboard = () => {
         };
     }, []);
 
-    // Function to handle toggling of accordion expansion state
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
-
     // Function to handle export and submission of editor content
     const handleExportAndSubmit = async () => {
         try {
@@ -91,47 +84,40 @@ const Whiteboard = () => {
         }
     };
 
-    return (
-        <div style={{ width: '100%', height: '100vh', position: 'relative', padding: '20px' }}>
-            {/* Accordion component for collapsible question section */}
-            <Accordion expanded={expanded} onChange={handleExpandClick}>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <Typography variant="subtitle2" style={{ color: '#888', fontWeight: 'bold' }}>
-                        Question
-                    </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography variant="h6" style={{ color: '#3f51b5', fontWeight: 'bold', marginBottom: '20px' }}>
-                        Write a `helloWorld` function.
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
+    // Handle resizing stop event
+    const handleResizeStop = (e, direction, ref, d) => {
+        if (ref.style.width) {
+            const width = parseInt(ref.style.width);
+            if (width < 100) { // Assuming 100px is the minimum size at which to hide
+                setQuestionVisible(false);
+            } else {
+                setQuestionVisible(true);
+            }
+        }
+    };
 
-            {/* Editor section for user input */}
+    return (
+        <div style={{width: '100%', height: '100vh', display: 'flex', position: 'relative'}}>
+            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop}/>
+
+            {/* Editor Section */}
             <div
-                id="editor"
                 ref={editorElement}
                 style={{
-                    width: '100%',
-                    height: 'calc(100% - 48px)', // Adjust height considering accordion header
+                    flexGrow: 1,
+                    height: '90%',
                     touchAction: 'none',
                     borderRadius: '8px',
                     border: '1px solid #ddd',
                     padding: '10px',
                     boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
                     backgroundColor: '#fff',
-                    marginTop: '20px',
                 }}
             />
 
-            {/* Flex container for action buttons */}
-            <Box sx={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-                <HelpButton />
-                <SubmitButton onExport={handleExportAndSubmit} />
+            {/* Bottom Positioned Submit Button for the Entire View */}
+            <Box sx={{position: 'absolute', bottom: '20px', right: '20px'}}>
+                <SubmitButton onExport={handleExportAndSubmit}/>
             </Box>
         </div>
     );
