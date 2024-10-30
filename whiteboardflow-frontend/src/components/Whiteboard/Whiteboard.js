@@ -88,7 +88,7 @@ const Whiteboard = () => {
     // Handle resizing stop event
     const handleResizeStop = (e, direction, ref) => {
         const width = parseInt(ref.style.width, 10);
-        setQuestionVisible(width > 10);  // Toggle visibility based on the width threshold
+        setQuestionVisible(width > 15);  // Toggle visibility based on the width threshold
     };
 
     return (
