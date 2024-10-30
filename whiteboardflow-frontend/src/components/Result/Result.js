@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box, Paper } from '@mui/material';
 import './Results.css';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 const Results = () => {
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
-    const imageUrl = "http://127.0.0.1:8000/static/image.png"; // URL for the handwriting image
+    const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
 
     // Load data from localStorage
     useEffect(() => {
         // Retrieve AI analysis from localStorage
         const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
         setOralAnalysis(aiResponse);
+
+        const storage = getStorage();
+
+        // Create a reference to the image file you want to download
+        const imageRef = ref(storage, "images/static.png");
+        getDownloadURL(imageRef)
+            .then((url) => {
+                setImageUrl(url); // Set the image URL in the state
+            })
+            .catch((error) => {
+                console.error("Error fetching image URL: ", error);
+            });
     }, []);
 
     return (
@@ -33,16 +46,16 @@ const Results = () => {
             </Box>
 
             {/* AI Analysis for Oral Response */}
-            <Paper 
-                elevation={3} 
-                className="analysis-box" 
-                style={{ 
-                    padding: '20px', 
-                    backgroundColor: '#f7f9fc', 
-                    lineHeight: '1.8', 
-                    fontSize: '1.2rem', 
-                    color: '#333', 
-                    maxHeight: '300px', 
+            <Paper
+                elevation={3}
+                className="analysis-box"
+                style={{
+                    padding: '20px',
+                    backgroundColor: '#f7f9fc',
+                    lineHeight: '1.8',
+                    fontSize: '1.2rem',
+                    color: '#333',
+                    maxHeight: '300px',
                     overflowY: 'auto',
                     textAlign: 'left',
                     whiteSpace: 'pre-wrap'
