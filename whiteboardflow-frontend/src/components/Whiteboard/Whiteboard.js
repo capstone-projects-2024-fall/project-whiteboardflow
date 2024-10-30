@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { Resizable } from 're-resizable';
 
 // Material-UI Imports for UI components
-import { Typography, Box } from '@mui/material';
+import { Box } from '@mui/material';
 
 // Import components
 import QuestionArea from './QuestionArea';
 import SubmitButton from './SubmitButton';
+import HelpModal from './HelpModal';
 
 // Style imports
 import './css/reset.css';          // Resets default browser styling
@@ -92,7 +93,10 @@ const Whiteboard = () => {
 
     return (
         <div style={{width: '100%', height: '100vh', display: 'flex', position: 'relative'}}>
+
+            {/* Question Area */}
             <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop} />
+
             {/* Editor Section */}
             <div
                 ref={editorElement}
@@ -107,9 +111,9 @@ const Whiteboard = () => {
                     backgroundColor: '#fff',
                 }}
             />
-
-            {/* Bottom Positioned Submit Button for the Entire View */}
-            <Box sx={{position: 'absolute', bottom: '20px', right: '20px'}}>
+            <HelpModal/>
+            {/* Submit Area */}
+            <Box>
                 <SubmitButton onExport={handleExportAndSubmit}/>
             </Box>
         </div>
