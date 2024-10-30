@@ -92,7 +92,7 @@ const Whiteboard = () => {
     };
 
     return (
-        <div style={{width: '100%', height: '100vh', display: 'flex', position: 'relative'}}>
+        <div style={{width: '100%', height: '100vh', display: 'flex', position: 'fixed', overflow: 'hidden'}}>
 
             {/* Question Area */}
             <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop} />
@@ -102,7 +102,7 @@ const Whiteboard = () => {
                 ref={editorElement}
                 style={{
                     flexGrow: 1,
-                    height: '90%',
+                    height: '90vh',
                     touchAction: 'none',
                     borderRadius: '8px',
                     border: '1px solid #ddd',

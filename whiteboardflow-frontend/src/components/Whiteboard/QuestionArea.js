@@ -9,7 +9,7 @@ const QuestionArea = ({isVisible, onResizeStop}) => {
         <Resizable
             defaultSize={{
                 width: isVisible ? '30%' : '0px', // Use a minimal width when not visible
-                height: '100%' // Full height
+                height: '95vh'
             }}
             minWidth={10} // Set to minimal width to keep the drag handle accessible
             maxWidth="80%" // Maximum width to which it can expand
