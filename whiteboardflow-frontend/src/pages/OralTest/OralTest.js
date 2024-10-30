@@ -15,8 +15,8 @@ function OralTest() {
 				},
 				body: JSON.stringify({
 					// Data to send to FastAPI
-					question: '[insert question]',
-					image: '[insert image]',
+					question: "Write a helloWorld function", // TODO Don't hardcode this
+					image: "",
 					transcript: localStorage.getItem("finalTranscript")
 				})
 			});
