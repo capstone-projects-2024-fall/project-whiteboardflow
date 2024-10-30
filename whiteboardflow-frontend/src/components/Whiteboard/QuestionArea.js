@@ -5,12 +5,11 @@ import HelpButton from './HelpButton';
 
 const QuestionArea = () => {
     const minWidth = 15;
-    const [width, setWidth] = useState('30%'); // Start with default visible width
+    const [width, setWidth] = useState('70%'); // Start with default visible width
     const [isVisible, setIsVisible] = useState(true); // Manage visibility state
     useLayoutEffect(() => {
         setIsVisible(width > '0px');
     }, [width]);
-
 
     return (
         <Resizable
@@ -60,7 +59,7 @@ const QuestionArea = () => {
             }}
         >
             {isVisible && (
-                <Box sx={{ padding: '20px', height: '95vh', overflowY: isVisible ? 'auto' : 'hidden'}}>
+                <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden'}}>
                     <p><strong>Question:</strong> Write a function that takes a list of numbers and returns the sum of
                         all even numbers in the list.</p>
                     <p><strong>Function Signature:</strong></p>
@@ -95,7 +94,7 @@ const QuestionArea = () => {
                 </Box>
 
             )}
-            {isVisible && (<Box sx={{ height: '5vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',borderTop: '1px solid #ccc'}}>
+            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',borderTop: '1px solid #ccc'}}>
                 <HelpButton />
             </Box>)}
         </Resizable>

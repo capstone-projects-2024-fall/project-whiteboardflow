@@ -1,19 +1,19 @@
 .help-button {
     position: absolute;
     bottom: 1vh;
-    right: 4vh;
+    right: 5vh;
+    width: 13vh;
+    height: 5vh;
+    font-size: 2.2vh;
     z-index: 1000;
-    width: 8vh;
-    height: 3vh;
-    font-size: 2vh;
-    color: #424242;
-    background-color: white;
+    color: black;
+    background-color: #F5F5F5;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .help-button:hover {
-    background-color: #e2e2e2;
+    background-color: white;
 }

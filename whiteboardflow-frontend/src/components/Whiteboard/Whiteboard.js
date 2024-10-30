@@ -56,6 +56,7 @@ const Whiteboard = () => {
                 };
                 editor.current = new window.iink.Editor(editorElement.current, options);
                 await editor.current.initialize();
+                hideElements();
                 if (!editor.current) {
                     console.error("Editor is not initialized.");
                 }
@@ -90,34 +91,56 @@ const Whiteboard = () => {
         const width = parseInt(ref.style.width, 10);
         setQuestionVisible(width > 15);  // Toggle visibility based on the width threshold
     };
+    // Hide unnecessary elements
+    function hideElements() {
+        // Select the first child div of the element with class 'state'
+        const stateElement = document.querySelector('.state'); // Select the element with class 'state'
+        if (stateElement) {
+            stateElement.style.display = 'none'; // Hide the entire element
+        }
+    }
 
     return (
         <div style={{width: '100%', height: '100vh', display: 'flex', position: 'fixed', overflow: 'hidden'}}>
 
             {/* Question Area */}
-            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop} />
+            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop}/>
 
             {/* Editor Section */}
-            <div
-                ref={editorElement}
-                style={{
-                    flexGrow: 1,
-                    height: '90vh',
-                    touchAction: 'none',
-                    borderRadius: '8px',
-                    border: '1px solid #ddd',
-                    padding: '10px',
-                    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-                    backgroundColor: '#fff',
-                }}
-            />
-            <HelpModal/>
-            {/* Submit Area */}
-            <Box>
-                <SubmitButton onExport={handleExportAndSubmit}/>
-            </Box>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                flexGrow: 1,
+                height: '100vh'
+            }}>
+                <div
+                    ref={editorElement}
+                    style={{
+                        flexGrow: 1,
+                        height: '93vh',
+                        touchAction: 'none',
+                        borderRadius: '8px',
+                        border: '1px solid #ddd',
+                        padding: '10px',
+                        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+                        backgroundColor: '#fff',
+                    }}
+                />
+                <HelpModal/>
+                {/* Submit Area */}
+                <Box sx={{
+                    height: '7vh',
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderTop: '1px solid #ccc'
+                }}>
+                    <SubmitButton onExport={handleExportAndSubmit}/>
+                </Box>
+            </div>
         </div>
-    );
-};
+            );
+            };
 
-export default Whiteboard;
+            export default Whiteboard;
