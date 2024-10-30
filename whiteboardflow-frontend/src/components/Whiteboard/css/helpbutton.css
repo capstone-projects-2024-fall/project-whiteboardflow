@@ -1,12 +1,11 @@
 .help-button {
     position: absolute;
-    bottom: 0;
-    right: 15%;
+    bottom: 1vh;
+    right: 4vh;
     z-index: 1000;
-    width: 100px;
-    height: 40px;
-    font-size: 22px;
-    padding: 2px 5px;
+    width: 8vh;
+    height: 3vh;
+    font-size: 2vh;
     color: #424242;
     background-color: white;
     border: 1px solid #ccc;

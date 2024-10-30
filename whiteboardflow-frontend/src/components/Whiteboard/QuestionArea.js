@@ -16,7 +16,7 @@ const QuestionArea = () => {
         <Resizable
             defaultSize={{
                 width: width,
-                height: '95vh'
+                height: '100vh'
             }}
             minWidth={minWidth}
             maxWidth="80%"
@@ -29,16 +29,6 @@ const QuestionArea = () => {
                 bottomRight: false,
                 bottomLeft: false,
                 topLeft: false
-            }}
-            handleStyles={{
-                right: {
-                    width: '20px', // Handle width
-                    background: 'rgba(grey)',
-                    cursor: 'ew-resize'
-                }
-            }}
-            handleComponent={{
-                right: <div style={{ width: '20px', cursor: 'ew-resize' }}></div>
             }}
             onResize={(e, direction, ref, d) => {
                 const newWidth = parseInt(ref.style.width, 10);
@@ -58,9 +48,19 @@ const QuestionArea = () => {
                     setWidth(`${minWidth}px`);
                 }
             }}
+            handleStyles={{
+                right: {
+                    width: '20px',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    cursor: 'ew-resize'
+                }
+            }}
+            handleComponent={{
+                right: <div style={{ width: '20px', cursor: 'ew-resize' }}></div>
+            }}
         >
-            {isVisible && ( // ISSUE: Sometimes doesn't go visible when it's 0 width
-                <Box sx={{ padding: '20px', height: '100%', overflowY: isVisible ? 'auto' : 'hidden'}}>
+            {isVisible && (
+                <Box sx={{ padding: '20px', height: '95vh', overflowY: isVisible ? 'auto' : 'hidden'}}>
                     <p><strong>Question:</strong> Write a function that takes a list of numbers and returns the sum of
                         all even numbers in the list.</p>
                     <p><strong>Function Signature:</strong></p>
@@ -91,9 +91,13 @@ const QuestionArea = () => {
                         <li>Use a loop or list comprehension to filter for even numbers.</li>
                         <li>The modulo operator <code>%</code> can help determine if a number is even.</li>
                     </ol>
-                    <HelpButton/>
+
                 </Box>
+
             )}
+            {isVisible && (<Box sx={{ height: '5vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',borderTop: '1px solid #ccc'}}>
+                <HelpButton />
+            </Box>)}
         </Resizable>
     );
 };
