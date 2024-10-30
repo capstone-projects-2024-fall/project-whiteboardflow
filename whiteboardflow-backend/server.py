@@ -3,6 +3,7 @@ import shutil
 import os
 import openai
 import base64
+import logging
 # Loads environment variables from settings (must be done before importing from
 # 'ai_assistant')
 from config.settings import Config
@@ -14,7 +15,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from routers.voice import router as voice_router
 from routers.ai_assistant import router as ai_router
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+# Use the logger
+logger = logging.getLogger(__name__)
 
 app = FastAPI(debug=True)
 
@@ -32,44 +36,57 @@ app.include_router(voice_router, prefix="/api")
 app.include_router(ai_router, prefix="/api")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+client = openai.OpenAI()
 
 """ This is where you upload an image """
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
-    # Save the original file
+    # Saving and converting the image to base64
     file_location = f"static/images/{file.filename}"
+    os.makedirs(os.path.dirname(file_location), exist_ok=True)
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-
-    # Convert the file to a base64 string
     with open(file_location, "rb") as image_file:
         base64_string = base64.b64encode(image_file.read()).decode("utf-8")
 
-    # Send image for analysis
+    # Attempting to send the image for analysis
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4o-mini",  # Make sure to use the correct model available to you
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
             messages=[
-                {
-                    "role": "system",
-                    "content": "Analyze the following image:"
-                },
-                {
-                    "role": "user",
-                    "content": f"data:image/png;base64,{base64_string}"
-                }
-            ],
-            api_key=Config.OPENAI_API_KEY
-        )
-        ai_response = response.choices[0].message.content if response.choices else "No response generated"
+            {
+            "role": "user",
+            "content": [
+                            {
+                                "type": "text",
+                                "text": "What is in this image?",
+                            },
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:image/jpeg;base64,{base64_string}"
+                                },
+                            },
+                        ],
+                    }
+                ],
+            )
+        if response.choices:
+            ai_response = response.choices[0].message.content
+            logger.info(f"AI Response: {ai_response}")
+        else:
+            ai_response = "No response generated"
+            logger.info("No response generated from AI")
     except Exception as e:
-        return {"error": str(e)}
+        logger.error("Failed at OpenAI API call", exc_info=True)
+        return {"error": str(e), "details": "Check model name, API key, and payload"}
 
-    # Return file details and the AI's response
+
+    # Returning the results
     return {
         "filename": file.filename,
         "url": f"/static/images/{file.filename}",
-        "base64": f"data:image/png;base64,{base64_string}",
+        "base64": base64_string,
         "ai_response": ai_response
     }
 
