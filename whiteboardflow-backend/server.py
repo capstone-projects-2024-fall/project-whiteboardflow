@@ -8,7 +8,6 @@ import openai
 from config.settings import Config
 
 from fastapi import FastAPI, File, Form, UploadFile
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -33,13 +32,6 @@ app.include_router(voice_router, prefix="/api")
 app.include_router(ai_router, prefix="/api")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
-from fastapi import FastAPI, UploadFile, File
-import shutil
-import base64
-import os
-
-app = FastAPI()
 
 
 @app.post("/upload")
