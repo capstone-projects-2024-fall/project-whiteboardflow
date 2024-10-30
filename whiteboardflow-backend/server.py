@@ -1,6 +1,7 @@
 import uvicorn
 import shutil
 import os
+import openai
 
 # Loads environment variables from settings (must be done before importing from
 # 'ai_assistant')
@@ -18,7 +19,7 @@ from routers.ai_assistant import router as ai_router
 
 app = FastAPI(debug=True)
 
-origins = ["http://localhost:3000", "localhost:3000"]
+origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -40,6 +41,7 @@ import os
 
 app = FastAPI()
 
+
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
     # Save the original file
@@ -51,16 +53,32 @@ async def upload_file(file: UploadFile = File(...)):
     with open(file_location, "rb") as image_file:
         base64_string = base64.b64encode(image_file.read()).decode("utf-8")
 
-    # Save base64 string as a .txt file for reference, if needed
-    base64_file_location = f"static/images/{file.filename}.txt"
-    with open(base64_file_location, "w") as text_file:
-        text_file.write(f"data:image/png;base64,{base64_string}")
+    # Send image for analysis (Simulating a URL to fit your current function's assumption)
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",  # Make sure to use the correct model available to you
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Analyze the following image:"
+                },
+                {
+                    "role": "user",
+                    "content": f"data:image/png;base64,{base64_string}"
+                }
+            ],
+            api_key=Config.OPENAI_API_KEY
+        )
+        ai_response = response.choices[0].message.content if response.choices else "No response generated"
+    except Exception as e:
+        return {"error": str(e)}
 
-    # Return file details and base64 string
+    # Return file details and the AI's response
     return {
         "filename": file.filename,
         "url": f"/static/images/{file.filename}",
-        "base64": f"data:image/png;base64,{base64_string}"
+        "base64": f"data:image/png;base64,{base64_string}",
+        "ai_response": ai_response
     }
 
 
