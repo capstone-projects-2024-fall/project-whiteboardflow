@@ -2,7 +2,7 @@ import uvicorn
 import shutil
 import os
 import openai
-
+import base64
 # Loads environment variables from settings (must be done before importing from
 # 'ai_assistant')
 from config.settings import Config
@@ -18,7 +18,7 @@ from routers.ai_assistant import router as ai_router
 
 app = FastAPI(debug=True)
 
-origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+origins = ["http://localhost:3000", "localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -33,7 +33,7 @@ app.include_router(ai_router, prefix="/api")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-
+""" This is where you upload an image """
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
     # Save the original file
@@ -45,10 +45,10 @@ async def upload_file(file: UploadFile = File(...)):
     with open(file_location, "rb") as image_file:
         base64_string = base64.b64encode(image_file.read()).decode("utf-8")
 
-    # Send image for analysis (Simulating a URL to fit your current function's assumption)
+    # Send image for analysis
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-4",  # Make sure to use the correct model available to you
+            model="gpt-4o-mini",  # Make sure to use the correct model available to you
             messages=[
                 {
                     "role": "system",
@@ -74,24 +74,14 @@ async def upload_file(file: UploadFile = File(...)):
     }
 
 
+""" This could visualize the uploaded image """
 @app.get("/images/{filename}", response_class=HTMLResponse)
 def view_file(filename: str):
-    base64_file_path = f"static/images/{filename}.txt"
-
-    # Check if the base64 file exists
-    if not os.path.exists(base64_file_path):
-        return HTMLResponse("<h1>Image not found</h1>", status_code=404)
-
-    # Read the base64 content
-    with open(base64_file_path, "r") as file:
-        base64_image = file.read()
-
-    # Embed the base64 image data in HTML
     return f"""
     <html>
         <body>
             <h1>Image Display</h1>
-            <img src="{base64_image}" alt="Uploaded Image" />
+            <img src="/static/{filename}" alt="Uploaded Image" />
         </body>
     </html>
     """
