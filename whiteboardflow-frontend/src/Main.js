@@ -23,16 +23,17 @@ function Main() {
 
     return (
         <Router>
-            <Layout user={user}> {/* Pass user as prop to Layout */}
-                <Routes>
-                    <Route index element={<HomePage user={user} />} /> {/* Pass user to HomePage */}
-                    <Route path="whiteboard" element={<Whiteboard />} />
+            <Routes>
+                <Route element={<Layout user={user} />}>
+                    <Route index element={<HomePage user={user} />} />
                     <Route path="OralTest" element={<OralTest />} />
                     <Route path="Settings" element={<Settings />} />
                     <Route path="BackEndTest" element={<BackEndTest />} />
-                    <Route path="results" element={<Results />} /> 
-                </Routes>
-            </Layout>
+                    <Route path="results" element={<Results />} />
+                </Route>
+
+                <Route path="whiteboard" element={<Whiteboard />} />
+            </Routes>
         </Router>
     );
 }
