@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Typography, Box } from '@mui/material';
 import HelpButton from './HelpButton';
 import SubmitButton from './SubmitButton';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import './css/reset.css';
 import './css/components.css';
 import './css/examples.css';
@@ -61,13 +62,52 @@ const Whiteboard = () => {
     const handleExportAndSubmit = async () => {
         try {
             if (editorRef.current) {
-                await editorRef.current.behaviors.sendPNGToServer(editorRef.current.behaviors.haveSymbolsSelected);
+                await sendPNGToFirebase(editorRef.current.behaviors.haveSymbolsSelected);
                 navigate('/oraltest'); // Navigate to the OralTest page after export
             }
         } catch (error) {
             console.error('Error during export or send:', error);
         }
     };
+
+    const sendPNGToFirebase = async (i = false) => {
+        const behaviors = editorRef.current.behaviors;
+        const symbols = i ? behaviors.model.symbolsSelected : behaviors.model.symbols;
+        const bounds = behaviors.getSymbolsBounds(symbols);
+        const svgBlob = behaviors.buildBlobFromSymbols(symbols, bounds);
+        const svgUrl = URL.createObjectURL(svgBlob);
+        const img = new Image();
+        
+        img.onload = async () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#FFFFFF'; // Set the background color to white
+            ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas
+            ctx.drawImage(img, 0, 0);
+            URL.revokeObjectURL(svgUrl); // Clean up the SVG blob URL
+    
+            // Convert the canvas to PNG
+            canvas.toBlob(async (pngBlob) => {
+                // Initialize Firebase Storage
+                const storage = getStorage();
+                const storageRef = ref(storage, `images/static.png`);
+    
+                try {
+                    // Upload PNG blob to Firebase Storage
+                    const snapshot = await uploadBytes(storageRef, pngBlob);
+                    console.log("Image uploaded to Firebase successfully.");
+
+                    const downloadURL = await getDownloadURL(snapshot.ref);
+                    console.log("File available at:", downloadURL);
+                } catch (error) {
+                    console.error("Error uploading image to Firebase:", error);
+                }
+            }, 'image/png');
+        };
+        img.src = svgUrl;
+    }
 
     return (
         <div style={{ width: '100%', height: '100vh', position: 'relative', padding: '20px' }}>
