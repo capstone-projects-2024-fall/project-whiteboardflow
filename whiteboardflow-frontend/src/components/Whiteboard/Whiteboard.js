@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Typography, Box } from '@mui/material';
 import HelpButton from './HelpButton';
 import SubmitButton from './SubmitButton';
+import { auth } from "../../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import './css/reset.css';
 import './css/components.css';
@@ -90,9 +91,10 @@ const Whiteboard = () => {
     
             // Convert the canvas to PNG
             canvas.toBlob(async (pngBlob) => {
-                // Initialize Firebase Storage
+                // Use user's uid to create path
+                const userId = auth.currentUser.uid;
                 const storage = getStorage();
-                const storageRef = ref(storage, `images/static.png`);
+                const storageRef = ref(storage, `user-files/${userId}/static.png`);
     
                 try {
                     // Upload PNG blob to Firebase Storage
