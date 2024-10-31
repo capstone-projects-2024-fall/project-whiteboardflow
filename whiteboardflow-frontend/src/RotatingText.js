@@ -21,7 +21,7 @@ const RotatingText = () => {
                 setIndex((prevIndex) => (prevIndex + 1) % textArray.current.length);
                 setSlide(true);
             }, 500);
-        }, 3000);
+        }, 7000);
 
         return () => clearInterval(intervalId);
     }, []);
