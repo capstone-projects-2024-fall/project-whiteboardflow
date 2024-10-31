@@ -31,8 +31,10 @@ about those three items:
     - Transcript: The verbal explanation that I gave to describe my thought
         process while answering this problem.
         
-Analyze the image and transcript in your response. What is in the image? If my
-answer was wrong, show me what I did wrong. Don't give me the answer.
+Analyze the image and transcript in your response. What is in the image? If
+(AND ONLY IF) my answer was wrong, show me what I did wrong. Don't focus on
+programming language syntax like quotations marks, that is irrelevant. Don't 
+explicitly give me the answer. 
 """
 
 additional_context = """Give me different ways that the problem could have been
@@ -77,7 +79,7 @@ def get_ai_response(data: AIData):
                 ],
             },
         ],
-        max_tokens=1000,
+        max_tokens=600,
     )
 
     return {"message": response.choices[0].message.content}
