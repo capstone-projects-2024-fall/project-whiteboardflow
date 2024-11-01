@@ -1,10 +1,6 @@
 import uvicorn
 import shutil
-import os
-
-# Loads environment variables from settings (must be done before importing from
-# 'ai_assistant')
-from config.settings import Config
+import config.firebase_config
 
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware

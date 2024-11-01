@@ -1,18 +1,25 @@
 import base64
 import openai
+import os
 
 from fastapi import APIRouter
 from pydantic import BaseModel
-from firebase_admin import storage
+from firebase_admin import storage, auth
 
 router = APIRouter()
 
 client = openai.OpenAI()
 
+
 class AIData(BaseModel):
+    token: str
     question: str
     image: str
     transcript: str
+
+
+dir = os.path.dirname(__file__)
+
 
 @router.post("/get-result/")
 def get_result(data: AIData):
@@ -21,7 +28,10 @@ def get_result(data: AIData):
             "At least one of 'question', 'image', or 'transcript' must be provided."
         )
 
-    image_data = get_firebase_image()
+    decoded_token = auth.verify_id_token(data.token)
+    uid = decoded_token["uid"]
+
+    image_data = get_firebase_image(uid)
 
     # Convert image to base64 encoding
     data.image = base64.b64encode(image_data).decode("utf-8")
@@ -30,13 +40,15 @@ def get_result(data: AIData):
 
 
 def get_ai_result(data: AIData):
+    filename = os.path.join(dir, "contexts/result_context.txt")
+
     try:
-        with open("contexts/result_context.txt", "r") as file:
+        with open(filename, "r") as file:
             chat_context = file.read()
     except IOError as e:
         print(e)
         return
-    
+
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
@@ -65,9 +77,9 @@ def get_ai_result(data: AIData):
     return {"message": response.choices[0].message.content}
 
 
-def get_firebase_image():
+def get_firebase_image(user_id):
     bucket = storage.bucket()
-    blob = bucket.blob("images/static.png")
+    blob = bucket.blob(f"user-files/{user_id}/static.png")
     image_data = blob.download_as_bytes()
 
     return image_data

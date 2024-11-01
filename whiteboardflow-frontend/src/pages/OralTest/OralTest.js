@@ -1,12 +1,15 @@
 import { Button } from '@mui/material';
 import MicPrompt from '../../components/MicPrompt/MicPrompt';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { getIdToken } from '../../firebase'
 import './OralTest.css';
 
 function OralTest() {
 	const navigate = useNavigate(); // Initialize navigate hook
-
+	
 	const submitResponseData = async () => {
+		const idToken = await getIdToken();
+
 		try {
 			const response = await fetch("/api/get-result", {
 				method: "POST",
@@ -15,6 +18,7 @@ function OralTest() {
 				},
 				body: JSON.stringify({
 					// Data to send to FastAPI
+					token: idToken,
 					question: "Write a helloWorld function", // TODO Don't hardcode this
 					image: "",
 					transcript: localStorage.getItem("finalTranscript")
@@ -24,7 +28,6 @@ function OralTest() {
 			// Get ChatGPT response
 			const result = await response.json();
 			localStorage.setItem("AIResponse", result.message);
-			//alert(result.message);
 
 			// Navigate to Results page after successful response
 			navigate('/results');
