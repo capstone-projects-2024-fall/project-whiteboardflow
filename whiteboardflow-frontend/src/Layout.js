@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Button, Snackbar, CircularProgress, Avatar, Switch } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { auth, provider, signInWithPopup, signOut } from './firebase';
 import Footer from './Footer';
 import './Layout.css';
@@ -122,7 +122,7 @@ const Layout = ({ children, user }) => { // Accept user as a prop
             </AppBar>
 
             <div className="content-container">
-                {children} {/* Render content based on the route */}
+                <Outlet />
             </div>
 
             <Footer />

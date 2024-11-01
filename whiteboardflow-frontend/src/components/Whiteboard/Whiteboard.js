@@ -1,31 +1,44 @@
-import React, { useEffect, useRef } from 'react';
+// React.js Imports
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Box } from '@mui/material';
-import HelpButton from './HelpButton';
+import { Resizable } from 're-resizable';
+
+// Material-UI Imports for UI components
+import { Box } from '@mui/material';
+
+// Import components
+import QuestionArea from './QuestionArea';
 import SubmitButton from './SubmitButton';
+import HelpModal from './HelpModal';
 import { auth } from "../../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import './css/reset.css';
-import './css/components.css';
-import './css/examples.css';
+
+// Style imports
+import './css/reset.css';          // Resets default browser styling
+import './css/components.css';     // Styles specific to components
+import './css/examples.css';       // Example-specific styles
 
 const Whiteboard = () => {
-    const editorElementRef = useRef(null);
-    const editorRef = useRef(null); // Use useRef to store the editor instance
+    // Refs for DOM elements and editor instance
+    const editor = useRef(null)
+    const editorElement = useRef(null)
     const navigate = useNavigate();
+    const [isQuestionVisible, setQuestionVisible] = useState(true); // State to toggle question visibility
 
+    // Effect for editor initialization and event handling
     useEffect(() => {
+        // Function to handle window resizing to adjust editor dimensions
         const handleResize = () => {
-            if (editorRef.current) {
-                editorRef.current.resize();
+            if (editor.current) {
+                editor.current.resize();
             }
         };
 
+        // Function to load editor configuration and initialize it
         const loadEditor = async () => {
             try {
                 const response = await fetch("server-configuration.json");
                 const server = await response.json();
-
                 const options = {
                     configuration: {
                         offscreen: true,
@@ -43,9 +56,10 @@ const Whiteboard = () => {
                         }
                     },
                 };
-                editorRef.current = new window.iink.Editor(editorElementRef.current, options);
-                await editorRef.current.initialize();
-                if (!editorRef.current) {
+                editor.current = new window.iink.Editor(editorElement.current, options);
+                await editor.current.initialize();
+                hideElements();
+                if (!editor.current) {
                     console.error("Editor is not initialized.");
                 }
                 window.addEventListener("resize", handleResize);
@@ -53,17 +67,20 @@ const Whiteboard = () => {
                 console.error("Error during iink Editor initialization:", error);
             }
         };
+
         loadEditor();
 
+        // Cleanup function to remove the resize event listener
         return () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
 
+    // Function to handle export and submission of editor content
     const handleExportAndSubmit = async () => {
         try {
-            if (editorRef.current) {
-                await sendPNGToFirebase(editorRef.current.behaviors.haveSymbolsSelected);
+            if (editor.current) {
+                await sendPNGToFirebase(editor.current.behaviors.haveSymbolsSelected);
                 navigate('/oraltest'); // Navigate to the OralTest page after export
             }
         } catch (error) {
@@ -71,8 +88,22 @@ const Whiteboard = () => {
         }
     };
 
+    // Handle resizing stop event
+    const handleResizeStop = (e, direction, ref) => {
+        const width = parseInt(ref.style.width, 10);
+        setQuestionVisible(width > 15);  // Toggle visibility based on the width threshold
+    };
+    // Hide unnecessary elements
+    function hideElements() {
+        // Select the first child div of the element with class 'state'
+        const stateElement = document.querySelector('.state'); // Select the element with class 'state'
+        if (stateElement) {
+            stateElement.style.display = 'none'; // Hide the entire element
+        }
+    }
+
     const sendPNGToFirebase = async (i = false) => {
-        const behaviors = editorRef.current.behaviors;
+        const behaviors = editor.current.behaviors;
         const symbols = i ? behaviors.model.symbolsSelected : behaviors.model.symbols;
         const bounds = behaviors.getSymbolsBounds(symbols);
         const svgBlob = behaviors.buildBlobFromSymbols(symbols, bounds);
@@ -112,40 +143,46 @@ const Whiteboard = () => {
     }
 
     return (
-        <div style={{ width: '100%', height: '100vh', position: 'relative', padding: '20px' }}>
-            {/* Question Label */}
-            <Typography variant="subtitle2" style={{ color: '#888', marginBottom: '5px', fontWeight: 'bold' }}>
-                Question
-            </Typography>
+        <div style={{width: '100%', height: '100vh', display: 'flex', position: 'fixed', overflow: 'hidden'}}>
 
-            {/* Question Text */}
-            <Typography variant="h6" style={{ color: '#3f51b5', fontWeight: 'bold', marginBottom: '20px' }}>
-                Write a `helloWorld` function.
-            </Typography>
-            
+            {/* Question Area */}
+            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop}/>
+
             {/* Editor Section */}
-            <div
-                id="editor"
-                ref={editorElementRef}
-                style={{
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                flexGrow: 1,
+                height: '100vh'
+            }}>
+                <div
+                    ref={editorElement}
+                    style={{
+                        flexGrow: 1,
+                        height: '93vh',
+                        touchAction: 'none',
+                        borderRadius: '8px',
+                        border: '1px solid #ddd',
+                        padding: '10px',
+                        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+                        backgroundColor: '#fff',
+                    }}
+                />
+                <HelpModal/>
+                {/* Submit Area */}
+                <Box sx={{
+                    height: '7vh',
                     width: '100%',
-                    height: '80%',  // Adjust height to fit the question above
-                    touchAction: 'none',
-                    borderRadius: '8px',
-                    border: '1px solid #ddd',
-                    padding: '10px',
-                    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-                    backgroundColor: '#fff',
-                }}
-            />
-            
-            {/* Buttons */}
-            <Box sx={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-                <HelpButton />
-                <SubmitButton onExport={handleExportAndSubmit} />
-            </Box>
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderTop: '1px solid #ccc'
+                }}>
+                    <SubmitButton onExport={handleExportAndSubmit}/>
+                </Box>
+            </div>
         </div>
-    );
-};
+            );
+            };
 
-export default Whiteboard;
+            export default Whiteboard;
