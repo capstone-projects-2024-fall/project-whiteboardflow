@@ -1,18 +1,15 @@
 import uvicorn
-import shutil
-import os
-
+import logging
 # Loads environment variables from settings (must be done before importing from
 # 'ai_assistant')
-from config.settings import Config
 
-from fastapi import FastAPI, File, Form, UploadFile
-from fastapi.middleware.cors import CORSMiddleware
+from config.settings import Config
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from routers.voice import router as voice_router
+from routers.image import router as image_router
 from routers.ai_assistant import router as ai_router
 
 
@@ -30,32 +27,9 @@ app.add_middleware(
 
 app.include_router(voice_router, prefix="/api")
 app.include_router(ai_router, prefix="/api")
-
+app.include_router(image_router, prefix="/api")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-""" This is where you upload an image """
-@app.post("/upload")
-async def upload_file(file: UploadFile = File(...)):
-    file_location = f"static/{file.filename}"
-    with open(file_location, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-
-    return {
-        "filename": file.filename,
-        "url": f"/static/{file.filename}"
-    }
-
-""" This could visualize the uploaded image """
-@app.get("/images/{filename}", response_class=HTMLResponse)
-def view_file(filename: str):
-    return f"""
-    <html>
-        <body>
-            <h1>Image Display</h1>
-            <img src="/static/{filename}" alt="Uploaded Image" />
-        </body>
-    </html>
-    """
 
 
 @app.get("/")
