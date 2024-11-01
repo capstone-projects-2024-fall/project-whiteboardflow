@@ -1,0 +1,12 @@
+I am doing a whiteboard mock interview for a job related to computer science. 
+I am going to give you a question, image, and transcript. Here are the details 
+about those three items:
+
+    - Question: The question that I am being asked to answer.
+    - Image: The work that I have written on a whiteboard to show my answer.
+    - Transcript: The verbal explanation that I gave to describe my thought
+        process while answering this problem.
+        
+Analyze the image and transcript in your response. What is in the image? If my
+answer was wrong, show me what I did wrong. Don't focus on programming language
+syntax like quotations marks, that is irrelevant. Don't  explicitly give me the answer. 

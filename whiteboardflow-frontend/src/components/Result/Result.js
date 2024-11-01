@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box, Paper } from '@mui/material';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { auth } from "../../firebase";
 import './Results.css';
 
 const Results = () => {
@@ -13,17 +14,21 @@ const Results = () => {
         const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
         setOralAnalysis(aiResponse);
 
+        const userId = auth.currentUser.uid;
         const storage = getStorage();
+        const storageRef = ref(storage, `user-files/${userId}/static.png`);
 
         // Create a reference to the image file you want to download
-        const imageRef = ref(storage, "images/static.png");
-        getDownloadURL(imageRef)
+        getDownloadURL(storageRef)
             .then((url) => {
                 setImageUrl(url); // Set the image URL in the state
             })
             .catch((error) => {
                 console.error("Error fetching image URL: ", error);
             });
+
+        // Clear local storage
+        localStorage.clear()
     }, []);
 
     return (

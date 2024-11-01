@@ -13,7 +13,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from routers.voice import router as voice_router
-from routers.ai_assistant import router as ai_router
+from routers.AI.ai_assistant import router as ai_router
 
 
 app = FastAPI(debug=True)

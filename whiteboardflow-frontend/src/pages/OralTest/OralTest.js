@@ -8,7 +8,7 @@ function OralTest() {
 
 	const submitResponseData = async () => {
 		try {
-			const response = await fetch("/api/get-response", {
+			const response = await fetch("/api/get-result", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
