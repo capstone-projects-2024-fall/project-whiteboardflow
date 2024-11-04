@@ -56,7 +56,7 @@ const Whiteboard = () => {
                 };
                 editor.current = new window.iink.Editor(editorElement.current, options);
                 await editor.current.initialize();
-                hideElements();
+                deleteElements();
                 if (!editor.current) {
                     console.error("Editor is not initialized.");
                 }
@@ -92,11 +92,11 @@ const Whiteboard = () => {
         setQuestionVisible(width > 15);  // Toggle visibility based on the width threshold
     };
     // Hide unnecessary elements
-    function hideElements() {
+    function deleteElements() {
         // Select the first child div of the element with class 'state'
         const stateElement = document.querySelector('.state'); // Select the element with class 'state'
         if (stateElement) {
-            stateElement.style.display = 'none'; // Hide the entire element
+            stateElement.remove(); // Hide the entire element
         }
     }
 

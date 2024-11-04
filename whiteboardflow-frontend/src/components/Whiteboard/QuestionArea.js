@@ -5,7 +5,7 @@ import HelpButton from './HelpButton';
 
 const QuestionArea = () => {
     const minWidth = 15;
-    const [width, setWidth] = useState('70%'); // Start with default visible width
+    const [width, setWidth] = useState('50%'); // Start with default visible width
     const [isVisible, setIsVisible] = useState(true); // Manage visibility state
     useLayoutEffect(() => {
         setIsVisible(width > '0px');
