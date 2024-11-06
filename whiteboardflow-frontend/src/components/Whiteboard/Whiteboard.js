@@ -10,6 +10,8 @@ import { Box } from '@mui/material';
 import QuestionArea from './QuestionArea';
 import SubmitButton from './SubmitButton';
 import HelpModal from './HelpModal';
+import { auth } from "../../firebase";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Style imports
 import './css/reset.css';          // Resets default browser styling
@@ -78,8 +80,8 @@ const Whiteboard = () => {
     const handleExportAndSubmit = async () => {
         try {
             if (editor.current) {
-                await editor.current.behaviors.sendPNGToServer(editor.current.behaviors.haveSymbolsSelected);
-                navigate('/oraltest');
+                await sendPNGToFirebase(editor.current.behaviors.haveSymbolsSelected);
+                navigate('/oraltest'); // Navigate to the OralTest page after export
             }
         } catch (error) {
             console.error('Error during export or send:', error);
@@ -100,11 +102,51 @@ const Whiteboard = () => {
         }
     }
 
+    const sendPNGToFirebase = async (i = false) => {
+        const behaviors = editor.current.behaviors;
+        const symbols = i ? behaviors.model.symbolsSelected : behaviors.model.symbols;
+        const bounds = behaviors.getSymbolsBounds(symbols);
+        const svgBlob = behaviors.buildBlobFromSymbols(symbols, bounds);
+        const svgUrl = URL.createObjectURL(svgBlob);
+        const img = new Image();
+
+        img.onload = async () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#FFFFFF'; // Set the background color to white
+            ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas
+            ctx.drawImage(img, 0, 0);
+            URL.revokeObjectURL(svgUrl); // Clean up the SVG blob URL
+
+            // Convert the canvas to PNG
+            canvas.toBlob(async (pngBlob) => {
+                // Use user's uid to create path
+                const userId = auth.currentUser.uid;
+                const storage = getStorage();
+                const storageRef = ref(storage, `user-files/${userId}/static.png`);
+
+                try {
+                    // Upload PNG blob to Firebase Storage
+                    const snapshot = await uploadBytes(storageRef, pngBlob);
+                    console.log("Image uploaded to Firebase successfully.");
+
+                    const downloadURL = await getDownloadURL(snapshot.ref);
+                    console.log("File available at:", downloadURL);
+                } catch (error) {
+                    console.error("Error uploading image to Firebase:", error);
+                }
+            }, 'image/png');
+        };
+        img.src = svgUrl;
+    }
+
     return (
-        <div style={{width: '100%', height: '100vh', display: 'flex', position: 'fixed', overflow: 'hidden'}}>
+        <div style={{ width: '100%', height: '100vh', display: 'flex', position: 'fixed', overflow: 'hidden' }}>
 
             {/* Question Area */}
-            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop}/>
+            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop} sendPNGToFirebase={sendPNGToFirebase} />
 
             {/* Editor Section */}
             <div style={{
@@ -126,7 +168,7 @@ const Whiteboard = () => {
                         backgroundColor: '#fff',
                     }}
                 />
-                <HelpModal/>
+                <HelpModal />
                 {/* Submit Area */}
                 <Box sx={{
                     height: '7vh',
@@ -136,11 +178,11 @@ const Whiteboard = () => {
                     justifyContent: 'center',
                     borderTop: '1px solid #ccc'
                 }}>
-                    <SubmitButton onExport={handleExportAndSubmit}/>
+                    <SubmitButton onExport={handleExportAndSubmit} />
                 </Box>
             </div>
         </div>
-            );
-            };
+    );
+};
 
-            export default Whiteboard;
+export default Whiteboard;

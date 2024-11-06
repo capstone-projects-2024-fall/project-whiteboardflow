@@ -1,16 +1,15 @@
 import uvicorn
-import logging
-# Loads environment variables from settings (must be done before importing from
-# 'ai_assistant')
+import shutil
+import config.firebase_config
 
-from config.settings import Config
-from fastapi import FastAPI
+from fastapi import FastAPI, File, Form, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
 from routers.voice import router as voice_router
 from routers.image import router as image_router
-from routers.ai_assistant import router as ai_router
+from routers.AI.ai_assistant import router as ai_router
 
 
 app = FastAPI(debug=True)

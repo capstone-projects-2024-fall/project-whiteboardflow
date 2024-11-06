@@ -5,3 +5,4 @@ PyAudio
 openai
 python-dotenv
 python-multipart
+firebase-admin
