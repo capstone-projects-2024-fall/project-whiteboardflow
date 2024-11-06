@@ -93,10 +93,11 @@ const Whiteboard = () => {
     };
     // Hide unnecessary elements
     function deleteElements() {
+        // document.getElementById('ms-menu-action').remove();
         // Select the first child div of the element with class 'state'
         const stateElement = document.querySelector('.state'); // Select the element with class 'state'
         if (stateElement) {
-            stateElement.remove(); // Hide the entire element
+            stateElement.remove();
         }
     }
 
