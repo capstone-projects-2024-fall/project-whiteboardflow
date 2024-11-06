@@ -57,6 +57,11 @@ def get_result(data: AIData):
 
 def get_ai_response(data: AIData, context_file: str):
     filename = os.path.join(dir, f"contexts/{context_file}.txt")
+    
+    transcript = ""
+    
+    if isinstance(data, AIData):
+        transcript = data.transcript
 
     try:
         with open(filename, "r") as file:
@@ -82,7 +87,7 @@ def get_ai_response(data: AIData, context_file: str):
                     },
                     {
                         "type": "text",
-                        "text": "",
+                        "text": transcript,
                     },
                 ],
             },

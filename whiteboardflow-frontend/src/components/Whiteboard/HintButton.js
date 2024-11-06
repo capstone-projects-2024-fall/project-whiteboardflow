@@ -6,7 +6,8 @@ import clsx from 'clsx';
 import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import { Snackbar, Alert } from '@mui/material';
-import { getIdToken } from '../../firebase'
+import { getIdToken } from '../../firebase';
+import ReactMarkdown from 'react-markdown';
 
 const HintButton = ({ sendPNGToFirebase }) => {
 	const [open, setOpen] = useState(false);
@@ -93,7 +94,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 						<div className="loader"></div> // Show loader when loading
 					) : (
 						<p id="unstyled-modal-description" className="modal-description">
-							{hintResponse}
+							<ReactMarkdown>{hintResponse}</ReactMarkdown>
 						</p>
 					)}
 				</ModalContent>

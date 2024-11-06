@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box, Paper } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { auth } from "../../firebase";
 import './Results.css';
@@ -66,9 +67,7 @@ const Results = () => {
                     whiteSpace: 'pre-wrap'
                 }}
             >
-                <Typography variant="body1">
-                    {oralAnalysis}
-                </Typography>
+                <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
             </Paper>
 
             {/* Placeholder for Future Metrics */}
