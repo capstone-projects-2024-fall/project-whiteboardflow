@@ -29,7 +29,7 @@ const Results = () => {
             });
 
         // Clear local storage
-        localStorage.clear()
+        // localStorage.clear()
     }, []);
 
     return (
@@ -59,12 +59,11 @@ const Results = () => {
                     padding: '20px',
                     backgroundColor: '#f7f9fc',
                     lineHeight: '1.8',
-                    fontSize: '1.2rem',
+                    fontSize: '1rem',
                     color: '#333',
                     maxHeight: '300px',
                     overflowY: 'auto',
                     textAlign: 'left',
-                    whiteSpace: 'pre-wrap'
                 }}
             >
                 <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
