@@ -1,16 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box, Paper } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { auth } from "../../firebase";
 import './Results.css';
 
 const Results = () => {
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
-    const imageUrl = "http://127.0.0.1:8000/static/image.png"; // URL for the handwriting image
+    const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
 
     // Load data from localStorage
     useEffect(() => {
         // Retrieve AI analysis from localStorage
         const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
         setOralAnalysis(aiResponse);
+
+        const userId = auth.currentUser.uid;
+        const storage = getStorage();
+        const storageRef = ref(storage, `user-files/${userId}/static.png`);
+
+        // Create a reference to the image file you want to download
+        getDownloadURL(storageRef)
+            .then((url) => {
+                setImageUrl(url); // Set the image URL in the state
+            })
+            .catch((error) => {
+                console.error("Error fetching image URL: ", error);
+            });
+
+        // Clear local storage
+        // localStorage.clear()
     }, []);
 
     return (
@@ -33,24 +52,21 @@ const Results = () => {
             </Box>
 
             {/* AI Analysis for Oral Response */}
-            <Paper 
-                elevation={3} 
-                className="analysis-box" 
-                style={{ 
-                    padding: '20px', 
-                    backgroundColor: '#f7f9fc', 
-                    lineHeight: '1.8', 
-                    fontSize: '1.2rem', 
-                    color: '#333', 
-                    maxHeight: '300px', 
+            <Paper
+                elevation={3}
+                className="analysis-box"
+                style={{
+                    padding: '20px',
+                    backgroundColor: '#f7f9fc',
+                    lineHeight: '1.8',
+                    fontSize: '1rem',
+                    color: '#333',
+                    maxHeight: '300px',
                     overflowY: 'auto',
                     textAlign: 'left',
-                    whiteSpace: 'pre-wrap'
                 }}
             >
-                <Typography variant="body1">
-                    {oralAnalysis}
-                </Typography>
+                <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
             </Paper>
 
             {/* Placeholder for Future Metrics */}
