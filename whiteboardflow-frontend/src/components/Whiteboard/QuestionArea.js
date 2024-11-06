@@ -1,9 +1,9 @@
 import { Resizable } from 're-resizable';
 import { Box } from '@mui/material';
 import React, { useState, useLayoutEffect } from 'react';
-import HelpButton from './HelpButton';
+import HintButton from './HintButton';
 
-const QuestionArea = () => {
+const QuestionArea = ({ sendPNGToFirebase }) => {
     const minWidth = 15;
     const [width, setWidth] = useState('70%'); // Start with default visible width
     const [isVisible, setIsVisible] = useState(true); // Manage visibility state
@@ -59,14 +59,14 @@ const QuestionArea = () => {
             }}
         >
             {isVisible && (
-                <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden'}}>
+                <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden' }}>
                     <p><strong>Question:</strong> Write a function that takes a list of numbers and returns the sum of
                         all even numbers in the list.</p>
                     <p><strong>Function Signature:</strong></p>
                     <pre>
                         <code>
                             {`def sum_of_evens(numbers: list) -> int:`}
-                            <br/>
+                            <br />
                             {'    pass'}
                         </code>
                     </pre>
@@ -74,12 +74,12 @@ const QuestionArea = () => {
                     <pre>
                         <code>
                             {`# Input`}
-                            <br/>
+                            <br />
                             {`numbers = [1, 2, 3, 4, 5, 6]`}
-                            <br/>
-                            <br/>
+                            <br />
+                            <br />
                             {`# Output`}
-                            <br/>
+                            <br />
                             {`12`}
                         </code>
                     </pre>
@@ -94,8 +94,8 @@ const QuestionArea = () => {
                 </Box>
 
             )}
-            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',borderTop: '1px solid #ccc'}}>
-                <HelpButton />
+            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTop: '1px solid #ccc' }}>
+                <HintButton sendPNGToFirebase={sendPNGToFirebase} />
             </Box>)}
         </Resizable>
     );

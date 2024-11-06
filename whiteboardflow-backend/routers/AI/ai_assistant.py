@@ -11,14 +11,30 @@ router = APIRouter()
 client = openai.OpenAI()
 
 
-class AIData(BaseModel):
+class HintData(BaseModel):
     token: str
     question: str
     image: str
+
+
+class AIData(HintData):
     transcript: str
 
 
 dir = os.path.dirname(__file__)
+
+
+@router.post("/get-hint/")
+def get_hint(data: HintData):
+    decoded_token = auth.verify_id_token(data.token)
+    uid = decoded_token["uid"]
+
+    image_data = get_firebase_image(uid)
+
+    # Convert image to base64 encoding
+    data.image = base64.b64encode(image_data).decode("utf-8")
+
+    return get_ai_response(data, "hint_context")
 
 
 @router.post("/get-result/")
@@ -36,11 +52,11 @@ def get_result(data: AIData):
     # Convert image to base64 encoding
     data.image = base64.b64encode(image_data).decode("utf-8")
 
-    return get_ai_result(data)
+    return get_ai_response(data, "result_context")
 
 
-def get_ai_result(data: AIData):
-    filename = os.path.join(dir, "contexts/result_context.txt")
+def get_ai_response(data: AIData, context_file: str):
+    filename = os.path.join(dir, f"contexts/{context_file}.txt")
 
     try:
         with open(filename, "r") as file:
@@ -66,7 +82,7 @@ def get_ai_result(data: AIData):
                     },
                     {
                         "type": "text",
-                        "text": data.transcript,
+                        "text": "",
                     },
                 ],
             },

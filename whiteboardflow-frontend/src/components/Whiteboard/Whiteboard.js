@@ -109,7 +109,7 @@ const Whiteboard = () => {
         const svgBlob = behaviors.buildBlobFromSymbols(symbols, bounds);
         const svgUrl = URL.createObjectURL(svgBlob);
         const img = new Image();
-        
+
         img.onload = async () => {
             const canvas = document.createElement('canvas');
             canvas.width = img.width;
@@ -119,14 +119,14 @@ const Whiteboard = () => {
             ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas
             ctx.drawImage(img, 0, 0);
             URL.revokeObjectURL(svgUrl); // Clean up the SVG blob URL
-    
+
             // Convert the canvas to PNG
             canvas.toBlob(async (pngBlob) => {
                 // Use user's uid to create path
                 const userId = auth.currentUser.uid;
                 const storage = getStorage();
                 const storageRef = ref(storage, `user-files/${userId}/static.png`);
-    
+
                 try {
                     // Upload PNG blob to Firebase Storage
                     const snapshot = await uploadBytes(storageRef, pngBlob);
@@ -143,10 +143,10 @@ const Whiteboard = () => {
     }
 
     return (
-        <div style={{width: '100%', height: '100vh', display: 'flex', position: 'fixed', overflow: 'hidden'}}>
+        <div style={{ width: '100%', height: '100vh', display: 'flex', position: 'fixed', overflow: 'hidden' }}>
 
             {/* Question Area */}
-            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop}/>
+            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop} sendPNGToFirebase={sendPNGToFirebase} />
 
             {/* Editor Section */}
             <div style={{
@@ -168,7 +168,7 @@ const Whiteboard = () => {
                         backgroundColor: '#fff',
                     }}
                 />
-                <HelpModal/>
+                <HelpModal />
                 {/* Submit Area */}
                 <Box sx={{
                     height: '7vh',
@@ -178,11 +178,11 @@ const Whiteboard = () => {
                     justifyContent: 'center',
                     borderTop: '1px solid #ccc'
                 }}>
-                    <SubmitButton onExport={handleExportAndSubmit}/>
+                    <SubmitButton onExport={handleExportAndSubmit} />
                 </Box>
             </div>
         </div>
-            );
-            };
+    );
+};
 
-            export default Whiteboard;
+export default Whiteboard;
