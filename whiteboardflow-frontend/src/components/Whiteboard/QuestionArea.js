@@ -1,15 +1,35 @@
 import { Resizable } from 're-resizable';
 import { Box } from '@mui/material';
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import HintButton from './HintButton';
+import DOMPurify from "dompurify";
 
 const QuestionArea = ({ sendPNGToFirebase }) => {
     const minWidth = 15;
     const [width, setWidth] = useState('70%'); // Start with default visible width
     const [isVisible, setIsVisible] = useState(true); // Manage visibility state
+    const [questionText, setQuestionText] = useState("");
     useLayoutEffect(() => {
         setIsVisible(width > '0px');
     }, [width]);
+
+    function removeHTMLTags(str) {
+        return str.replace(/<[^>]*>/g, '');
+      }
+
+    useEffect(() => {
+        // const question = getQuestionFromFirebase();
+        let question = `
+        <p><strong>Question:</strong> Write a function that takes a list of numbers and returns the sum of
+            all even numbers in the list.</p>
+        <p><strong>Function Signature:</strong></p>
+        <p><strong>Example:</strong></p>
+        <p><strong>Explanation:</strong> In the list <code>[1, 2, 3, 4, 5, 6]</code>, the even numbers are
+            2, 4, and 6. Their sum is 12.</p>
+        `; // Hardcoded for now until the question is retrieved from firebase
+        setQuestionText(question);
+        localStorage.setItem("question", removeHTMLTags(question));
+    });
 
     return (
         <Resizable
@@ -60,37 +80,7 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
         >
             {isVisible && (
                 <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden' }}>
-                    <p><strong>Question:</strong> Write a function that takes a list of numbers and returns the sum of
-                        all even numbers in the list.</p>
-                    <p><strong>Function Signature:</strong></p>
-                    <pre>
-                        <code>
-                            {`def sum_of_evens(numbers: list) -> int:`}
-                            <br />
-                            {'    pass'}
-                        </code>
-                    </pre>
-                    <p><strong>Example:</strong></p>
-                    <pre>
-                        <code>
-                            {`# Input`}
-                            <br />
-                            {`numbers = [1, 2, 3, 4, 5, 6]`}
-                            <br />
-                            <br />
-                            {`# Output`}
-                            <br />
-                            {`12`}
-                        </code>
-                    </pre>
-                    <p><strong>Explanation:</strong> In the list <code>[1, 2, 3, 4, 5, 6]</code>, the even numbers are
-                        2, 4, and 6. Their sum is 12.</p>
-                    <p><strong>Hints:</strong></p>
-                    <ol>
-                        <li>Use a loop or list comprehension to filter for even numbers.</li>
-                        <li>The modulo operator <code>%</code> can help determine if a number is even.</li>
-                    </ol>
-
+                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questionText) }} />
                 </Box>
 
             )}

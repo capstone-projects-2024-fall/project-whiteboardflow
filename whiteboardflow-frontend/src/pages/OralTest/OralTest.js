@@ -19,7 +19,7 @@ function OralTest() {
 				body: JSON.stringify({
 					// Data to send to FastAPI
 					token: idToken,
-					question: "Write a helloWorld function", // TODO Don't hardcode this
+					question: localStorage.getItem("question"),
 					image: "",
 					transcript: localStorage.getItem("finalTranscript")
 				})

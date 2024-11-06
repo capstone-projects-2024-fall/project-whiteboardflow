@@ -45,7 +45,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 				},
 				body: JSON.stringify({
 					token: idToken,
-					question: "Write a helloWorld function", // TODO Don't hardcode this
+					question: localStorage.getItem("question"),
 					image: ""
 				})
 			});
