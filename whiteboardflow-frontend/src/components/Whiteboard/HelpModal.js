@@ -7,10 +7,6 @@ const HelpModal = ({ isVisible, onClose }) => {
     const modalStyle = {
         display: isVisible ? 'block' : 'none',
         zIndex: 2000,
-        userSelect: 'none',
-        WebkitUserSelect: 'none',
-        MozUserSelect: 'none',
-        msUserSelect: 'none'
     };
 
     return (
@@ -21,7 +17,7 @@ const HelpModal = ({ isVisible, onClose }) => {
                 <div className="gestures">
                     <h3>What is it?</h3>
                     <p>WhiteBoardFlow is a web application designed to help job seekers prepare for interviews by allowing users to solve coding and estimation problems on a digital whiteboard using a tablet and stylus. It includes microphone integration for speech detection, enabling users to verbalize their thought process while answering questions. The app leverages AI to provide feedback and assistance based on the user's progress and logs their performance history for ongoing study and improvement.</p>
-                    <div className="gestures-img-container" style={{ userSelect: 'none' }}>
+                    <div className="gestures-img-container">
                         <img src="logo192.png" alt="logo"/>
                     </div>
                 </div>
