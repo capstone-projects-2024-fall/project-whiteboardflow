@@ -41,7 +41,6 @@ export default class CustomMenuAction extends window.iink.OIMenuAction {
         this.wrapper.appendChild(this.createMenuUndo());
         this.wrapper.appendChild(this.createMenuRedo());
 
-        this.expandableContent.appendChild(this.createMenuClear());
         const menuStroke = this.menuStyle.createMenuStroke();
         menuStroke.style.width = '80px';
 
@@ -50,6 +49,7 @@ export default class CustomMenuAction extends window.iink.OIMenuAction {
 
         this.expandableContent.appendChild(menuStroke);
         this.expandableContent.appendChild(menuFontSize);
+        this.expandableContent.appendChild(this.createMenuClear());
 
         // Append the toggle button and the expandable content to the wrapper
         this.wrapper.appendChild(this.toggleButton);
