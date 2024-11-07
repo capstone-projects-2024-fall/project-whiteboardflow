@@ -236,7 +236,6 @@ nav {
 .my-custom-class .smartguide .more-menu .options-label-button:active {
     background-color: rgba(100, 100, 100, 0.5);
 }
-
 .my-custom-class .added-word {
     animation: 1s linear word-added-anim, 1s ease-in-out color-input-anim;
 }
