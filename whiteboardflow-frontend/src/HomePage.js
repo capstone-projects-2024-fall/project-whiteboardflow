@@ -4,7 +4,10 @@ import { Button, Typography, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import RotatingText from './RotatingText';
 import './HomePage.css';
-import Character from './Character';
+import './Avatar/RetroAvatar.css';
+//import Character from './Character';
+import RetroAvatar from './Avatar/RetroAvatar';
+//import RetroAvatar from './Avatar/AvatarContext.js';
 
 const HomePage = ({ user }) => {
     return (
@@ -36,10 +39,15 @@ const HomePage = ({ user }) => {
             <section style={{ marginTop: '100px', textAlign: 'center' }}>
                 <RotatingText />
             </section>
-            <div className="App">
-                <h1>Welcome to My App</h1>
+{/*             <div className="App">
+                <h1>...</h1>
                 <Character message="Hello there! Need some help?" />
-            </div>
+            </div> */}
+            <section style={{ marginTop: '0px', marginLeft: '800px', textAlign: 'right' }}>
+            <div className="RetrAppoAvatar">
+                <RetroAvatar />
+                </div>
+            </section>
             
         </Container>
     );

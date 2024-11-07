@@ -9,6 +9,7 @@ import Settings from './components/Settings/Settings';
 import BackEndTest from './BackEndTest';
 import Results from './components/Result/Result';
 import { auth } from './firebase'; // Import auth for authentication state
+import { AvatarProvider } from './Avatar/AvatarContext'; // Import AvatarProvider
 
 function Main() {
     const [user, setUser] = useState(null);
@@ -22,19 +23,20 @@ function Main() {
     }, []);
 
     return (
-        <Router>
-            <Routes>
-                <Route element={<Layout user={user} />}>
-                    <Route index element={<HomePage user={user} />} />
-                    <Route path="OralTest" element={<OralTest />} />
-                    <Route path="Settings" element={<Settings />} />
-                    <Route path="BackEndTest" element={<BackEndTest />} />
-                    <Route path="results" element={<Results />} />
-                </Route>
-
-                <Route path="whiteboard" element={<Whiteboard />} />
-            </Routes>
-        </Router>
+        <AvatarProvider> {/* Wrap the entire Router with AvatarProvider */}
+            <Router>
+                <Routes>
+                    <Route element={<Layout user={user} />}>
+                        <Route index element={<HomePage user={user} />} />
+                        <Route path="OralTest" element={<OralTest />} />
+                        <Route path="Settings" element={<Settings />} />
+                        <Route path="BackEndTest" element={<BackEndTest />} />
+                        <Route path="results" element={<Results />} />
+                    </Route>
+                    <Route path="whiteboard" element={<Whiteboard />} />
+                </Routes>
+            </Router>
+        </AvatarProvider>
     );
 }
 

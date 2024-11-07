@@ -1,0 +1,21 @@
+/* RetroAvatar.css */
+.retro-avatar
+{
+    width: 150px;
+    /* Adjust width as needed */
+    height: auto;
+    /* Adjust height to maintain aspect ratio */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Ensures no parts of the image overflow the container */
+}
+
+.retro-avatar img
+{
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    /* Keeps the pixel art sharp */
+}
