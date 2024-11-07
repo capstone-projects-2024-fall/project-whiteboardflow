@@ -6,7 +6,7 @@ import DOMPurify from "dompurify";
 
 const QuestionArea = ({ sendPNGToFirebase }) => {
     const minWidth = 15;
-    const [width, setWidth] = useState('70%'); // Start with default visible width
+    const [width, setWidth] = useState('50%'); // Start with default visible width
     const [isVisible, setIsVisible] = useState(true); // Manage visibility state
     const [questionText, setQuestionText] = useState("");
     useLayoutEffect(() => {
@@ -75,7 +75,7 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
                 }
             }}
             handleComponent={{
-                right: <div style={{ width: '20px', cursor: 'ew-resize' }}></div>
+                right: <div style={{ width: '15px', cursor: 'ew-resize' }}></div>
             }}
         >
             {isVisible && (
