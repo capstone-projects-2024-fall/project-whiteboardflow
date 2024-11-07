@@ -4,6 +4,7 @@ import { Button, Typography, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import RotatingText from './RotatingText';
 import './HomePage.css';
+import Character from './Character';
 
 const HomePage = ({ user }) => {
     return (
@@ -35,6 +36,11 @@ const HomePage = ({ user }) => {
             <section style={{ marginTop: '100px', textAlign: 'center' }}>
                 <RotatingText />
             </section>
+            <div className="App">
+                <h1>Welcome to My App</h1>
+                <Character message="Hello there! Need some help?" />
+            </div>
+            
         </Container>
     );
 };
