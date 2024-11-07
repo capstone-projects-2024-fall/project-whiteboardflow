@@ -75,7 +75,7 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
                 }
             }}
             handleComponent={{
-                right: <div style={{ width: '20px', cursor: 'ew-resize' }}></div>
+                right: <div style={{ width: '15px', cursor: 'ew-resize' }}></div>
             }}
         >
             {isVisible && (
