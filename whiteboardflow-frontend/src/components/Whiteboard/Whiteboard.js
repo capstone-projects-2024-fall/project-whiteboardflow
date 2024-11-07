@@ -47,7 +47,7 @@ const Whiteboard = () => {
                         offscreen: true,
                         server,
                         rendering: {
-                            minWidth: 1250,
+                            minWidth: 1240,
                             minHeight: 2000,
                             guides:{
                                 enable: true,

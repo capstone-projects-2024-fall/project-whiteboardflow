@@ -21,7 +21,7 @@ export default class CustomMenuAction extends window.iink.OIMenuAction {
         this.toggleButton.textContent = '\u2B9E';
         this.toggleButton.style.backgroundColor = 'white';
         this.toggleButton.style.border = 'none';
-        this.toggleButton.style.color = 'gray';
+        this.toggleButton.style.color = '#1a9fff';
         this.toggleButton.onclick = () => this.toggleMenu();
 
         // Create a container for the items that will be shown/hidden
