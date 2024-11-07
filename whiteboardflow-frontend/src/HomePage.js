@@ -36,19 +36,9 @@ const HomePage = ({ user }) => {
             </section>
 
             {/* Add the rotating text at the bottom */}
-            <section style={{ marginTop: '100px', textAlign: 'center' }}>
+            <section className="rotating-text-section" style={{ marginTop: '100px', textAlign: 'center' }}>
                 <RotatingText />
             </section>
-{/*             <div className="App">
-                <h1>...</h1>
-                <Character message="Hello there! Need some help?" />
-            </div> */}
-            <section style={{ marginTop: '0px', marginLeft: '800px', textAlign: 'right' }}>
-            <div className="RetrAppoAvatar">
-                <RetroAvatar />
-                </div>
-            </section>
-            
         </Container>
     );
 };

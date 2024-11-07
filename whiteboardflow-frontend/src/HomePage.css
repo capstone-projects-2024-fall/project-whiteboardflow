@@ -75,3 +75,15 @@ html
     color: #007BFF;
     /* Vibrant blue for ".ai" */
 }
+/* HomePage.css */
+.rotating-text-section
+{
+    min-height: 100px;
+    /* Adjust based on the tallest text in the rotation */
+    /*max-width: 1000px;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    overflow: hidden;
+}

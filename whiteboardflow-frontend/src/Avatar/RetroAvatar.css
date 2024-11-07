@@ -19,3 +19,14 @@
     image-rendering: pixelated;
     /* Keeps the pixel art sharp */
 }
+/* AvatarContext.css */
+.avatar-fixed-container
+{
+    position: fixed;
+    bottom: 60px;
+    /* Adjust as needed */
+    right: 20px;
+    /* Adjust as needed */
+    z-index: 1000;
+    /* Ensures it stays above other elements */
+}

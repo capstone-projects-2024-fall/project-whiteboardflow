@@ -8,23 +8,22 @@ import OralTest from './pages/OralTest/OralTest';
 import Settings from './components/Settings/Settings';
 import BackEndTest from './BackEndTest';
 import Results from './components/Result/Result';
-import { auth } from './firebase'; // Import auth for authentication state
-import { AvatarProvider } from './Avatar/AvatarContext'; // Import AvatarProvider
+import { auth } from './firebase';
+import { AvatarProvider } from './Avatar/AvatarContext';
 
 function Main() {
     const [user, setUser] = useState(null);
 
-    // Listen for authentication state changes
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
-            setUser(user); // Set user if logged in, otherwise null
+            setUser(user);
         });
-        return () => unsubscribe(); // Cleanup on component unmount
+        return () => unsubscribe();
     }, []);
 
     return (
-        <AvatarProvider> {/* Wrap the entire Router with AvatarProvider */}
-            <Router>
+        <Router> {/* Move Router to wrap AvatarProvider */}
+            <AvatarProvider>
                 <Routes>
                     <Route element={<Layout user={user} />}>
                         <Route index element={<HomePage user={user} />} />
@@ -35,8 +34,8 @@ function Main() {
                     </Route>
                     <Route path="whiteboard" element={<Whiteboard />} />
                 </Routes>
-            </Router>
-        </AvatarProvider>
+            </AvatarProvider>
+        </Router>
     );
 }
 
