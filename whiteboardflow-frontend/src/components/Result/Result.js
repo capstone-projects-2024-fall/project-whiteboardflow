@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Box, Paper } from '@mui/material';
+import { Container, Typography, Box, Paper, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { auth } from "../../firebase";
@@ -27,60 +27,70 @@ const Results = () => {
             .catch((error) => {
                 console.error("Error fetching image URL: ", error);
             });
-
-        // Clear local storage
-        // localStorage.clear()
     }, []);
 
     return (
-        <Container className="results-container" maxWidth="md">
-            {/* Handwriting Image Section - Displayed at the Top */}
-            <Box className="written-image-section" textAlign="center" mt={5} mb={5}>
-                <Typography variant="h6" color="textSecondary" gutterBottom>
-                    Handwriting Response
-                </Typography>
-                <Paper elevation={3} style={{ padding: '20px', backgroundColor: '#f9f9f9' }}>
-                    <img src={imageUrl} alt="User's Handwriting Response" className="written-image" style={{ maxWidth: '100%', borderRadius: '8px' }} />
-                </Paper>
-            </Box>
+        <Container maxWidth="lg" style={{ padding: '30px', backgroundColor: '#f4f6f8' }}>
+            <Typography variant="h4" style={{ fontWeight: 'bold', marginBottom: '20px', color: '#333' }}>
+                Practice Results
+            </Typography>
+            <Grid container spacing={3}>
+                {/* Main Content */}
+                <Grid item xs={12}>
+                    <Grid container spacing={3}>
+                        {/* Handwriting Image Card */}
+                        <Grid item xs={12}>
+                            <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff' }}>
+                                <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                                    Handwriting Response
+                                </Typography>
+                                <Box textAlign="center">
+                                    <img
+                                        src={imageUrl}
+                                        alt="User's Handwriting Response"
+                                        style={{
+                                            maxWidth: '100%',
+                                            maxHeight: '300px',
+                                            borderRadius: '8px',
+                                            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)'
+                                        }}
+                                    />
+                                </Box>
+                            </Paper>
+                        </Grid>
 
-            {/* Results Analysis Label */}
-            <Box textAlign="center" mt={4} mb={2}>
-                <Typography variant="h5" color="primary">
-                    AI Analysis of Oral Response
-                </Typography>
-            </Box>
+                        {/* AI Analysis Card */}
+                        <Grid item xs={12}>
+                            <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff' }}>
+                                <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                                    AI Analysis of Oral Response
+                                </Typography>
+                                <Box style={{
+                                    maxHeight: '300px',
+                                    overflowY: 'auto',
+                                    padding: '10px',
+                                    backgroundColor: '#f7f9fc',
+                                    borderRadius: '8px'
+                                }}>
+                                    <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
+                                </Box>
+                            </Paper>
+                        </Grid>
 
-            {/* AI Analysis for Oral Response */}
-            <Paper
-                elevation={3}
-                className="analysis-box"
-                style={{
-                    padding: '20px',
-                    backgroundColor: '#f7f9fc',
-                    lineHeight: '1.8',
-                    fontSize: '1rem',
-                    color: '#333',
-                    maxHeight: '300px',
-                    overflowY: 'auto',
-                    textAlign: 'left',
-                }}
-            >
-                <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
-            </Paper>
-
-            {/* Placeholder for Future Metrics */}
-            <Box textAlign="center" mt={4} mb={2}>
-                <Typography variant="h5" color="primary">
-                    Completion Time
-                </Typography>
-            </Box>
-            <Paper elevation={3} className="completion-time-box" style={{ padding: '20px', backgroundColor: '#f9f9f9', lineHeight: '1.6' }}>
-                <Typography variant="body1" color="textSecondary">
-                    {/* Display the completion time when available; placeholder text for now */}
-                    Completion time will be displayed here.
-                </Typography>
-            </Paper>
+                        {/* Completion Time Card */}
+                        <Grid item xs={12}>
+                            <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff' }}>
+                                <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                                    Completion Time
+                                </Typography>
+                                <Typography variant="body1" color="textSecondary" style={{ marginTop: '10px' }}>
+                                    Completion time will be displayed here.
+                                </Typography>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
         </Container>
     );
 };
