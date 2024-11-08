@@ -4,6 +4,10 @@ import { Button, Typography, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import RotatingText from './RotatingText';
 import './HomePage.css';
+import './Avatar/RetroAvatar.css';
+//import Character from './Character';
+import RetroAvatar from './Avatar/RetroAvatar';
+//import RetroAvatar from './Avatar/AvatarContext.js';
 
 const HomePage = ({ user }) => {
     return (
@@ -32,7 +36,7 @@ const HomePage = ({ user }) => {
             </section>
 
             {/* Add the rotating text at the bottom */}
-            <section style={{ marginTop: '100px', textAlign: 'center' }}>
+            <section className="rotating-text-section" style={{ marginTop: '100px', textAlign: 'center' }}>
                 <RotatingText />
             </section>
         </Container>

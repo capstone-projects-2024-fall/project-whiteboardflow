@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Button, Snackbar, CircularProgress, Avatar, Switch } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 import { auth, provider, signInWithPopup, signOut } from './firebase';
 import Footer from './Footer';
+import AvatarToggleButton from './Avatar/AvatarToggleButton.js';
+import { useAvatar } from './Avatar/AvatarContext.js';
 import './Layout.css';
 
 const Layout = ({ children, user }) => { // Accept user as a prop
@@ -13,7 +15,9 @@ const Layout = ({ children, user }) => { // Accept user as a prop
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+    const { isVisible, toggleAvatar } = useAvatar();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const pages = [
         { name: 'Home', path: '/' },
@@ -69,6 +73,11 @@ const Layout = ({ children, user }) => { // Accept user as a prop
         setSnackbarOpen(false);
     };
 
+    // Define a list of paths where you want the Footer to be visible
+    const footerVisiblePaths = ['/', '/home', '/Settings']; // Example paths, add the paths you need
+
+    const showFooter = footerVisiblePaths.includes(location.pathname);
+
     return (
         <div className={`layout-container ${darkMode ? 'dark-mode' : ''}`}>
             <AppBar position="static">
@@ -100,7 +109,7 @@ const Layout = ({ children, user }) => { // Accept user as a prop
                     </Menu>
 
                     <Switch checked={darkMode} onChange={toggleDarkMode} color="default" />
-
+                    <AvatarToggleButton />
                     {loading && <CircularProgress size={24} color="inherit" />}
 
                     {user ? (
@@ -125,7 +134,7 @@ const Layout = ({ children, user }) => { // Accept user as a prop
                 <Outlet />
             </div>
 
-            <Footer />
+            {showFooter && <Footer />}  {/* Conditionally render Footer */}
 
             <Snackbar
                 open={snackbarOpen}
