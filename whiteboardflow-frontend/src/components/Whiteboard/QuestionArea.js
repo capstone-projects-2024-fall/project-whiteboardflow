@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import HintButton from './HintButton';
 import DOMPurify from "dompurify";
+import AvatarToggleButton from '../../Avatar/AvatarToggleButton';
 
 const QuestionArea = ({ sendPNGToFirebase }) => {
     const minWidth = 15;
@@ -84,7 +85,8 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
                 </Box>
 
             )}
-            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTop: '1px solid #ccc' }}>
+            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'left', borderTop: '1px solid #ccc' }}>
+                <AvatarToggleButton></AvatarToggleButton>
                 <HintButton sendPNGToFirebase={sendPNGToFirebase} />
             </Box>)}
         </Resizable>
