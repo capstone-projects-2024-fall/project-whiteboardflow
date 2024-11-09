@@ -3,17 +3,36 @@ import { Container, Typography, Box, Paper, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { auth } from "../../firebase";
+import DOMPurify from "dompurify"; // Import for sanitizing HTML
 import './Results.css';
 
 const Results = () => {
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
+    const [questionText, setQuestionText] = useState(""); // Question text
+    const [completionTime, setCompletionTime] = useState(""); // Completion time
 
-    // Load data from localStorage
+    // Calculate and format completion time
+    const calculateCompletionTime = () => {
+        const startTime = localStorage.getItem("startTime");
+        if (startTime) {
+            const endTime = Date.now();
+            const timeSpent = endTime - startTime;
+            const seconds = Math.floor((timeSpent / 1000) % 60);
+            const minutes = Math.floor((timeSpent / (1000 * 60)) % 60);
+            const hours = Math.floor((timeSpent / (1000 * 60 * 60)) % 24);
+            return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
+        }
+        return "Not available";
+    };
+
     useEffect(() => {
-        // Retrieve AI analysis from localStorage
+        // Retrieve AI analysis and question text from localStorage
         const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
         setOralAnalysis(aiResponse);
+
+        const storedQuestion = localStorage.getItem("question") || "No question available.";
+        setQuestionText(storedQuestion);
 
         const userId = auth.currentUser.uid;
         const storage = getStorage();
@@ -27,68 +46,91 @@ const Results = () => {
             .catch((error) => {
                 console.error("Error fetching image URL: ", error);
             });
+
+        // Set the formatted completion time
+        setCompletionTime(calculateCompletionTime());
     }, []);
 
     return (
         <Container maxWidth="lg" style={{ padding: '30px', backgroundColor: '#f4f6f8' }}>
             <Typography variant="h4" style={{ fontWeight: 'bold', marginBottom: '20px', color: '#333' }}>
-                Practice Results
+                Practice Results Dashboard
             </Typography>
             <Grid container spacing={3}>
-                {/* Main Content */}
-                <Grid item xs={12}>
-                    <Grid container spacing={3}>
-                        {/* Handwriting Image Card */}
-                        <Grid item xs={12}>
-                            <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff' }}>
-                                <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
-                                    Handwriting Response
-                                </Typography>
-                                <Box textAlign="center">
-                                    <img
-                                        src={imageUrl}
-                                        alt="User's Handwriting Response"
-                                        style={{
-                                            maxWidth: '100%',
-                                            maxHeight: '300px',
-                                            borderRadius: '8px',
-                                            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)'
-                                        }}
-                                    />
-                                </Box>
-                            </Paper>
-                        </Grid>
+                {/* Question Text Section - Left Column */}
+                <Grid item xs={12} md={6}>
+                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                        <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                            Practice Question
+                        </Typography>
+                        <Box style={{ padding: '10px', backgroundColor: '#f7f9fc', borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
+                            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questionText) }} />
+                        </Box>
+                    </Paper>
+                </Grid>
 
-                        {/* AI Analysis Card */}
-                        <Grid item xs={12}>
-                            <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff' }}>
-                                <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
-                                    AI Analysis of Oral Response
-                                </Typography>
-                                <Box style={{
+                {/* Handwriting Image Card - Right Column */}
+                <Grid item xs={12} md={6}>
+                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                        <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                            Your Handwritten Response
+                        </Typography>
+                        <Box textAlign="center" style={{ paddingTop: '10px', flex: 1 }}>
+                            <img
+                                src={imageUrl}
+                                alt="User's Handwriting Response"
+                                style={{
+                                    maxWidth: '100%',
                                     maxHeight: '300px',
-                                    overflowY: 'auto',
-                                    padding: '10px',
-                                    backgroundColor: '#f7f9fc',
-                                    borderRadius: '8px'
-                                }}>
-                                    <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
-                                </Box>
-                            </Paper>
-                        </Grid>
+                                    borderRadius: '8px',
+                                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+                                    margin: '0 auto',
+                                }}
+                            />
+                        </Box>
+                    </Paper>
+                </Grid>
 
-                        {/* Completion Time Card */}
-                        <Grid item xs={12}>
-                            <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff' }}>
-                                <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
-                                    Completion Time
-                                </Typography>
-                                <Typography variant="body1" color="textSecondary" style={{ marginTop: '10px' }}>
-                                    Completion time will be displayed here.
-                                </Typography>
-                            </Paper>
-                        </Grid>
-                    </Grid>
+                {/* AI Analysis Card - Full Width */}
+                <Grid item xs={12}>
+                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                            AI Analysis of Whiteboard Practice
+                        </Typography>
+                        <Box style={{
+                            overflowY: 'auto',
+                            padding: '10px',
+                            backgroundColor: '#f7f9fc',
+                            borderRadius: '8px',
+                            flex: 1
+                        }}>
+                            <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
+                        </Box>
+                    </Paper>
+                </Grid>
+
+                {/* Completion Time Card - Left Column */}
+                <Grid item xs={12} md={6}>
+                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                            Completion Time
+                        </Typography>
+                        <Typography variant="body1" color="textSecondary" style={{ marginTop: '10px', flex: 1 }}>
+                            {completionTime}
+                        </Typography>
+                    </Paper>
+                </Grid>
+
+                {/* Placeholder for Future Metrics or Other Information - Right Column */}
+                <Grid item xs={12} md={6}>
+                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                            Additional Information
+                        </Typography>
+                        <Typography variant="body1" color="textSecondary" style={{ marginTop: '10px', flex: 1 }}>
+                            Placeholder for future metrics or insights.
+                        </Typography>
+                    </Paper>
                 </Grid>
             </Grid>
         </Container>

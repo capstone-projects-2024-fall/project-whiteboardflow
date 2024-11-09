@@ -1,15 +1,21 @@
 // HomePage.js
 import React from 'react';
 import { Button, Typography, Container } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // useNavigate instead of useHistory
 import RotatingText from './RotatingText';
 import './HomePage.css';
 import './Avatar/RetroAvatar.css';
-//import Character from './Character';
-import RetroAvatar from './Avatar/RetroAvatar';
-//import RetroAvatar from './Avatar/AvatarContext.js';
 
 const HomePage = ({ user }) => {
+    const navigate = useNavigate();
+
+    const handleGetStarted = () => {
+        // Set the start time in localStorage
+        localStorage.setItem("startTime", Date.now());
+        // Redirect to the whiteboard page
+        navigate("/whiteboard");
+    };
+
     return (
         <Container>
             <section style={{ padding: '40px 0', textAlign: 'center', fontSize: '2rem', fontWeight: 'bold' }}>
@@ -23,11 +29,9 @@ const HomePage = ({ user }) => {
 
                 {/* Conditionally render the "Get Started" button if the user is logged in */}
                 {user ? (
-                    <Link to="/whiteboard" style={{ textDecoration: 'none' }}>
-                        <Button variant="contained" style={{ marginTop: '20px' }}>
-                            Get Started
-                        </Button>
-                    </Link>
+                    <Button variant="contained" style={{ marginTop: '20px' }} onClick={handleGetStarted}>
+                        Get Started
+                    </Button>
                 ) : (
                     <Typography variant="body2" color="textSecondary" style={{ marginTop: '20px' }}>
                         Please log in to start practicing.
