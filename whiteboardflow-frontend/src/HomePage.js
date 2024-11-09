@@ -1,10 +1,14 @@
 // HomePage.js
 import { React, useState, useEffect } from 'react';
 import { Button, Typography, Container } from '@mui/material';
-import { Link, useOutletContext} from 'react-router-dom';
+import { Link, useOutletContext, useNavigate } from 'react-router-dom';
+
 import RotatingText from './RotatingText';
 import { auth, provider, signInWithPopup, signOut } from './firebase';
 import './HomePage.css';
+import './Avatar/RetroAvatar.css';
+
+
 
 const HomePage = ({ user}) => {
 
@@ -30,6 +34,15 @@ const HomePage = ({ user}) => {
                 setLoading(false);
             });
     };
+  
+  const navigate = useNavigate();
+
+    const handleGetStarted = () => {
+        // Set the start time in localStorage
+        localStorage.setItem("startTime", Date.now());
+        // Redirect to the whiteboard page
+        navigate("/whiteboard");
+    };
     
     return (
         <Container>
@@ -52,13 +65,12 @@ const HomePage = ({ user}) => {
 
             <section style={{ padding: '60px 0', textAlign: 'center', fontSize: '2rem', fontWeight: 'bold' }}>
 
-            {/* Conditionally render the "Get Started" button if the user is logged in */}
-            {user ? (
-                    <Link to="/whiteboard" style={{ textDecoration: 'none' }}>
-                        <Button variant="contained" style={{ marginTop: '20px' }}>
-                            Get Started
-                        </Button>
-                    </Link>
+                {/* Conditionally render the "Get Started" button if the user is logged in */}
+                {user ? (
+                    <Button variant="contained" style={{ marginTop: '20px' }} onClick={handleGetStarted}>
+                        Get Started
+                    </Button>
+
                 ) : (
                     // <Link to="/whiteboard" style={{ textDecoration: 'none' }}>
                         <Button variant="contained" style={{ marginTop: '20px' }} onClick={signInWithGoogle}>

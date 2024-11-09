@@ -49,7 +49,7 @@ const Whiteboard = () => {
                         rendering: {
                             minWidth: 1240,
                             minHeight: 2000,
-                            guides:{
+                            guides: {
                                 enable: true,
                                 gap: 50,
                                 type: 'line'
@@ -157,44 +157,48 @@ const Whiteboard = () => {
     }
 
     const sendPNGToFirebase = async (i = false) => {
-        const behaviors = editor.current.behaviors;
-        const symbols = i ? behaviors.model.symbolsSelected : behaviors.model.symbols;
-        const bounds = behaviors.getSymbolsBounds(symbols);
-        const svgBlob = behaviors.buildBlobFromSymbols(symbols, bounds);
-        const svgUrl = URL.createObjectURL(svgBlob);
-        const img = new Image();
+        return new Promise((resolve, reject) => {
+            const behaviors = editor.current.behaviors;
+            const symbols = i ? behaviors.model.symbolsSelected : behaviors.model.symbols;
+            const bounds = behaviors.getSymbolsBounds(symbols);
+            const svgBlob = behaviors.buildBlobFromSymbols(symbols, bounds);
+            const svgUrl = URL.createObjectURL(svgBlob);
+            const img = new Image();
 
-        img.onload = async () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#FFFFFF'; // Set the background color to white
-            ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas
-            ctx.drawImage(img, 0, 0);
-            URL.revokeObjectURL(svgUrl); // Clean up the SVG blob URL
+            img.onload = async () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#FFFFFF'; // Set the background color to white
+                ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas
+                ctx.drawImage(img, 0, 0);
+                URL.revokeObjectURL(svgUrl); // Clean up the SVG blob URL
 
-            // Convert the canvas to PNG
-            canvas.toBlob(async (pngBlob) => {
-                // Use user's uid to create path
-                const userId = auth.currentUser.uid;
-                const storage = getStorage();
-                const storageRef = ref(storage, `user-files/${userId}/static.png`);
+                // Convert the canvas to PNG
+                canvas.toBlob(async (pngBlob) => {
+                    const userId = auth.currentUser.uid;
+                    const storage = getStorage();
+                    const storageRef = ref(storage, `user-files/${userId}/static.png`);
 
-                try {
-                    // Upload PNG blob to Firebase Storage
-                    const snapshot = await uploadBytes(storageRef, pngBlob);
-                    console.log("Image uploaded to Firebase successfully.");
+                    try {
+                        const snapshot = await uploadBytes(storageRef, pngBlob);
+                        console.log("Image uploaded to Firebase successfully.");
 
-                    const downloadURL = await getDownloadURL(snapshot.ref);
-                    console.log("File available at:", downloadURL);
-                } catch (error) {
-                    console.error("Error uploading image to Firebase:", error);
-                }
-            }, 'image/png');
-        };
-        img.src = svgUrl;
-    }
+                        const downloadURL = await getDownloadURL(snapshot.ref);
+                        resolve(downloadURL); // Resolve with the download URL
+                    } catch (error) {
+                        console.error("Error uploading image to Firebase:", error);
+                        reject(error); // Reject in case of an error
+                    }
+                }, 'image/png');
+            };
+            img.onerror = (error) => {
+                reject(error); // Reject if there’s an image load error
+            };
+            img.src = svgUrl;
+        });
+    };
 
     return (
         <div style={{ width: '100%', height: '100vh', display: 'flex', position: 'fixed', overflow: 'hidden' }}>
@@ -222,7 +226,7 @@ const Whiteboard = () => {
                         backgroundColor: '#fff',
                     }}
                 />
-                <a id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex:'1000'}}>
+                <a id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex: '1000' }}>
                     <img src="/img/info.svg" alt="Info" />
                 </a>
                 <HelpModal isVisible={modalVisible} onClose={() => setModalVisible(false)} />
