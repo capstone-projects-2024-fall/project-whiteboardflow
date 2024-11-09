@@ -86,18 +86,35 @@ const HintButton = ({ sendPNGToFirebase }) => {
 				onClose={handleClose}
 				slots={{ backdrop: StyledBackdrop }}
 			>
-				<ModalContent sx={{ width: 700 }}>
-					<h2 id="unstyled-modal-title" className="modal-title">
-						Hint Response
-					</h2>
-					{loading ? (
-						<div className="loader"></div> // Show loader when loading
-					) : (
-						<p id="unstyled-modal-description" className="modal-description">
-							<ReactMarkdown>{hintResponse}</ReactMarkdown>
-						</p>
-					)}
-				</ModalContent>
+				<div style={{ position: 'relative', width: 700, maxHeight: '500px' }}>
+					<button
+						onClick={handleClose}
+						style={{
+							position: 'absolute',
+							top: 10,
+							right: 10,
+							background: 'transparent',
+							border: 'none',
+							fontSize: '1.5rem',
+							cursor: 'pointer',
+							zIndex: 1 // Ensure it stays above the ModalContent
+						}}
+					>
+						&times;
+					</button>
+					<ModalContent sx={{ width: '100%', maxHeight: '500px', overflowY: 'auto' }}>
+						<h2 id="unstyled-modal-title" className="modal-title">
+							Hint Response
+						</h2>
+						{loading ? (
+							<div className="loader"></div> // Show loader when loading
+						) : (
+							<p id="unstyled-modal-description" className="modal-description">
+								<ReactMarkdown>{hintResponse}</ReactMarkdown>
+							</p>
+						)}
+					</ModalContent>
+				</div>
 			</Modal>
 		</>
 	);
