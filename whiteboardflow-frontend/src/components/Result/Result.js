@@ -1,33 +1,70 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Box, Paper, Grid } from '@mui/material';
+import { Container, Typography, Box, Paper, Grid, LinearProgress } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { auth } from "../../firebase";
-import DOMPurify from "dompurify"; // Import for sanitizing HTML
+import DOMPurify from "dompurify";
 import './Results.css';
 
 const Results = () => {
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
     const [questionText, setQuestionText] = useState(""); // Question text
-    const [completionTime, setCompletionTime] = useState(""); // Completion time
+    const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
+    const [accuracy, setAccuracy] = useState(0); // Estimated accuracy percentage
 
-    // Calculate and format completion time
     const calculateCompletionTime = () => {
         const startTime = localStorage.getItem("startTime");
         if (startTime) {
             const endTime = Date.now();
-            const timeSpent = endTime - startTime;
-            const seconds = Math.floor((timeSpent / 1000) % 60);
-            const minutes = Math.floor((timeSpent / (1000 * 60)) % 60);
-            const hours = Math.floor((timeSpent / (1000 * 60 * 60)) % 24);
+            const timeSpent = (endTime - startTime) / 1000;
+            const seconds = Math.floor(timeSpent % 60);
+            const minutes = Math.floor((timeSpent / 60) % 60);
+            const hours = Math.floor((timeSpent / (60 * 60)) % 24);
             return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
         }
         return "Not available";
     };
 
+    // Estimate accuracy from the analysis text using expanded keyword lists
+    const calculateAccuracy = (analysisText) => {
+        const positiveKeywords = [
+            "correct", "good", "accurate", "excellent", "well-done", "precise", "clear",
+            "successful", "effective", "strong", "consistent", "thorough", "proficient",
+            "skillful", "competent", "insightful", "impressive", "positive", "satisfactory",
+            "noteworthy", "complete", "on-point", "valid", "acceptable", "outstanding",
+            "exceptional"
+        ];
+
+        const negativeKeywords = [
+            "incorrect", "mistake", "error", "wrong", "poor", "unclear", "failed",
+            "ineffective", "weak", "inconsistent", "lacking", "incomplete", "subpar",
+            "deficient", "inadequate", "unsatisfactory", "disappointing", "vague", "flawed",
+            "negative", "invalid", "unacceptable", "problematic", "off-track", "misguided",
+            "insufficient", "absent"
+        ];
+
+        // Count occurrences of positive and negative keywords
+        let positiveCount = 0;
+        let negativeCount = 0;
+
+        positiveKeywords.forEach((word) => {
+            positiveCount += (analysisText.match(new RegExp(word, "gi")) || []).length;
+        });
+
+        negativeKeywords.forEach((word) => {
+            negativeCount += (analysisText.match(new RegExp(word, "gi")) || []).length;
+        });
+
+        // Calculate approximate accuracy percentage
+        const totalKeywords = positiveCount + negativeCount;
+        if (totalKeywords === 0) return 0; // Neutral accuracy set to 0% if no keywords are found
+
+        const accuracyPercentage = (positiveCount / totalKeywords) * 100;
+        return Math.round(accuracyPercentage);
+    };
+
     useEffect(() => {
-        // Retrieve AI analysis and question text from localStorage
         const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
         setOralAnalysis(aiResponse);
 
@@ -38,17 +75,19 @@ const Results = () => {
         const storage = getStorage();
         const storageRef = ref(storage, `user-files/${userId}/static.png`);
 
-        // Create a reference to the image file you want to download
         getDownloadURL(storageRef)
             .then((url) => {
-                setImageUrl(url); // Set the image URL in the state
+                setImageUrl(url);
             })
             .catch((error) => {
                 console.error("Error fetching image URL: ", error);
             });
 
-        // Set the formatted completion time
         setCompletionTime(calculateCompletionTime());
+
+        // Calculate and set accuracy from the analysis text
+        const estimatedAccuracy = calculateAccuracy(aiResponse);
+        setAccuracy(estimatedAccuracy);
     }, []);
 
     return (
@@ -57,7 +96,8 @@ const Results = () => {
                 Practice Results Dashboard
             </Typography>
             <Grid container spacing={3}>
-                {/* Question Text Section - Left Column */}
+
+                {/* Practice Question */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
                         <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
@@ -69,7 +109,7 @@ const Results = () => {
                     </Paper>
                 </Grid>
 
-                {/* Handwriting Image Card - Right Column */}
+                {/* Handwriting Image */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
                         <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
@@ -91,7 +131,7 @@ const Results = () => {
                     </Paper>
                 </Grid>
 
-                {/* AI Analysis Card - Full Width */}
+                {/* AI Analysis */}
                 <Grid item xs={12}>
                     <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
                         <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
@@ -109,7 +149,7 @@ const Results = () => {
                     </Paper>
                 </Grid>
 
-                {/* Completion Time Card - Left Column */}
+                {/* Completion Time */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
                         <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
@@ -121,15 +161,25 @@ const Results = () => {
                     </Paper>
                 </Grid>
 
-                {/* Placeholder for Future Metrics or Other Information - Right Column */}
+                {/* Accuracy Metric */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
                         <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
-                            Additional Information
+                            Estimated Accuracy
                         </Typography>
-                        <Typography variant="body1" color="textSecondary" style={{ marginTop: '10px', flex: 1 }}>
-                            Placeholder for future metrics or insights.
-                        </Typography>
+                        <Box mt={2}>
+                            <LinearProgress
+                                variant="determinate"
+                                value={accuracy}
+                                style={{
+                                    height: '10px',
+                                    borderRadius: '5px',
+                                }}
+                            />
+                            <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '10px' }}>
+                                {accuracy}% Accuracy
+                            </Typography>
+                        </Box>
                     </Paper>
                 </Grid>
             </Grid>
