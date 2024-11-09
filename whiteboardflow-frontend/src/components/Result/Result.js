@@ -10,8 +10,22 @@ const Results = () => {
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
     const [questionText, setQuestionText] = useState(""); // Question text
+    const [completionTime, setCompletionTime] = useState(""); // Completion time
 
-    // Load data from localStorage
+    // Calculate and format completion time
+    const calculateCompletionTime = () => {
+        const startTime = localStorage.getItem("startTime");
+        if (startTime) {
+            const endTime = Date.now();
+            const timeSpent = endTime - startTime;
+            const seconds = Math.floor((timeSpent / 1000) % 60);
+            const minutes = Math.floor((timeSpent / (1000 * 60)) % 60);
+            const hours = Math.floor((timeSpent / (1000 * 60 * 60)) % 24);
+            return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
+        }
+        return "Not available";
+    };
+
     useEffect(() => {
         // Retrieve AI analysis and question text from localStorage
         const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
@@ -32,6 +46,9 @@ const Results = () => {
             .catch((error) => {
                 console.error("Error fetching image URL: ", error);
             });
+
+        // Set the formatted completion time
+        setCompletionTime(calculateCompletionTime());
     }, []);
 
     return (
@@ -47,7 +64,6 @@ const Results = () => {
                             Practice Question
                         </Typography>
                         <Box style={{ padding: '10px', backgroundColor: '#f7f9fc', borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
-                            {/* Display sanitized HTML content of the question */}
                             <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questionText) }} />
                         </Box>
                     </Paper>
@@ -100,7 +116,7 @@ const Results = () => {
                             Completion Time
                         </Typography>
                         <Typography variant="body1" color="textSecondary" style={{ marginTop: '10px', flex: 1 }}>
-                            Completion time will be displayed here.
+                            {completionTime}
                         </Typography>
                     </Paper>
                 </Grid>
