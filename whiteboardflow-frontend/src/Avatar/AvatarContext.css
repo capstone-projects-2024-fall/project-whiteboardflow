@@ -1,9 +1,9 @@
 .avatar-fixed-container
 {
     position: fixed;
-    bottom: 60px;
+    bottom: 90px;
     /* Adjust this to position the avatar in the corner */
-    right: 20px;
+    right: 35px;
     z-index: 1000;
     cursor: pointer;
     display: flex;

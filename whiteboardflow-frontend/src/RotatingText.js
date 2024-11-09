@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './RotatingText.css';
 
-const RotatingText = () => {
+const RotatingText = ({darkMode}) => {
     const textArray = useRef([
         { heading: "Welcome", body: "Discover a new and effective way to approach your upcoming interviews. Practice makes perfect!" },
         { heading: "Prepare with AI Powered Interviews", body: "Gain insights from AI powered question generation and analysis." },
@@ -31,7 +31,8 @@ const RotatingText = () => {
     }, [index]);
 
     return (
-        <div className={`rotating-text ${slide ? 'slide-in' : 'slide-out'}`}>
+        <div className={darkMode ? `rotating-text-dark ${slide ? 'slide-in' : 'slide-out'}` : `rotating-text-light ${slide ? 'slide-in' : 'slide-out'}`}>
+            {/* {darkMode ? <p>True</p> : <p>False</p>} */}
             <h2 className="rotating-text-heading">{currentText.heading}</h2>
             <p className="rotating-text-body">{currentText.body}</p>
         </div>
