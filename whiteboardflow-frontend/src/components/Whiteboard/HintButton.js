@@ -27,12 +27,15 @@ const HintButton = ({ sendPNGToFirebase }) => {
 		setHintUsed(true);
 		setLoading(true);
 
-		// Take screenshot, send question to backend
-		await sendPNGToFirebase(false);
-		const response = await getHintResponse();
-
-		setLoading(false);
-		setHintResponse(response);
+		try {
+			await sendPNGToFirebase(false);
+			const response = await getHintResponse();
+			setHintResponse(response);
+		} catch (error) {
+			console.error("Error during image upload or hint response:", error);
+		} finally {
+			setLoading(false);
+		}
 	}
 
 	const getHintResponse = async () => {
