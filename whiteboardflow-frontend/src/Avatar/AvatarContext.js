@@ -27,7 +27,7 @@ export const AvatarProvider = ({ children }) => {
             case '/BackEndTest':
                 return "This is where you can test the backend.";
             case '/results':
-                return "Check your results here!";
+                return "Here are your results!\nGood Job!";
             case '/whiteboard':
                 return "Use the whiteboard for brainstorming.";
             default:
