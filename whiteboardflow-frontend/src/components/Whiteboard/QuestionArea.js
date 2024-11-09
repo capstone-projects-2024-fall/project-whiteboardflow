@@ -29,6 +29,7 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
             2, 4, and 6. Their sum is 12.</p>
         `; // Hardcoded for now until the question is retrieved from firebase
         setQuestionText(question);
+        localStorage.setItem("question_html", question);
         localStorage.setItem("question", removeHTMLTags(question));
     });
 
