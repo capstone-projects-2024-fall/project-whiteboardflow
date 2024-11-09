@@ -31,7 +31,7 @@ const Results = () => {
         const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
         setOralAnalysis(aiResponse);
 
-        const storedQuestion = localStorage.getItem("question") || "No question available.";
+        const storedQuestion = localStorage.getItem("question_html") || "No question available.";
         setQuestionText(storedQuestion);
 
         const userId = auth.currentUser.uid;
