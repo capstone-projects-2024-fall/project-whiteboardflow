@@ -41,7 +41,7 @@ const Results = () => {
             "ineffective", "weak", "inconsistent", "lacking", "incomplete", "subpar",
             "deficient", "inadequate", "unsatisfactory", "disappointing", "vague", "flawed",
             "negative", "invalid", "unacceptable", "problematic", "off-track", "misguided",
-            "insufficient", "absent"
+            "insufficient", "absent", "you need to", "missing", "does not provide", "image does not"
         ];
 
         // Count occurrences of positive and negative keywords
