@@ -27,12 +27,15 @@ const HintButton = ({ sendPNGToFirebase }) => {
 		setHintUsed(true);
 		setLoading(true);
 
-		// Take screenshot, send question to backend
-		await sendPNGToFirebase(false);
-		const response = await getHintResponse();
-
-		setLoading(false);
-		setHintResponse(response);
+		try {
+			await sendPNGToFirebase(false);
+			const response = await getHintResponse();
+			setHintResponse(response);
+		} catch (error) {
+			console.error("Error during image upload or hint response:", error);
+		} finally {
+			setLoading(false);
+		}
 	}
 
 	const getHintResponse = async () => {
@@ -86,18 +89,35 @@ const HintButton = ({ sendPNGToFirebase }) => {
 				onClose={handleClose}
 				slots={{ backdrop: StyledBackdrop }}
 			>
-				<ModalContent sx={{ width: 700 }}>
-					<h2 id="unstyled-modal-title" className="modal-title">
-						Hint Response
-					</h2>
-					{loading ? (
-						<div className="loader"></div> // Show loader when loading
-					) : (
-						<p id="unstyled-modal-description" className="modal-description">
-							<ReactMarkdown>{hintResponse}</ReactMarkdown>
-						</p>
-					)}
-				</ModalContent>
+				<div style={{ position: 'relative', width: 700, maxHeight: '500px' }}>
+					<button
+						onClick={handleClose}
+						style={{
+							position: 'absolute',
+							top: 10,
+							right: 10,
+							background: 'transparent',
+							border: 'none',
+							fontSize: '1.5rem',
+							cursor: 'pointer',
+							zIndex: 1 // Ensure it stays above the ModalContent
+						}}
+					>
+						&times;
+					</button>
+					<ModalContent sx={{ width: '100%', maxHeight: '500px', overflowY: 'auto' }}>
+						<h2 id="unstyled-modal-title" className="modal-title">
+							Hint Response
+						</h2>
+						{loading ? (
+							<div className="loader"></div> // Show loader when loading
+						) : (
+							<p id="unstyled-modal-description" className="modal-description">
+								<ReactMarkdown>{hintResponse}</ReactMarkdown>
+							</p>
+						)}
+					</ModalContent>
+				</div>
 			</Modal>
 		</>
 	);

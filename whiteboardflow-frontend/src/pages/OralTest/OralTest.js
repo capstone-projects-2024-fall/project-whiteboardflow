@@ -1,11 +1,13 @@
 import { Button } from '@mui/material';
 import MicPrompt from '../../components/MicPrompt/MicPrompt';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate, useOutletContext } from 'react-router-dom'; // Import useNavigate
 import { getIdToken } from '../../firebase'
 import './OralTest.css';
 
 function OralTest() {
 	const navigate = useNavigate(); // Initialize navigate hook
+
+	const [darkMode, setDarkMode] = useOutletContext();
 	
 	const submitResponseData = async () => {
 		const idToken = await getIdToken();
@@ -38,9 +40,9 @@ function OralTest() {
 	};
 
 	return (
-		<div>
-			<div className="container">
-				<h1>Welcome to the oral portion of the test!</h1>
+		<div className='verbal-page'>
+			{/* <div className="verbal-container"> */}
+				<h1>Whiteboard Assistant: Verbal Assessment</h1>
 				<h4>Instructions:</h4>
 				<ol>
 					<li>Click the 'Record' button, then explain your thought process for your written answer.</li>
@@ -48,10 +50,10 @@ function OralTest() {
 					<li>Click 'Submit' to submit your response and receive AI-generated feedback.</li>
 				</ol>
 
-				<div className="container">
-					<MicPrompt />
-				</div>
-			</div>
+				{/* <div className="verbal-container"> */}
+					<MicPrompt darkMode={darkMode}/>
+				{/* </div> */}
+			{/* </div> */}
 			<Button
 				className="submit-button"
 				variant="contained"

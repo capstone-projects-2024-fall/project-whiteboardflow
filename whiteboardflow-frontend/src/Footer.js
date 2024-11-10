@@ -1,22 +1,22 @@
 import React from 'react';
-import { Container, Typography, IconButton } from '@mui/material';
+import { Container, Typography, IconButton, } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import './Footer.css'; // Optional CSS for styling
 
-const Footer = () => {
+const Footer = ({darkMode}) => {
     const handleScrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
-        <footer className="footer">
+        <footer className={darkMode ? "footer-dark" : "footer-light"}>
             <Container>
                 <div className="footer-content">
                     
-                    {/* Social Media Links */}
+                    {/* Social Media Links
                     <div className="footer-social">
                         <Typography variant="h6">Follow Us</Typography>
                         <IconButton href="https://www.facebook.com" target="_blank" color="primary">
@@ -31,11 +31,11 @@ const Footer = () => {
                         <IconButton href="https://www.instagram.com" target="_blank" color="primary">
                             <InstagramIcon />
                         </IconButton>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Copyright Info */}
-                <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '20px' }}>
+                <Typography variant="body2" color="white" align="center" style={{ marginTop: '20px' }}>
                     © {new Date().getFullYear()} Whiteboard Assistant. All Rights Reserved.
                 </Typography>
 

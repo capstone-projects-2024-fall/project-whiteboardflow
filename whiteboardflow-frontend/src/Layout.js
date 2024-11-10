@@ -1,37 +1,55 @@
 // Layout.js
 import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Button, Snackbar, CircularProgress, Avatar, Switch } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useLocation, useNavigate, Outlet } from 'react-router-dom';
+import { AppBar, Toolbar, IconButton, Typography, Menu, Button, Snackbar, CircularProgress, Avatar, Switch } from '@mui/material';
+// import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { auth, provider, signInWithPopup, signOut } from './firebase';
 import Footer from './Footer';
-import AvatarToggleButton from './Avatar/AvatarToggleButton.js';
-import { useAvatar } from './Avatar/AvatarContext.js';
 import './Layout.css';
+import { useAvatar } from './Avatar/AvatarContext.js';
+import AvatarToggleButton from './Avatar/AvatarToggleButton.js';
 
 const Layout = ({ children, user }) => { // Accept user as a prop
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [settingsAnchorEl, setSettingsAnchorEl] = useState(null);
+    const [userAnchorEl, setUserAnchorEl] = useState(null);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const [footer, setFooter] = useState(false);
     const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
-    const { isVisible, toggleAvatar } = useAvatar();
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const pages = [
-        { name: 'Home', path: '/' },
-        { name: 'Get Started', path: '/whiteboard' },
-        { name: 'Settings', path: '/Settings' },
-        { name: 'Results', path: '/results' }
-    ];
+    const homeButt = () => {
+        navigate("/")
+    }
 
-    const handleOpenMenu = (event) => setAnchorEl(event.currentTarget);
-    const handleCloseMenu = () => setAnchorEl(null);
-    const handleMenuClick = (path) => {
-        navigate(path);
-        handleCloseMenu();
-    };
+    // const pages = [
+    //     { name: 'Home', path: '/' },
+    //     { name: 'Get Started', path: '/whiteboard' },
+    //     { name: 'Settings', path: '/Settings' },
+    //     { name: 'Results', path: '/results' }
+    // ];
+
+    // useEffect(() => {
+
+    // },[darkMode])
+
+    const handleOpenSettingsMenu = (event) => setSettingsAnchorEl(event.currentTarget);
+    const handleCloseSettingsMenu = () => setSettingsAnchorEl(null);
+
+
+    const handleOpenUserMenu = (event) => setUserAnchorEl(event.currentTarget);
+    const handleCloseUserMenu = () => setUserAnchorEl(null);
+
+
+    // const handleMenuClick = (path) => {
+    //     navigate(path);
+    //     handleCloseMenu();
+    // };
 
     const signInWithGoogle = () => {
         setLoading(true);
@@ -69,52 +87,91 @@ const Layout = ({ children, user }) => { // Accept user as a prop
         localStorage.setItem('darkMode', !darkMode);
     };
 
+    const toggleFooter = () => {
+        setFooter((prev) => !prev);
+    }
+
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
     };
 
     // Define a list of paths where you want the Footer to be visible
-    const footerVisiblePaths = ['/', '/home', '/Settings']; // Example paths, add the paths you need
-
-    const showFooter = footerVisiblePaths.includes(location.pathname);
+    // const footerVisiblePaths = ['/', '/home', '/Settings']; // Example paths, add the paths you need
+    // const showFooter = footerVisiblePaths.includes(location.pathname);
 
     return (
-        <div className={`layout-container ${darkMode ? 'dark-mode' : ''}`}>
-            <AppBar position="static">
-                <Toolbar>
+        <div className={`layout-container ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+            {console.log(useLocation)}
+            {/* <AppBar position="static"> */}
+                {/* <Toolbar> */}
+                    {/* <IconButton
+                        size="large"
+                        edge="start"
+                        className={darkMode ? "darkmode-home-button" : "lightmode-home-button"}
+                        aria-label="home"
+                        onClick={homeButt}
+                    > */}
+                        {/* <HomeIcon sx={darkMode ? { color: "pink", fontSize: 40} : { color: "red", fontSize: 40}}/> */}
+                        <HomeIcon 
+                            className={darkMode ? "darkmode-home-button" : "lightmode-home-button"}
+                            fontSize='large'
+                            onClick={homeButt}
+                        />
+                    {/* </IconButton> */}
                     {user && (
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="menu"
-                            onClick={handleOpenMenu}
-                        >
-                            <MenuIcon />
-                        </IconButton>
+                        // <IconButton
+                        //     size="large"
+                        //     edge="start"
+                        //     aria-label="menu"
+                        //     // className={darkMode ? "darkmode-settings-button" : "lightmode-settings-button"}
+                        //     sx={ {position:"static", right: "80px", top: "20px"}}
+                        //     // onClick={handleOpenSettingsMenu}
+                        // >
+                            <SettingsIcon 
+                                className={darkMode ? "darkmode-settings-button" : "lightmode-settings-button"}
+                                fontSize='large'
+                                onClick={handleOpenSettingsMenu}
+                            />
+                        // </IconButton>
                     )}
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Whiteboard Assistant
-                    </Typography>
+
+                    
+
+                    {/* settings menu */}
                     <Menu
-                        anchorEl={anchorEl}
-                        open={Boolean(anchorEl)}
-                        onClose={handleCloseMenu}
+                        anchorEl={settingsAnchorEl}
+                        open={Boolean(settingsAnchorEl)}
+                        onClose={handleCloseSettingsMenu}
                     >
-                        {pages.map((page) => (
-                            <MenuItem key={page.name} onClick={() => handleMenuClick(page.path)}>
-                                {page.name}
-                            </MenuItem>
-                        ))}
+                        <div className='settings-menu'>
+                            <div className='settings-row'>
+                                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                                    Toggle Dark Mode
+                                </Typography>
+                                <Switch checked={darkMode} onChange={toggleDarkMode} color="default" />
+                            </div>
+                            
+                            <div className='settings-row'>
+                                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                                    Toggle Teddy
+                                </Typography>
+                                <AvatarToggleButton />
+                            </div>
+                        </div>
                     </Menu>
 
-                    <Switch checked={darkMode} onChange={toggleDarkMode} color="default" />
-                    <AvatarToggleButton />
-                    {loading && <CircularProgress size={24} color="inherit" />}
-
-                    {user ? (
+                    
+                    {/* user menu */}
+                    <Menu
+                        anchorEl={userAnchorEl}
+                        open={Boolean(userAnchorEl)}
+                        onClose={handleCloseUserMenu}
+                    >
+                        <div className='user-menu'>
+                        {user ? (
                         <>
-                            <Avatar alt={user.displayName} src={user.photoURL} sx={{ marginRight: 2 }} />
+                            <Avatar alt={user.displayName} src={user.photoURL} sx={{ marginBottom: 1 }} />   
+                            {/* <Avatar alt={user.displayName} src={user.photoURL} /> */}
                             <Typography variant="h6" component="div" sx={{ mr: 2 }}>
                                 Welcome, {user.displayName}
                             </Typography>
@@ -127,14 +184,42 @@ const Layout = ({ children, user }) => { // Accept user as a prop
                             Login with Google
                         </Button>
                     )}
-                </Toolbar>
-            </AppBar>
+
+                        </div>
+                    </Menu>
+
+                    {loading && <CircularProgress size={24} color="inherit" />}
+
+                    
+                    {/* <IconButton
+                        size="large"
+                        edge="start"
+                        aria-label="settings"
+                        className={darkMode ? "darkmode-user-button" : "lightmode-user-button"}
+                        onClick={handleOpenUserMenu}
+                    
+                    > */}
+
+                    <AccountCircleIcon 
+                        className={darkMode ? "darkmode-user-button" : "lightmode-user-button"}
+                        fontSize='large'
+                        onClick={handleOpenUserMenu}
+                    />
+                    {/* </IconButton> */}
+                    
+                {/* </Toolbar> */}
+            {/* </AppBar> */}
 
             <div className="content-container">
-                <Outlet />
+                <Outlet context={[darkMode, setDarkMode]}
+                
+                />
             </div>
 
-            {showFooter && <Footer />}  {/* Conditionally render Footer */}
+            <ExpandCircleDownIcon className={footer ? "footer-toggle-button-up" : "footer-toggle-button-down"} onClick={toggleFooter}/>
+            {/* <button onClick={toggleFooter}></button> */}
+
+            {footer && <Footer darkMode={darkMode}/>}
 
             <Snackbar
                 open={snackbarOpen}
@@ -145,5 +230,6 @@ const Layout = ({ children, user }) => { // Accept user as a prop
         </div>
     );
 };
+
 
 export default Layout;

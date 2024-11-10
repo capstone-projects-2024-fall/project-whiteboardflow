@@ -19,7 +19,7 @@ export const AvatarProvider = ({ children }) => {
     const getHintMessage = () => {
         switch (location.pathname) {
             case '/':
-                return "Welcome to the homepage!";
+                return "Welcome to the Whiteboard Assistant!";
             case '/OralTest':
                 return "Get ready for the oral test!";
             case '/Settings':
@@ -27,7 +27,7 @@ export const AvatarProvider = ({ children }) => {
             case '/BackEndTest':
                 return "This is where you can test the backend.";
             case '/results':
-                return "Check your results here!";
+                return "Here are your results!\nGood Job!";
             case '/whiteboard':
                 return "Use the whiteboard for brainstorming.";
             default:

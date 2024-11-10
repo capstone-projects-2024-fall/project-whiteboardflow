@@ -1,9 +1,22 @@
 /* Footer.css */
-.footer {
-    background-color: #f8f9fa;
-    padding: 20px 0;
-    margin-top: 40px;
+.footer-dark {
+    background-color: black;
+    transition: ease-in 50ms;
+    padding: 10px 0;
+    margin-top: 10px;
     text-align: center;
+    color: white;
+    position:relative;
+    bottom: 0px;
+}
+
+.footer-light {
+    background-color: #202124;
+    padding: 10px 0;
+    margin-top: 10px;
+    text-align: center;
+    position:relative;
+    bottom: 0px;
 }
 
 .footer-content {
