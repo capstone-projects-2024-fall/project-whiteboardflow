@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Box, Paper, Grid, LinearProgress } from '@mui/material';
+import { Container, Typography, Box, Paper, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { auth } from "../../firebase";
@@ -11,7 +11,6 @@ const Results = () => {
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
     const [questionText, setQuestionText] = useState(""); // Question text
     const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
-    const [accuracy, setAccuracy] = useState(0); // Estimated accuracy percentage
 
     const calculateCompletionTime = () => {
         const startTime = localStorage.getItem("startTime");
@@ -24,44 +23,6 @@ const Results = () => {
             return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
         }
         return "Not available";
-    };
-
-    // Estimate accuracy from the analysis text using expanded keyword lists
-    const calculateAccuracy = (analysisText) => {
-        const positiveKeywords = [
-            "correct", "good", "accurate", "excellent", "well-done", "precise", "clear",
-            "successful", "effective", "strong", "consistent", "thorough", "proficient",
-            "skillful", "competent", "insightful", "impressive", "positive", "satisfactory",
-            "noteworthy", "complete", "on-point", "valid", "acceptable", "outstanding",
-            "exceptional"
-        ];
-
-        const negativeKeywords = [
-            "incorrect", "mistake", "error", "wrong", "poor", "unclear", "failed",
-            "ineffective", "weak", "inconsistent", "lacking", "incomplete", "subpar",
-            "deficient", "inadequate", "unsatisfactory", "disappointing", "vague", "flawed",
-            "negative", "invalid", "unacceptable", "problematic", "off-track", "misguided",
-            "insufficient", "absent", "you need to", "missing", "does not provide", "image does not"
-        ];
-
-        // Count occurrences of positive and negative keywords
-        let positiveCount = 0;
-        let negativeCount = 0;
-
-        positiveKeywords.forEach((word) => {
-            positiveCount += (analysisText.match(new RegExp(word, "gi")) || []).length;
-        });
-
-        negativeKeywords.forEach((word) => {
-            negativeCount += (analysisText.match(new RegExp(word, "gi")) || []).length;
-        });
-
-        // Calculate approximate accuracy percentage
-        const totalKeywords = positiveCount + negativeCount;
-        if (totalKeywords === 0) return 0; // Neutral accuracy set to 0% if no keywords are found
-
-        const accuracyPercentage = (positiveCount / totalKeywords) * 100;
-        return Math.round(accuracyPercentage);
     };
 
     useEffect(() => {
@@ -84,10 +45,6 @@ const Results = () => {
             });
 
         setCompletionTime(calculateCompletionTime());
-
-        // Calculate and set accuracy from the analysis text
-        const estimatedAccuracy = calculateAccuracy(aiResponse);
-        setAccuracy(estimatedAccuracy);
     }, []);
 
     return (
@@ -158,28 +115,6 @@ const Results = () => {
                         <Typography variant="body1" color="textSecondary" style={{ marginTop: '10px', flex: 1 }}>
                             {completionTime}
                         </Typography>
-                    </Paper>
-                </Grid>
-
-                {/* Accuracy Metric */}
-                <Grid item xs={12} md={6}>
-                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                        <Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
-                            Estimated Accuracy
-                        </Typography>
-                        <Box mt={2}>
-                            <LinearProgress
-                                variant="determinate"
-                                value={accuracy}
-                                style={{
-                                    height: '10px',
-                                    borderRadius: '5px',
-                                }}
-                            />
-                            <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '10px' }}>
-                                {accuracy}% Accuracy
-                            </Typography>
-                        </Box>
                     </Paper>
                 </Grid>
             </Grid>
