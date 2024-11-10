@@ -11,7 +11,7 @@ function OralTest() {
 		const idToken = await getIdToken();
 
 		try {
-			const response = await fetch("/api/get-result", {
+			const response = await fetch("https://project-whiteboardflow-1.onrender.com/api/get-result", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
