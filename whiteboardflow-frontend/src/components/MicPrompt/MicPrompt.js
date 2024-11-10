@@ -2,13 +2,30 @@ import React, { useState, useEffect } from "react";
 import { Button } from '@mui/material';
 import "./MicPrompt.css"
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+/**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
 const recognition = new SpeechRecognition();
 
 recognition.continuous = true;
 recognition.interimResults = true;
 recognition.lang = 'en-US';
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @param {{ darkMode: any; }} param0
+ * @param {${2:*}} param0.darkMode
+ * @returns {${3:*}\}
+ */
 const MicPrompt = ({darkMode}) => {
 	const [listening, setListening] = useState(false);
 

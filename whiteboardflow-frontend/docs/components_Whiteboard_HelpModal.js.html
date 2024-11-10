@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Whiteboard/HelpModal.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Whiteboard/HelpModal.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react'; // Ensure to import useState
+
+/**
+ * ${1:Description placeholder}
+ *
+ * @param {{ isVisible: any; onClose: any; }} param0
+ * @param {${2:*}} param0.isVisible
+ * @param {${3:*}} param0.onClose
+ * @returns {${4:*}\}
+ */
+const HelpModal = ({ isVisible, onClose }) => {
+    const [open, setOpen] = useState(false); // State to manage visibility internally if needed
+
+    // Enhanced style object
+    const modalStyle = {
+        display: isVisible ? 'block' : 'none',
+        zIndex: 2000,
+    };
+
+    return (
+        &lt;div id="help-modal" className="help-modal" style={modalStyle}>
+            &lt;div id="help-modal-content" className="help-modal-content">
+                &lt;button className="close" onClick={onClose}>×&lt;/button>
+                &lt;h1>Hi!&lt;/h1>
+                &lt;div className="gestures">
+                    &lt;h3>What is it?&lt;/h3>
+                    &lt;p>WhiteBoardFlow is a web application designed to help job seekers prepare for interviews by allowing users to solve coding and estimation problems on a digital whiteboard using a tablet and stylus. It includes microphone integration for speech detection, enabling users to verbalize their thought process while answering questions. The app leverages AI to provide feedback and assistance based on the user's progress and logs their performance history for ongoing study and improvement.&lt;/p>
+                    &lt;div className="gestures-img-container">
+                        &lt;img src="logo192.png" alt="logo"/>
+                    &lt;/div>
+                &lt;/div>
+                &lt;h1>Gestures&lt;/h1>
+                &lt;div className="gestures">
+                    &lt;h3>Erase&lt;/h3>
+                    &lt;p>Scratch thoroughly and cover all the characters.&lt;/p>
+                    &lt;div className="gestures-img-container">
+                        &lt;img src="img/gestures/gest-erase.png" alt="Erase gesture"/>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div className="gestures">
+                    &lt;h3>Break&lt;/h3>
+                    &lt;p>Draw a straight vertical line downwards. Start above characters and end well below the baseline.&lt;/p>
+                    &lt;div className="gestures-img-container">
+                        &lt;img src="img/gestures/gest-break-lines.png" alt="Break lines gesture"/>
+                        &lt;img src="img/gestures/gest-break-words.png" alt="Break words gesture"/>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div className="gestures">
+                    &lt;h3>Join&lt;/h3>
+                    &lt;p>Draw a straight vertical line upwards. Start well below the baseline and end above characters.&lt;/p>
+                    &lt;div className="gestures-img-container">
+                        &lt;img src="img/gestures/gest-join-lines.png" alt="Join lines gesture"/>
+                        &lt;img src="img/gestures/gest-join-words.png" alt="Join words gesture"/>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+    );
+};
+
+export default HelpModal;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AIAssistant">AIAssistant</a></li><li><a href="global.html#AccountSettings">AccountSettings</a></li><li><a href="global.html#AvatarContext">AvatarContext</a></li><li><a href="global.html#AvatarProvider">AvatarProvider</a></li><li><a href="global.html#AvatarToggleButton">AvatarToggleButton</a></li><li><a href="global.html#BackEndTest">BackEndTest</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Character">Character</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#HelpButton">HelpButton</a></li><li><a href="global.html#HelpModal">HelpModal</a></li><li><a href="global.html#Helper">Helper</a></li><li><a href="global.html#HintButton">HintButton</a></li><li><a href="global.html#HomePage">HomePage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#MicPrompt">MicPrompt</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalContent">ModalContent</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#QuestionArea">QuestionArea</a></li><li><a href="global.html#RedirectToImage">RedirectToImage</a></li><li><a href="global.html#Results">Results</a></li><li><a href="global.html#RetroAvatar">RetroAvatar</a></li><li><a href="global.html#SpeechRecognition">SpeechRecognition</a></li><li><a href="global.html#StyledBackdrop">StyledBackdrop</a></li><li><a href="global.html#SubmitButton">SubmitButton</a></li><li><a href="global.html#Whiteboard">Whiteboard</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#blue">blue</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#frames">frames</a></li><li><a href="global.html#getIdToken">getIdToken</a></li><li><a href="global.html#grey">grey</a></li><li><a href="global.html#provider">provider</a></li><li><a href="global.html#recognition">recognition</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#reportWebVitals">reportWebVitals</a></li><li><a href="global.html#root">root</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#useAvatar">useAvatar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 10 2024 16:20:51 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

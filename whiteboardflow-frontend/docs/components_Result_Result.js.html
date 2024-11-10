@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Result/Result.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Result/Result.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState } from 'react';
+import { Container, Typography, Box, Paper, Grid } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { auth } from "../../firebase";
+import DOMPurify from "dompurify";
+import './Results.css';
+
+/**
+ * The `Results` component displays a dashboard of the practice session, including the AI analysis,
+ * the handwritten response image, the practice question, and the completion time.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ */
+const Results = () => {
+    /**
+     * State to store the AI analysis of the oral response.
+     * @type {string}
+     */
+    const [oralAnalysis, setOralAnalysis] = useState("");
+
+    /**
+     * State to store the URL of the handwritten image.
+     * @type {string}
+     */
+    const [imageUrl, setImageUrl] = useState("");
+
+    /**
+     * State to store the question text in HTML format.
+     * @type {string}
+     */
+    const [questionText, setQuestionText] = useState("");
+
+    /**
+     * State to store the formatted completion time.
+     * @type {string}
+     */
+    const [completionTime, setCompletionTime] = useState("");
+
+    /**
+     * Calculates the time spent on the practice session by using the start time
+     * stored in localStorage and the current time.
+     *
+     * @returns {string} The formatted completion time as a string (e.g., "1h 15m 30s").
+     */
+    const calculateCompletionTime = () => {
+        const startTime = localStorage.getItem("startTime");
+        if (startTime) {
+            const endTime = Date.now();
+            const timeSpent = (endTime - startTime) / 1000;
+            const seconds = Math.floor(timeSpent % 60);
+            const minutes = Math.floor((timeSpent / 60) % 60);
+            const hours = Math.floor((timeSpent / (60 * 60)) % 24);
+            return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
+        }
+        return "Not available";
+    };
+
+    /**
+     * Loads data from localStorage, fetches the image URL from Firebase, and calculates the completion time.
+     */
+    useEffect(() => {
+        const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
+        setOralAnalysis(aiResponse);
+
+        const storedQuestion = localStorage.getItem("question_html") || "No question available.";
+        setQuestionText(storedQuestion);
+
+        const userId = auth.currentUser.uid;
+        const storage = getStorage();
+        const storageRef = ref(storage, `user-files/${userId}/static.png`);
+
+        getDownloadURL(storageRef)
+            .then((url) => {
+                setImageUrl(url);
+            })
+            .catch((error) => {
+                console.error("Error fetching image URL: ", error);
+            });
+
+        setCompletionTime(calculateCompletionTime());
+    }, []);
+
+    return (
+        &lt;Container maxWidth="lg" style={{ padding: '30px', backgroundColor: '#f4f6f8' }}>
+            &lt;Typography variant="h4" style={{ fontWeight: 'bold', marginBottom: '20px', color: '#333' }}>
+                Practice Results Dashboard
+            &lt;/Typography>
+            &lt;Grid container spacing={3}>
+
+                {/* Practice Question */}
+                &lt;Grid item xs={12} md={6}>
+                    &lt;Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                        &lt;Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                            Practice Question
+                        &lt;/Typography>
+                        &lt;Box style={{ padding: '10px', backgroundColor: '#f7f9fc', borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
+                            &lt;div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questionText) }} />
+                        &lt;/Box>
+                    &lt;/Paper>
+                &lt;/Grid>
+
+                {/* Handwriting Image */}
+                &lt;Grid item xs={12} md={6}>
+                    &lt;Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                        &lt;Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                            Your Handwritten Response
+                        &lt;/Typography>
+                        &lt;Box textAlign="center" style={{ paddingTop: '10px', flex: 1 }}>
+                            &lt;img
+                                src={imageUrl}
+                                alt="User's Handwriting Response"
+                                style={{
+                                    maxWidth: '100%',
+                                    maxHeight: '300px',
+                                    borderRadius: '8px',
+                                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+                                    margin: '0 auto',
+                                }}
+                            />
+                        &lt;/Box>
+                    &lt;/Paper>
+                &lt;/Grid>
+
+                {/* AI Analysis */}
+                &lt;Grid item xs={12}>
+                    &lt;Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        &lt;Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                            AI Analysis of Whiteboard Practice
+                        &lt;/Typography>
+                        &lt;Box style={{
+                            overflowY: 'auto',
+                            padding: '10px',
+                            backgroundColor: '#f7f9fc',
+                            borderRadius: '8px',
+                            flex: 1
+                        }}>
+                            &lt;ReactMarkdown>{oralAnalysis}&lt;/ReactMarkdown>
+                        &lt;/Box>
+                    &lt;/Paper>
+                &lt;/Grid>
+
+                {/* Completion Time */}
+                &lt;Grid item xs={12} md={6}>
+                    &lt;Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        &lt;Typography variant="h6" style={{ fontWeight: 'bold', color: '#1976d2' }} gutterBottom>
+                            Completion Time
+                        &lt;/Typography>
+                        &lt;Typography variant="body1" color="textSecondary" style={{ marginTop: '10px', flex: 1 }}>
+                            {completionTime}
+                        &lt;/Typography>
+                    &lt;/Paper>
+                &lt;/Grid>
+            &lt;/Grid>
+        &lt;/Container>
+    );
+};
+
+export default Results;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AIAssistant">AIAssistant</a></li><li><a href="global.html#AccountSettings">AccountSettings</a></li><li><a href="global.html#AvatarContext">AvatarContext</a></li><li><a href="global.html#AvatarProvider">AvatarProvider</a></li><li><a href="global.html#AvatarToggleButton">AvatarToggleButton</a></li><li><a href="global.html#BackEndTest">BackEndTest</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Character">Character</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#HelpButton">HelpButton</a></li><li><a href="global.html#HelpModal">HelpModal</a></li><li><a href="global.html#Helper">Helper</a></li><li><a href="global.html#HintButton">HintButton</a></li><li><a href="global.html#HomePage">HomePage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#MicPrompt">MicPrompt</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalContent">ModalContent</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#QuestionArea">QuestionArea</a></li><li><a href="global.html#RedirectToImage">RedirectToImage</a></li><li><a href="global.html#Results">Results</a></li><li><a href="global.html#RetroAvatar">RetroAvatar</a></li><li><a href="global.html#SpeechRecognition">SpeechRecognition</a></li><li><a href="global.html#StyledBackdrop">StyledBackdrop</a></li><li><a href="global.html#SubmitButton">SubmitButton</a></li><li><a href="global.html#Whiteboard">Whiteboard</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#blue">blue</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#frames">frames</a></li><li><a href="global.html#getIdToken">getIdToken</a></li><li><a href="global.html#grey">grey</a></li><li><a href="global.html#provider">provider</a></li><li><a href="global.html#recognition">recognition</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#reportWebVitals">reportWebVitals</a></li><li><a href="global.html#root">root</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#useAvatar">useAvatar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 10 2024 16:20:51 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

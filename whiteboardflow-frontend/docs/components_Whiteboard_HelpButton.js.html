@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Whiteboard/HelpButton.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Whiteboard/HelpButton.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import './css/helpbutton.css'; // Ensure the CSS file is imported here
+
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { styled, css } from '@mui/system';
+import { Modal as BaseModal} from '@mui/base/Modal';
+
+
+
+    /**
+ * ${1:Description placeholder}
+ *
+ * @returns {${2:*}}
+ */
+const HelpButton = () => {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    return (
+        &lt;>
+        &lt;button className='help-button' type="button" onClick={handleOpen}>
+        Help
+      &lt;/button>
+      &lt;Modal
+        aria-labelledby="unstyled-modal-title"
+        aria-describedby="unstyled-modal-description"
+        open={open}
+        onClose={handleClose}
+        slots={{ backdrop: StyledBackdrop }}
+      >
+        &lt;ModalContent sx={{ width: 700 }}>
+          &lt;h2 id="unstyled-modal-title" className="modal-title">
+            Help:
+          &lt;/h2>
+          &lt;p id="unstyled-modal-description" className="modal-description">
+          WhiteBoardFlow is a web application designed to help job seekers prepare for interviews by allowing users to solve coding and estimation problems on a digital whiteboard using a tablet and stylus. It includes microphone integration for speech detection, enabling users to verbalize their thought process while answering questions. The app leverages AI to provide feedback and assistance based on the user's progress and logs their performance history for ongoing study and improvement.
+          &lt;br/>&lt;br/>
+          To begin, click the "Start" button on the home page. You will then be brought to the whiteboard where you will be prompted to answer a coding or Fermi approximation question. Affter submitting you will be taken to the verbal page where you explain your answer. You will then submit and recieve feedback.
+          &lt;/p>
+        &lt;/ModalContent>
+      &lt;/Modal>
+      &lt;/>
+    );
+};
+
+/**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
+const Backdrop = React.forwardRef((props, ref) => {
+    const { open, className, ...other } = props;
+    return (
+      &lt;div
+        className={clsx({ 'base-Backdrop-open': open }, className)}
+        ref={ref}
+        {...other}
+      />
+    );
+  });
+  
+  Backdrop.propTypes = {
+    className: PropTypes.string.isRequired,
+    open: PropTypes.bool,
+  };
+  
+  /**
+ * ${1:Description placeholder}
+ *
+ * @type {{ 200: string; 300: string; 400: string; 500: string; 600: string; 700: string; }\}
+ */
+const blue = {
+    200: '#99CCFF',
+    300: '#66B2FF',
+    400: '#3399FF',
+    500: '#007FFF',
+    600: '#0072E5',
+    700: '#0066CC',
+  };
+  
+  /**
+ * ${1:Description placeholder}
+ *
+ * @type {{ 50: string; 100: string; 200: string; 300: string; 400: string; 500: string; 600: string; 700: string; 800: string; 900: string; }\}
+ */
+const grey = {
+    50: '#F3F6F9',
+    100: '#E5EAF2',
+    200: '#DAE2ED',
+    300: '#C7D0DD',
+    400: '#B0B8C4',
+    500: '#9DA8B7',
+    600: '#6B7A90',
+    700: '#434D5B',
+    800: '#303740',
+    900: '#1C2025',
+  };
+  
+  /**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
+const Modal = styled(BaseModal)`
+    position: fixed;
+    z-index: 1300;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `;
+  
+  /**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
+const StyledBackdrop = styled(Backdrop)`
+    z-index: -1;
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0 0 0 / 0.5);
+    -webkit-tap-highlight-color: transparent;
+  `;
+  
+  /**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
+const ModalContent = styled('div')(
+    ({ theme }) => css`
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 500;
+      text-align: start;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow: hidden;
+      background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+      border-radius: 8px;
+      border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+      box-shadow: 0 4px 12px
+        ${theme.palette.mode === 'dark' ? 'rgb(0 0 0 / 0.5)' : 'rgb(0 0 0 / 0.2)'};
+      padding: 24px;
+      color: ${theme.palette.mode === 'dark' ? grey[50] : grey[900]};
+  
+      &amp; .modal-title {
+        margin: 0;
+        line-height: 1.5rem;
+        margin-bottom: 8px;
+      }
+  
+      &amp; .modal-description {
+        margin: 0;
+        line-height: 1.5rem;
+        font-weight: 400;
+        color: ${theme.palette.mode === 'dark' ? grey[400] : grey[800]};
+        margin-bottom: 4px;
+      }
+    `,
+  );
+  
+
+export default HelpButton;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AIAssistant">AIAssistant</a></li><li><a href="global.html#AccountSettings">AccountSettings</a></li><li><a href="global.html#AvatarContext">AvatarContext</a></li><li><a href="global.html#AvatarProvider">AvatarProvider</a></li><li><a href="global.html#AvatarToggleButton">AvatarToggleButton</a></li><li><a href="global.html#BackEndTest">BackEndTest</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Character">Character</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#HelpButton">HelpButton</a></li><li><a href="global.html#HelpModal">HelpModal</a></li><li><a href="global.html#Helper">Helper</a></li><li><a href="global.html#HintButton">HintButton</a></li><li><a href="global.html#HomePage">HomePage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#MicPrompt">MicPrompt</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalContent">ModalContent</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#QuestionArea">QuestionArea</a></li><li><a href="global.html#RedirectToImage">RedirectToImage</a></li><li><a href="global.html#Results">Results</a></li><li><a href="global.html#RetroAvatar">RetroAvatar</a></li><li><a href="global.html#SpeechRecognition">SpeechRecognition</a></li><li><a href="global.html#StyledBackdrop">StyledBackdrop</a></li><li><a href="global.html#SubmitButton">SubmitButton</a></li><li><a href="global.html#Whiteboard">Whiteboard</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#blue">blue</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#frames">frames</a></li><li><a href="global.html#getIdToken">getIdToken</a></li><li><a href="global.html#grey">grey</a></li><li><a href="global.html#provider">provider</a></li><li><a href="global.html#recognition">recognition</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#reportWebVitals">reportWebVitals</a></li><li><a href="global.html#root">root</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#useAvatar">useAvatar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 10 2024 16:20:51 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Layout.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Layout.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Layout.js
+import React, { useState } from 'react';
+import { AppBar, Toolbar, IconButton, Typography, Menu, Button, Snackbar, CircularProgress, Avatar, Switch } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
+import { auth, provider, signInWithPopup, signOut } from './firebase';
+import Footer from './Footer';
+import './Layout.css';
+import { useAvatar } from './Avatar/AvatarContext.js';
+import AvatarToggleButton from './Avatar/AvatarToggleButton.js';
+
+/**
+ * Main layout component that includes a navigation bar, user menu, settings menu,
+ * dark mode toggle, and footer. Manages user authentication, UI settings, and navigation.
+ *
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - Child components to be rendered within the layout.
+ * @param {any} props.user - The authenticated user object.
+ * @returns {JSX.Element} The rendered Layout component.
+ */
+const Layout = ({ children, user }) => { // Accept user as a prop
+    const [settingsAnchorEl, setSettingsAnchorEl] = useState(null);
+    const [userAnchorEl, setUserAnchorEl] = useState(null);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [footer, setFooter] = useState(false);
+    const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+    const navigate = useNavigate();
+
+    /**
+     * Navigates to the home page.
+     */
+    const homeButt = () => {
+        navigate("/")
+    };
+
+    /**
+     * Opens the settings menu.
+     * @param {React.MouseEvent} event - The event object.
+     */
+    const handleOpenSettingsMenu = (event) => setSettingsAnchorEl(event.currentTarget);
+
+    /**
+     * Closes the settings menu.
+     */
+    const handleCloseSettingsMenu = () => setSettingsAnchorEl(null);
+
+    /**
+     * Opens the user menu.
+     * @param {React.MouseEvent} event - The event object.
+     */
+    const handleOpenUserMenu = (event) => setUserAnchorEl(event.currentTarget);
+
+    /**
+     * Closes the user menu.
+     */
+    const handleCloseUserMenu = () => setUserAnchorEl(null);
+
+    /**
+     * Initiates Google sign-in using Firebase authentication.
+     * Displays a success or failure message in a snackbar.
+     */
+    const signInWithGoogle = () => {
+        setLoading(true);
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                setSnackbarMessage(`Welcome, ${result.user.displayName}`);
+                setSnackbarOpen(true);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('Login failed:', error);
+                setSnackbarMessage('Login failed. Please try again.');
+                setSnackbarOpen(true);
+                setLoading(false);
+            });
+    };
+
+    /**
+     * Logs the user out using Firebase authentication.
+     * Displays a success or failure message in a snackbar.
+     */
+    const handleLogout = () => {
+        setLoading(true);
+        signOut(auth)
+            .then(() => {
+                setSnackbarMessage('Successfully logged out.');
+                setSnackbarOpen(true);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('Logout failed:', error);
+                setSnackbarMessage('Logout failed. Please try again.');
+                setLoading(false);
+            });
+    };
+
+    /**
+     * Toggles dark mode and saves the preference to localStorage.
+     */
+    const toggleDarkMode = () => {
+        setDarkMode((prev) => !prev);
+        localStorage.setItem('darkMode', !darkMode);
+    };
+
+    /**
+     * Toggles the visibility of the footer.
+     */
+    const toggleFooter = () => {
+        setFooter((prev) => !prev);
+    };
+
+    /**
+     * Closes the snackbar notification.
+     */
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
+
+    return (
+        &lt;div className={`layout-container ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+            &lt;HomeIcon
+                className={darkMode ? "darkmode-home-button" : "lightmode-home-button"}
+                fontSize='large'
+                onClick={homeButt}
+            />
+            {user &amp;&amp; (
+                &lt;SettingsIcon
+                    className={darkMode ? "darkmode-settings-button" : "lightmode-settings-button"}
+                    fontSize='large'
+                    onClick={handleOpenSettingsMenu}
+                />
+            )}
+
+            {/* Settings menu for toggling dark mode and the avatar */}
+            &lt;Menu
+                anchorEl={settingsAnchorEl}
+                open={Boolean(settingsAnchorEl)}
+                onClose={handleCloseSettingsMenu}
+            >
+                &lt;div className='settings-menu'>
+                    &lt;div className='settings-row'>
+                        &lt;Typography variant="h6">Toggle Dark Mode&lt;/Typography>
+                        &lt;Switch checked={darkMode} onChange={toggleDarkMode} color="default" />
+                    &lt;/div>
+
+                    &lt;div className='settings-row'>
+                        &lt;Typography variant="h6">Toggle Teddy&lt;/Typography>
+                        &lt;AvatarToggleButton />
+                    &lt;/div>
+                &lt;/div>
+            &lt;/Menu>
+
+            {/* User menu with login/logout options */}
+            &lt;Menu
+                anchorEl={userAnchorEl}
+                open={Boolean(userAnchorEl)}
+                onClose={handleCloseUserMenu}
+            >
+                &lt;div className='user-menu'>
+                    {user ? (
+                        &lt;>
+                            &lt;Avatar alt={user.displayName} src={user.photoURL} sx={{ marginBottom: 1 }} />
+                            &lt;Typography variant="h6">Welcome, {user.displayName}&lt;/Typography>
+                            &lt;Button color="inherit" onClick={handleLogout}>Logout&lt;/Button>
+                        &lt;/>
+                    ) : (
+                        &lt;Button color="inherit" onClick={signInWithGoogle}>Login with Google&lt;/Button>
+                    )}
+                &lt;/div>
+            &lt;/Menu>
+
+            {loading &amp;&amp; &lt;CircularProgress size={24} color="inherit" />}
+
+            &lt;AccountCircleIcon
+                className={darkMode ? "darkmode-user-button" : "lightmode-user-button"}
+                fontSize='large'
+                onClick={handleOpenUserMenu}
+            />
+
+            &lt;div className="content-container">
+                &lt;Outlet context={[darkMode, setDarkMode]} />
+            &lt;/div>
+
+            &lt;ExpandCircleDownIcon className={footer ? "footer-toggle-button-up" : "footer-toggle-button-down"} onClick={toggleFooter} />
+
+            {footer &amp;&amp; &lt;Footer darkMode={darkMode} />}
+
+            &lt;Snackbar
+                open={snackbarOpen}
+                onClose={handleSnackbarClose}
+                message={snackbarMessage}
+                autoHideDuration={6000}
+            />
+        &lt;/div>
+    );
+};
+
+export default Layout;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BackEndTest">BackEndTest</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#HomePage">HomePage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#RotatingText">RotatingText</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#getIdToken">getIdToken</a></li><li><a href="global.html#provider">provider</a></li><li><a href="global.html#reportWebVitals">reportWebVitals</a></li><li><a href="global.html#root">root</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 10 2024 16:34:52 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

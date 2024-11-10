@@ -1,0 +1,13 @@
+{
+    "source": {
+        "include": [
+            "src"
+        ], // Include your directories or files
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "opts": {
+        "destination": "./docs", // Output directory
+        "recurse": false // Recursively include subdirectories
+    }
+}

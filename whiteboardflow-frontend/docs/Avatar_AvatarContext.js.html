@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Avatar/AvatarContext.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Avatar/AvatarContext.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { createContext, useState, useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import AnimatedAvatar from './RetroAvatar';
+import './AvatarContext.css';
+
+/**
+ * @typedef {Object} AvatarContextProps
+ * @property {boolean} isVisible - Whether the avatar is visible.
+ * @property {Function} toggleAvatar - Function to toggle the avatar's visibility.
+ */
+
+/** @type {React.Context&lt;AvatarContextProps | undefined>} */
+const AvatarContext = createContext(undefined);
+
+/**
+ * Custom hook to access the AvatarContext.
+ * @returns {AvatarContextProps} The avatar context value with `isVisible` and `toggleAvatar`.
+ * @throws Will throw an error if used outside of an AvatarProvider.
+ */
+export const useAvatar = () => {
+    const context = useContext(AvatarContext);
+    if (!context) {
+        throw new Error("useAvatar must be used within an AvatarProvider");
+    }
+    return context;
+};
+
+/**
+ * Provides avatar context to child components, enabling visibility management and hint messages based on the route.
+ * @param {Object} props
+ * @param {React.ReactNode} props.children - The child components wrapped by the provider.
+ * @returns {JSX.Element} The provider component with avatar visibility functionality.
+ */
+export const AvatarProvider = ({ children }) => {
+    const [isVisible, setIsVisible] = useState(true);
+    const [showHint, setShowHint] = useState(false);
+    const location = useLocation();
+
+    /**
+     * Gets the hint message based on the current route path.
+     * @returns {string} The hint message.
+     */
+    const getHintMessage = () => {
+        switch (location.pathname) {
+            case '/':
+                return "Welcome to the Whiteboard Assistant!";
+            case '/OralTest':
+                return "Get ready for the oral test!";
+            case '/Settings':
+                return "Adjust your preferences here.";
+            case '/BackEndTest':
+                return "This is where you can test the backend.";
+            case '/results':
+                return "Here are your results!\nGood Job!";
+            case '/whiteboard':
+                return "Use the whiteboard for brainstorming.";
+            default:
+                return "Hello! Need any help?";
+        }
+    };
+
+    const toggleAvatar = () => setIsVisible((prev) => !prev);
+    const toggleHint = () => setShowHint((prev) => !prev);
+
+    useEffect(() => {
+        setShowHint(true);
+    }, [location.pathname]);
+
+    return (
+        &lt;AvatarContext.Provider value={{ isVisible, toggleAvatar }}>
+            {children}
+            {isVisible &amp;&amp; (
+                &lt;div className="avatar-fixed-container" onClick={toggleHint}>
+                    &lt;AnimatedAvatar />
+                    {showHint &amp;&amp; (
+                        &lt;div className="hint-bubble">
+                            &lt;p>{getHintMessage()}&lt;/p>
+                        &lt;/div>
+                    )}
+                &lt;/div>
+            )}
+        &lt;/AvatarContext.Provider>
+    );
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AIAssistant">AIAssistant</a></li><li><a href="global.html#AccountSettings">AccountSettings</a></li><li><a href="global.html#AvatarContext">AvatarContext</a></li><li><a href="global.html#AvatarProvider">AvatarProvider</a></li><li><a href="global.html#AvatarToggleButton">AvatarToggleButton</a></li><li><a href="global.html#BackEndTest">BackEndTest</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Character">Character</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#HelpButton">HelpButton</a></li><li><a href="global.html#HelpModal">HelpModal</a></li><li><a href="global.html#Helper">Helper</a></li><li><a href="global.html#HintButton">HintButton</a></li><li><a href="global.html#HomePage">HomePage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#MicPrompt">MicPrompt</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalContent">ModalContent</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#QuestionArea">QuestionArea</a></li><li><a href="global.html#RedirectToImage">RedirectToImage</a></li><li><a href="global.html#Results">Results</a></li><li><a href="global.html#RetroAvatar">RetroAvatar</a></li><li><a href="global.html#SpeechRecognition">SpeechRecognition</a></li><li><a href="global.html#StyledBackdrop">StyledBackdrop</a></li><li><a href="global.html#SubmitButton">SubmitButton</a></li><li><a href="global.html#Whiteboard">Whiteboard</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#blue">blue</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#frames">frames</a></li><li><a href="global.html#getIdToken">getIdToken</a></li><li><a href="global.html#grey">grey</a></li><li><a href="global.html#provider">provider</a></li><li><a href="global.html#recognition">recognition</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#reportWebVitals">reportWebVitals</a></li><li><a href="global.html#root">root</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#useAvatar">useAvatar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 10 2024 16:20:51 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

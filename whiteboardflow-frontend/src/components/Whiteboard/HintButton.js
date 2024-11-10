@@ -9,6 +9,13 @@ import { Snackbar, Alert } from '@mui/material';
 import { getIdToken } from '../../firebase';
 import ReactMarkdown from 'react-markdown';
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @param {{ sendPNGToFirebase: any; }} param0
+ * @param {${2:*}} param0.sendPNGToFirebase
+ * @returns {${3:*}\}
+ */
 const HintButton = ({ sendPNGToFirebase }) => {
 	const [open, setOpen] = useState(false);
 	const [hintUsed, setHintUsed] = useState(false);
@@ -123,6 +130,11 @@ const HintButton = ({ sendPNGToFirebase }) => {
 	);
 };
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
 const Backdrop = React.forwardRef((props, ref) => {
 	const { open, className, ...other } = props;
 	return (
@@ -139,6 +151,11 @@ Backdrop.propTypes = {
 	open: PropTypes.bool,
 };
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @type {{ 200: string; 300: string; 400: string; 500: string; 600: string; 700: string; }\}
+ */
 const blue = {
 	200: '#99CCFF',
 	300: '#66B2FF',
@@ -148,6 +165,11 @@ const blue = {
 	700: '#0066CC',
 };
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @type {{ 50: string; 100: string; 200: string; 300: string; 400: string; 500: string; 600: string; 700: string; 800: string; 900: string; }\}
+ */
 const grey = {
 	50: '#F3F6F9',
 	100: '#E5EAF2',
@@ -161,6 +183,11 @@ const grey = {
 	900: '#1C2025',
 };
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
 const Modal = styled(BaseModal)`
     position: fixed;
     z-index: 1300;
@@ -170,6 +197,11 @@ const Modal = styled(BaseModal)`
     justify-content: center;
   `;
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
 const StyledBackdrop = styled(Backdrop)`
     z-index: -1;
     position: fixed;
@@ -178,6 +210,11 @@ const StyledBackdrop = styled(Backdrop)`
     -webkit-tap-highlight-color: transparent;
   `;
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
 const ModalContent = styled('div')(
 	({ theme }) => css`
       font-family: 'IBM Plex Sans', sans-serif;

@@ -1,14 +1,8 @@
-// Character.js
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './RetroAvatar.css';
 
-/**
- * Array of image paths representing each frame in the animation sequence.
- * Each path points to a frame in the "idle blink" animation.
- * @constant {string[]}
- */
+/** @type {string[]} Paths for each animation frame */
 const frames = [
     "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_000.png",
     "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_002.png",
@@ -22,33 +16,19 @@ const frames = [
 ];
 
 /**
- * A component that renders an animated avatar cycling through multiple frames,
- * simulating a blinking animation. The avatar also has a pulsing animation applied.
- *
- * @component
- * @returns {JSX.Element} An animated avatar component with blinking and pulsing effects.
- * 
- * @example
- * // Usage of the AnimatedAvatar component
- * <AnimatedAvatar />
+ * An animated avatar component that cycles through a series of frames to simulate a blinking effect.
+ * The avatar also has a pulsing effect applied.
+ * @returns {JSX.Element} The animated avatar component.
  */
-const AnimatedAvatar = () => {
-    /**
-     * State representing the current frame index in the animation sequence.
-     * @type {number}
-     */
+const RetroAvatar = () => {
     const [currentFrame, setCurrentFrame] = useState(0);
 
-    /**
-     * useEffect to update the current frame at set intervals.
-     * This creates a loop through the frames array, cycling every 500ms.
-     */
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentFrame((prevFrame) => (prevFrame + 1) % frames.length);
-        }, 500); // Adjusts the frame every 500ms for animation speed
+        }, 500);
 
-        return () => clearInterval(interval); // Clean up interval on unmount
+        return () => clearInterval(interval);
     }, []);
 
     return (
@@ -66,4 +46,4 @@ const AnimatedAvatar = () => {
     );
 };
 
-export default AnimatedAvatar;
+export default RetroAvatar;

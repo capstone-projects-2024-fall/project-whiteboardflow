@@ -1,18 +1,30 @@
 export default class CustomMenuAction extends window.iink.OIMenuAction {
-    constructor(editor) {
+    /**
+ * Creates an instance of CustomMenuAction.
+ *
+ * @constructor
+ * @param {${1:*}} editor
+ */
+constructor(editor) {
         super(editor);
         this.menuIntention = new window.iink.OIMenuIntention(editor);
         this.menuStyle = new window.iink.OIMenuStyle(editor);
         this.isExpanded = false;  // State to track if the menu is expanded or not
     }
 
-    toggleMenu() {
+    /** ${1:Description placeholder} */
+toggleMenu() {
         this.isExpanded = !this.isExpanded;
         this.expandableContent.style.width = this.isExpanded ? `${this.expandableContent.scrollWidth}px` : '0';
         this.toggleButton.textContent = this.isExpanded ? '\u2B9C' : '\u2B9E'; // Left arrow when expanded, right arrow when collapsed
     }
 
-    render(layer) {
+    /**
+ * ${1:Description placeholder}
+ *
+ * @param {${2:*}} layer
+ */
+render(layer) {
         this.wrapper = document.createElement("div");
         this.wrapper.classList.add("ms-menu", "custom-menu-action");
 

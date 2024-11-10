@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Whiteboard/CustomMenuAction.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Whiteboard/CustomMenuAction.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>export default class CustomMenuAction extends window.iink.OIMenuAction {
+    /**
+ * Creates an instance of CustomMenuAction.
+ *
+ * @constructor
+ * @param {${1:*}} editor
+ */
+constructor(editor) {
+        super(editor);
+        this.menuIntention = new window.iink.OIMenuIntention(editor);
+        this.menuStyle = new window.iink.OIMenuStyle(editor);
+        this.isExpanded = false;  // State to track if the menu is expanded or not
+    }
+
+    /** ${1:Description placeholder} */
+toggleMenu() {
+        this.isExpanded = !this.isExpanded;
+        this.expandableContent.style.width = this.isExpanded ? `${this.expandableContent.scrollWidth}px` : '0';
+        this.toggleButton.textContent = this.isExpanded ? '\u2B9C' : '\u2B9E'; // Left arrow when expanded, right arrow when collapsed
+    }
+
+    /**
+ * ${1:Description placeholder}
+ *
+ * @param {${2:*}} layer
+ */
+render(layer) {
+        this.wrapper = document.createElement("div");
+        this.wrapper.classList.add("ms-menu", "custom-menu-action");
+
+        // Create a button to toggle the menu
+        this.toggleButton = document.createElement('button');
+        this.toggleButton.textContent = '\u2B9E';
+        this.toggleButton.style.backgroundColor = 'white';
+        this.toggleButton.style.border = 'none';
+        this.toggleButton.style.color = '#1a9fff';
+        this.toggleButton.onclick = () => this.toggleMenu();
+
+        // Create a container for the items that will be shown/hidden
+        this.expandableContent = document.createElement("div");
+        this.expandableContent.classList.add('expandable-content');
+        this.expandableContent.style.width = '0';  // Start collapsed
+        this.expandableContent.style.overflow = 'hidden';
+        this.expandableContent.style.transition = 'width 0.3s ease-out';
+        this.expandableContent.style.display = 'flex';
+        this.expandableContent.style.flexDirection = 'row';
+        this.expandableContent.style.flexWrap = 'nowrap';
+        this.expandableContent.style.justifyContent = 'space-between';
+        // Elements that are always visible
+        this.wrapper.appendChild(this.menuIntention.createMenuWrite());
+        this.wrapper.appendChild(this.menuIntention.createMenuMove());
+        this.wrapper.appendChild(this.menuIntention.createMenuErase());
+        this.wrapper.appendChild(this.createMenuUndo());
+        this.wrapper.appendChild(this.createMenuRedo());
+
+        const menuStroke = this.menuStyle.createMenuStroke();
+        menuStroke.style.width = '80px';
+
+        const menuFontSize = this.menuStyle.createMenuFontSize();
+        menuFontSize.style.width = '100px';
+
+        this.expandableContent.appendChild(menuStroke);
+        this.expandableContent.appendChild(menuFontSize);
+        this.expandableContent.appendChild(this.createMenuClear());
+
+        // Append the toggle button and the expandable content to the wrapper
+        this.wrapper.appendChild(this.toggleButton);
+        this.wrapper.appendChild(this.expandableContent);
+
+        // Append the entire wrapper to the provided layer and show it
+        layer.appendChild(this.wrapper);
+        this.show();
+    }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AIAssistant">AIAssistant</a></li><li><a href="global.html#AccountSettings">AccountSettings</a></li><li><a href="global.html#AvatarContext">AvatarContext</a></li><li><a href="global.html#AvatarProvider">AvatarProvider</a></li><li><a href="global.html#AvatarToggleButton">AvatarToggleButton</a></li><li><a href="global.html#BackEndTest">BackEndTest</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Character">Character</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#HelpButton">HelpButton</a></li><li><a href="global.html#HelpModal">HelpModal</a></li><li><a href="global.html#Helper">Helper</a></li><li><a href="global.html#HintButton">HintButton</a></li><li><a href="global.html#HomePage">HomePage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#MicPrompt">MicPrompt</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalContent">ModalContent</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#QuestionArea">QuestionArea</a></li><li><a href="global.html#RedirectToImage">RedirectToImage</a></li><li><a href="global.html#Results">Results</a></li><li><a href="global.html#RetroAvatar">RetroAvatar</a></li><li><a href="global.html#SpeechRecognition">SpeechRecognition</a></li><li><a href="global.html#StyledBackdrop">StyledBackdrop</a></li><li><a href="global.html#SubmitButton">SubmitButton</a></li><li><a href="global.html#Whiteboard">Whiteboard</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#blue">blue</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#frames">frames</a></li><li><a href="global.html#getIdToken">getIdToken</a></li><li><a href="global.html#grey">grey</a></li><li><a href="global.html#provider">provider</a></li><li><a href="global.html#recognition">recognition</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#reportWebVitals">reportWebVitals</a></li><li><a href="global.html#root">root</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#useAvatar">useAvatar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 10 2024 16:20:51 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Avatar/RetroAvatar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Avatar/RetroAvatar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import './RetroAvatar.css';
+
+/** @type {string[]} Paths for each animation frame */
+const frames = [
+    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_000.png",
+    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_002.png",
+    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_003.png",
+    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_004.png",
+    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_005.png",
+    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_006.png",
+    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_007.png",
+    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_008.png",
+    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_009.png"
+];
+
+/**
+ * An animated avatar component that cycles through a series of frames to simulate a blinking effect.
+ * The avatar also has a pulsing effect applied.
+ * @returns {JSX.Element} The animated avatar component.
+ */
+const RetroAvatar = () => {
+    const [currentFrame, setCurrentFrame] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentFrame((prevFrame) => (prevFrame + 1) % frames.length);
+        }, 500);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        &lt;motion.div
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1.05 }}
+            transition={{
+                duration: 2,
+                yoyo: Infinity,
+            }}
+            className="retro-avatar"
+        >
+            &lt;img src={frames[currentFrame]} alt="Animated Helper" />
+        &lt;/motion.div>
+    );
+};
+
+export default RetroAvatar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AIAssistant">AIAssistant</a></li><li><a href="global.html#AccountSettings">AccountSettings</a></li><li><a href="global.html#AvatarContext">AvatarContext</a></li><li><a href="global.html#AvatarProvider">AvatarProvider</a></li><li><a href="global.html#AvatarToggleButton">AvatarToggleButton</a></li><li><a href="global.html#BackEndTest">BackEndTest</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Character">Character</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#HelpButton">HelpButton</a></li><li><a href="global.html#HelpModal">HelpModal</a></li><li><a href="global.html#Helper">Helper</a></li><li><a href="global.html#HintButton">HintButton</a></li><li><a href="global.html#HomePage">HomePage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#MicPrompt">MicPrompt</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalContent">ModalContent</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#QuestionArea">QuestionArea</a></li><li><a href="global.html#RedirectToImage">RedirectToImage</a></li><li><a href="global.html#Results">Results</a></li><li><a href="global.html#RetroAvatar">RetroAvatar</a></li><li><a href="global.html#SpeechRecognition">SpeechRecognition</a></li><li><a href="global.html#StyledBackdrop">StyledBackdrop</a></li><li><a href="global.html#SubmitButton">SubmitButton</a></li><li><a href="global.html#Whiteboard">Whiteboard</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#blue">blue</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#frames">frames</a></li><li><a href="global.html#getIdToken">getIdToken</a></li><li><a href="global.html#grey">grey</a></li><li><a href="global.html#provider">provider</a></li><li><a href="global.html#recognition">recognition</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#reportWebVitals">reportWebVitals</a></li><li><a href="global.html#root">root</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#useAvatar">useAvatar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 10 2024 16:20:51 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

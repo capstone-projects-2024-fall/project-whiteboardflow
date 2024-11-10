@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: HomePage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: HomePage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// HomePage.js
+import { React, useState } from 'react';
+import { Button, Typography, Container } from '@mui/material';
+import { Link, useOutletContext, useNavigate } from 'react-router-dom';
+
+import RotatingText from './RotatingText';
+import { auth, provider, signInWithPopup, signOut } from './firebase';
+import './HomePage.css';
+import './Avatar/RetroAvatar.css';
+
+/**
+ * HomePage component providing the main interface for users, including login, 
+ * a welcome message, and navigation to the whiteboard.
+ *
+ * @param {Object} props - The props object.
+ * @param {any} props.user - The authenticated user object.
+ * @returns {JSX.Element} The rendered HomePage component.
+ */
+const HomePage = ({ user }) => {
+    const [darkMode, setDarkMode] = useOutletContext();
+    const [loading, setLoading] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const navigate = useNavigate();
+
+    /**
+     * Initiates Google sign-in using Firebase authentication.
+     * Displays a success or failure message in a snackbar.
+     */
+    const signInWithGoogle = () => {
+        setLoading(true);
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                setSnackbarMessage(`Welcome, ${result.user.displayName}`);
+                setSnackbarOpen(true);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('Login failed:', error);
+                setSnackbarMessage('Login failed. Please try again.');
+                setSnackbarOpen(true);
+                setLoading(false);
+            });
+    };
+
+    /**
+     * Starts the whiteboard session by saving the start time in local storage
+     * and navigating to the whiteboard page.
+     */
+    const handleGetStarted = () => {
+        localStorage.setItem("startTime", Date.now());
+        navigate("/whiteboard");
+    };
+
+    return (
+        &lt;Container>
+            &lt;section style={{ padding: '100px 0 0 0', textAlign: 'center', fontSize: '2rem', fontWeight: 'bold' }}>
+                &lt;Typography variant="h8" gutterBottom className="styled-heading">
+                    &lt;span className={darkMode ? "heading-main-dark" : "heading-main-light"}>Whiteboard&lt;/span>
+                    &lt;span className="heading-highlight">.assistant&lt;/span>
+                &lt;/Typography>
+            &lt;/section>
+
+            {/* Rotating text component */}
+            &lt;section style={{ marginTop: '60px', textAlign: 'center' }}>
+                &lt;RotatingText darkMode={darkMode} />
+            &lt;/section>
+
+            &lt;section style={{ padding: '60px 0', textAlign: 'center', fontSize: '2rem', fontWeight: 'bold' }}>
+                {/* Conditionally render the "Get Started" button if the user is logged in */}
+                {user ? (
+                    &lt;Button variant="contained" style={{ marginTop: '20px' }} onClick={handleGetStarted}>
+                        Get Started
+                    &lt;/Button>
+                ) : (
+                    &lt;Button variant="contained" style={{ marginTop: '20px' }} onClick={signInWithGoogle}>
+                        Get Started
+                    &lt;/Button>
+                )}
+            &lt;/section>
+        &lt;/Container>
+    );
+};
+
+export default HomePage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BackEndTest">BackEndTest</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#HomePage">HomePage</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#Main">Main</a></li><li><a href="global.html#RotatingText">RotatingText</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#getIdToken">getIdToken</a></li><li><a href="global.html#provider">provider</a></li><li><a href="global.html#reportWebVitals">reportWebVitals</a></li><li><a href="global.html#root">root</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 10 2024 16:34:52 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

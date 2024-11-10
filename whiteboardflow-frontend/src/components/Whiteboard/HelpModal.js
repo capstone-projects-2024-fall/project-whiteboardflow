@@ -1,5 +1,13 @@
 import React, { useState } from 'react'; // Ensure to import useState
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @param {{ isVisible: any; onClose: any; }} param0
+ * @param {${2:*}} param0.isVisible
+ * @param {${3:*}} param0.onClose
+ * @returns {${4:*}\}
+ */
 const HelpModal = ({ isVisible, onClose }) => {
     const [open, setOpen] = useState(false); // State to manage visibility internally if needed
 

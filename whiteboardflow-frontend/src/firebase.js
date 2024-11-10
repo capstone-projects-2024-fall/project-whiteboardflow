@@ -3,6 +3,13 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/
 
 /**
  * Firebase configuration settings, retrieved from environment variables for security.
+ * @type {Object}
+ * @property {string} apiKey - API key for Firebase.
+ * @property {string} authDomain - Authentication domain for Firebase.
+ * @property {string} projectId - Firebase project ID.
+ * @property {string} storageBucket - Storage bucket for Firebase.
+ * @property {string} messagingSenderId - Messaging sender ID for Firebase.
+ * @property {string} appId - App ID for Firebase.
  */
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

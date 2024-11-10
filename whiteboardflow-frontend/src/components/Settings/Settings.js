@@ -2,6 +2,11 @@ import React, {useState} from 'react';
 import './Settings.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @returns {${2:*}}
+ */
 const AccountSettings = () => {
     const [activeTab, setActiveTab] = useState('account-general');
     const [username, setUsername] = useState('');

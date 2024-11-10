@@ -11,10 +11,24 @@ import Results from './components/Result/Result';
 import { auth } from './firebase';
 import { AvatarProvider } from './Avatar/AvatarContext';
 
+/**
+ * Main component of the application that sets up routes, layout, 
+ * and user authentication state. Wraps the routes in an 
+ * `AvatarProvider` and handles user authentication status.
+ *
+ * @returns {JSX.Element} The main routing and layout structure of the app.
+ */
 function Main() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+        /**
+         * Listens for changes in the user's authentication state.
+         * Updates the user state when authentication status changes.
+         * Cleans up the listener on component unmount.
+         *
+         * @returns {Function} Unsubscribe function to clean up the listener.
+         */
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setUser(user);
         });
@@ -22,7 +36,7 @@ function Main() {
     }, []);
 
     return (
-        <Router> {/* Move Router to wrap AvatarProvider */}
+        <Router> {/* Router wraps AvatarProvider to ensure context is available */}
             <AvatarProvider>
                 <Routes>
                     <Route element={<Layout user={user} />}>

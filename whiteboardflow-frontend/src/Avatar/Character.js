@@ -1,27 +1,19 @@
-// Character.js
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './Character.css';
 
 /**
- * A character component that displays an animated character with a talking bubble.
- * The bubble displays a message when the character is clicked, toggling its visibility.
- *
- * @component
- * @param {Object} props - The props for the component.
- * @param {string} props.message - The message to display in the talking bubble.
- * @returns {JSX.Element} An animated character component with a toggleable message bubble.
- * 
- * @example
- * // Example usage of the Character component
- * <Character message="Hello! I'm here to help you." />
+ * Character component props.
+ * @typedef {Object} CharacterProps
+ * @property {string} message - The message displayed in the speech bubble.
  */
-function Character({ message }) {
-    /** 
-     * State to control the visibility of the message bubble.
-     * @type {boolean}
-     */
+
+/**
+ * A character component that displays an animated character with a toggleable speech bubble.
+ * @param {CharacterProps} props - The props containing the message.
+ * @returns {JSX.Element} An animated character with a clickable speech bubble.
+ */
+const Character = ({ message }) => {
     const [showBubble, setShowBubble] = useState(false);
 
     return (
@@ -45,6 +37,6 @@ function Character({ message }) {
             )}
         </div>
     );
-}
+};
 
 export default Character;

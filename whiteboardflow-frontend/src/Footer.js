@@ -1,12 +1,23 @@
 import React from 'react';
-import { Container, Typography, IconButton, } from '@mui/material';
+import { Container, Typography, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import './Footer.css'; // Optional CSS for styling
 
-const Footer = ({darkMode}) => {
+/**
+ * Footer component displaying social media links, copyright information, 
+ * and a "Back to Top" button.
+ *
+ * @param {Object} props - The props for the Footer component.
+ * @param {boolean} props.darkMode - Determines if dark mode styling is applied.
+ * @returns {JSX.Element} The rendered Footer component.
+ */
+const Footer = ({ darkMode }) => {
+    /**
+     * Scrolls the window to the top with a smooth animation.
+     */
     const handleScrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -15,8 +26,8 @@ const Footer = ({darkMode}) => {
         <footer className={darkMode ? "footer-dark" : "footer-light"}>
             <Container>
                 <div className="footer-content">
-                    
-                    {/* Social Media Links
+
+                    {/* Social Media Links */}
                     <div className="footer-social">
                         <Typography variant="h6">Follow Us</Typography>
                         <IconButton href="https://www.facebook.com" target="_blank" color="primary">
@@ -31,7 +42,7 @@ const Footer = ({darkMode}) => {
                         <IconButton href="https://www.instagram.com" target="_blank" color="primary">
                             <InstagramIcon />
                         </IconButton>
-                    </div> */}
+                    </div>
                 </div>
 
                 {/* Copyright Info */}

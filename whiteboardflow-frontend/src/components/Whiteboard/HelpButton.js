@@ -8,7 +8,12 @@ import { Modal as BaseModal} from '@mui/base/Modal';
 
 
 
-    const HelpButton = () => {
+    /**
+ * ${1:Description placeholder}
+ *
+ * @returns {${2:*}}
+ */
+const HelpButton = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -40,6 +45,11 @@ import { Modal as BaseModal} from '@mui/base/Modal';
     );
 };
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
 const Backdrop = React.forwardRef((props, ref) => {
     const { open, className, ...other } = props;
     return (
@@ -56,7 +66,12 @@ const Backdrop = React.forwardRef((props, ref) => {
     open: PropTypes.bool,
   };
   
-  const blue = {
+  /**
+ * ${1:Description placeholder}
+ *
+ * @type {{ 200: string; 300: string; 400: string; 500: string; 600: string; 700: string; }\}
+ */
+const blue = {
     200: '#99CCFF',
     300: '#66B2FF',
     400: '#3399FF',
@@ -65,7 +80,12 @@ const Backdrop = React.forwardRef((props, ref) => {
     700: '#0066CC',
   };
   
-  const grey = {
+  /**
+ * ${1:Description placeholder}
+ *
+ * @type {{ 50: string; 100: string; 200: string; 300: string; 400: string; 500: string; 600: string; 700: string; 800: string; 900: string; }\}
+ */
+const grey = {
     50: '#F3F6F9',
     100: '#E5EAF2',
     200: '#DAE2ED',
@@ -78,7 +98,12 @@ const Backdrop = React.forwardRef((props, ref) => {
     900: '#1C2025',
   };
   
-  const Modal = styled(BaseModal)`
+  /**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
+const Modal = styled(BaseModal)`
     position: fixed;
     z-index: 1300;
     inset: 0;
@@ -87,7 +112,12 @@ const Backdrop = React.forwardRef((props, ref) => {
     justify-content: center;
   `;
   
-  const StyledBackdrop = styled(Backdrop)`
+  /**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
+const StyledBackdrop = styled(Backdrop)`
     z-index: -1;
     position: fixed;
     inset: 0;
@@ -95,7 +125,12 @@ const Backdrop = React.forwardRef((props, ref) => {
     -webkit-tap-highlight-color: transparent;
   `;
   
-  const ModalContent = styled('div')(
+  /**
+ * ${1:Description placeholder}
+ *
+ * @type {${2:*}}
+ */
+const ModalContent = styled('div')(
     ({ theme }) => css`
       font-family: 'IBM Plex Sans', sans-serif;
       font-weight: 500;

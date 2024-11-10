@@ -1,7 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './RotatingText.css';
 
-const RotatingText = ({darkMode}) => {
+/**
+ * RotatingText component that cycles through an array of text messages, 
+ * displaying each message with a sliding animation. Supports dark mode styling.
+ *
+ * @param {Object} props - The props for the RotatingText component.
+ * @param {boolean} props.darkMode - Determines if dark mode styling is applied.
+ * @returns {JSX.Element} The rendered RotatingText component.
+ */
+const RotatingText = ({ darkMode }) => {
+    /**
+     * An array of text objects containing a heading and body for each message.
+     * Stored in a ref to prevent reinitialization on re-renders.
+     */
     const textArray = useRef([
         { heading: "Welcome", body: "Discover a new and effective way to approach your upcoming interviews. Practice makes perfect!" },
         { heading: "Prepare with AI Powered Interviews", body: "Gain insights from AI powered question generation and analysis." },
@@ -14,6 +26,10 @@ const RotatingText = ({darkMode}) => {
     const [slide, setSlide] = useState(true);
 
     useEffect(() => {
+        /**
+         * Interval to automatically update the index for rotating text every 7 seconds.
+         * Temporarily disables the slide animation during text transition.
+         */
         const intervalId = setInterval(() => {
             setSlide(false);
 
@@ -27,12 +43,12 @@ const RotatingText = ({darkMode}) => {
     }, []);
 
     useEffect(() => {
+        // Updates the current text based on the current index.
         setCurrentText(textArray.current[index]);
     }, [index]);
 
     return (
         <div className={darkMode ? `rotating-text-dark ${slide ? 'slide-in' : 'slide-out'}` : `rotating-text-light ${slide ? 'slide-in' : 'slide-out'}`}>
-            {/* {darkMode ? <p>True</p> : <p>False</p>} */}
             <h2 className="rotating-text-heading">{currentText.heading}</h2>
             <p className="rotating-text-body">{currentText.body}</p>
         </div>

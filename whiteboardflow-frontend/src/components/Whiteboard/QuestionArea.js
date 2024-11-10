@@ -5,6 +5,13 @@ import HintButton from './HintButton';
 import DOMPurify from "dompurify";
 import AvatarToggleButton from '../../Avatar/AvatarToggleButton';
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @param {{ sendPNGToFirebase: any; }} param0
+ * @param {${2:*}} param0.sendPNGToFirebase
+ * @returns {${3:*}\}
+ */
 const QuestionArea = ({ sendPNGToFirebase }) => {
     const minWidth = 15;
     const [width, setWidth] = useState('50%'); // Start with default visible width

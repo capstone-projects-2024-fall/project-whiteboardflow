@@ -4,15 +4,24 @@ import './index.css';
 import Main from './Main.js'; // Import the Main component
 import reportWebVitals from './reportWebVitals.js';
 
-
+/**
+ * The root of the React application, responsible for rendering the Main component
+ * into the HTML root element.
+ *
+ * @type {ReactDOM.Root}
+ */
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+/**
+ * Renders the Main component into the DOM.
+ */
 root.render(
-
     <Main />
-
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+/**
+ * Initializes web vitals reporting to measure and log performance metrics.
+ * Pass a function to log results (e.g., reportWebVitals(console.log)) or 
+ * send data to an analytics endpoint. More information: https://bit.ly/CRA-vitals
+ */
 reportWebVitals();

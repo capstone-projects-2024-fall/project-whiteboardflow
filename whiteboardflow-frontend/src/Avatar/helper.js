@@ -2,22 +2,17 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 /**
- * A helper component that displays a message bubble with a fade-in animation when hovered over.
- *
- * @component
- * @param {Object} props - The properties for the Helper component.
- * @param {string} props.message - The message displayed inside the helper bubble.
- * @returns {JSX.Element} A message bubble that appears on hover.
- * 
- * @example
- * // Example usage of the Helper component
- * <Helper message="Hover over me for tips!" />
+ * Helper component props.
+ * @typedef {Object} HelperProps
+ * @property {string} message - The message to display in the helper bubble.
  */
-function Helper({ message }) {
-    /**
-     * State controlling the visibility of the message bubble.
-     * @type {boolean}
-     */
+
+/**
+ * Helper component that displays a message bubble when hovered.
+ * @param {HelperProps} props - The props containing the message.
+ * @returns {JSX.Element} A helper component with a hover-triggered message bubble.
+ */
+const Helper = ({ message }) => {
     const [visible, setVisible] = useState(false);
 
     return (
@@ -32,6 +27,6 @@ function Helper({ message }) {
             </motion.div>
         </div>
     );
-}
+};
 
 export default Helper;

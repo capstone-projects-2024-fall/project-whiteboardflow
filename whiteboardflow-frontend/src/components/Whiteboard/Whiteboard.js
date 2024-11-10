@@ -19,6 +19,11 @@ import './css/components.css';
 import './css/examples.css';
 import './css/custom-menu-action.css';
 
+/**
+ * ${1:Description placeholder}
+ *
+ * @returns {${2:*}}
+ */
 const Whiteboard = () => {
     // Refs for DOM elements and editor instance
     const editor = useRef(null)
