@@ -6,12 +6,44 @@ import { auth } from "../../firebase";
 import DOMPurify from "dompurify";
 import './Results.css';
 
+/**
+ * The `Results` component displays a dashboard of the practice session, including the AI analysis,
+ * the handwritten response image, the practice question, and the completion time.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ */
 const Results = () => {
-    const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
-    const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
-    const [questionText, setQuestionText] = useState(""); // Question text
-    const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
+    /**
+     * State to store the AI analysis of the oral response.
+     * @type {string}
+     */
+    const [oralAnalysis, setOralAnalysis] = useState("");
 
+    /**
+     * State to store the URL of the handwritten image.
+     * @type {string}
+     */
+    const [imageUrl, setImageUrl] = useState("");
+
+    /**
+     * State to store the question text in HTML format.
+     * @type {string}
+     */
+    const [questionText, setQuestionText] = useState("");
+
+    /**
+     * State to store the formatted completion time.
+     * @type {string}
+     */
+    const [completionTime, setCompletionTime] = useState("");
+
+    /**
+     * Calculates the time spent on the practice session by using the start time
+     * stored in localStorage and the current time.
+     *
+     * @returns {string} The formatted completion time as a string (e.g., "1h 15m 30s").
+     */
     const calculateCompletionTime = () => {
         const startTime = localStorage.getItem("startTime");
         if (startTime) {
@@ -25,6 +57,9 @@ const Results = () => {
         return "Not available";
     };
 
+    /**
+     * Loads data from localStorage, fetches the image URL from Firebase, and calculates the completion time.
+     */
     useEffect(() => {
         const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
         setOralAnalysis(aiResponse);

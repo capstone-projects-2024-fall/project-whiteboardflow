@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
+/**
+ * Firebase configuration settings, retrieved from environment variables for security.
+ */
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 	authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -10,18 +13,40 @@ const firebaseConfig = {
 	appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
+/**
+ * The Firebase app instance.
+ * @type {import("firebase/app").FirebaseApp | undefined}
+ */
 let app;
 
 try {
+	// Initialize Firebase app
 	app = initializeApp(firebaseConfig);
 	console.log("Firebase initialized successfully");
 } catch (error) {
 	console.error("Firebase initialization error:", error);
 }
 
+/**
+ * Firebase authentication instance.
+ * @type {import("firebase/auth").Auth}
+ */
 const auth = getAuth(app);
+
+/**
+ * Google Authentication provider for Firebase.
+ * @type {import("firebase/auth").GoogleAuthProvider}
+ */
 const provider = new GoogleAuthProvider();
 
+/**
+ * Retrieves the ID token for the currently authenticated user.
+ *
+ * @async
+ * @function getIdToken
+ * @returns {Promise<string>} The ID token of the signed-in user.
+ * @throws Will throw an error if no user is signed in.
+ */
 async function getIdToken() {
 	const user = auth.currentUser;
 	if (user) {
@@ -32,5 +57,6 @@ async function getIdToken() {
 	}
 }
 
-export { auth, provider, signInWithPopup, signOut, getIdToken }; // Make sure signOut is exported
+// Exports
+export { auth, provider, signInWithPopup, signOut, getIdToken };
 export default app;

@@ -2,8 +2,19 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { auth } from '../firebase';
 import { signInWithCredential, GoogleAuthProvider } from 'firebase/auth';
 
-
+/**
+ * The `Login` component provides a Google OAuth login interface using Firebase.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered login component.
+ */
 function Login() {
+    /**
+     * Handles successful Google login and signs in the user with Firebase using the received credential.
+     *
+     * @param {object} response - The response object returned from Google login.
+     * @param {string} response.credential - The credential token returned from Google.
+     */
     const handleGoogleLoginSuccess = (response) => {
         if (response.credential) {
             const credential = GoogleAuthProvider.credential(response.credential);
@@ -33,15 +44,3 @@ function Login() {
 }
 
 export default Login;
-
-/* import { auth, provider } from '../firebase'; // Make sure to import provider
-import { signInWithPopup } from 'firebase/auth';
-
-const handleGoogleLogin = async () => {
-    try {
-        const result = await signInWithPopup(auth, provider);
-        console.log('User logged in:', result.user);
-    } catch (error) {
-        console.error('Login failed:', error);
-    }
-}; */
