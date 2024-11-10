@@ -1,4 +1,4 @@
-.rotating-text
+.rotating-text-dark
 {
     display: flex;
     flex-direction: column;
@@ -6,11 +6,22 @@
     justify-content: center;
     overflow: hidden;
     min-height: 6em;
-    /* Increased minimum height */
     text-align: center;
-    color: #2D3748;
     padding: 1em 0;
-    /* Added padding to prevent clipping */
+    color: white;
+}
+
+.rotating-text-light
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 6em;
+    text-align: center;
+    padding: 1em 0;
+    color: #202124;
 }
 
 .rotating-text-heading
@@ -19,7 +30,7 @@
     /* Adjusted for larger heading */
     font-weight: bold;
     margin: 0;
-    color: #2D3748;
+    /* color: gray; */
 }
 
 .rotating-text-body
@@ -27,7 +38,7 @@
     font-size: 1.5em;
     /* Adjusted for larger body text */
     font-weight: 400;
-    color: #4A5568;
+    /* color: gray; */
     margin: 0.5em 0 0;
 }
 
@@ -43,4 +54,12 @@
     transform: translateX(100%);
     opacity: 0;
     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.dark {
+    color: white;
+}
+
+.light {
+    color: #202124;
 }

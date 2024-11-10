@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from '@mui/material';
+import "./MicPrompt.css"
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
@@ -8,7 +9,7 @@ recognition.continuous = true;
 recognition.interimResults = true;
 recognition.lang = 'en-US';
 
-const MicPrompt = () => {
+const MicPrompt = ({darkMode}) => {
 	const [listening, setListening] = useState(false);
 
 	const handleListen = () => {
@@ -67,8 +68,10 @@ const MicPrompt = () => {
 			>
 				{listening ? "Stop recording" : "Record"}
 			</Button>
-			<div id='interim'></div>
-			<div id='final'></div>
+			<div className={darkMode ? "transcription-box-dark" :"transcription-box-light"}>
+				<div id='final'></div>
+				<div className={darkMode ? listening ? "interim-box-dark" : "" : listening ? "interim-box-light" : ""} id='interim'></div>
+			</div>
 		</div>
 	);
 };
