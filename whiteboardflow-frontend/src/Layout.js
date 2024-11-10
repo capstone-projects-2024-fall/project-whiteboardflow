@@ -170,8 +170,8 @@ const Layout = ({ children, user }) => { // Accept user as a prop
                         <div className='user-menu'>
                         {user ? (
                         <>
-                            <Avatar alt={user.displayName} src={user.photoURL} sx={{ marginRight: 4, marginBottom: 5 }} />   
-                            <Avatar alt={user.displayName} src={user.photoURL} />
+                            <Avatar alt={user.displayName} src={user.photoURL} sx={{ marginBottom: 1 }} />   
+                            {/* <Avatar alt={user.displayName} src={user.photoURL} /> */}
                             <Typography variant="h6" component="div" sx={{ mr: 2 }}>
                                 Welcome, {user.displayName}
                             </Typography>
