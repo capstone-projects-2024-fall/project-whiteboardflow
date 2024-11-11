@@ -6,8 +6,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from routers.voice import router as voice_router
-from routers.image import router as image_router
 from routers.AI.ai_assistant import router as ai_router
 
 app = FastAPI(debug=False)  # Set debug=False for production
@@ -23,9 +21,7 @@ app.add_middleware(
 )
 
 # Include routers for different API endpoints
-app.include_router(voice_router, prefix="/api")
 app.include_router(ai_router, prefix="/api")
-app.include_router(image_router, prefix="/api")
 
 # Serve static files (e.g., images)
 app.mount("/static", StaticFiles(directory="static"), name="static")
