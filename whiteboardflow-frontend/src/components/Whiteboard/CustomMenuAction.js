@@ -10,6 +10,16 @@ export default class CustomMenuAction extends window.iink.OIMenuAction {
         this.isExpanded = !this.isExpanded;
         this.expandableContent.style.width = this.isExpanded ? `${this.expandableContent.scrollWidth}px` : '0';
         this.toggleButton.textContent = this.isExpanded ? '\u2B9C' : '\u2B9E'; // Left arrow when expanded, right arrow when collapsed
+
+        Array.from(this.expandableContent.children).forEach(wrapper => {
+            if (wrapper.classList.contains('collapsible-wrapper')) {
+                const content = wrapper.querySelector('.collapsible-content'); // Find the collapsible-content inside the wrapper
+                if (content) {
+                    content.style.display = this.isExpanded ? 'flex' : 'none'; // Toggle display of the collapsible-content
+                    content.style.width = this.isExpanded ? '' : '0'; // Ensure content width is reset when expanded
+                }
+            }
+        });
     }
 
     render(layer) {
@@ -44,11 +54,11 @@ export default class CustomMenuAction extends window.iink.OIMenuAction {
         const menuStroke = this.menuStyle.createMenuStroke();
         menuStroke.style.width = '80px';
 
-        const menuFontSize = this.menuStyle.createMenuFontSize();
-        menuFontSize.style.width = '100px';
+        const menuThickness = this.menuStyle.createMenuThickness();
+        menuThickness.style.width = '100px';
 
         this.expandableContent.appendChild(menuStroke);
-        this.expandableContent.appendChild(menuFontSize);
+        this.expandableContent.appendChild(menuThickness);
         this.expandableContent.appendChild(this.createMenuClear());
 
         // Append the toggle button and the expandable content to the wrapper
