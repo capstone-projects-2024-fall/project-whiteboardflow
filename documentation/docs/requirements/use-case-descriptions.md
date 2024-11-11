@@ -2,78 +2,135 @@
 sidebar_position: 5
 ---
 
-# Use-case descriptions
+# Use-case Descriptions
 
-## Use Case 1: Mock interview
-A user wants to practice a problem using WhiteBoardFlow.
-1. User opens the WhiteboardFlow application.
-2. User logs into their WhiteboardFlow account.
-3. After logging in, the user clicks the button to begin an interview question.
-4. User writes out their answer on the digital whiteboard.
-5. User is prompted to explain their thought process orally.
-6. User receives feedback on their answer and thought processes.
+## Use Case 1: Mock Interview
 
-## Use case 2: Digital whiteboard
-A user wants to answer questions by drawing out answers on the whiteboard.
-1. User starts an exercise.
-2. User is presented with a digital whiteboard to answer questions.
-3. User is able to write their problem out with a stylus or their finger.
-4. User is able to erase or delete what they've written.
-5. User is able to undo/redo individual pen strokes.
+**Actor**: A recent graduate who is somewhat uncertain about their problem-solving skills and wants to prepare for upcoming job interviews by practicing on WhiteboardFlow.
 
-## Use case 3: AI assistant
-A user needs help with a practice problem.
-1. User chooses to  answer a question.
-2. User is unsure of how to start answering the question.
-3. User clicks a button to request help.
-4. WhiteboardFlow generates a hint or leading question to guide the user based on the user's current project.
+**Pre-Condition**: The user is logged into the WhiteboardFlow application and on the main dashboard.
 
-## Use case 4: Account creation
-A user wants to sign up for an account.
-1. User opens the WhiteboardFlow application.
-2. User selects "Create Account."
-3. User links an existing Google/Facebook account to their new account through
-   OAuth.
-4. User verifies account is created.
+**Post-Condition**: The user receives immediate feedback on their answer.
 
-## Use Case 5: Account deletion
-A user wants to delete their account.
-1. User navigates to the preferences drop-down menu.
-2. User selects ‘delete account’.
-3. User must confirm that they want to delete their account by re-signing in
-   through OAuth.
-4. System deletes all of the user's profile and information from the Firebase database.
+### Main Success Scenario
+1. The user selects the “Start Interview” button on the dashboard.
+2. The system displays a new interview question on the digital whiteboard.
+3. The user writes their solution on the whiteboard.
+4. The system provides real-time feedback on the user's answer.
 
+---
 
-## Use Case 6: User practice history
-A user wants to review their performance history.
-1. User logs into their WhiteboardFlow account.
-2. On the homepage, the user selects the "Previous Questions" table in the upper left corner hamburger menu.
-3. User clicks on a question from the history list to expand it.
-4. The system displays the question, the AI-generated feedback, and the user’s speech emotion score.
-5. User reviews the feedback and closes the expanded view.
+## Use Case 2: Digital Whiteboard
 
-<!--## Use Case 7: Request a different question
-A user requests a more challenging question.
-1. User logs into WhiteboardFlow and starts an interview.
-2. After completing the first question, the user selects the “New Question” option
-3. User opts for a “High Difficulty” question from the dropdown menu.
-4. The system generates a more complex problem, with a longer time limit.
-5. User begins solving the problem on the whiteboard, with AI monitoring their progress.
-6. User finishes some questions, clicks on the exit button, and logs out from the application. -->
+**Actor**: A student who learns best through visual methods and needs a space to draw out answers for problem-solving.
+
+**Pre-Condition**: The user has started an exercise and is on the digital whiteboard screen.
+
+**Post-Condition**: The user successfully draws, edits, or erases their responses on the whiteboard.
+
+### Main Success Scenario
+1. The user starts an exercise.
+2. The system presents a digital whiteboard interface for answering questions.
+3. The user uses a stylus or finger to write on the whiteboard.
+4. The user erases or deletes content as needed.
+5. The user can undo or redo individual pen strokes.
+
+---
+
+## Use Case 3: AI Assistant
+
+**Actor**: A user who is practicing for technical interviews and occasionally needs hints to overcome challenging questions.
+
+**Pre-Condition**: The user is logged in, has started a practice problem, but is uncertain about their approach.
+
+**Post-Condition**: The user receives AI-generated guidance on how to proceed with the question.
+
+### Main Success Scenario
+1. The user selects a question to answer.
+2. The user becomes unsure of how to proceed.
+3. The user clicks a "Request Help" button.
+4. The system generates a hint or guiding question based on the user's current work.
+
+---
+
+## Use Case 4: Account Creation
+
+**Actor**: A new user who has recently downloaded WhiteboardFlow and wants to set up their profile quickly to start practicing.
+
+**Pre-Condition**: The user has opened the WhiteboardFlow application for the first time.
+
+**Post-Condition**: A new account is created for the user, and they are logged in.
+
+### Main Success Scenario
+1. The user opens the WhiteboardFlow application.
+2. The user selects "Create Account."
+3. The user links an existing Google or Facebook account through OAuth.
+4. The system confirms the account creation and logs the user in.
+
+---
+## Use Case 5: Account Deletion
+
+**Actor**: A user who has decided to stop using WhiteboardFlow and wants to remove their account and all related data.
+
+**Pre-Condition**: The user is logged into WhiteboardFlow and has navigated to their settings/preferences menu.
+
+**Post-Condition**: The user's account and data are removed from the Firebase database.
+
+### Main Success Scenario
+1. The user accesses the preferences drop-down menu.
+2. The user selects "Delete Account."
+3. The system prompts the user to confirm by re-authenticating via OAuth.
+4. The system deletes the user’s profile and all associated data from Firebase.
+
+---
+
+## Use Case 6: User Practice History
+
+**Actor**: A user who wants to track their progress and review feedback on previous practice problems.
+
+**Pre-Condition**: The user is logged into WhiteboardFlow.
+
+**Post-Condition**: The user can review past questions and feedback.
+
+### Main Success Scenario
+1. The user logs into their WhiteboardFlow account.
+2. The user accesses the "Previous Questions" table via the hamburger menu on the homepage.
+3. The user clicks on a specific question from the history list.
+4. The system displays the question, AI-generated feedback, and the user’s speech emotion score.
+5. The user reviews the feedback and closes the view.
+
+---
 
 ## Use Case 7: Hints
-A user requests a hint from the AI assistant.
-1. User begins answer a question but is unsure how to proceed after a certain point.
-2. User presses the "Hint" button.
-3. User's current work is sent to the AI assistant.
-4. User receives a hint or is asked a leading question based on work done so far.
 
-## Use Case 8: Unexpected exit
-A user accidentally exits the app mid-interview but is able to restore their session.
-1. User is currently answering a question.
-2. User accidentally exits out of the WhiteboardFlow tab.
-3. User logs back into the homepage.
-4. A prompt appears, asking if the user wants to continue their session.
-5. User selects ‘Yes’.
-6. User continues their interview question, with their previous whiteboard drawings and time remaining saved from the previous session.
+**Actor**: A user who is answering a question but gets stuck and requires guidance to continue.
+
+**Pre-Condition**: The user is answering a question but is unsure how to proceed.
+
+**Post-Condition**: The user receives a helpful hint or guiding question based on their work so far.
+
+### Main Success Scenario
+1. The user begins answering a question but encounters difficulty.
+2. The user clicks the "Hint" button.
+3. The system analyzes the user’s current work and generates a hint or leading question.
+4. The user receives AI-generated guidance.
+
+---
+
+## Use Case 8: Unexpected Exit
+
+**Actor**: A user who accidentally exits the application mid-interview but wants to continue from where they left off.
+
+**Pre-Condition**: The user is logged in and answering a question.
+
+**Post-Condition**: The user is able to continue their session seamlessly from where they left off.
+
+### Main Success Scenario
+1. The user is actively answering a question.
+2. The user accidentally exits the WhiteboardFlow tab.
+3. The user reopens WhiteboardFlow and logs back in.
+4. The system prompts the user to restore their previous session.
+5. The user selects "Yes" to continue.
+6. The system restores the previous session, including whiteboard drawings and time remaining.
+
+---
