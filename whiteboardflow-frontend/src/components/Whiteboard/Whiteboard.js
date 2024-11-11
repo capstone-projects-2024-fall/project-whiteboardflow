@@ -56,7 +56,9 @@ const Whiteboard = () => {
                             }
                         },
                         recognition: {
-                            alwaysConnected: false,
+                            alwaysConnected: true,
+                            type: "TEXT",
+                            "recognition-timeout": 3600000
                         },
                         modules: {
                             eraser: true,
