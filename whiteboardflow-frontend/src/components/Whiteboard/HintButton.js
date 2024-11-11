@@ -42,7 +42,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 		const idToken = await getIdToken();
 
 		try {
-			const response = await fetch("/api/get-hint", {
+			const response = await fetch("https://project-whiteboardflow-1.onrender.com/api/get-hint", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

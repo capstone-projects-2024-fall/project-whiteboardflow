@@ -2,18 +2,16 @@ import uvicorn
 import shutil
 import config.firebase_config
 
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
 
 from routers.AI.ai_assistant import router as ai_router
 
+app = FastAPI(debug=False)  # Set debug=False for production
 
-app = FastAPI(debug=True)
-
-origins = ["http://localhost:3000", "localhost:3000"]
-
+# CORS configuration to allow frontend from Vercel
+origins = ["https://project-whiteboardflow-eowa.vercel.app"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -22,16 +20,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(ai_router, prefix="/api")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+# Include routers for different API endpoints
+app.include_router(ai_router, prefix="/api")
 
+# Serve static files (e.g., images)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 def read_root():
     return {"test_data": ["data1", "data2"]}
 
-
-if __name__ == "__main__":
-    # TODO Remove reload parameter in production
-    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
+# For local development, you can still use uvicorn manually:
+# if __name__ == "__main__":
+#     uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
