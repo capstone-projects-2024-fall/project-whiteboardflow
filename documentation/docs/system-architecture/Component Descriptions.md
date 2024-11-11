@@ -90,18 +90,6 @@ The **iink-ts** library is used for digital whiteboard functionality, providing 
 
 ---
 
-## Performance Monitoring
-
-**Technology**: Web Vitals Reporting
-
-Performance monitoring is implemented with **reportWebVitals.js**, tracking key metrics like CLS, FCP, and TTFB.
-
-### Key Features:
-- **Analytics**: Allows performance metrics to be logged or sent to analytics services for monitoring.
-- **Optimization**: Helps detect and address performance bottlenecks in real-time.
-
----
-
 ## Interactive Avatars and Animations
 
 **Technology**: Framer Motion, Custom Avatar Context
@@ -137,7 +125,6 @@ Performance monitoring is implemented with **reportWebVitals.js**, tracking key 
 | `Character.js`       | Renders avatar with animations           | Framer Motion              |
 | `RetroAvatar.js`     | Retro-style avatar with animations       | Framer Motion              |
 | `firebase.js`        | Manages Firebase setup                   | Firebase, Env Variables    |
-| `reportWebVitals.js` | Captures performance metrics             | Web Vitals API, Vercel     |
 | Whiteboard           | Interactive whiteboard                   | iink-ts, WebSocket         |
 
 ---
