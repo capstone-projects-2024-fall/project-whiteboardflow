@@ -9,7 +9,7 @@ recognition.continuous = true;
 recognition.interimResults = true;
 recognition.lang = 'en-US';
 
-const MicPrompt = ({darkMode}) => {
+const MicPrompt = ({darkMode, setRecording, setNotRecording, setEmpty, setNotEmpty}) => {
 	const [listening, setListening] = useState(false);
 
 	const handleListen = () => {
@@ -52,7 +52,9 @@ const MicPrompt = ({darkMode}) => {
 	};
 
 	const toggleListen = () => {
+		listening ? setNotRecording() : setRecording();
 		setListening((prevListening) => !prevListening);
+		setNotEmpty() 
 	};
 
 	useEffect(() => {
