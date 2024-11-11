@@ -1,4 +1,5 @@
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
+import React, { useState } from 'react'
 import MicPrompt from '../../components/MicPrompt/MicPrompt';
 import { useNavigate, useOutletContext } from 'react-router-dom'; // Import useNavigate
 import { getIdToken } from '../../firebase'
@@ -8,7 +9,31 @@ function OralTest() {
 	const navigate = useNavigate(); // Initialize navigate hook
 
 	const [darkMode, setDarkMode] = useOutletContext();
+
+	const [isEmpty, setIsEmpty] = useState(true)
+	const [isRecording, setIsRecording] = useState(true)
+	const [isLoading, setIsLoading] = useState(false)
 	
+	const setNotEmpty = () => {
+		setIsEmpty(false);
+	}
+
+	const setEmpty = () => {
+		setIsEmpty(true);
+	}
+
+	const setRecording = () => {
+		setIsRecording(true)
+	}
+
+	const setNotRecording = () => {
+		setIsRecording(false)
+	}
+
+	const triggerLoading = () => {
+		setIsLoading(true);
+	}
+
 	const submitResponseData = async () => {
 		const idToken = await getIdToken();
 
@@ -47,20 +72,39 @@ function OralTest() {
 				<ol>
 					<li>Click the 'Record' button, then explain your thought process for your written answer.</li>
 					<li>Click 'Stop Recording' when you are finished.</li>
+					<li>A "Submit" button will appear when you are finished.</li>
 					<li>Click 'Submit' to submit your response and receive AI-generated feedback.</li>
 				</ol>
 
 				{/* <div className="verbal-container"> */}
-					<MicPrompt darkMode={darkMode}/>
+					<MicPrompt 
+						darkMode={darkMode}
+						setRecording={setRecording}
+						setNotRecording={setNotRecording}
+						setEmpty={setEmpty}
+						setNotEmpty={setNotEmpty}
+					/>
 				{/* </div> */}
 			{/* </div> */}
+			{(!isRecording && !isEmpty && !isLoading) && 
+			
 			<Button
 				className="submit-button"
 				variant="contained"
-				onClick={submitResponseData}
+				onClick={(e) => {triggerLoading(); submitResponseData()}}
 			>
 				Submit
-			</Button>
+			</Button> 
+			
+			}
+
+			{isLoading && 
+			
+			
+		<CircularProgress color="inherit" />
+
+}
+			
 		</div>
 	);
 }

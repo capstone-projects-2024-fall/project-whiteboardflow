@@ -86,7 +86,7 @@ const Whiteboard = () => {
                 };
                 editor.current = new window.iink.Editor(editorElement.current, options);
                 await editor.current.initialize();
-                deleteElements();
+                // deleteElements();
                 if (!editor.current) {
                     console.error("Editor is not initialized.");
                 }
