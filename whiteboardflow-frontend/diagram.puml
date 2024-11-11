@@ -1,0 +1,176 @@
+@startuml
+actor User
+participant AvatarContext
+AvatarContext -> react: renders
+AvatarContext -> react-router-dom: renders
+AvatarContext -> RetroAvatar: renders
+AvatarContext -> AvatarContext: renders
+participant AvatarToggleButton
+AvatarToggleButton -> react: renders
+AvatarToggleButton -> material: renders
+AvatarToggleButton -> AvatarContext: renders
+participant Character
+Character -> react: renders
+Character -> framer-motion: renders
+Character -> Character: renders
+participant helper-working
+helper-working -> react: renders
+helper-working -> framer-motion: renders
+participant helper
+helper -> react: renders
+helper -> framer-motion: renders
+participant RetroAvatar
+RetroAvatar -> react: renders
+RetroAvatar -> framer-motion: renders
+RetroAvatar -> RetroAvatar: renders
+participant BackEndTest
+BackEndTest -> react: renders
+participant AIAssistant
+AIAssistant -> react: renders
+participant Menu
+Menu -> react: renders
+participant MicPrompt
+MicPrompt -> react: renders
+MicPrompt -> material: renders
+MicPrompt -> MicPrompt: renders
+participant Profile
+Profile -> react: renders
+participant Result
+Result -> react: renders
+Result -> material: renders
+Result -> react-markdown: renders
+Result -> storage: renders
+Result -> firebase: renders
+Result -> dompurify: renders
+Result -> Results: renders
+participant Settings
+Settings -> react: renders
+Settings -> Settings: renders
+Settings -> bootstrap.min: renders
+participant CustomMenuAction
+participant HelpButton
+HelpButton -> react: renders
+HelpButton -> helpbutton: renders
+HelpButton -> prop-types: renders
+HelpButton -> clsx: renders
+HelpButton -> system: renders
+HelpButton -> Modal: renders
+participant HelpModal
+HelpModal -> react: renders
+participant HintButton
+HintButton -> react: renders
+HintButton -> helpbutton: renders
+HintButton -> prop-types: renders
+HintButton -> clsx: renders
+HintButton -> system: renders
+HintButton -> Modal: renders
+HintButton -> material: renders
+HintButton -> firebase: renders
+HintButton -> react-markdown: renders
+participant QuestionArea
+QuestionArea -> re-resizable: renders
+QuestionArea -> material: renders
+QuestionArea -> react: renders
+QuestionArea -> HintButton: renders
+QuestionArea -> dompurify: renders
+QuestionArea -> AvatarToggleButton: renders
+participant SubmitButton
+SubmitButton -> react: renders
+SubmitButton -> submitbutton: renders
+participant Whiteboard
+Whiteboard -> react: renders
+Whiteboard -> react-router-dom: renders
+Whiteboard -> material: renders
+Whiteboard -> QuestionArea: renders
+Whiteboard -> SubmitButton: renders
+Whiteboard -> HelpModal: renders
+Whiteboard -> CustomMenuAction: renders
+Whiteboard -> firebase: renders
+Whiteboard -> storage: renders
+Whiteboard -> reset: renders
+Whiteboard -> components: renders
+Whiteboard -> examples: renders
+Whiteboard -> custom-menu-action: renders
+participant Whiteboard.test
+Whiteboard.test -> react: renders
+Whiteboard.test -> react: renders
+Whiteboard.test -> Whiteboard: renders
+participant firebase
+firebase -> app: renders
+firebase -> auth: renders
+participant Footer
+Footer -> react: renders
+Footer -> material: renders
+Footer -> Facebook: renders
+Footer -> Twitter: renders
+Footer -> LinkedIn: renders
+Footer -> Instagram: renders
+Footer -> Footer: renders
+participant HomePage
+HomePage -> react: renders
+HomePage -> material: renders
+HomePage -> react-router-dom: renders
+HomePage -> RotatingText: renders
+HomePage -> firebase: renders
+HomePage -> HomePage: renders
+HomePage -> RetroAvatar: renders
+participant index
+index -> react: renders
+index -> client: renders
+index -> index: renders
+index -> Main: renders
+index -> reportWebVitals: renders
+participant Layout
+Layout -> react: renders
+Layout -> material: renders
+Layout -> Home: renders
+Layout -> Settings: renders
+Layout -> ExpandCircleDown: renders
+Layout -> AccountCircle: renders
+Layout -> react-router-dom: renders
+Layout -> firebase: renders
+Layout -> Footer: renders
+Layout -> Layout: renders
+Layout -> AvatarContext: renders
+Layout -> AvatarToggleButton: renders
+participant Login
+Login -> google: renders
+Login -> firebase: renders
+Login -> auth: renders
+participant Main
+Main -> react: renders
+Main -> react-router-dom: renders
+Main -> Layout: renders
+Main -> HomePage: renders
+Main -> Whiteboard: renders
+Main -> OralTest: renders
+Main -> Settings: renders
+Main -> BackEndTest: renders
+Main -> Result: renders
+Main -> firebase: renders
+Main -> AvatarContext: renders
+participant linenumber
+participant lang-css
+participant prettify
+participant Feedback
+participant Help
+participant Home
+participant imagetest
+imagetest -> react: renders
+participant Login
+Login -> react: renders
+Login -> Login: renders
+participant OralTest
+OralTest -> material: renders
+OralTest -> MicPrompt: renders
+OralTest -> react-router-dom: renders
+OralTest -> firebase: renders
+OralTest -> OralTest: renders
+participant WrittenTest
+participant reportWebVitals
+participant RotatingText
+RotatingText -> react: renders
+RotatingText -> RotatingText: renders
+participant setupTests
+setupTests -> jest-dom: renders
+@enduml

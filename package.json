@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "acorn": "^8.14.0",
     "bootstrap": "^5.3.3",
     "firebase": "^11.0.1",
     "react-router-dom": "^6.26.2",
