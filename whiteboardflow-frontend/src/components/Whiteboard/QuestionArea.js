@@ -1,5 +1,5 @@
 import { Resizable } from 're-resizable';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import HintButton from './HintButton';
 import DOMPurify from "dompurify";
@@ -88,8 +88,8 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
                 </Box>
 
             )}
-            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'left', borderTop: '1px solid #ccc' }}>
-                <AvatarToggleButton></AvatarToggleButton>
+            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'left', borderTop: '1px solid #ccc' }}>         
+                <AvatarToggleButton />
                 <HintButton sendPNGToFirebase={sendPNGToFirebase} />
             </Box>)}
         </Resizable>
