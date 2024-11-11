@@ -3,6 +3,12 @@ sidebar_position: 3
 ---
 
 # General Requirements
-    Users for WhiteBoardFlow must have an internet-connected device with internet access. The app will be created with intended use of a tablet with a stylus for precise writing input. The app will additionally require the use of a microphone.
 
-    Code maintenence and verzion control for WhiteBoardFlow will be done via GitHub and documentation will make use of Docusaurus which utilzes Markdown and Mermaid for formatting.
+To use **WhiteBoardFlow**, users need:
+- An internet-connected device (ideally a tablet with stylus support for precise input).
+- A microphone for voice-enabled features.
+
+**Code Maintenance and Documentation**:
+- Version control and code maintenance for WhiteBoardFlow will be managed through **GitHub**.
+- Documentation will utilize **Docusaurus** with **Markdown** for text formatting and **Mermaid** for creating visual diagrams and flowcharts.
+
