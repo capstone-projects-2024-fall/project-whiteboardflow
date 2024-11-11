@@ -90,18 +90,6 @@ The **iink-ts** library is used for digital whiteboard functionality, providing 
 
 ---
 
-## Performance Monitoring
-
-**Technology**: Web Vitals Reporting
-
-Performance monitoring is implemented with **reportWebVitals.js**, tracking key metrics like CLS, FCP, and TTFB.
-
-### Key Features:
-- **Analytics**: Allows performance metrics to be logged or sent to analytics services for monitoring.
-- **Optimization**: Helps detect and address performance bottlenecks in real-time.
-
----
-
 ## Interactive Avatars and Animations
 
 **Technology**: Framer Motion, Custom Avatar Context
@@ -120,25 +108,6 @@ Performance monitoring is implemented with **reportWebVitals.js**, tracking key 
 - **JIRA**: Used for project management and task tracking, enabling efficient workflow and project organization.
 - **Linting and Formatting**: ESLint and Prettier enforce consistent code formatting and quality.
 - **Babel and Webpack**: Ensure compatibility with modern JavaScript features and optimize assets for Vercel deployment.
-
----
-
-# Component Summary with Technologies
-
-| Component            | Purpose                                   | Key Technologies          |
-|----------------------|-------------------------------------------|----------------------------|
-| `Main.js`            | App entry, routing setup                 | React, React Router        |
-| `Layout.js`          | Navigation, theme management             | React Router, MUI, Firebase |
-| `HomePage.js`        | Landing page, user sign-in               | Firebase Auth, MUI         |
-| `AvatarContext.js`   | Avatar state management                  | React Context API, MUI     |
-| `RotatingText.js`    | Displays rotating text messages          | React, CSS Animations      |
-| `Footer.js`          | Footer with social links, copyright info | MUI, CSS                   |
-| `AvatarToggleButton` | Toggles avatar visibility                | React Context, MUI Switch  |
-| `Character.js`       | Renders avatar with animations           | Framer Motion              |
-| `RetroAvatar.js`     | Retro-style avatar with animations       | Framer Motion              |
-| `firebase.js`        | Manages Firebase setup                   | Firebase, Env Variables    |
-| `reportWebVitals.js` | Captures performance metrics             | Web Vitals API, Vercel     |
-| Whiteboard           | Interactive whiteboard                   | iink-ts, WebSocket         |
 
 ---
 
