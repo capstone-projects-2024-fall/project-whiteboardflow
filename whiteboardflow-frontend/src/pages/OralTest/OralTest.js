@@ -1,18 +1,36 @@
-import { Button, CircularProgress } from '@mui/material';
-import React, { useState } from 'react'
+import { Button, CircularProgress, Typography, Box, Paper } from '@mui/material';
+import React, { useEffect, useState } from 'react'
 import MicPrompt from '../../components/MicPrompt/MicPrompt';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useNavigate, useOutletContext } from 'react-router-dom'; // Import useNavigate
-import { getIdToken } from '../../firebase'
+import { getIdToken, auth } from '../../firebase'
 import './OralTest.css';
 
 function OralTest() {
 	const navigate = useNavigate(); // Initialize navigate hook
 
 	const [darkMode, setDarkMode] = useOutletContext();
+	const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
 
 	const [isEmpty, setIsEmpty] = useState(true)
 	const [isRecording, setIsRecording] = useState(true)
 	const [isLoading, setIsLoading] = useState(false)
+
+	useEffect(() => {
+
+		const userId = auth.currentUser.uid;
+        const storage = getStorage();
+        const storageRef = ref(storage, `user-files/${userId}/static.png`);
+
+        getDownloadURL(storageRef)
+            .then((url) => {
+                setImageUrl(url);
+            })
+            .catch((error) => {
+                console.error("Error fetching image URL: ", error);
+            });
+
+	},[])
 	
 	const setNotEmpty = () => {
 		setIsEmpty(false);
@@ -104,6 +122,25 @@ function OralTest() {
 		<CircularProgress color="inherit" />
 
 }
+
+                    <Paper elevation={3} style={{ marginTop: "40px", marginBottom: "40px", padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                        <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode? '#fff' : '#1976d2' }} gutterBottom>
+                            Your work:
+                        </Typography>
+                        <Box textAlign="center" style={{ paddingTop: '10px', flex: 1 }}>
+                            <img
+                                src={imageUrl}
+                                alt="User's Handwriting Response"
+                                style={{
+                                    maxWidth: '100%',
+                                    maxHeight: '300px',
+                                    borderRadius: '8px',
+                                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+                                    margin: '0 auto',
+                                }}
+                            />
+                        </Box>
+                    </Paper>
 			
 		</div>
 	);

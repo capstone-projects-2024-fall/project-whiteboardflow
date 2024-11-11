@@ -20,6 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 # Include routers for different API endpoints
 app.include_router(ai_router, prefix="/api")
 
