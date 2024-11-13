@@ -1,6 +1,6 @@
 // Main.js
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './Layout';
 import HomePage from './HomePage';
 import Whiteboard from './components/Whiteboard/Whiteboard';
@@ -21,18 +21,24 @@ function Main() {
         return () => unsubscribe();
     }, []);
 
+    // PrivateRoute component to restrict access
+    const PrivateRoute = ({ children }) => {
+        return user ? children : <Navigate to="/" />;
+    };
+
     return (
-        <Router> {/* Move Router to wrap AvatarProvider */}
+        <Router>
             <AvatarProvider>
                 <Routes>
                     <Route element={<Layout user={user} />}>
                         <Route index element={<HomePage user={user} />} />
-                        <Route path="OralTest" element={<OralTest />} />
-                        <Route path="Settings" element={<Settings />} />
-                        <Route path="BackEndTest" element={<BackEndTest />} />
-                        <Route path="results" element={<Results />} />
+                        {/* Only allow access to these routes if user is logged in */}
+                        <Route path="OralTest" element={<PrivateRoute><OralTest /></PrivateRoute>} />
+                        <Route path="Settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
+                        <Route path="BackEndTest" element={<PrivateRoute><BackEndTest /></PrivateRoute>} />
+                        <Route path="results" element={<PrivateRoute><Results /></PrivateRoute>} />
+                        <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
                     </Route>
-                    <Route path="whiteboard" element={<Whiteboard />} />
                 </Routes>
             </AvatarProvider>
         </Router>
