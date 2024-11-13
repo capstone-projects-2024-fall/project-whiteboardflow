@@ -3,10 +3,10 @@ import { React, useState, useEffect } from 'react';
 import { Button, Typography, Container } from '@mui/material';
 import { Link, useOutletContext, useNavigate } from 'react-router-dom';
 
-import RotatingText from './RotatingText';
-import { auth, provider, signInWithPopup, signOut } from './firebase';
+import RotatingText from '../RotatingText/RotatingText';
+import { auth, provider, signInWithPopup, signOut } from '../../firebase';
 import './HomePage.css';
-import './Avatar/RetroAvatar.css';
+import '../Avatar/RetroAvatar.css';
 
 
 

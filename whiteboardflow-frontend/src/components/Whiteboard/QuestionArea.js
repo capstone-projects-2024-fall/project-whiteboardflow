@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import HintButton from './HintButton';
 import DOMPurify from "dompurify";
-import AvatarToggleButton from '../../Avatar/AvatarToggleButton';
+import AvatarToggleButton from '../Avatar/AvatarToggleButton';
 
 const QuestionArea = ({ sendPNGToFirebase }) => {
     const minWidth = 15;
