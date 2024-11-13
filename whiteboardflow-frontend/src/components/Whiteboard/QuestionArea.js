@@ -16,24 +16,25 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
 
     function removeHTMLTags(str) {
         return str.replace(/<[^>]*>/g, '');
-      }
+    }
 
     useEffect(() => {
-        // const question = getQuestionFromFirebase();
-        let question = `
-        <p><strong>Question:</strong> Write a function that takes a list of numbers and returns the sum of
-            all even numbers in the list.</p>
-        <p><strong>Function Signature:</strong></p>
-        <p><strong>Example:</strong></p>
-        <p><strong>Explanation:</strong> In the list <code>[1, 2, 3, 4, 5, 6]</code>, the even numbers are
-            2, 4, and 6. Their sum is 12.</p>
-        `; // Hardcoded for now until the question is retrieved from firebase
-        setQuestionText(question);
+        const fetchRandomQuestion = async () => {
+            try {
+                const response = await fetch("/api/get-random-question");
+                const jsonData = await response.json();
+                setQuestionText(jsonData.question);
+                localStorage.setItem("question", jsonData.question);
 
-        localStorage.setItem("question_html", question);
-
-        localStorage.setItem("question", removeHTMLTags(question));
-    });
+                // TODO Temporary, until we decide how the questions should be
+                // formatted with HTML
+                localStorage.setItem("question_html", jsonData.question);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        fetchRandomQuestion();
+    }, []);
 
     return (
         <Resizable
@@ -88,7 +89,7 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
                 </Box>
 
             )}
-            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'left', borderTop: '1px solid #ccc' }}>         
+            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'left', borderTop: '1px solid #ccc' }}>
                 <AvatarToggleButton />
                 <HintButton sendPNGToFirebase={sendPNGToFirebase} />
             </Box>)}
