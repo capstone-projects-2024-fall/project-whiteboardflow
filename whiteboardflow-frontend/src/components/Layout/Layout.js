@@ -7,11 +7,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
-import { auth, provider, signInWithPopup, signOut } from './firebase';
-import Footer from './Footer';
+import { auth, provider, signInWithPopup, signOut } from '../../firebase.js';
+import Footer from '../Footer/Footer.js';
 import './Layout.css';
-import { useAvatar } from './Avatar/AvatarContext.js';
-import AvatarToggleButton from './Avatar/AvatarToggleButton.js';
+import { useAvatar } from '../Avatar/AvatarContext.js';
+import AvatarToggleButton from '../Avatar/AvatarToggleButton.js';
 
 const Layout = ({ children, user }) => { // Accept user as a prop
     const [settingsAnchorEl, setSettingsAnchorEl] = useState(null);
