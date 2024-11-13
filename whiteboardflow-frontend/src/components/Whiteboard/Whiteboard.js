@@ -55,6 +55,9 @@ const Whiteboard = () => {
                                 type: 'line'
                             }
                         },
+                        grabber: {
+                            delayLongTouch: 500
+                        },
                         recognition: {
                             alwaysConnected: true,
                             type: "TEXT",

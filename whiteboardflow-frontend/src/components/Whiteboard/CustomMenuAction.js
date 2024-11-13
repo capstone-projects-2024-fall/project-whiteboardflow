@@ -51,21 +51,21 @@ export default class CustomMenuAction extends window.iink.OIMenuAction {
         this.wrapper.appendChild(this.createMenuUndo());
         this.wrapper.appendChild(this.createMenuRedo());
 
-        const menuStroke = this.menuStyle.createMenuStroke();
-        menuStroke.style.width = '80px';
-
-        const menuThickness = this.menuStyle.createMenuThickness();
-        menuThickness.style.width = '100px';
-
-        this.expandableContent.appendChild(menuStroke);
-        this.expandableContent.appendChild(menuThickness);
-        this.expandableContent.appendChild(this.createMenuClear());
-
-        // Append the toggle button and the expandable content to the wrapper
-        this.wrapper.appendChild(this.toggleButton);
-        this.wrapper.appendChild(this.expandableContent);
-
-        // Append the entire wrapper to the provided layer and show it
+        // const menuStroke = this.menuStyle.createMenuStroke();
+        // menuStroke.style.width = '80px';
+        //
+        // const menuThickness = this.menuStyle.createMenuThickness();
+        // menuThickness.style.width = '100px';
+        //
+        // this.expandableContent.appendChild(menuStroke);
+        // this.expandableContent.appendChild(menuThickness);
+        // this.expandableContent.appendChild(this.createMenuClear());
+        //
+        // // Append the toggle button and the expandable content to the wrapper
+        // this.wrapper.appendChild(this.toggleButton);
+        // this.wrapper.appendChild(this.expandableContent);
+        //
+        // // Append the entire wrapper to the provided layer and show it
         layer.appendChild(this.wrapper);
         this.show();
     }
