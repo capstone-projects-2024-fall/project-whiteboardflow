@@ -59,6 +59,7 @@ const MicPrompt = ({darkMode, setRecording, setNotRecording, setEmpty, setNotEmp
 
 	useEffect(() => {
 		handleListen();
+		// eslint-disable-next-line
 	}, [listening]);
 
 	return (

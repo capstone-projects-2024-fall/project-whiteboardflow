@@ -8,6 +8,7 @@ import DOMPurify from "dompurify";
 import './Results.css';
 
 const Results = () => {
+    // eslint-disable-next-line 
 	const [darkMode, setDarkMode] = useOutletContext();
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image

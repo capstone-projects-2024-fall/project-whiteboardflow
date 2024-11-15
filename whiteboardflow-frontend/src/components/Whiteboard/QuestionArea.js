@@ -1,5 +1,5 @@
 import { Resizable } from 're-resizable';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import HintButton from './HintButton';
 import DOMPurify from "dompurify";
