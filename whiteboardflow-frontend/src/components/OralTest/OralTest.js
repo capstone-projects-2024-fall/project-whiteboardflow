@@ -8,10 +8,9 @@ import './OralTest.css';
 
 function OralTest() {
 	const navigate = useNavigate(); // Initialize navigate hook
-
+	// eslint-disable-next-line
 	const [darkMode, setDarkMode] = useOutletContext();
 	const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
-
 	const [isEmpty, setIsEmpty] = useState(true)
 	const [isRecording, setIsRecording] = useState(true)
 	const [isLoading, setIsLoading] = useState(false)

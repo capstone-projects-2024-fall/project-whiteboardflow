@@ -9,6 +9,7 @@ import './Results.css';
 
 const Results = () => {
     const [darkMode, setDarkMode] = useOutletContext();
+
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
     const [questionText, setQuestionText] = useState(""); // Question text
