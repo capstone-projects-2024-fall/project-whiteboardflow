@@ -1,0 +1,13 @@
+# Generated files
+.docusaurus
+
+# Misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+node_modules
+/whiteboardflow-frontend/public/server-configuration.json
+.vscode/

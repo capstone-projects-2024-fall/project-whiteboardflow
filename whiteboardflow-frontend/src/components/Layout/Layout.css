@@ -1,0 +1,126 @@
+/* Layout.css */
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    overflow: hidden;
+    /* color: red; */
+}
+
+.content-container {
+    flex: 1; 
+}
+/* Dark mode styles */
+.dark-mode {
+    background-color: #202124;
+    color: white;
+}
+
+.light-mode {
+    background-color: white;
+    color: black;
+}
+
+
+.dark-mode .MuiButtonBase-root {
+    color: white;
+}
+
+.lightmode-home-button {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    color: #202124;
+}
+
+.lightmode-home-button :hover {
+    cursor: pointer;
+}
+
+.darkmode-home-button :hover {
+    cursor: pointer;
+}
+
+.darkmode-home-button {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    color: white;
+}
+
+.lightmode-settings-button {
+    position: fixed;
+    right: 80px;
+    top: 20px;
+    color: #202124;
+}
+
+.darkmode-settings-button {
+    position: fixed;
+    right: 80px;
+    top: 20px;
+    color: white;
+}
+
+.lightmode-settings-button :hover {
+    cursor: pointer;
+}
+
+.darkmode-settings-button :hover {
+    cursor: pointer;
+}
+
+.lightmode-user-button {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    color: #202124;
+}
+
+.darkmode-user-button {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    color: white;
+}
+
+.lightmode-user-button :hover {
+    cursor: pointer;
+}
+
+.darkmode-user-button :hover {
+    cursor: pointer;
+}
+
+.settings-menu {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.user-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.footer-toggle-button-up {
+    position: fixed;
+    right: 10px;
+    bottom: 110px;
+}
+
+.footer-toggle-button-down {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    rotate: 180deg;
+}
+
+.settings-row {
+    display: flex;
+    flex-direction: row;
+}
