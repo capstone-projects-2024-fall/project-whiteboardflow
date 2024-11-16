@@ -23,7 +23,7 @@ function DifficultySelect() {
 
   const handleGetStarted = () => {
     // Set the start time in localStorage
-    localStorage.setItem("startTime", Date.now());
+    sessionStorage.setItem("startTime", Date.now());
     // Redirect to the whiteboard page
     navigate("/whiteboard");
   };

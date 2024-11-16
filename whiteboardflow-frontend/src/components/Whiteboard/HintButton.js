@@ -49,7 +49,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 				},
 				body: JSON.stringify({
 					token: idToken,
-					question: localStorage.getItem("question"),
+					question: sessionStorage.getItem("question_text"),
 					image: ""
 				})
 			});
