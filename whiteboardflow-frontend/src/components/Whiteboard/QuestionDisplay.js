@@ -2,8 +2,9 @@ import React from 'react';
 import './css/question-display.css';
 
 const QuestionDisplay = ({ question }) => {
+    // If question is not available, show an empty div or a message
     if (!question) {
-        return <div />;
+        return <div></div>;
     }
 
     return (
@@ -41,5 +42,17 @@ const QuestionDisplay = ({ question }) => {
     );
 };
 
+// Helper function to retrieve question from sessionStorage
+export const getQuestionFromStorage = () => {
+    const savedQuestion = sessionStorage.getItem('question');
+    return savedQuestion ? JSON.parse(savedQuestion) : null;
+};
+
+// Helper function to save question to sessionStorage
+export const saveQuestionToStorage = (question) => {
+    if (question) {
+        sessionStorage.setItem('question', JSON.stringify(question));
+    }
+};
 
 export default QuestionDisplay;

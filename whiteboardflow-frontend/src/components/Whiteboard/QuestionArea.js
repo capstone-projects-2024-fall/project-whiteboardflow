@@ -4,7 +4,7 @@ import React, { useState, useLayoutEffect, useEffect } from 'react';
 import HintButton from './HintButton';
 import DOMPurify from "dompurify";
 import AvatarToggleButton from '../Avatar/AvatarToggleButton';
-import QuestionDisplay from "./QuestionDisplay"
+import QuestionDisplay, { saveQuestionToStorage } from './QuestionDisplay';
 
 const QuestionArea = ({ sendPNGToFirebase }) => {
     const minWidth = 15;
@@ -26,11 +26,8 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
                 const response = await fetch("/api/get-random-question");
                 const jsonData = await response.json();
                 setQuestionJson(jsonData);
-                localStorage.setItem("question", jsonData.question.question_text);
-
-                // TODO Temporary, until we decide how the questions should be
-                // formatted with HTML
-                // localStorage.setItem("question_html", jsonData.question);
+                sessionStorage.setItem("question_text", jsonData.question.question_text);
+                saveQuestionToStorage(jsonData.question)
             } catch (error) {
                 console.error("Error:", error);
             }
