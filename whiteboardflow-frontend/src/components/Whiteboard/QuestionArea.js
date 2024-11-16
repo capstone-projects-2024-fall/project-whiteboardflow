@@ -4,12 +4,14 @@ import React, { useState, useLayoutEffect, useEffect } from 'react';
 import HintButton from './HintButton';
 import DOMPurify from "dompurify";
 import AvatarToggleButton from '../Avatar/AvatarToggleButton';
+import QuestionDisplay from "./QuestionDisplay"
 
 const QuestionArea = ({ sendPNGToFirebase }) => {
     const minWidth = 15;
     const [width, setWidth] = useState('50%'); // Start with default visible width
     const [isVisible, setIsVisible] = useState(true); // Manage visibility state
-    const [questionText, setQuestionText] = useState("");
+    const [questionJson, setQuestionJson] = useState([]);
+
     useLayoutEffect(() => {
         setIsVisible(width > '0px');
     }, [width]);
@@ -23,12 +25,12 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
             try {
                 const response = await fetch("/api/get-random-question");
                 const jsonData = await response.json();
-                setQuestionText(jsonData.question);
-                localStorage.setItem("question", jsonData.question);
+                setQuestionJson(jsonData);
+                localStorage.setItem("question", jsonData.question.question_text);
 
                 // TODO Temporary, until we decide how the questions should be
                 // formatted with HTML
-                localStorage.setItem("question_html", jsonData.question);
+                // localStorage.setItem("question_html", jsonData.question);
             } catch (error) {
                 console.error("Error:", error);
             }
@@ -85,7 +87,8 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
         >
             {isVisible && (
                 <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden' }}>
-                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questionText) }} />
+                    <QuestionDisplay question={questionJson.question} />
+                    {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questionText) }} /> */}
                 </Box>
 
             )}

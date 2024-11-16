@@ -15,4 +15,4 @@ question_list = [doc.to_dict() for doc in docs]
 def get_random_question():
     # Select a random question
     random_question = random.choice(question_list)
-    return {"question": random_question["question_text"]}
+    return {"question": random_question}
