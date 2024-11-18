@@ -7,6 +7,8 @@ about those two items:
     - Image: The work that I have currently written on a whiteboard to show my
         answer. 
         
-Analyze the image in your response. What is in the image? From the question, am
-I currently on the right path? Give me hints, and don't explicitly give me the
-answer.
+Provide a response based on what I have currently written. 
+In your response, give me the following:
+    - Whether or not I'm on the right path, based on the image.
+    - A single hint.
+    - A leading question to help me arrive at a solution.
