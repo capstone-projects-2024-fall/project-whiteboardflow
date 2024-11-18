@@ -54,23 +54,23 @@ public` directory. The `server-configuration.json` file should look like this:
 Our backend is a Python FastAPI server that uses the OpenAI API to generate interview questions and analyze user responses. To install the backend, follow these steps:
 #### With a virtual environment
 Navigate to the `backend` directory
-```bash
+```shell
 cd whiteboardflow-backend
 ```
 Create a virtual environment
-```bash
+```shell
 python3 -m venv [your-virtual-environment-name]
 ```
 Activate the virtual environment(assume your virtual environment name is `venv`)
-```bash
+```shell
 source venv/bin/activate
 ```
 Install the required packages
-```bash
+```shell
 pip install -r requirements.txt
 ```
 Run the server
-```bash
+```shell
 python server.py
 ```
 #### Without a virtual environment
@@ -78,15 +78,15 @@ You may skip the virtual environment steps if you do not want to use a virtual e
 ### Frontend
 Our frontend is a React application that uses the iink-ts library to capture handwriting input. To install the frontend, follow these steps:
 Navigate to the `frontend` directory
-```bash
+```shell
 cd whiteboardflow-frontend
 ```
 Install the required packages
-```bash
+```shell
 npm install
 ```
 Run the server
-```bash
+```shell
 npm start
 ```
 ## Usage
