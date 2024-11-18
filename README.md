@@ -51,7 +51,7 @@ public` directory. The `server-configuration.json` file should look like this:
 
 ## Installation
 ### Backend
-Our backend is a Python Flask server that uses the OpenAI API to generate interview questions and analyze user responses. To install the backend, follow these steps:
+Our backend is a Python FastAPI server that uses the OpenAI API to generate interview questions and analyze user responses. To install the backend, follow these steps:
 #### With a virtual environment
 Navigate to the `backend` directory
 ```bash
@@ -112,7 +112,7 @@ For ease of access and simplicity of code, I believe this would best be done as 
 
 ## Background
 
-This project will ideally make use of various open source softwares in order to meet project requirements. For speech to text dictation, OpenAI’s open source Whisper could be leveraged, as well as Open AI for the language processing. This product hopes to improve on existing technologies used to test coding aptitude for interviews such as LeetCode or Codewars which simply use unit testing to determine if a solution is correct or incorrect, rather than testing the thought process of the user which is a major part of interview whiteboard questions.
+This project will ideally make use of various open source software in order to meet project requirements. For speech to text dictation, Open AI could be leveraged, as well as for the language processing. This product hopes to improve on existing technologies used to test coding aptitude for interviews such as LeetCode or Codewars which simply use unit testing to determine if a solution is correct or incorrect, rather than testing the thought process of the user which is a major part of interview whiteboard questions.
 
 ## Required Resources
 
