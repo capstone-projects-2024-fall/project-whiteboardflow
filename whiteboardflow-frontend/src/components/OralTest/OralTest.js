@@ -63,15 +63,15 @@ function OralTest() {
 				body: JSON.stringify({
 					// Data to send to FastAPI
 					token: idToken,
-					question: localStorage.getItem("question"),
+					question: sessionStorage.getItem("question_text"),
 					image: "",
-					transcript: localStorage.getItem("finalTranscript")
+					transcript: sessionStorage.getItem("finalTranscript")
 				})
 			});
 
 			// Get ChatGPT response
 			const result = await response.json();
-			localStorage.setItem("AIResponse", result.message);
+			sessionStorage.setItem("AIResponse", result.message);
 
 			// Navigate to Results page after successful response
 			navigate('/results');

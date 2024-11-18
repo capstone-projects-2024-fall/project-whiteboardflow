@@ -7,9 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-# from routers.voice import router as voice_router
-# from routers.image import router as image_router
 from routers.AI.ai_assistant import router as ai_router
+from routers.firebase.questions import router as questions_router
 
 
 app = FastAPI(debug=True)
@@ -24,11 +23,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# app.include_router(voice_router, prefix="/api")
 app.include_router(ai_router, prefix="/api")
-# app.include_router(image_router, prefix="/api")
+app.include_router(questions_router, prefix="/api")
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
 
 
 @app.get("/")
