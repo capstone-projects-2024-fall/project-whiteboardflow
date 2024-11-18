@@ -6,55 +6,33 @@ import './AvatarContext.css';
 
 const AvatarContext = createContext();
 
-export const useAvatar = () => {
-    return useContext(AvatarContext);
-};
+export const useAvatar = () => useContext(AvatarContext);
 
 export const AvatarProvider = ({ children }) => {
     const [isVisible, setIsVisible] = useState(true);
-    const [showHint, setShowHint] = useState(false); // Initial state for the hint bubble
-    const location = useLocation(); // Get current route location
-
-    // Determine hint message based on the current route
-    const getHintMessage = () => {
-        switch (location.pathname) {
-            case '/':
-                return "Welcome to the Whiteboard Assistant!";
-            case '/OralTest':
-                return "Get ready for the oral test!";
-            case '/Settings':
-                return "Adjust your preferences here.";
-            case '/BackEndTest':
-                return "This is where you can test the backend.";
-            case '/results':
-                return "Here are your results!\nGood Job!";
-            case '/whiteboard':
-                return "Use the whiteboard for brainstorming.";
-            default:
-                return "Hello! Need any help?";
-        }
-    };
+    const [showHint, setShowHint] = useState(false);
+    const [clicked, setClicked] = useState(false); // New state for click animation
+    const location = useLocation();
 
     const toggleAvatar = () => setIsVisible((prev) => !prev);
-    const toggleHint = () => setShowHint((prev) => !prev);
+    const handleClick = () => {
+        setClicked(true);
+        setTimeout(() => setClicked(false), 1000); // Reset after animation duration
+    };
 
-    // Show hint automatically when the page loads
     useEffect(() => {
         setShowHint(true);
-        // Optionally hide the hint after a few seconds
-        //const timer = setTimeout(() => setShowHint(false), 5000); // Hide after 5 seconds
-       //return () => clearTimeout(timer); // Clean up the timer on unmount
-    }, [location.pathname]); // Run this effect on page load and when the path changes
+    }, [location.pathname]);
 
     return (
         <AvatarContext.Provider value={{ isVisible, toggleAvatar }}>
             {children}
             {isVisible && (
-                <div className="avatar-fixed-container" onClick={toggleHint}>
-                    <AnimatedAvatar />
+                <div className="avatar-fixed-container" onClick={handleClick}>
+                    <AnimatedAvatar clicked={clicked} />
                     {showHint && (
                         <div className="hint-bubble">
-                            <p>{getHintMessage()}</p>
+                            <p>{location.pathname === '/results' ? "Here are your results!" : "Hello!"}</p>
                         </div>
                     )}
                 </div>

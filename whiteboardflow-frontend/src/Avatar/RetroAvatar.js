@@ -1,31 +1,74 @@
-// Character.js
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import './RetroAvatar.css';
 
-const frames = [
-    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_000.png",
-    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_002.png",
-    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_003.png",
-    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_004.png",
-    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_005.png",
-    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_006.png",
-    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_007.png",
-    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_008.png",
-    "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_009.png"
+const frameSequences = {
+    '/results': [
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_000.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_001.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_002.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_003.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_004.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_005.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_006.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_007.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_008.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_009.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_010.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_011.png"
+    ],
+    '/OralTest': [
+        "/fat_animal_teddy/OralTest/03-Jump_Throw/FA_TEDDY_Jump_Throw_000.png",
+        "/fat_animal_teddy/OralTest/03-Jump_Throw/FA_TEDDY_Jump_Throw_001.png",
+        "/fat_animal_teddy/OralTest/03-Jump_Throw/FA_TEDDY_Jump_Throw_002.png",
+        "/fat_animal_teddy/OralTest/03-Jump_Throw/FA_TEDDY_Jump_Throw_003.png",
+        "/fat_animal_teddy/OralTest/03-Jump_Throw/FA_TEDDY_Jump_Throw_004.png"
+    ],
+    '/Settings': [
+        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_000.png",
+        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_001.png",
+        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_002.png",
+        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_003.png",
+        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_004.png",
+        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_005.png",
+        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_006.png",
+        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_007.png",
+        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_008.png",
+        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_009.png"
+    ],
+    '/BackEndTest': [
+        "/fat_animal_teddy/BackEndTest/FA_TEDDY_BackEndTest_000.png",
+        "/fat_animal_teddy/BackEndTest/FA_TEDDY_BackEndTest_001.png",
+        "/fat_animal_teddy/BackEndTest/FA_TEDDY_BackEndTest_002.png",
+        "/fat_animal_teddy/BackEndTest/FA_TEDDY_BackEndTest_003.png"
+    ],
+    '/whiteboard': [
+        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_000.png",
+        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_001.png",
+        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_002.png",
+        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_003.png",
+        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_004.png",
+        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_005.png",
+        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_006.png",
+        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_007.png"
+    ]
+};
 
-]; // Add paths to each frame image here
-
-const AnimatedAvatar = () => {
+const AnimatedAvatar = ({ clicked }) => {
+    const location = useLocation();
     const [currentFrame, setCurrentFrame] = useState(0);
+
+    // Get the appropriate frames for the current route
+    const frames = frameSequences[location.pathname] || frameSequences['/results']; // Default to results if no match
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentFrame((prevFrame) => (prevFrame + 1) % frames.length);
-        }, 500); // Change frame every 500ms, adjust for speed
+        }, 500); // Change frame every 500ms
 
         return () => clearInterval(interval); // Clean up on component unmount
-    }, []);
+    }, [frames]); // Update animation if frames change
 
     return (
         <motion.div
