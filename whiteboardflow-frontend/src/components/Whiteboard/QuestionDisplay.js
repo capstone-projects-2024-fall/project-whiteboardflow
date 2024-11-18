@@ -11,7 +11,7 @@ const QuestionDisplay = ({ question }) => {
         <div class="question-container">
             {/* Render Question Text */}
             {question.question_text && (
-                <div class="question">Question: {question.question_text}</div>
+                <div class="question"><strong>Question:</strong> {question.question_text}</div>
             )}
             {/* Render Explanation*/}
             {question.explanation && (
@@ -19,7 +19,7 @@ const QuestionDisplay = ({ question }) => {
             )}
             {/* Render Examples */}
             {question.examples && question.examples.length > 0 && (
-                <p>
+                <p> <hr></hr>
                     {question.examples.map((example, index) => (
                         <div key={index} class="example">
                             <div class="example-title">Example {index + 1}:</div>
