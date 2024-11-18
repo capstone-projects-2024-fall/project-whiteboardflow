@@ -18,6 +18,11 @@ Section 001, Coding exercises, speech-to-text/dictation software, handwriting de
 
 This document proposes a tool to help professionals and students entering the development workforce practice whiteboard-style interview questions.product will generate interview-style coding questions and prompt the user to reason out their solution, either through text or voice dictation, and generate feedback on the thought process to guide the user through the correct thought process to solve the problem. The user can then attempt the problem with actual code or using handwriting dictation to determine correctness, optimization, and efficiency and then provide the feedback.
 
+## Deployed verision
+
+You can visit the deployed version of our app [here](https://project-whiteboardflow-eowa.vercel.app/ )
+Currently, our app does not support Firefox.
+
 ## Requirements
 
 1. Have [npm](https://www.npmjs.com/get-npm) or [yarn](https://yarnpkg.com/en/docs/install).
