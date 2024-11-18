@@ -18,6 +18,55 @@ Section 001, Coding exercises, speech-to-text/dictation software, handwriting de
 
 This document proposes a tool to help professionals and students entering the development workforce practice whiteboard-style interview questions.product will generate interview-style coding questions and prompt the user to reason out their solution, either through text or voice dictation, and generate feedback on the thought process to guide the user through the correct thought process to solve the problem. The user can then attempt the problem with actual code or using handwriting dictation to determine correctness, optimization, and efficiency and then provide the feedback.
 
+## Requirements
+
+1. Have [npm](https://www.npmjs.com/get-npm) or [yarn](https://yarnpkg.com/en/docs/install).
+2. Have API keys from [OpenAI](https://openai.com/), [Firebase](https://firebase.google.com/), and [iink-ts](https://github.com/MyScript/iinkTS).
+3. Have a browser that supports speech recognition from mdn web docs, to see if your browser supports speech recognition, you can check [here](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition#browser_compatibility).
+
+## Installation
+### Backend
+Our backend is a Python Flask server that uses the OpenAI API to generate interview questions and analyze user responses. To install the backend, follow these steps:
+#### With a virtual environment
+Navigate to the `backend` directory
+```bash
+cd whiteboardflow-backend
+```
+Create a virtual environment
+```bash
+python3 -m venv [your-virtual-environment-name]
+```
+Activate the virtual environment(assume your virtual environment name is `venv`)
+```bash
+source venv/bin/activate
+```
+Install the required packages
+```bash
+pip install -r requirements.txt
+```
+Run the server
+```bash
+python server.py
+```
+#### Without a virtual environment
+You may skip the virtual environment steps if you do not want to use a virtual environment.
+### Frontend
+Our frontend is a React application that uses the iink-ts library to capture handwriting input. To install the frontend, follow these steps:
+Navigate to the `frontend` directory
+```bash
+cd whiteboardflow-frontend
+```
+Install the required packages
+```bash
+npm install
+```
+Run the server
+```bash
+npm start
+```
+## Usage
+To use the application, navigate to `http://localhost:3000` in your browser. You will be prompted to sign in with Google. Once you sign in, you will be able to generate interview questions and attempt to solve them using handwriting input or text input. The application will analyze your response and provide feedback on your solution.
+
 ## High Level Requirement
 
 This app will:
