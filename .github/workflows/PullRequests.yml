@@ -1,0 +1,25 @@
+name: Track PR Approvals
+
+on:
+  workflow_dispatch: # Allows manual triggering
+  schedule:
+    - cron: "0 0 * * *" # Runs daily at midnight (adjust as needed)
+
+jobs:
+  fetch-approvals:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Fetch PR approval data using a custom script
+      - name: Fetch PR Approvals
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: your_org_or_username
+          REPO_NAME: your_repository_name
+        run: |
+          echo "Fetching PR approvals..."
+          python fetch_pr_approvals.py
