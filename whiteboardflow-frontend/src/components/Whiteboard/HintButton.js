@@ -8,6 +8,7 @@ import { Modal as BaseModal } from '@mui/base/Modal';
 import { Snackbar, Alert } from '@mui/material';
 import { getIdToken } from '../../firebase';
 import ReactMarkdown from 'react-markdown';
+import { useAvatar } from '../Avatar/AvatarContext';
 
 const HintButton = ({ sendPNGToFirebase }) => {
 	const [open, setOpen] = useState(false);
@@ -15,6 +16,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 	const [hintResponse, setHintResponse] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
+	const { setHintMessage } = useAvatar();
 
 	const handleOpen = async () => {
 		setOpen(true);
@@ -30,7 +32,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 		try {
 			await sendPNGToFirebase(false);
 			const response = await getHintResponse();
-			setHintResponse(response);
+			setHintMessage(response);
 		} catch (error) {
 			console.error("Error during image upload or hint response:", error);
 		} finally {

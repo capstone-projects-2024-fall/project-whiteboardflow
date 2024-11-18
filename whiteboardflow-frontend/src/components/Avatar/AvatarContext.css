@@ -29,7 +29,9 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     font-size: 14px;
     max-width: 200px;
-    white-space: pre-wrap;
+    max-height: 250px;
+    overflow-y: auto;
+    white-space: normal;
 }
 
 .hint-bubble::after
