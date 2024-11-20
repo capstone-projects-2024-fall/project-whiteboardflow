@@ -73,14 +73,18 @@ const frameSequences = {
         "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_011.png"
     ],
     '/whiteboard': [
-        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_000.png",
-        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_001.png",
-        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_002.png",
-        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_003.png",
-        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_004.png",
-        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_005.png",
-        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_006.png",
-        "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_007.png"
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_000.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_001.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_002.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_003.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_004.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_005.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_006.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_007.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_008.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_009.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_010.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_011.png"
     ]
 };
 
@@ -94,7 +98,7 @@ const AnimatedAvatar = ({ clicked }) => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentFrame((prevFrame) => (prevFrame + 1) % frames.length);
-        }, 500); // Change frame every 500ms
+        }, 300); // Change frame every 500ms
 
         return () => clearInterval(interval); // Clean up on component unmount
     }, [frames]); // Update animation if frames change
@@ -104,7 +108,7 @@ const AnimatedAvatar = ({ clicked }) => {
             initial={{ scale: 0.5 }}
             animate={{ scale: 1.05 }}
             transition={{
-                duration: 2,
+                duration: 1,
                 yoyo: Infinity,
             }}
             className="retro-avatar"
