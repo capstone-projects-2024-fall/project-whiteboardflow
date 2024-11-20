@@ -1,6 +1,6 @@
 // AvatarToggleButton.js
 import React from 'react';
-import { Button, Switch } from '@mui/material';
+import { Switch } from '@mui/material';
 import { useAvatar } from './AvatarContext'; // Import your Avatar context
 
 const AvatarToggleButton = () => {

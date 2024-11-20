@@ -1,39 +1,39 @@
 import { Resizable } from 're-resizable';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import HintButton from './HintButton';
 import DOMPurify from "dompurify";
 import AvatarToggleButton from '../Avatar/AvatarToggleButton';
+import QuestionDisplay, { saveQuestionToStorage } from './QuestionDisplay';
 
 const QuestionArea = ({ sendPNGToFirebase }) => {
     const minWidth = 15;
     const [width, setWidth] = useState('50%'); // Start with default visible width
     const [isVisible, setIsVisible] = useState(true); // Manage visibility state
-    const [questionText, setQuestionText] = useState("");
+    const [questionJson, setQuestionJson] = useState([]);
+
     useLayoutEffect(() => {
         setIsVisible(width > '0px');
     }, [width]);
 
     function removeHTMLTags(str) {
         return str.replace(/<[^>]*>/g, '');
-      }
+    }
 
     useEffect(() => {
-        // const question = getQuestionFromFirebase();
-        let question = `
-        <p><strong>Question:</strong> Write a function that takes a list of numbers and returns the sum of
-            all even numbers in the list.</p>
-        <p><strong>Function Signature:</strong></p>
-        <p><strong>Example:</strong></p>
-        <p><strong>Explanation:</strong> In the list <code>[1, 2, 3, 4, 5, 6]</code>, the even numbers are
-            2, 4, and 6. Their sum is 12.</p>
-        `; // Hardcoded for now until the question is retrieved from firebase
-        setQuestionText(question);
-
-        localStorage.setItem("question_html", question);
-
-        localStorage.setItem("question", removeHTMLTags(question));
-    });
+        const fetchRandomQuestion = async () => {
+            try {
+                const response = await fetch("/api/get-random-question");
+                const jsonData = await response.json();
+                setQuestionJson(jsonData);
+                sessionStorage.setItem("question_text", jsonData.question.question_text);
+                saveQuestionToStorage(jsonData.question)
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        fetchRandomQuestion();
+    }, []);
 
     return (
         <Resizable
@@ -84,11 +84,12 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
         >
             {isVisible && (
                 <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden' }}>
-                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questionText) }} />
+                    <QuestionDisplay question={questionJson.question} />
+                    {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questionText) }} /> */}
                 </Box>
 
             )}
-            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'left', borderTop: '1px solid #ccc' }}>         
+            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'left', borderTop: '1px solid #ccc' }}>
                 <AvatarToggleButton />
                 <HintButton sendPNGToFirebase={sendPNGToFirebase} />
             </Box>)}

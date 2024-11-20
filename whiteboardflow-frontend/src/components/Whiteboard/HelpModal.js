@@ -1,7 +1,7 @@
-import React, { useState } from 'react'; // Ensure to import useState
+import React from 'react'; // Ensure to import useState
 
 const HelpModal = ({ isVisible, onClose }) => {
-    const [open, setOpen] = useState(false); // State to manage visibility internally if needed
+    // const [open, setOpen] = useState(false); // State to manage visibility internally if needed
 
     // Enhanced style object
     const modalStyle = {

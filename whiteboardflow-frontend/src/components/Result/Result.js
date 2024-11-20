@@ -6,12 +6,14 @@ import { useOutletContext } from 'react-router-dom'; // Import useNavigate
 import { auth } from "../../firebase";
 import DOMPurify from "dompurify";
 import './Results.css';
+import QuestionDisplay, { getQuestionFromStorage } from '../Whiteboard/QuestionDisplay';
 
 const Results = () => {
-	const [darkMode, setDarkMode] = useOutletContext();
+    const [darkMode, setDarkMode] = useOutletContext();
+
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
-    const [questionText, setQuestionText] = useState(""); // Question text
+    const [questionJson, setQuestionJson] = useState(null); // Question object
     const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
 
     const calculateCompletionTime = () => {
@@ -28,11 +30,13 @@ const Results = () => {
     };
 
     useEffect(() => {
-        const aiResponse = localStorage.getItem("AIResponse") || "No analysis available";
+        const aiResponse = sessionStorage.getItem("AIResponse") || "No analysis available";
         setOralAnalysis(aiResponse);
 
-        const storedQuestion = localStorage.getItem("question_html") || "No question available.";
-        setQuestionText(storedQuestion);
+        const savedQuestion = getQuestionFromStorage();
+        if (savedQuestion) {
+            setQuestionJson(savedQuestion);  // Set the question if available
+        }
 
         const userId = auth.currentUser.uid;
         const storage = getStorage();
@@ -50,7 +54,7 @@ const Results = () => {
     }, []);
 
     return (
-        <Container maxWidth="lg" style={{ textAlign: 'center', paddingTop: "70px", padding: '30px', backgroundColor: darkMode? '#202124' : 'white' }}>
+        <Container maxWidth="lg" style={{ textAlign: 'left', paddingTop: "70px", padding: '30px', backgroundColor: darkMode ? '#202124' : 'white' }}>
             <Typography variant="h4" style={{ fontWeight: 'bold', marginBottom: '20px', color: darkMode ? "white" : '#1976d2' }}>
                 Practice Results Dashboard
             </Typography>
@@ -62,8 +66,8 @@ const Results = () => {
                         <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? 'white' : '#202124' }} gutterBottom>
                             Practice Question
                         </Typography>
-                        <Box style={{ padding: '10px', backgroundColor: darkMode? '#C7C7C8' : "#fff", borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
-                            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questionText) }} />
+                        <Box style={{ padding: '10px', backgroundColor: darkMode ? '#C7C7C8' : "#fff", borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
+                            <QuestionDisplay question={questionJson} />
                         </Box>
                     </Paper>
                 </Grid>
@@ -71,7 +75,7 @@ const Results = () => {
                 {/* Handwriting Image */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                        <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode? '#fff' : '#1976d2' }} gutterBottom>
+                        <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? '#fff' : '#1976d2' }} gutterBottom>
                             Your Handwritten Response
                         </Typography>
                         <Box textAlign="center" style={{ paddingTop: '10px', flex: 1 }}>
@@ -92,14 +96,14 @@ const Results = () => {
 
                 {/* AI Analysis */}
                 <Grid item xs={12}>
-                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode? '#202124':'#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                        <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode? '#fff':'#1976d2' }} gutterBottom>
+                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? '#fff' : '#1976d2' }} gutterBottom>
                             AI Analysis of Whiteboard Practice
                         </Typography>
                         <Box style={{
                             overflowY: 'auto',
                             padding: '10px',
-                            backgroundColor: darkMode? '#C7C7C8' : "#fff",
+                            backgroundColor: darkMode ? '#C7C7C8' : "#fff",
                             borderRadius: '8px',
                             flex: 1
                         }}>
