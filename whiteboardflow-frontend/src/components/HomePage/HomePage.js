@@ -1,22 +1,24 @@
 // HomePage.js
-import { React, useState, useEffect } from 'react';
+import { React, useState} from 'react';
 import { Button, Typography, Container } from '@mui/material';
-import { Link, useOutletContext, useNavigate } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 
-import RotatingText from './RotatingText';
-import { auth, provider, signInWithPopup, signOut } from './firebase';
+import RotatingText from '../RotatingText/RotatingText';
+import { auth, provider, signInWithPopup } from '../../firebase';
 import './HomePage.css';
-import './Avatar/RetroAvatar.css';
+import '../Avatar/RetroAvatar.css';
 
 
 
 const HomePage = ({ user}) => {
 
+    // eslint-disable-next-line
     const [darkMode, setDarkMode] = useOutletContext();
-    
-
+    // eslint-disable-next-line
     const [loading, setLoading] = useState(false);
+    // eslint-disable-next-line
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+    // eslint-disable-next-line
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
     const signInWithGoogle = () => {
@@ -37,12 +39,19 @@ const HomePage = ({ user}) => {
   
   const navigate = useNavigate();
 
+    // const handleGetStarted = () => {
+    //     // Set the start time in localStorage
+    //     localStorage.setItem("startTime", Date.now());
+    //     // Redirect to the whiteboard page
+    //     navigate("/whiteboard");
+    // };
+
     const handleGetStarted = () => {
-        // Set the start time in localStorage
-        localStorage.setItem("startTime", Date.now());
-        // Redirect to the whiteboard page
-        navigate("/whiteboard");
-    };
+            // Set the start time in localStorage
+            // localStorage.setItem("startTime", Date.now());
+            // Redirect to the whiteboard page
+            navigate("/difficulty");
+        };
     
     return (
         <Container>

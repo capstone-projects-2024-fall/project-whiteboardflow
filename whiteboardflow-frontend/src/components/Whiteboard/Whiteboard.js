@@ -55,6 +55,9 @@ const Whiteboard = () => {
                                 type: 'line'
                             }
                         },
+                        grabber: {
+                            delayLongTouch: 500
+                        },
                         recognition: {
                             alwaysConnected: true,
                             type: "TEXT",
@@ -124,39 +127,39 @@ const Whiteboard = () => {
         setQuestionVisible(width > 15);  // Toggle visibility based on the width threshold
     };
     // Hide unnecessary elements
-    function deleteElements() {
-        // var menu = document.querySelector('.ms-menu.ms-menu-top-left.ms-menu-row');
-        // if (menu && menu.children.length > 1) {
-        //     // Remove the second child
-        //     menu.removeChild(menu.children[1]);
-        // }
-        // // Check if the main menu element exists
-        // if (menu) {
-        //     // Find the first child with the class 'sub-menu-content.buttom.open' within the first child of the main menu
-        //     var subMenuContent = menu.children[0]?.querySelector('.sub-menu-content.buttom.open');
-        //
-        //     // Check if the sub-menu content element exists
-        //     if (subMenuContent) {
-        //         // Find the element with the class 'ms-menu-column' within the sub-menu content
-        //         var menuColumn = subMenuContent.querySelector('.ms-menu-column');
-        //
-        //         // Check if the menu column element exists and has at least four children
-        //         if (menuColumn && menuColumn.children.length >= 4) {
-        //             // Remove the first four children
-        //             for (let i = 0; i < 4; i++) {
-        //                 menuColumn.removeChild(menuColumn.children[0]);
-        //             }
-        //         }
-        //     }
-        // }
-        // document.querySelector('.ms-menu.ms-menu-top-right').style.display = 'none';
-        // document.querySelector('.ms-menu.ms-menu-bottom.ms-menu-row').style.display = 'none';
-        // Select the first child div of the element with class 'state'
-        const stateElement = document.querySelector('.state'); // Select the element with class 'state'
-        if (stateElement) {
-            stateElement.remove();
-        }
-    }
+    // function deleteElements() {
+    //     // var menu = document.querySelector('.ms-menu.ms-menu-top-left.ms-menu-row');
+    //     // if (menu && menu.children.length > 1) {
+    //     //     // Remove the second child
+    //     //     menu.removeChild(menu.children[1]);
+    //     // }
+    //     // // Check if the main menu element exists
+    //     // if (menu) {
+    //     //     // Find the first child with the class 'sub-menu-content.buttom.open' within the first child of the main menu
+    //     //     var subMenuContent = menu.children[0]?.querySelector('.sub-menu-content.buttom.open');
+    //     //
+    //     //     // Check if the sub-menu content element exists
+    //     //     if (subMenuContent) {
+    //     //         // Find the element with the class 'ms-menu-column' within the sub-menu content
+    //     //         var menuColumn = subMenuContent.querySelector('.ms-menu-column');
+    //     //
+    //     //         // Check if the menu column element exists and has at least four children
+    //     //         if (menuColumn && menuColumn.children.length >= 4) {
+    //     //             // Remove the first four children
+    //     //             for (let i = 0; i < 4; i++) {
+    //     //                 menuColumn.removeChild(menuColumn.children[0]);
+    //     //             }
+    //     //         }
+    //     //     }
+    //     // }
+    //     // document.querySelector('.ms-menu.ms-menu-top-right').style.display = 'none';
+    //     // document.querySelector('.ms-menu.ms-menu-bottom.ms-menu-row').style.display = 'none';
+    //     // Select the first child div of the element with class 'state'
+    //     const stateElement = document.querySelector('.state'); // Select the element with class 'state'
+    //     if (stateElement) {
+    //         stateElement.remove();
+    //     }
+    // }
 
     const sendPNGToFirebase = async (i = false) => {
         return new Promise((resolve, reject) => {
@@ -228,9 +231,9 @@ const Whiteboard = () => {
                         backgroundColor: '#fff',
                     }}
                 />
-                <a id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex: '1000' }}>
+                <button id="link-info" className="link-info" onClick={toggleModal} style={{ fontSize: '50px', cursor: 'pointer', zIndex: '1000', border: 'none', background: "transparent"}}>
                     <img src="/img/info.svg" alt="Info" />
-                </a>
+                </button>
                 <HelpModal isVisible={modalVisible} onClose={() => setModalVisible(false)} />
                 {/* Submit Area */}
                 <Box sx={{

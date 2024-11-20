@@ -1,17 +1,16 @@
 // Layout.js
-import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Menu, Button, Snackbar, CircularProgress, Avatar, Switch } from '@mui/material';
+import React, { useState } from 'react';
+import { Typography, Menu, Button, Snackbar, CircularProgress, Avatar, Switch } from '@mui/material';
 // import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
-import { auth, provider, signInWithPopup, signOut } from './firebase';
-import Footer from './Footer';
+import { auth, provider, signInWithPopup, signOut } from '../../firebase.js';
+import Footer from '../Footer/Footer.js';
 import './Layout.css';
-import { useAvatar } from './Avatar/AvatarContext.js';
-import AvatarToggleButton from './Avatar/AvatarToggleButton.js';
+import AvatarToggleButton from '../Avatar/AvatarToggleButton.js';
 
 const Layout = ({ children, user }) => { // Accept user as a prop
     const [settingsAnchorEl, setSettingsAnchorEl] = useState(null);
