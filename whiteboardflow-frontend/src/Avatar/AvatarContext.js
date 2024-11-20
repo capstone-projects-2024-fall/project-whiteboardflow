@@ -32,7 +32,7 @@ export const AvatarProvider = ({ children }) => {
                     <AnimatedAvatar clicked={clicked} />
                     {showHint && (
                         <div className="hint-bubble">
-                            <p>{location.pathname === '/results' ? "Here are your results!" : "Hello!"}</p>
+                            <p>{location.pathname === '/results' ? "Here are your results!" : "Welcome to Whiteboard Assistant"}</p>
                         </div>
                     )}
                 </div>

@@ -45,18 +45,18 @@ const frameSequences = {
         "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_011.png"
     ],
     '/': [
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_000.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_001.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_002.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_003.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_004.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_005.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_006.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_007.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_008.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_009.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_010.png",
-        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_011.png"
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_000.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_001.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_002.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_003.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_004.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_005.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_006.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_007.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_008.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_009.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_010.png",
+        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_011.png"
     ],
     '/BackEndTest': [
         "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_000.png",
@@ -73,18 +73,19 @@ const frameSequences = {
         "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_011.png"
     ],
     '/whiteboard': [
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_000.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_001.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_002.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_003.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_004.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_005.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_006.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_007.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_008.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_009.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_010.png",
-        "/fat_animal_teddy/01-Walk/FA_TEDDY_Walk_011.png"
+
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_000.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_001.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_002.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_003.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_004.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_005.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_006.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_007.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_008.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_009.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_010.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_011.png"
     ]
 };
 
@@ -108,7 +109,7 @@ const AnimatedAvatar = ({ clicked }) => {
             initial={{ scale: 0.5 }}
             animate={{ scale: 1.05 }}
             transition={{
-                duration: 1,
+                duration: 2,
                 yoyo: Infinity,
             }}
             className="retro-avatar"
