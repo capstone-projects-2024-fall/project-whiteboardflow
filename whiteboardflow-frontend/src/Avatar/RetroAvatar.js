@@ -5,6 +5,32 @@ import './RetroAvatar.css';
 
 const frameSequences = {
     '/results': [
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_000.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_001.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_002.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_003.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_004.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_005.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_006.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_007.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_008.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_009.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_010.png",
+        "/fat_animal_teddy/02-Walk_Happy/FA_TEDDY_Walk_Happy_011.png"
+        ],
+    '/oraltest': [
+        "/fat_animal_teddy/04-Run/FA_TEDDY_Run_000.png",
+        "/fat_animal_teddy/04-Run/FA_TEDDY_Run_001.png",
+        "/fat_animal_teddy/04-Run/FA_TEDDY_Run_002.png",
+        "/fat_animal_teddy/04-Run/FA_TEDDY_Run_003.png",
+        "/fat_animal_teddy/04-Run/FA_TEDDY_Run_004.png",
+        "/fat_animal_teddy/04-Run/FA_TEDDY_Run_005.png",
+        "/fat_animal_teddy/04-Run/FA_TEDDY_Run_006.png",
+        "/fat_animal_teddy/04-Run/FA_TEDDY_Run_007.png",
+        "/fat_animal_teddy/04-Run/FA_TEDDY_Run_008.png",
+        "/fat_animal_teddy/04-Run/FA_TEDDY_Run_009.png"
+    ],
+    '/Settings': [
         "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_000.png",
         "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_001.png",
         "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_002.png",
@@ -18,30 +44,33 @@ const frameSequences = {
         "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_010.png",
         "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_011.png"
     ],
-    '/OralTest': [
-        "/fat_animal_teddy/OralTest/03-Jump_Throw/FA_TEDDY_Jump_Throw_000.png",
-        "/fat_animal_teddy/OralTest/03-Jump_Throw/FA_TEDDY_Jump_Throw_001.png",
-        "/fat_animal_teddy/OralTest/03-Jump_Throw/FA_TEDDY_Jump_Throw_002.png",
-        "/fat_animal_teddy/OralTest/03-Jump_Throw/FA_TEDDY_Jump_Throw_003.png",
-        "/fat_animal_teddy/OralTest/03-Jump_Throw/FA_TEDDY_Jump_Throw_004.png"
-    ],
-    '/Settings': [
-        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_000.png",
-        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_001.png",
-        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_002.png",
-        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_003.png",
-        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_004.png",
-        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_005.png",
-        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_006.png",
-        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_007.png",
-        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_008.png",
-        "/fat_animal_teddy/OralTest/04-Run/FA_TEDDY_Run_009.png"
+    '/': [
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_000.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_001.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_002.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_003.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_004.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_005.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_006.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_007.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_008.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_009.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_010.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_011.png"
     ],
     '/BackEndTest': [
-        "/fat_animal_teddy/BackEndTest/FA_TEDDY_BackEndTest_000.png",
-        "/fat_animal_teddy/BackEndTest/FA_TEDDY_BackEndTest_001.png",
-        "/fat_animal_teddy/BackEndTest/FA_TEDDY_BackEndTest_002.png",
-        "/fat_animal_teddy/BackEndTest/FA_TEDDY_BackEndTest_003.png"
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_000.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_001.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_002.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_003.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_004.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_005.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_006.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_007.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_008.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_009.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_010.png",
+        "/fat_animal_teddy/02-Idle_Blink/FA_TEDDY_Idle_Blink_011.png"
     ],
     '/whiteboard': [
         "/fat_animal_teddy/03-Jump_Throw/FA_TEDDY_Jump_Throw_000.png",
