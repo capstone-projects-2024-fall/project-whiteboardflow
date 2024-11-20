@@ -89,7 +89,7 @@ const frameSequences = {
     ]
 };
 
-const AnimatedAvatar = ({ clicked }) => {
+const AnimatedAvatar = () => {
     const location = useLocation();
     const [currentFrame, setCurrentFrame] = useState(0);
 
