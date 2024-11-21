@@ -59,7 +59,9 @@ export const AvatarProvider = ({ children }) => {
                     <AnimatedAvatar />
                     {showHint && (
                         <div className="hint-bubble">
-                            <ReactMarkdown>{hintMessage}</ReactMarkdown>
+                            <div className="hint-content">
+                                <ReactMarkdown>{hintMessage}</ReactMarkdown>
+                            </div>
                         </div>
                     )}
                 </div>

@@ -1,5 +1,4 @@
-.avatar-fixed-container
-{
+.avatar-fixed-container {
     position: fixed;
     bottom: 90px;
     /* Adjust this to position the avatar in the corner */
@@ -11,17 +10,12 @@
     align-items: center;
 }
 
-.hint-bubble
-{
+.hint-bubble {
     position: fixed;
     bottom: 250px;
-    /* Adjust this to position the bubble above the avatar */
     right: 10%;
-    /* Testing this */
     z-index: 8000;
-    /* Center-align with respect to avatar */
     transform: translateX(50%);
-    /* Adjust to center the bubble horizontally */
     background-color: #f1f1f1;
     color: #333;
     padding: 10px;
@@ -29,17 +23,18 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     font-size: 14px;
     max-width: 200px;
-    max-height: 250px;
-    overflow-y: auto;
-    white-space: normal;
+    overflow: visible;
 }
 
-.hint-bubble::after
-{
+.hint-content {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.hint-bubble::after {
     content: "";
     position: absolute;
     bottom: -10px;
-    /* Triangle pointing down */
     left: 50%;
     transform: translateX(-50%);
     width: 0;
