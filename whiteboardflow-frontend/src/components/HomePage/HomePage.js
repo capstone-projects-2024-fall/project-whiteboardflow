@@ -50,7 +50,8 @@ const HomePage = ({ user}) => {
             // Set the start time in localStorage
             // localStorage.setItem("startTime", Date.now());
             // Redirect to the whiteboard page
-            navigate("/difficulty");
+            // navigate("/difficulty");
+            navigate("/questionSelect")
         };
     
     return (

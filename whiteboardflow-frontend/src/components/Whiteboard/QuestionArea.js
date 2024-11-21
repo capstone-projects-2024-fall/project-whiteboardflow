@@ -18,6 +18,8 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
         return str.replace(/<[^>]*>/g, '');
       }
 
+    // This might actually be a problem IDK
+    
     useEffect(() => {
         // const question = getQuestionFromFirebase();
         let question = `

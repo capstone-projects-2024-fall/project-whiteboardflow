@@ -7,6 +7,7 @@ import Whiteboard from './components/Whiteboard/Whiteboard';
 import OralTest from './components/OralTest/OralTest';
 import Results from './components/Result/Result';
 import DifficultySelect from './components/DifficultySelect/DifficultySelect';
+import QuestionSelect from './components/QuestionSelect/QuestionSelect'
 import { auth } from './firebase';
 import { AvatarProvider } from './components/Avatar/AvatarContext';
 
@@ -36,6 +37,7 @@ function Main() {
                         <Route path="results" element={<PrivateRoute><Results /></PrivateRoute>} />
                         <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
                         <Route path="difficulty" element={<PrivateRoute><DifficultySelect /></PrivateRoute>} />
+                        <Route path="questionSelect" element={<PrivateRoute><QuestionSelect /></PrivateRoute>} />
                     </Route>
                 </Routes>
             </AvatarProvider>

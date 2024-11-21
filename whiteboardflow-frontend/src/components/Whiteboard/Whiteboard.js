@@ -228,7 +228,7 @@ const Whiteboard = () => {
                         backgroundColor: '#fff',
                     }}
                 />
-                <button id="link-info" className="link-info" onClick={toggleModal} style={{ fontSize: '50px', cursor: 'pointer', zIndex: '1000', border: 'none', background: "transparent"}}>
+                <button id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex: '1000', border: 'none', background: "transparent"}}>
                     <img src="/img/info.svg" alt="Info" />
                 </button>
                 <HelpModal isVisible={modalVisible} onClose={() => setModalVisible(false)} />
