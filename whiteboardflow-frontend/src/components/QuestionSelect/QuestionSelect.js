@@ -223,8 +223,10 @@ function QuestionSelect() {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+  const handleClose = () => {
+    setSelected([0]);
+    setOpen(false);
+  }
 
 
   const handleClick = (event, id) => {
