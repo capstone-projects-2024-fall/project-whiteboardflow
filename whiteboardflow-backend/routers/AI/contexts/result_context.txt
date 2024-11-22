@@ -9,4 +9,10 @@ about those three items:
         
 Analyze the image and transcript in your response. What is in the image? If my
 answer was wrong, show me what I did wrong. Don't focus on programming language
-syntax like quotations marks, that is irrelevant. Don't  explicitly give me the answer. 
+syntax like quotations marks, that is irrelevant. Don't explicitly give me the answer. 
+Also, can you give me a numerical metric based on these criteria.
+
+Clarity of Reasoning: Rate how well you communicated your thought process (1-5 scale).
+Relevance to Problem: Measure how related the content of your answer was to the actual question (1-5 scale).
+Creativity: Evaluate how creatively you approached the problem (1-5 scale).
+Structure: Assess the organization and logical flow of your explanation (1-5 scale).
