@@ -6,14 +6,19 @@ import './AvatarContext.css';
 
 const AvatarContext = createContext();
 
-export const useAvatar = () => {
-    return useContext(AvatarContext);
-};
+export const useAvatar = () => useContext(AvatarContext);
 
 export const AvatarProvider = ({ children }) => {
     const [isVisible, setIsVisible] = useState(true);
-    const [showHint, setShowHint] = useState(false); // Initial state for the hint bubble
-    const location = useLocation(); // Get current route location
+    const [showHint, setShowHint] = useState(false);
+    const location = useLocation();
+
+    const toggleAvatar = () => setIsVisible((prev) => !prev);
+    const toggleHint = () => setShowHint((prev) => !prev);
+
+    useEffect(() => {
+        setShowHint(true);
+    }, [location.pathname]);
 
     // Determine hint message based on the current route
     const getHintMessage = () => {
@@ -27,24 +32,13 @@ export const AvatarProvider = ({ children }) => {
             case '/BackEndTest':
                 return "This is where you can test the backend.";
             case '/results':
-                return "Here are your results!\nGood Job!";
+                return "Here are your results!";
             case '/whiteboard':
-                return "Use the whiteboard for brainstorming.";
+                return "Click me for a hint!";
             default:
                 return "Hello! Need any help?";
         }
     };
-
-    const toggleAvatar = () => setIsVisible((prev) => !prev);
-    const toggleHint = () => setShowHint((prev) => !prev);
-
-    // Show hint automatically when the page loads
-    useEffect(() => {
-        setShowHint(true);
-        // Optionally hide the hint after a few seconds
-        //const timer = setTimeout(() => setShowHint(false), 5000); // Hide after 5 seconds
-       //return () => clearTimeout(timer); // Clean up the timer on unmount
-    }, [location.pathname]); // Run this effect on page load and when the path changes
 
     return (
         <AvatarContext.Provider value={{ isVisible, toggleAvatar }}>

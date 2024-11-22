@@ -74,11 +74,11 @@ label {
   margin-right: 5px;
 }
 
-input:disabled,
+/* input:disabled,
 select:disabled {
   opacity: 0.5;
   pointer-events: none;
-}
+} */
 
 @media screen and (max-width : 480px) {
   input:not([type="checkbox"]):not([type="color"]):not([type="range"]) {

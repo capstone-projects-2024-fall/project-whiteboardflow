@@ -65,6 +65,7 @@ const MicPrompt = ({darkMode, setRecording, setNotRecording, setEmpty, setNotEmp
 	return (
 		<div>
 			<Button
+				sx={{marginTop: '10px'}}
 				id='microphone-btn' 
 				onClick={toggleListen}
 				variant="contained"
