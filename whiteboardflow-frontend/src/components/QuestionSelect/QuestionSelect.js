@@ -170,17 +170,6 @@ function QuestionSelect() {
     setOrderBy(property);
   };
 
-  const handleClick = (event, id) => {
-    const selectedIndex = selected.indexOf(id);
-
-    if (selectedIndex === -1) {
-      setSelected([id]);
-    } else {
-      setSelected([0])
-    }
-    
-  };
-
   const modalStyle = {
     position: 'absolute',
     top: '50%',
@@ -237,6 +226,20 @@ function QuestionSelect() {
   const handleClose = () => setOpen(false);
 
 
+
+  const handleClick = (event, id) => {
+    const selectedIndex = selected.indexOf(id);
+
+    if (selectedIndex === -1) {
+      setSelected([id]);
+      handleOpen();
+    } else {
+      setSelected([0])
+    }
+    
+  };
+
+
   return (
       <Box sx={{ width: '100%', paddingTop: '50px', display: "flex", flexDirection: "column", alignItems: 'center'}}>
         <h1 className= {darkMode ? 'q-header-dark' : 'q-header-light'}> Choose a question from the list below: </h1>
@@ -264,7 +267,7 @@ function QuestionSelect() {
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => {handleClick(event, row.id); if (selected[0] === 0) {handleOpen()}}}
+                        onClick={(event) => {handleClick(event, row.id);}}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
