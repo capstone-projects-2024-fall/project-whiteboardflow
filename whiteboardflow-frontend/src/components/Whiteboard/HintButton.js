@@ -9,7 +9,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const { setHintMessage, setHintLoading } = useAvatar();
 
-	const handleOpen = async () => {
+	const getHint = async () => {
 		if (hintUsed) {
 			setSnackbarOpen(true);
 			return;
@@ -20,7 +20,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 
 		try {
 			await sendPNGToFirebase(false);
-			const response = await getHintResponse();
+			const response = await fetchHint();
 			setHintMessage(response);
 		} catch (error) {
 			console.error("Error during image upload or hint response:", error);
@@ -29,7 +29,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 		}
 	}
 
-	const getHintResponse = async () => {
+	const fetchHint = async () => {
 		const idToken = await getIdToken();
 
 		try {
@@ -58,7 +58,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 
 	return (
 		<>
-			<button className='help-button' type="button" onClick={handleOpen}>
+			<button className='help-button' type="button" onClick={getHint}>
 				Request a Hint
 			</button>
 			{/* Snackbar for hint already used */}

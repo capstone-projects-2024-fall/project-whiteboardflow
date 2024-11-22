@@ -3,6 +3,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import AnimatedAvatar from './RetroAvatar';
 import ReactMarkdown from 'react-markdown';
+import CircularProgress from '@mui/material/CircularProgress'; // Import MUI loader
 import './AvatarContext.css';
 
 const AvatarContext = createContext();
@@ -15,6 +16,7 @@ export const AvatarProvider = ({ children }) => {
     const [isVisible, setIsVisible] = useState(true);
     const [hintMessage, setHintMessage] = useState("");
     const [showHint, setShowHint] = useState(false); // Initial state for the hint bubble
+    const [hintLoading, setHintLoading] = useState(false); // Add loading state
     const location = useLocation(); // Get current route location
 
     // Show hint automatically when the page loads
@@ -52,7 +54,7 @@ export const AvatarProvider = ({ children }) => {
 
 
     return (
-        <AvatarContext.Provider value={{ isVisible, toggleAvatar, setHintMessage }}>
+        <AvatarContext.Provider value={{ isVisible, toggleAvatar, setHintMessage, setHintLoading }}>
             {children}
             {isVisible && (
                 <div className="avatar-fixed-container" onClick={toggleHint}>
@@ -60,7 +62,11 @@ export const AvatarProvider = ({ children }) => {
                     {showHint && (
                         <div className="hint-bubble">
                             <div className="hint-content">
-                                <ReactMarkdown>{hintMessage}</ReactMarkdown>
+                                {hintLoading ? (
+                                    <CircularProgress size={40} /> // Show loader if loading
+                                ) : (
+                                    <ReactMarkdown>{hintMessage}</ReactMarkdown> // Show hint message otherwise
+                                )}
                             </div>
                         </div>
                     )}
