@@ -1,0 +1,48 @@
+.avatar-fixed-container
+{
+    position: fixed;
+    bottom: 90px;
+    /* Adjust this to position the avatar in the corner */
+    right: 35px;
+    z-index: 1000;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hint-bubble
+{
+    position: fixed;
+    bottom: 250px;
+    /* Adjust this to position the bubble above the avatar */
+    right: 10%;
+    /* Testing this */
+    z-index: 8000;
+    /* Center-align with respect to avatar */
+    transform: translateX(50%);
+    /* Adjust to center the bubble horizontally */
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    max-width: 200px;
+    white-space: pre-wrap;
+}
+
+.hint-bubble::after
+{
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    /* Triangle pointing down */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #f1f1f1;
+}

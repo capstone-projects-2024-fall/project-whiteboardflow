@@ -1,0 +1,12 @@
+.custom-menu-action {
+    position: absolute;
+    top: -0.5vh;
+    left: 2.5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.expandable-content {
+    transition: max-height 0.3s ease-out;
+}
+
