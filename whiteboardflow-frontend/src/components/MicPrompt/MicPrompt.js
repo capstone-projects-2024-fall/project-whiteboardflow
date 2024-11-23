@@ -43,7 +43,7 @@ const MicPrompt = ({darkMode, setRecording, setNotRecording, setEmpty, setNotEmp
 			}
 			document.getElementById('interim').innerHTML = interimTranscript;
 			document.getElementById('final').innerHTML = finalTranscript;
-			localStorage.setItem("finalTranscript", finalTranscript);
+			sessionStorage.setItem("finalTranscript", finalTranscript);
 		};
 
 		recognition.onerror = (event) => {
@@ -65,6 +65,7 @@ const MicPrompt = ({darkMode, setRecording, setNotRecording, setEmpty, setNotEmp
 	return (
 		<div>
 			<Button
+				sx={{marginTop: '10px'}}
 				id='microphone-btn' 
 				onClick={toggleListen}
 				variant="contained"

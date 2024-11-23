@@ -1,0 +1,34 @@
+[
+    // Example question
+    {
+        "question_text": "Write a function to reverse a string.",
+
+        // Difficulties: ["basic", "intermediate", "advanced", "null"]
+        // 'null' is reserved for fermi questions
+        "difficulty": "basic",
+
+        // Categories: ["algorithms", "coding", "data_structures", "fermi", "programming_concepts"]
+        // CATEGORIES MUST BE PUT ALPHABETICALLY IN THE ARRAY FOR FILTERING PURPOSES
+        "categories": [
+            "algorithms", 
+            "coding"
+        ]
+
+        // Optional explanation
+        "explanation": "Further explanation of the problem."
+
+        "examples": [
+            {
+                "input": "123", 
+                "output": "321"
+
+                // Optional explanation
+                "explanation": "This is the explanation for output."
+            },
+            {
+                "input": "elephant", 
+                "output": "tnahpele"
+            }
+        ]
+    }
+]

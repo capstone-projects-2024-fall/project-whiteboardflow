@@ -8,26 +8,20 @@ import './AvatarContext.css';
 
 const AvatarContext = createContext();
 
-export const useAvatar = () => {
-    return useContext(AvatarContext);
-};
+export const useAvatar = () => useContext(AvatarContext);
 
 export const AvatarProvider = ({ children }) => {
     const [isVisible, setIsVisible] = useState(true);
     const [hintMessage, setHintMessage] = useState("");
-    const [showHint, setShowHint] = useState(false); // Initial state for the hint bubble
-    const [hintLoading, setHintLoading] = useState(false); // Add loading state
-    const location = useLocation(); // Get current route location
+    const [showHint, setShowHint] = useState(false);
+    const [hintLoading, setHintLoading] = useState(false);
+    const location = useLocation();
 
-    // Show hint automatically when the page loads
     useEffect(() => {
         setShowHint(true);
         const defaultHintMessage = getDefaultHintMessage(location.pathname);
         setHintMessage(defaultHintMessage);
-        // Optionally hide the hint after a few seconds
-        //const timer = setTimeout(() => setShowHint(false), 5000); // Hide after 5 seconds
-        //return () => clearTimeout(timer); // Clean up the timer on unmount
-    }, [location.pathname]); // Run this effect on page load and when the path changes
+    }, [location.pathname]);
 
     // Determine hint message based on the current route
     const getDefaultHintMessage = (path) => {
@@ -41,9 +35,9 @@ export const AvatarProvider = ({ children }) => {
             case '/BackEndTest':
                 return "This is where you can test the backend.";
             case '/results':
-                return "Here are your results!\nGood Job!";
+                return "Here are your results!";
             case '/whiteboard':
-                return "Use the whiteboard for brainstorming.";
+                return "Click me for a hint!";
             default:
                 return "Hello! Need any help?";
         }
