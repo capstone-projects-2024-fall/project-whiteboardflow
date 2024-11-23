@@ -37,7 +37,7 @@ export const AvatarProvider = ({ children }) => {
             case '/results':
                 return "Here are your results!";
             case '/whiteboard':
-                return "Click me for a hint!";
+                return "Show your work here!";
             default:
                 return "Hello! Need any help?";
         }
