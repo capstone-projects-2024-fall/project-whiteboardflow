@@ -2,6 +2,8 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import AnimatedAvatar from './RetroAvatar';
+import ReactMarkdown from 'react-markdown';
+import CircularProgress from '@mui/material/CircularProgress'; // Import MUI loader
 import './AvatarContext.css';
 
 const AvatarContext = createContext();
@@ -10,19 +12,20 @@ export const useAvatar = () => useContext(AvatarContext);
 
 export const AvatarProvider = ({ children }) => {
     const [isVisible, setIsVisible] = useState(true);
+    const [hintMessage, setHintMessage] = useState("");
     const [showHint, setShowHint] = useState(false);
+    const [hintLoading, setHintLoading] = useState(false);
     const location = useLocation();
-
-    const toggleAvatar = () => setIsVisible((prev) => !prev);
-    const toggleHint = () => setShowHint((prev) => !prev);
 
     useEffect(() => {
         setShowHint(true);
+        const defaultHintMessage = getDefaultHintMessage(location.pathname);
+        setHintMessage(defaultHintMessage);
     }, [location.pathname]);
 
     // Determine hint message based on the current route
-    const getHintMessage = () => {
-        switch (location.pathname) {
+    const getDefaultHintMessage = (path) => {
+        switch (path) {
             case '/':
                 return "Welcome to the Whiteboard Assistant!";
             case '/OralTest':
@@ -34,21 +37,31 @@ export const AvatarProvider = ({ children }) => {
             case '/results':
                 return "Here are your results!";
             case '/whiteboard':
-                return "Click me for a hint!";
+                return "Show your work here!";
             default:
                 return "Hello! Need any help?";
         }
     };
 
+    const toggleAvatar = () => setIsVisible((prev) => !prev);
+    const toggleHint = () => setShowHint((prev) => !prev);
+
+
     return (
-        <AvatarContext.Provider value={{ isVisible, toggleAvatar }}>
+        <AvatarContext.Provider value={{ isVisible, toggleAvatar, setHintMessage, setHintLoading }}>
             {children}
             {isVisible && (
                 <div className="avatar-fixed-container" onClick={toggleHint}>
                     <AnimatedAvatar />
                     {showHint && (
                         <div className="hint-bubble">
-                            <p>{getHintMessage()}</p>
+                            <div className="hint-content">
+                                {hintLoading ? (
+                                    <CircularProgress size={40} /> // Show loader if loading
+                                ) : (
+                                    <ReactMarkdown>{hintMessage}</ReactMarkdown> // Show hint message otherwise
+                                )}
+                            </div>
                         </div>
                     )}
                 </div>
