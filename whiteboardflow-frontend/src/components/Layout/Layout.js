@@ -6,7 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useNavigate, Outlet, useLocation } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { auth, provider, signInWithPopup, signOut } from '../../firebase.js';
 import Footer from '../Footer/Footer.js';
 import './Layout.css';
@@ -100,7 +100,6 @@ const Layout = ({ children, user }) => { // Accept user as a prop
 
     return (
         <div className={`layout-container ${darkMode ? 'dark-mode' : 'light-mode'}`}>
-            {console.log(useLocation)}
             {/* <AppBar position="static"> */}
                 {/* <Toolbar> */}
                     {/* <IconButton
