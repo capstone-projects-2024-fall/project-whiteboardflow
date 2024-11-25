@@ -33,7 +33,7 @@ const HintButton = ({ sendPNGToFirebase }) => {
 		const idToken = await getIdToken();
 
 		try {
-			const response = await fetch("/api/get-hint", {
+			const response = await fetch("/assistant/hint", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

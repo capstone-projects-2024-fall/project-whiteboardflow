@@ -43,7 +43,7 @@ class AIData(HintData):
 dir = os.path.dirname(__file__)
 
 
-@router.post("/get-hint/")
+@router.post("/hint/")
 def get_hint(data: HintData):
     """
     Processes a hint request by verifying the user token, retrieving an
@@ -68,7 +68,7 @@ def get_hint(data: HintData):
     return get_ai_response(data, "hint_context")
 
 
-@router.post("/get-result/")
+@router.post("/result/")
 def get_result(data: AIData):
     if not any([data.question, data.image, data.transcript]):
         raise ValueError(

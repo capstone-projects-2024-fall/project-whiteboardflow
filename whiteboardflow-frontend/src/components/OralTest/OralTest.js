@@ -55,7 +55,7 @@ function OralTest() {
 		const idToken = await getIdToken();
 
 		try {
-			const response = await fetch("/api/get-result", {
+			const response = await fetch("/assistant/result", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

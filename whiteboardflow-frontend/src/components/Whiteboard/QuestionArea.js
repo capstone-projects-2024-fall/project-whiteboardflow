@@ -25,7 +25,7 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
     useEffect(() => {
         const fetchRandomQuestion = async () => {
             try {
-                const response = await fetch("/api/get-random-question");
+                const response = await fetch("/questions/random");
                 const jsonData = await response.json();
                 setQuestionJson(jsonData);
                 sessionStorage.setItem("question_text", jsonData.question.question_text);
