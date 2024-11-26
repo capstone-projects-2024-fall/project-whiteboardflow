@@ -10,6 +10,7 @@ import DifficultySelect from './components/DifficultySelect/DifficultySelect';
 import QuestionSelect from './components/QuestionSelect/QuestionSelect'
 import { auth } from './firebase';
 import { AvatarProvider } from './components/Avatar/AvatarContext';
+import { QuestionProvider } from './components/QuestionSelect/QuestionContext';
 
 function Main() {
     const [user, setUser] = useState(null);
@@ -29,17 +30,19 @@ function Main() {
     return (
         <Router>
             <AvatarProvider>
-                <Routes>
-                    <Route element={<Layout user={user} />}>
-                        <Route index element={<HomePage user={user} />} />
-                        {/* Only allow access to these routes if user is logged in */}
-                        <Route path="OralTest" element={<PrivateRoute><OralTest /></PrivateRoute>} />
-                        <Route path="results" element={<PrivateRoute><Results /></PrivateRoute>} />
-                        <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
-                        <Route path="difficulty" element={<PrivateRoute><DifficultySelect /></PrivateRoute>} />
-                        <Route path="questionSelect" element={<PrivateRoute><QuestionSelect /></PrivateRoute>} />
-                    </Route>
-                </Routes>
+                <QuestionProvider>
+                    <Routes>
+                        <Route element={<Layout user={user} />}>
+                            <Route index element={<HomePage user={user} />} />
+                            {/* Only allow access to these routes if user is logged in */}
+                            <Route path="OralTest" element={<PrivateRoute><OralTest /></PrivateRoute>} />
+                            <Route path="results" element={<PrivateRoute><Results /></PrivateRoute>} />
+                            <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
+                            <Route path="difficulty" element={<PrivateRoute><DifficultySelect /></PrivateRoute>} />
+                            <Route path="questionSelect" element={<PrivateRoute><QuestionSelect /></PrivateRoute>} />
+                        </Route>
+                    </Routes>
+                </QuestionProvider>
             </AvatarProvider>
         </Router>
     );

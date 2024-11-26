@@ -20,4 +20,4 @@ def get_random_question():
 
 @router.get("/all")
 def get_question_list():
-    return question_list
+    return {"question_list": question_list}

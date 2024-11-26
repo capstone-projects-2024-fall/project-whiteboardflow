@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import './QuestionSelect.css'
 import { color } from 'framer-motion';
+import { useQuestionContext } from './QuestionContext';
 
 
 function createData(id, title, question, category, difficulty, completed) {
@@ -29,40 +30,16 @@ function createData(id, title, question, category, difficulty, completed) {
   };
 }
 
-const rows = [
-  createData(
-    0,
-    '',
-    '',
-    '',
-    '',
-    false
-  ),createData(
-    1,
-    'Sum even numbers',
-    'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
-    'Coding problems',
-    'Basic',
-    false
-  ),
-  createData(
-    2,
-    'How many licks does it take to get to the Tootsie Roll center of a Tootsie Pop?',
-    'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
-    'Coding problems',
-    'Basic',
-    false
-  ),createData(
-    3,
-    'Sum even numbers',
-    'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
-    'Coding problems',
-    'Basic',
-    true
-  ),
-];
+// Empty string for Fermi question difficulty
+const difficultyOrder = { Basic: 1, Intermediate: 2, Advanced: 3, "": 4};
 
 function descendingComparator(a, b, orderBy) {
+  if (orderBy === 'difficulty') {
+    const aValue = difficultyOrder[a[orderBy]] || 0;
+    const bValue = difficultyOrder[b[orderBy]] || 0;
+    return bValue - aValue;
+  }
+
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -158,6 +135,31 @@ function QuestionSelect() {
   //eslint-disable-next-line
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const { questions } = useQuestionContext();
+  const [rows, setRows] = React.useState([]);
+
+  React.useEffect(() => {
+    if (questions) {
+      const newRows = questions.map((question, index) => {
+
+        // Convert array of categories to a comma-separated string
+        const formattedCategories = question.categories
+        ? question.categories.join(', ')
+        : '';
+  
+        return createData(
+          index,
+          question.title || '',
+          question.question_text || '',
+          formattedCategories,
+          question.difficulty,
+          question.completed || false
+        );
+      });
+  
+      setRows(newRows);
+    }
+  }, [questions]);
 
 	// eslint-disable-next-line
 	const [darkMode, setDarkMode] = useOutletContext();
@@ -184,10 +186,6 @@ function QuestionSelect() {
     alignItems: "center"
   };
 
-  React.useEffect(() => {
-    
-  },[selected])
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -201,13 +199,12 @@ function QuestionSelect() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const visibleRows = React.useMemo(
-    () =>
-      [...rows]
+    const visibleRows = React.useMemo(() => {
+      if (!rows || !Array.isArray(rows)) return [];
+      return [...rows]
         .sort(getComparator(order, orderBy))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage],
-  );
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    }, [order, orderBy, page, rowsPerPage, rows]);
 
   const navigate = useNavigate();
 
@@ -218,14 +215,12 @@ function QuestionSelect() {
     navigate("/whiteboard");
   };
 
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setSelected([0]);
     setOpen(false);
   }
-
 
   const handleClick = (event, id) => {
     const selectedIndex = selected.indexOf(id);
@@ -236,9 +231,7 @@ function QuestionSelect() {
     } else {
       setSelected([0])
     }
-    
   };
-
 
   return (
       <Box sx={{ width: '100%', paddingTop: '50px', display: "flex", flexDirection: "column", alignItems: 'center'}}>
@@ -249,7 +242,7 @@ function QuestionSelect() {
               sx={{ minWidth: 750 }}
               aria-labelledby="tableTitle"
               size={dense ? 'small' : 'medium'}
-            >
+            >  
               <EnhancedTableHead
                 numSelected={selected.length}
                 order={order}
@@ -321,11 +314,7 @@ function QuestionSelect() {
               Confirm question selection:
             </Typography>
             <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2 }}>
-              {selected == null ? "" : rows.find(data => data.id === selected[0]).title}
-              {/* {selected} */}
-              {/* {console.log(rows.find(data => data.id === selected[0]))}
-              {console.log(rows)}
-              {console.log(selected)} */}
+              {selected[0] == 0 ? "" : rows.find(data => data.id === selected[0]).title}
             </Typography>
             <Button sx={{width: "100px", marginTop: '20px'}} variant="contained" onClick={handleNav} >Confirm</Button>
           </Box>
