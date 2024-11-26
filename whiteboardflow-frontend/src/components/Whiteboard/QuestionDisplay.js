@@ -1,17 +1,21 @@
 import React from 'react';
 import './css/question-display.css';
 
-const QuestionDisplay = ({ question }) => {
+const QuestionDisplay = () => {
+    const question = getQuestionFromStorage();
+
     // If question is not available, show an empty div or a message
     if (!question) {
         return <div></div>;
+    } else {
+        sessionStorage.setItem("question_text", question.question_text);
     }
 
     return (
-        <div class="question-container">
+        <div className="question-container">
             {/* Render Question Text */}
             {question.question_text && (
-                <div class="question"><strong>Question:</strong> {question.question_text}</div>
+                <div className="question"><strong>Question:</strong> {question.question_text}</div>
             )}
             {/* Render Explanation*/}
             {question.explanation && (
@@ -19,24 +23,27 @@ const QuestionDisplay = ({ question }) => {
             )}
             {/* Render Examples */}
             {question.examples && question.examples.length > 0 && (
-                <p> <hr></hr>
-                    {question.examples.map((example, index) => (
-                        <div key={index} class="example">
-                            <div class="example-title">Example {index + 1}:</div>
-                            <div class="example-content">
-                                {example.input && (
-                                    <div><strong>Input:</strong> {example.input}</div>
-                                )}
-                                {example.output && (
-                                    <div><strong>Output:</strong> {example.output}</div>
-                                )}
-                                {example.explanation && (
-                                    <div><strong>Explanation:</strong> {example.explanation}</div>
-                                )}
+                <>
+                    <hr />
+                    <div>
+                        {question.examples.map((example, index) => (
+                            <div key={index} className="example">
+                                <div className="example-title">Example {index + 1}:</div>
+                                <div className="example-content">
+                                    {example.input && (
+                                        <div><strong>Input:</strong> {example.input}</div>
+                                    )}
+                                    {example.output && (
+                                        <div><strong>Output:</strong> {example.output}</div>
+                                    )}
+                                    {example.explanation && (
+                                        <div><strong>Explanation:</strong> {example.explanation}</div>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </p>
+                        ))}
+                    </div>
+                </>
             )}
         </div>
     );

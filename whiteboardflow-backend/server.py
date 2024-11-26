@@ -23,8 +23,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(ai_router, prefix="/api")
-app.include_router(questions_router, prefix="/api")
+app.include_router(ai_router, prefix="/assistant")
+app.include_router(questions_router, prefix="/questions")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
