@@ -31,7 +31,7 @@ function createData(id, title, question, category, difficulty, completed) {
 }
 
 // Empty string for Fermi question difficulty
-const difficultyOrder = { Basic: 1, Intermediate: 2, Advanced: 3, "": 4};
+const difficultyOrder = { Basic: 1, Intermediate: 2, Advanced: 3, "": 4 };
 
 function descendingComparator(a, b, orderBy) {
   if (orderBy === 'difficulty') {
@@ -56,13 +56,12 @@ function getComparator(order, orderBy) {
 }
 
 const headCells = [
-  
   {
     id: 'completed',
     numeric: false,
     disablePadding: true,
     label: '',
-  },{
+  }, {
     id: 'title',
     numeric: false,
     disablePadding: true,
@@ -88,8 +87,6 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-
-  
 
   return (
     <TableHead>
@@ -144,9 +141,9 @@ function QuestionSelect() {
 
         // Convert array of categories to a comma-separated string
         const formattedCategories = question.categories
-        ? question.categories.join(', ')
-        : '';
-  
+          ? question.categories.join(', ')
+          : '';
+
         return createData(
           index,
           question.title || '',
@@ -156,13 +153,13 @@ function QuestionSelect() {
           question.completed || false
         );
       });
-  
+
       setRows(newRows);
     }
   }, [questions]);
 
-	// eslint-disable-next-line
-	const [darkMode, setDarkMode] = useOutletContext();
+  // eslint-disable-next-line
+  const [darkMode, setDarkMode] = useOutletContext();
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -199,12 +196,12 @@ function QuestionSelect() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-    const visibleRows = React.useMemo(() => {
-      if (!rows || !Array.isArray(rows)) return [];
-      return [...rows]
-        .sort(getComparator(order, orderBy))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-    }, [order, orderBy, page, rowsPerPage, rows]);
+  const visibleRows = React.useMemo(() => {
+    if (!rows || !Array.isArray(rows)) return [];
+    return [...rows]
+      .sort(getComparator(order, orderBy))
+      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  }, [order, orderBy, page, rowsPerPage, rows]);
 
   const navigate = useNavigate();
 
@@ -229,98 +226,96 @@ function QuestionSelect() {
       setSelected([id]);
       handleOpen();
     } else {
-      setSelected([0])
+      setSelected([0]);
     }
   };
 
   return (
-      <Box sx={{ width: '100%', paddingTop: '50px', display: "flex", flexDirection: "column", alignItems: 'center'}}>
-        <h1 className= {darkMode ? 'q-header-dark' : 'q-header-light'}> Choose a question from the list below: </h1>
-        <Box sx={{ width: '100%', mb: 2 }}>
-          <TableContainer>
-            <Table
-              sx={{ minWidth: 750 }}
-              aria-labelledby="tableTitle"
-              size={dense ? 'small' : 'medium'}
-            >  
-              <EnhancedTableHead
-                numSelected={selected.length}
-                order={order}
-                orderBy={orderBy}
-                onRequestSort={handleRequestSort}
-                rowCount={rows.length}
-              />
-              <TableBody>
-                {visibleRows.map((row, index) => {
-                  const isItemSelected = selected.includes(row.id);
-                  if (row.id === 0){
+    <Box sx={{ width: '100%', paddingTop: '50px', display: "flex", flexDirection: "column", alignItems: 'center' }}>
+      <h1 className={darkMode ? 'q-header-dark' : 'q-header-light'}> Choose a question from the list below: </h1>
+      <Box sx={{ width: '100%', mb: 2 }}>
+        <TableContainer>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            size={dense ? 'small' : 'medium'}
+          >
+            <EnhancedTableHead
+              numSelected={selected.length}
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+              rowCount={rows.length}
+            />
+            <TableBody>
+              {visibleRows.map((row, index) => {
+                const isItemSelected = selected.includes(row.id);
+                if (row.id === 0) {
 
-                  } else {
+                } else {
 
-                    return (
-                      <TableRow
-                        hover
-                        onClick={(event) => {handleClick(event, row.id);}}
-                        role="checkbox"
-                        aria-checked={isItemSelected}
-                        tabIndex={-1}
-                        key={row.id}
-                        selected={isItemSelected}
-                        sx={{ cursor: 'pointer' }}
-                      >
-                        <TableCell align="center">{row.completed ? <Checkbox color='white' checked disabled/> : <Checkbox color='white' disabled/>}</TableCell>
-                        <TableCell sx={{color: darkMode ? "white" : "#202124"}} align="left">{row.title}</TableCell>
-                        <TableCell sx={{color: darkMode ? "white" : "#202124"}}align="left">{row.category}</TableCell>
-                        <TableCell sx={{color: darkMode ? "white" : "#202124"}}align="left">{row.difficulty}</TableCell>
-                        {/* <TableCell align="left">{row.completed ? "True" : "False"}</TableCell> */}
-                      </TableRow>
-                    );
-                  }
-
-                  
-                })}
-                {emptyRows > 0 && (
-                  <TableRow
-                    style={{
-                      height: (dense ? 33 : 53) * emptyRows,
-                    }}
-                  >
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            sx={{color: darkMode ? "white" : "#202124"}}
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Box>
-        {/* <Button onClick={handleOpen}>Open modal</Button> */}
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={modalStyle}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Confirm question selection:
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2 }}>
-              {selected[0] == 0 ? "" : rows.find(data => data.id === selected[0]).title}
-            </Typography>
-            <Button sx={{width: "100px", marginTop: '20px'}} variant="contained" onClick={handleNav} >Confirm</Button>
-          </Box>
-        </Modal>
+                  return (
+                    <TableRow
+                      hover
+                      onClick={(event) => { handleClick(event, row.id); }}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row.id}
+                      selected={isItemSelected}
+                      sx={{ cursor: 'pointer' }}
+                    >
+                      <TableCell align="center">{row.completed ? <Checkbox color='white' checked disabled /> : <Checkbox color='white' disabled />}</TableCell>
+                      <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.title}</TableCell>
+                      <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.category}</TableCell>
+                      <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.difficulty}</TableCell>
+                      {/* <TableCell align="left">{row.completed ? "True" : "False"}</TableCell> */}
+                    </TableRow>
+                  );
+                }
+              })}
+              {emptyRows > 0 && (
+                <TableRow
+                  style={{
+                    height: (dense ? 33 : 53) * emptyRows,
+                  }}
+                >
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          sx={{ color: darkMode ? "white" : "#202124" }}
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Box>
+      {/* <Button onClick={handleOpen}>Open modal</Button> */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={modalStyle}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Confirm question selection:
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2 }}>
+            {selected[0] == 0 ? "" : rows.find(data => data.id === selected[0]).title}
+          </Typography>
+          <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleNav} >Confirm</Button>
+        </Box>
+      </Modal>
+    </Box>
   );
 }
 
-export default QuestionSelect
+export default QuestionSelect;
