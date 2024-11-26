@@ -2,40 +2,17 @@ import { Resizable } from 're-resizable';
 import { Box } from '@mui/material';
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import HintButton from './HintButton';
-import DOMPurify from "dompurify";
 import AvatarToggleButton from '../Avatar/AvatarToggleButton';
-import QuestionDisplay, { saveQuestionToStorage } from './QuestionDisplay';
+import QuestionDisplay from './QuestionDisplay';
 
 const QuestionArea = ({ sendPNGToFirebase }) => {
     const minWidth = 15;
     const [width, setWidth] = useState('50%'); // Start with default visible width
     const [isVisible, setIsVisible] = useState(true); // Manage visibility state
-    const [questionJson, setQuestionJson] = useState([]);
 
     useLayoutEffect(() => {
         setIsVisible(width > '0px');
     }, [width]);
-
-    function removeHTMLTags(str) {
-        return str.replace(/<[^>]*>/g, '');
-    }
-
-    // This might actually be a problem IDK
-    
-    useEffect(() => {
-        const fetchRandomQuestion = async () => {
-            try {
-                const response = await fetch("/questions/random");
-                const jsonData = await response.json();
-                setQuestionJson(jsonData);
-                sessionStorage.setItem("question_text", jsonData.question.question_text);
-                saveQuestionToStorage(jsonData.question)
-            } catch (error) {
-                console.error("Error:", error);
-            }
-        }
-        fetchRandomQuestion();
-    }, []);
 
     return (
         <Resizable
@@ -86,8 +63,7 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
         >
             {isVisible && (
                 <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden' }}>
-                    <QuestionDisplay question={questionJson.question} />
-                    {/* <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(questionText) }} /> */}
+                    <QuestionDisplay />
                 </Box>
 
             )}

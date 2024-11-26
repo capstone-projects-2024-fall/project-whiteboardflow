@@ -1,10 +1,14 @@
 import React from 'react';
 import './css/question-display.css';
 
-const QuestionDisplay = ({ question }) => {
+const QuestionDisplay = () => {
+    const question = getQuestionFromStorage();
+
     // If question is not available, show an empty div or a message
     if (!question) {
         return <div></div>;
+    } else {
+        sessionStorage.setItem("question_text", question.question_text);
     }
 
     return (

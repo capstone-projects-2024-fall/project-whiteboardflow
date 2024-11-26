@@ -17,7 +17,7 @@ import Modal from '@mui/material/Modal';
 import './QuestionSelect.css'
 import { color } from 'framer-motion';
 import { useQuestionContext } from './QuestionContext';
-
+import { saveQuestionToStorage } from '../Whiteboard/QuestionDisplay';
 
 function createData(id, title, question, category, difficulty, completed) {
   return {
@@ -206,9 +206,8 @@ function QuestionSelect() {
   const navigate = useNavigate();
 
   const handleNav = () => {
-    // Set the start time in localStorage
-    localStorage.setItem("startTime", Date.now());
-    // Redirect to the whiteboard page
+    sessionStorage.setItem("startTime", Date.now());
+    saveQuestionToStorage(questions[selected])
     navigate("/whiteboard");
   };
 
@@ -311,7 +310,7 @@ function QuestionSelect() {
           <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2 }}>
             {selected[0] == 0 ? "" : rows.find(data => data.id === selected[0]).title}
           </Typography>
-          <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleNav} >Confirm</Button>
+          <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
         </Box>
       </Modal>
     </Box>
