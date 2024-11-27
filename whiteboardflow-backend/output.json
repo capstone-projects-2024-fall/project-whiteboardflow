@@ -1,146 +1,276 @@
 {
-    "04okZl4FKcZiVuXRgF49": {
-        "question_id": null,
-        "answer": "output_file = os.path.join(output_dir, f'{sheet}.json') df.to_json(output_file, orient='records') print(\"JSON files saved to:\", output_dir)",
-        "difficulty": "easy",
-        "question_text": "Write a function to check if a string is a palindrome.",
-        "correct": null,
-        "category": null
+    "0": {
+        "0th question placeholder": "That's what this is"
     },
-    "0dKFcUqC0akQcXHLaEdo": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "medium",
-        "question_text": "Find the length of the longest substring without repeating characters.",
-        "correct": null,
-        "category": null
+    "1P9vmEk8uUfuCq4WPmuR": {
+        "examples": [
+            {
+                "input": "123",
+                "output": "321"
+            },
+            {
+                "input": "elephant",
+                "output": "tnahpele"
+            }
+        ],
+        "title": "Reverse String",
+        "difficulty": "Basic",
+        "question_text": "Write a function to reverse a string.",
+        "categories": [
+            "Coding"
+        ]
     },
-    "8JhpEPPNR2rWrZdZdOQw": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "hard",
-        "question_text": "Given two words, find the shortest transformation sequence.",
-        "correct": null,
-        "category": null
+    "40ATOoeHoml6CfF663vT": {
+        "explanation": "In insertion sort, we start from the second element and compare it with the previous elements. If it is smaller than the previous one, it is moved to the left until it is in the correct position. This process is repeated for every element in the array.",
+        "title": "Insertion Sort",
+        "examples": [
+            {
+                "input": "[7, 2, 9, 3, 5]",
+                "output": "[2, 3, 5, 7, 9]"
+            }
+        ],
+        "difficulty": "Intermediate",
+        "question_text": "Write an implementation of the insertion sort algorithm to sort an array of integers.",
+        "categories": [
+            "Algorithms",
+            "Coding"
+        ]
     },
-    "Ax5I9UCPntedfeBRHtrj": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "hard",
-        "question_text": "Design a Least Recently Used (LRU) cache.",
-        "correct": null,
-        "category": null
+    "EKFoWqDIGlYOiPrPPVTF": {
+        "examples": [
+            {
+                "explanation": "The array [3, 0, 1] contains integers from the range 0 to n (inclusive), where n = 3 is the length of the array. The array provided has all numbers in this range except one: 2.",
+                "input": "[3, 0, 1]",
+                "output": "2"
+            }
+        ],
+        "title": "Find the Missing Number in Array",
+        "difficulty": "Basic",
+        "question_text": "You are given an array containing n unique integers in the range 0 to n, where one number is missing. Write a function to find the missing number.",
+        "categories": [
+            "Coding"
+        ]
     },
-    "GOFyn7HWYEurt608PneO": {
-        "question_id": null,
-        "answer": "# Loop through the sheets and save each one as a JSON file in the same directory for sheet in excel_file.sheet_names: df = pd.read_excel(excel_file, sheet_name=sheet) # Check if this is the 'questions' sheet to cast the 'answer' field to a string if sheet == 'questions': df['answer'] = df['answer'].astype(str) # Ensure 'answer' column is cast to string",
-        "difficulty": "easy",
-        "question_text": "Given an array of integers, return indices of two numbers that add up to a specific target.",
-        "correct": null,
-        "category": "coding"
+    "HP5ncBF17QJsQHLkArEK": {
+        "examples": [
+            {
+                "input": "[1, 2, 3, 4, 5]",
+                "output": "3"
+            }
+        ],
+        "title": "Find the Middle Element of a Linked List",
+        "difficulty": "Basic",
+        "question_text": "Write a function to find the middle element of a singly linked list.",
+        "categories": [
+            "Data Structures",
+            "Coding"
+        ]
     },
-    "JZ8PH3ZMTA4Sm7hSt4pR": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "hard",
-        "question_text": "Design a Least Recently Used (LRU) cache.",
-        "correct": null,
-        "category": null
-    },
-    "NO3oxmtfW0Ididg2ykQz": {
-        "question_id": null,
-        "answer": "{ \"question_id\": \"q1\", \"question_text\": \"What is 2+2?\", \"difficulty_level\": \"easy\", \"category_id\": \"math\", \"answer\": \"4\" }",
-        "difficulty": "easy",
+    "MwhleS7pnz0NWk95XlOE": {
+        "explanation": "The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, usually starting with 0 and 1.",
+        "title": "Nth Fibonacci Number",
+        "examples": [
+            {
+                "explanation": "The sequence is [0, 1, 1], so the 2nd Fibonacci number is 1.",
+                "input": "2",
+                "output": "1"
+            },
+            {
+                "explanation": "The sequence is [0, 1, 1, 2, 3, 5], so the 5th Fibonacci number is 5.",
+                "input": "5",
+                "output": "5"
+            }
+        ],
+        "difficulty": "Basic",
         "question_text": "Write a function to return the nth Fibonacci number.",
-        "correct": null,
-        "category": null
+        "categories": [
+            "Coding"
+        ]
     },
-    "QvsL3siYEgrpzz427Xqf": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "medium",
-        "question_text": "Given a collection of intervals, merge all overlapping intervals.",
-        "correct": null,
-        "category": null
-    },
-    "Waz9I3jZwxsOGIlHBGJV": {
-        "question_id": null,
-        "answer": "output_file = os.path.join(output_dir, f'{sheet}.json') df.to_json(output_file, orient='records') print(\"JSON files saved to:\", output_dir)",
-        "difficulty": "easy",
-        "question_text": "Write a function to check if a string is a palindrome.",
-        "correct": null,
-        "category": null
-    },
-    "XQMISEc6fUrn3Zeca6KH": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "hard",
-        "question_text": "Given two words, find the shortest transformation sequence.",
-        "correct": null,
-        "category": null
-    },
-    "YupSmRK88EZcIfbcnHzA": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "hard",
-        "question_text": "Calculate how much water can be trapped between bars in a histogram.",
-        "correct": null,
-        "category": null
-    },
-    "bqD8CXb6XWzFBKVcWNOX": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "medium",
-        "question_text": "Given a collection of intervals, merge all overlapping intervals.",
-        "correct": null,
-        "category": null
-    },
-    "eOraDciFbBpZH8UxUwdX": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "medium",
-        "question_text": "Detect if a linked list has a cycle.",
-        "correct": null,
-        "category": null
-    },
-    "eWmss3k71aq9P6E4HSdO": {
-        "question_id": null,
-        "answer": "# Loop through the sheets and save each one as a JSON file in the same directory for sheet in excel_file.sheet_names: df = pd.read_excel(excel_file, sheet_name=sheet) # Check if this is the 'questions' sheet to cast the 'answer' field to a string if sheet == 'questions': df['answer'] = df['answer'].astype(str) # Ensure 'answer' column is cast to string",
-        "difficulty": "easy",
-        "question_text": "Given an array of integers, return indices of two numbers that add up to a specific target.",
-        "correct": null,
-        "category": "coding"
-    },
-    "mbD2Y1iXt8xQN1egqiee": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "hard",
-        "question_text": "Calculate how much water can be trapped between bars in a histogram.",
-        "correct": null,
-        "category": null
-    },
-    "oRZay7Gnla8sDYO7z2x2": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "medium",
+    "O7o9djgJxtinChLa6Xur": {
+        "examples": [
+            {
+                "explanation": "The longest substring without repeating characters is \"abc\", which has a length of 3.",
+                "input": "abcabcbb",
+                "output": "3"
+            },
+            {
+                "explanation": "The longest substring without repeating characters is \"b\", with a length of 1.",
+                "input": "bbbbb",
+                "output": "1"
+            },
+            {
+                "explanation": "The longest substring without repeating characters is \"wke\", which has a length of 3.",
+                "input": "pwwkew",
+                "output": "3"
+            }
+        ],
+        "title": "Longest Substring Without Repeating Characters",
+        "difficulty": "Intermediate",
         "question_text": "Find the length of the longest substring without repeating characters.",
-        "correct": null,
-        "category": null
+        "categories": [
+            "Coding"
+        ]
     },
-    "pQZMpRcDzsfx5MQRvALA": {
-        "question_id": null,
-        "answer": "nan",
-        "difficulty": "medium",
-        "question_text": "Detect if a linked list has a cycle.",
-        "correct": null,
-        "category": null
+    "RTXVN41EATinacQB2Ygh": {
+        "examples": [
+            {
+                "explanation": "Transform 'hit' to 'cog' using the words ['hot', 'dot', 'dog', 'lot', 'log', 'cog']. The shortest sequence is: 'hit' -> 'hot' -> 'dot' -> 'dog' -> 'cog', with a length of 5.",
+                "input": "'hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']",
+                "output": "5"
+            }
+        ],
+        "title": "Word Ladder",
+        "difficulty": "Advanced",
+        "question_text": "Given two words `beginWord` and `endWord`, and a dictionary `wordList`, return the shortest transformation sequence length from `beginWord` to `endWord`. Each transformed word must exist in `wordList` and differ by exactly one character. If no such sequence exists, return 0.",
+        "categories": [
+            "Coding"
+        ]
     },
-    "rtTkCRde1lfcK5SZq9U2": {
-        "question_id": null,
-        "answer": "{ \"question_id\": \"q1\", \"question_text\": \"What is 2+2?\", \"difficulty_level\": \"easy\", \"category_id\": \"math\", \"answer\": \"4\" }",
-        "difficulty": "easy",
-        "question_text": "Write a function to return the nth Fibonacci number.",
-        "correct": null,
-        "category": null
+    "StAddB1p9CingeMDgXyP": {
+        "title": "Center of Tootsie Pop",
+        "difficulty": "",
+        "question_text": "How many licks does it take to get to the center of a Tootsie Pop?",
+        "categories": [
+            "Fermi"
+        ]
+    },
+    "UUreYqgEmEu45A1PgHEB": {
+        "explanation": "The algorithm works by repeatedly stepping through the list, comparing adjacent elements, and swapping them if they are in the wrong order. The process continues until no more swaps are needed.",
+        "title": "Bubble Sort",
+        "examples": [
+            {
+                "explanation": "The array [5, 2, 9, 1, 5, 6] is repeatedly traversed, and adjacent elements are compared. If an element is greater than the next, they are swapped. This process repeats until no swaps are needed, resulting in the sorted array [1, 2, 5, 5, 6, 9].",
+                "input": "[5, 2, 9, 1, 5, 6]",
+                "output": "[1, 2, 5, 5, 6, 9]"
+            }
+        ],
+        "difficulty": "Intermediate",
+        "question_text": "Implement the bubble sort algorithm to sort an array of integers in ascending order.",
+        "categories": [
+            "Algorithms",
+            "Coding"
+        ]
+    },
+    "WrApJL2LLiueO133Yi2l": {
+        "title": "Max Tennis Balls in Pool",
+        "difficulty": "",
+        "question_text": "How many tennis balls can fit into a swimming pool?",
+        "categories": [
+            "Fermi"
+        ]
+    },
+    "a8WVXn9AvsLN2rukHmHe": {
+        "examples": [
+            {
+                "explanation": "The arrays [1, 3] and [2] combined are [1, 2, 3]. The median is 2.",
+                "input": "[1, 3], [2]",
+                "output": "2.0"
+            },
+            {
+                "explanation": "The arrays [1, 2] and [3, 4] combined are [1, 2, 3, 4]. The median is (2 + 3) / 2 = 2.5.",
+                "input": "[1, 2], [3, 4]",
+                "output": "2.5"
+            }
+        ],
+        "title": "Median of Two Sorted Arrays",
+        "difficulty": "Intermediate",
+        "question_text": "Given two sorted arrays `nums1` and `nums2` of size m and n respectively, return the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).",
+        "categories": [
+            "Coding"
+        ]
+    },
+    "ibUnpGPUj7NC1hwGq6eY": {
+        "examples": [
+            {
+                "input": "[1, 2, 2, 3, 4, 4, 5]",
+                "output": "[1, 2, 3, 4, 5]"
+            },
+            {
+                "input": "[7, 8, 9, 7, 6, 8]",
+                "output": "[7, 8, 9, 6]"
+            }
+        ],
+        "title": "Remove Duplicates from Sorted Array",
+        "difficulty": "Basic",
+        "question_text": "Write a function to remove duplicate members of an array.",
+        "categories": [
+            "Coding"
+        ]
+    },
+    "nE9BQnsOuJuCZ1Gh4aRb": {
+        "explanation": "A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward as forward.",
+        "title": "Valid Palindrome",
+        "examples": [
+            {
+                "explanation": "\"racecar\" is a palindrome since it reads the same backward.",
+                "input": "racecar",
+                "output": "true"
+            },
+            {
+                "explanation": "\"hello\" is not a palindrome since it does not read the same backward.",
+                "input": "hello",
+                "output": "false"
+            }
+        ],
+        "difficulty": "Basic",
+        "question_text": "Write a function to check if a string is a palindrome.",
+        "categories": [
+            "Coding"
+        ]
+    },
+    "qapAIFNcokcga4ZB0ech": {
+        "title": "Grains of Sand on all Beaches",
+        "difficulty": "",
+        "question_text": "How many grains of sand are there on all the beaches in the world?",
+        "categories": [
+            "Fermi"
+        ]
+    },
+    "sVSMO3g1ZFqzypnsuPqD": {
+        "examples": [
+            {
+                "input": "[1, 3, 5, 2, 4]",
+                "output": "4"
+            }
+        ],
+        "title": "Second Largest Element in an Array",
+        "difficulty": "Basic",
+        "question_text": "Write a function that takes an array of integers and returns the second largest value.",
+        "categories": [
+            "Coding"
+        ]
+    },
+    "vSL8MpL0ZdJ0Ra5DiSfq": {
+        "title": "Intersection of Two Arrays",
+        "difficulty": "Basic",
+        "question_text": "Given two arrays, write a program to find the intersection of the arrays (i.e., the common elements). Each element in the result must be unique and returned in any order.",
+        "categories": [
+            "Coding"
+        ]
+    },
+    "yPn38e7iOsl43D6Vcqlk": {
+        "title": "Binary Search",
+        "difficulty": "Intermediate",
+        "question_text": "Given a sorted array of n elements, write a function to perform a binary search given an element x in the array.",
+        "categories": [
+            "Algorithms",
+            "Coding"
+        ]
+    },
+    "zT3kJf5zwiKanKbk6zJQ": {
+        "examples": [
+            {
+                "explanation": "In the list [1, 2, 3, 4, 5, 6], the even numbers are 2, 4, and 6. Their sum is 12.",
+                "input": "[1, 2, 3, 4, 5, 6]",
+                "output": "12"
+            }
+        ],
+        "title": "Sum of Even Numbers",
+        "difficulty": "Basic",
+        "question_text": "Write a function that takes a list of numbers and returns the sum of all even numbers in the list.",
+        "categories": [
+            "Coding"
+        ]
     }
 }
