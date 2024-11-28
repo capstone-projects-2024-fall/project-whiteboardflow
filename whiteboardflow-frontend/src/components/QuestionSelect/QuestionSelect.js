@@ -307,12 +307,14 @@ function QuestionSelect() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Confirm question selection:
           </Typography>
-          <Typography id="modal-modal-question" sx={{ textAlign: 'left', mt: 2 }}>
+          <Typography id="modal-modal-question" sx={{ textAlign: 'center', mt: 2 }}>
             <strong>"{selected[0] == 0 ? "" : rows.find(data => data.id === selected[0]).title}"</strong>
           </Typography>
-          <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
-            {questions[selected].question_text}
-          </Typography>
+          {questions && (
+            <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
+              {questions[selected].question_text}
+            </Typography> 
+          )}
           <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
         </Box>
       </Modal>
