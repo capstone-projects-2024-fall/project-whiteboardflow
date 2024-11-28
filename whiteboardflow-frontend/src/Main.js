@@ -30,15 +30,16 @@ function Main() {
         <Router>
             <AvatarProvider>
                 <Routes>
+                    {/* Routes wrapped with Layout */}
                     <Route element={<Layout user={user} />}>
                         <Route index element={<HomePage user={user} />} />
-                        {/* Only allow access to these routes if user is logged in */}
                         <Route path="OralTest" element={<PrivateRoute><OralTest /></PrivateRoute>} />
                         <Route path="results" element={<PrivateRoute><Results /></PrivateRoute>} />
-                        <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
                         <Route path="difficulty" element={<PrivateRoute><DifficultySelect /></PrivateRoute>} />
                         <Route path="questionSelect" element={<PrivateRoute><QuestionSelect /></PrivateRoute>} />
                     </Route>
+                    {/* Route for Whiteboard without Layout */}
+                    <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
                 </Routes>
             </AvatarProvider>
         </Router>
