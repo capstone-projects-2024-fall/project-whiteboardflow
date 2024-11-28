@@ -4,11 +4,12 @@ import ReactMarkdown from 'react-markdown';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useOutletContext } from 'react-router-dom'; // Import useNavigate
 import { auth } from "../../firebase";
-import DOMPurify from "dompurify";
 import './Results.css';
 import QuestionDisplay, { getQuestionFromStorage } from '../Whiteboard/QuestionDisplay';
 
 const Results = () => {
+
+    // eslint-disable-next-line
     const [darkMode, setDarkMode] = useOutletContext();
 
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
@@ -55,7 +56,7 @@ const Results = () => {
 
     return (
         <Container maxWidth="lg" style={{ textAlign: 'left', paddingTop: "70px", padding: '30px', backgroundColor: darkMode ? '#202124' : 'white' }}>
-            <Typography variant="h4" style={{ fontWeight: 'bold', marginBottom: '20px', color: darkMode ? "white" : '#1976d2' }}>
+            <Typography variant="h4" style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', color: darkMode ? "white" : '#1976d2' }}>
                 Practice Results Dashboard
             </Typography>
             <Grid container spacing={3}>
@@ -66,8 +67,8 @@ const Results = () => {
                         <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? 'white' : '#202124' }} gutterBottom>
                             Practice Question
                         </Typography>
-                        <Box style={{ padding: '10px', backgroundColor: darkMode ? '#C7C7C8' : "#fff", borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
-                            <QuestionDisplay question={questionJson} />
+                        <Box style={{ padding: '10px', backgroundColor: darkMode ? '#202124' : "#fff", borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
+                            <QuestionDisplay darkMode = {darkMode} question={questionJson} />
                         </Box>
                     </Paper>
                 </Grid>
@@ -103,9 +104,10 @@ const Results = () => {
                         <Box style={{
                             overflowY: 'auto',
                             padding: '10px',
-                            backgroundColor: darkMode ? '#C7C7C8' : "#fff",
+                            backgroundColor: darkMode ? '#202124' : "#fff",
                             borderRadius: '8px',
-                            flex: 1
+                            flex: 1,
+                            color: darkMode ? "#fff" : "#202124"
                         }}>
                             <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
                         </Box>
@@ -118,7 +120,7 @@ const Results = () => {
                         <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? '#fff' : '#1976d2' }} gutterBottom>
                             Completion Time
                         </Typography>
-                        <Typography variant="body1" style={{ color: darkMode ? '#fff' : '#1976d2', marginTop: '10px', flex: 1 }}>
+                        <Typography variant="body1" style={{ color: darkMode ? '#fff' : '#202124', marginTop: '10px', flex: 1 }}>
                             {completionTime}
                         </Typography>
                     </Paper>

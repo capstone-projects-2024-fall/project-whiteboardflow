@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/question-display.css';
 
-const QuestionDisplay = () => {
+const QuestionDisplay = ({darkMode}) => {
     const question = getQuestionFromStorage();
 
     // If question is not available, show an empty div or a message
@@ -12,10 +12,11 @@ const QuestionDisplay = () => {
     }
 
     return (
-        <div className="question-container">
+        <div className={darkMode ? "question-container-dark" : "question-container-light"}>
+            {console.log("Question Display " + darkMode)}
             {/* Render Question Text */}
             {question.question_text && (
-                <div className="question"><strong>Question:</strong> {question.question_text}</div>
+                <div className={darkMode ? "question-dark" : "question-light"}><strong>Question:</strong> {question.question_text}</div>
             )}
             {/* Render Explanation*/}
             {question.explanation && (
@@ -28,8 +29,8 @@ const QuestionDisplay = () => {
                     <div>
                         {question.examples.map((example, index) => (
                             <div key={index} className="example">
-                                <div className="example-title">Example {index + 1}:</div>
-                                <div className="example-content">
+                                <div className={darkMode ? "example-title-dark" : "example-title-light"}>Example {index + 1}:</div>
+                                <div className={darkMode ? "example-content-dark" : "example-content-light"}>
                                     {example.input && (
                                         <div><strong>Input:</strong> {example.input}</div>
                                     )}

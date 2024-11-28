@@ -1,11 +1,11 @@
 import { Resizable } from 're-resizable';
 import { Box } from '@mui/material';
-import React, { useState, useLayoutEffect, useEffect } from 'react';
+import React, { useState, useLayoutEffect} from 'react';
 import HintButton from './HintButton';
 import AvatarToggleButton from '../Avatar/AvatarToggleButton';
 import QuestionDisplay from './QuestionDisplay';
 
-const QuestionArea = ({ sendPNGToFirebase }) => {
+const QuestionArea = ({ sendPNGToFirebase, darkMode}) => {
     const minWidth = 15;
     const [width, setWidth] = useState('50%'); // Start with default visible width
     const [isVisible, setIsVisible] = useState(true); // Manage visibility state
@@ -61,9 +61,10 @@ const QuestionArea = ({ sendPNGToFirebase }) => {
                 right: <div style={{ width: '15px', cursor: 'ew-resize' }}></div>
             }}
         >
+            {console.log("Question Area " + darkMode)}
             {isVisible && (
                 <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden' }}>
-                    <QuestionDisplay />
+                    <QuestionDisplay darkMode = {darkMode} />
                 </Box>
 
             )}
