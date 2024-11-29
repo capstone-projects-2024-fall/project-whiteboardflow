@@ -50,12 +50,13 @@ const Whiteboard = () => {
                             minWidth: 1240,
                             minHeight: 2000,
                             guides: {
-                                enable: true,
-                                gap: 50,
-                                type: 'line'
-                            }
+                                enable: false
+                            },
                         },
                         grabber: {
+                            listenerOptions:{
+                                capture: true,
+                            },
                             delayLongTouch: 500
                         },
                         recognition: {
