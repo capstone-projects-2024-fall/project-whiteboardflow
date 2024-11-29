@@ -37,10 +37,10 @@ function Main() {
                             {/* Only allow access to these routes if user is logged in */}
                             <Route path="OralTest" element={<PrivateRoute><OralTest /></PrivateRoute>} />
                             <Route path="results" element={<PrivateRoute><Results /></PrivateRoute>} />
-                            <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
                             <Route path="difficulty" element={<PrivateRoute><DifficultySelect /></PrivateRoute>} />
                             <Route path="questionSelect" element={<PrivateRoute><QuestionSelect /></PrivateRoute>} />
                         </Route>
+                        <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
                     </Routes>
                 </QuestionProvider>
             </AvatarProvider>
