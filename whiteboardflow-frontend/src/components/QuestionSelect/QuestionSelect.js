@@ -99,8 +99,10 @@ function EnhancedTableHead(props) {
           >
             <TableSortLabel
               // active={orderBy === headCell.id}
+              sx={{ '&:hover': { color: 'primary.main' } }}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
+              
             >
               {headCell.label}
               {orderBy === headCell.id ? (
@@ -181,6 +183,13 @@ function QuestionSelect() {
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
+  };
+
+  const paginationButtonStyles = {
+    color: darkMode ? "white" : "#202124",
+    '&.Mui-disabled': {
+      color: darkMode ? '#666666' : '#B0B0B0',
+    },
   };
 
   const handleChangePage = (event, newPage) => {
@@ -286,7 +295,22 @@ function QuestionSelect() {
           </Table>
         </TableContainer>
         <TablePagination
-          sx={{ color: darkMode ? "white" : "#202124" }}
+          sx={{
+            color: paginationButtonStyles.color,
+            '& .MuiTablePagination-selectIcon': {
+              color: paginationButtonStyles.color
+            },
+          }}
+          slotProps={{
+            actions: {
+              previousButton: {
+                sx: paginationButtonStyles,
+              },
+              nextButton: {
+                sx: paginationButtonStyles,
+              },
+            },
+          }}
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={rows.length}
