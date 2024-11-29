@@ -82,6 +82,8 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
+  const [darkMode, setDarkMode] = useOutletContext();
+
   const { order, orderBy, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
@@ -99,10 +101,21 @@ function EnhancedTableHead(props) {
           >
             <TableSortLabel
               // active={orderBy === headCell.id}
-              sx={{ '&:hover': { color: 'primary.main' } }}
+              sx={{
+                fontWeight: 'bold',
+                color: darkMode ? 'white' : 'text.primary',
+                '&:hover': {
+                  color: 'primary.main',
+                },
+                '&:focus': {
+                  color: darkMode ? 'white' : 'text.primary',
+                },
+                '&:hover:focus': {
+                  color: 'primary.main',
+                },
+              }}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
-              
             >
               {headCell.label}
               {orderBy === headCell.id ? (
@@ -331,7 +344,7 @@ function QuestionSelect() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Confirm question selection:
           </Typography>
-          <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2}}>
+          <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2 }}>
             <strong style={{ color: darkMode ? 'white' : '#202124' }}>
               "{selected[0] == 0 ? "" : rows.find(data => data.id === selected[0]).title}"
             </strong>
@@ -339,7 +352,7 @@ function QuestionSelect() {
           {questions && (
             <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
               {questions[selected].question_text}
-            </Typography> 
+            </Typography>
           )}
           <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
         </Box>
