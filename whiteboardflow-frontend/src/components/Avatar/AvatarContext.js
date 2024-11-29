@@ -18,6 +18,10 @@ export const AvatarProvider = ({ children }) => {
     const location = useLocation();
 
     useEffect(() => {
+        // Automatically hide avatar on specific routes
+        const hiddenRoutes = ['/questionSelect'];
+        setIsVisible(!hiddenRoutes.includes(location.pathname));
+
         setShowHint(true);
         const defaultHintMessage = getDefaultHintMessage(location.pathname);
         setHintMessage(defaultHintMessage);
