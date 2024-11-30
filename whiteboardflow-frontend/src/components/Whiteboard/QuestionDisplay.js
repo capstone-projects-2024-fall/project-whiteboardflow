@@ -19,7 +19,11 @@ const QuestionDisplay = () => {
             )}
             {/* Render Explanation*/}
             {question.explanation && (
-                <div><strong>Explanation:</strong> {question.explanation}</div>
+                <div><strong>Explanation:</strong> {question.explanation}<br/><br/></div>
+            )}
+            {/* Render Function Definition*/}
+            {question.function && (
+                <div><strong>Function:</strong> <code>{question.function}</code></div>
             )}
             {/* Render Examples */}
             {question.examples && question.examples.length > 0 && (
@@ -31,10 +35,10 @@ const QuestionDisplay = () => {
                                 <div className="example-title">Example {index + 1}:</div>
                                 <div className="example-content">
                                     {example.input && (
-                                        <div><strong>Input:</strong> {example.input}</div>
+                                        <div><strong>Input:</strong> <code>{example.input}</code></div>
                                     )}
                                     {example.output && (
-                                        <div><strong>Output:</strong> {example.output}</div>
+                                        <div><strong>Output:</strong> <code>{example.output}</code></div>
                                     )}
                                     {example.explanation && (
                                         <div><strong>Explanation:</strong> {example.explanation}</div>

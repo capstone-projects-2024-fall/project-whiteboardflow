@@ -17,7 +17,7 @@ const Results = () => {
     const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
 
     const calculateCompletionTime = () => {
-        const startTime = localStorage.getItem("startTime");
+        const startTime = sessionStorage.getItem("startTime");
         if (startTime) {
             const endTime = Date.now();
             const timeSpent = (endTime - startTime) / 1000;
