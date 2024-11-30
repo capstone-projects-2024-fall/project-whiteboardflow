@@ -5,6 +5,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useNavigate, useOutletContext } from 'react-router-dom'; // Import useNavigate
 import { getIdToken, auth } from '../../firebase'
 import './OralTest.css';
+import { useSessionId } from '../../SessionIdContext';
 
 function OralTest() {
 	const navigate = useNavigate(); // Initialize navigate hook
@@ -15,11 +16,13 @@ function OralTest() {
 	const [isRecording, setIsRecording] = useState(true)
 	const [isLoading, setIsLoading] = useState(false)
 
+	const { sessionId} = useSessionId();
+
 	useEffect(() => {
 
 		const userId = auth.currentUser.uid;
         const storage = getStorage();
-        const storageRef = ref(storage, `user-files/${userId}/static.png`);
+        const storageRef = ref(storage, `user-files/${userId}/${sessionId}/static.png`);
 
         getDownloadURL(storageRef)
             .then((url) => {

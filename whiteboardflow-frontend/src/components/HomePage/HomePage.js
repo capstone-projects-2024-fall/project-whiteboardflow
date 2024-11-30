@@ -8,6 +8,10 @@ import { auth, provider, signInWithPopup } from '../../firebase';
 import './HomePage.css';
 import '../Avatar/RetroAvatar.css';
 
+import { testWrite } from '../../firebase';
+
+// import { useSessionId } from '../../SessionIdContext';
+
 
 
 const HomePage = ({ user}) => {
@@ -36,6 +40,10 @@ const HomePage = ({ user}) => {
                 setLoading(false);
             });
     };
+
+    const handleTest = () => {
+        testWrite();
+    }
   
   const navigate = useNavigate();
 
@@ -56,6 +64,7 @@ const HomePage = ({ user}) => {
     
     return (
         <Container>
+            {/* {console.log(Date.now())} */}
             <section style={{ padding: '100px 0 0 0', textAlign: 'center', fontSize: '2rem', fontWeight: 'bold' }}>
                 <Typography variant="h8" gutterBottom className="styled-heading">
                     <span className={darkMode ? "heading-main-dark" : "heading-main-light"}>Whiteboard</span>
@@ -73,6 +82,9 @@ const HomePage = ({ user}) => {
                 <RotatingText darkMode={darkMode}/>
             </section>
 
+            <button onClick={handleTest}>TEST</button>
+
+        
             <section style={{ padding: '60px 0', textAlign: 'center', fontSize: '2rem', fontWeight: 'bold' }}>
 
                 {/* Conditionally render the "Get Started" button if the user is logged in */}

@@ -12,6 +12,7 @@ import HelpModal from './HelpModal';
 import CustomMenuAction from './CustomMenuAction';
 import { auth } from "../../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { useSessionId } from '../../SessionIdContext';
 
 
 // Style imports
@@ -30,6 +31,8 @@ const Whiteboard = () => {
 
     // eslint-disable-next-line
     const [darkMode, setDarkMode] = useOutletContext();
+
+    const { setSessionId} = useSessionId();
 
     const toggleModal = () => setModalVisible(!modalVisible);
     // Effect for editor initialization and event handling
@@ -188,7 +191,10 @@ const Whiteboard = () => {
                 canvas.toBlob(async (pngBlob) => {
                     const userId = auth.currentUser.uid;
                     const storage = getStorage();
-                    const storageRef = ref(storage, `user-files/${userId}/static.png`);
+                    // const testId = Date.now()
+                    const tempSessionId = Date.now()
+                    setSessionId(tempSessionId)
+                    const storageRef = ref(storage, `user-files/${userId}/${tempSessionId}/static.png`);
 
                     try {
                         const snapshot = await uploadBytes(storageRef, pngBlob);
