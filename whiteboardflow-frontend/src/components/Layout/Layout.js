@@ -50,6 +50,10 @@ const Layout = ({ children, user }) => { // Accept user as a prop
     //     handleCloseMenu();
     // };
 
+    const handleHistory = () => {
+        navigate("/history")
+    }
+
     const signInWithGoogle = () => {
         setLoading(true);
         signInWithPopup(auth, provider)
@@ -173,6 +177,9 @@ const Layout = ({ children, user }) => { // Accept user as a prop
                             <Typography variant="h6" component="div" sx={{ mr: 2 }}>
                                 Welcome, {user.displayName}
                             </Typography>
+                            <Button color="inherit" onClick={handleHistory}>
+                                History
+                            </Button>
                             <Button color="inherit" onClick={handleLogout}>
                                 Logout
                             </Button>

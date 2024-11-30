@@ -260,7 +260,7 @@ function QuestionSelect() {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => { handleClick(event, row.id); }}
+                      onClick={(event) => { handleClick(event, row.id); console.log(row)}}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
