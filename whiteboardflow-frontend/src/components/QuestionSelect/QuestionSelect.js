@@ -15,13 +15,14 @@ import { useOutletContext } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import './QuestionSelect.css'
-import { color } from 'framer-motion';
+// import { color } from 'framer-motion';
 import { useQuestionContext } from './QuestionContext';
 import { saveQuestionToStorage } from '../Whiteboard/QuestionDisplay';
 
-function createData(id, title, question, category, difficulty, completed) {
+function createData(id, questionId, title, question, category, difficulty, completed) {
   return {
     id,
+    questionId,
     title,
     question,
     category,
@@ -146,6 +147,7 @@ function QuestionSelect() {
 
         return createData(
           index,
+          question.id,
           question.title || '',
           question.question_text || '',
           formattedCategories,
@@ -220,6 +222,8 @@ function QuestionSelect() {
 
   const handleClick = (event, id) => {
     const selectedIndex = selected.indexOf(id);
+
+    // console.log()
 
     if (selectedIndex === -1) {
       setSelected([id]);

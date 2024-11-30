@@ -3,15 +3,17 @@ import { Container, Typography, Box, Paper, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useOutletContext } from 'react-router-dom'; // Import useNavigate
-import { auth } from "../../firebase";
+import { auth, userHistoryWrite } from "../../firebase";
 import './Results.css';
 import QuestionDisplay, { getQuestionFromStorage } from '../Whiteboard/QuestionDisplay';
+import { useSessionId } from '../../SessionIdContext';
 
 const Results = () => {
 
     // eslint-disable-next-line
     const [darkMode, setDarkMode] = useOutletContext();
 
+	const {sessionId} = useSessionId();
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
     const [questionJson, setQuestionJson] = useState(null); // Question object
@@ -54,6 +56,13 @@ const Results = () => {
         setCompletionTime(calculateCompletionTime());
     }, []);
 
+    const handleTest = () => {
+        userHistoryWrite(auth.currentUser.uid, sessionId.toString(), 0, completionTime, oralAnalysis)
+        console.log(getQuestionFromStorage());
+        console.log(sessionId)
+        console.log(Date(sessionId))
+    }
+
     return (
         <Container maxWidth="lg" style={{ textAlign: 'left', paddingTop: "70px", padding: '30px', backgroundColor: darkMode ? '#202124' : 'white' }}>
             <Typography variant="h4" style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', color: darkMode ? "white" : '#1976d2' }}>
@@ -94,6 +103,8 @@ const Results = () => {
                         </Box>
                     </Paper>
                 </Grid>
+
+                <button onClick={handleTest}>TEST</button>
 
                 {/* AI Analysis */}
                 <Grid item xs={12}>
