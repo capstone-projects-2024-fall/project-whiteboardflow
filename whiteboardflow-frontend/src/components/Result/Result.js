@@ -17,20 +17,21 @@ const Results = () => {
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
     const [questionJson, setQuestionJson] = useState(null); // Question object
+    
     const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
 
-    const calculateCompletionTime = () => {
-        const startTime = localStorage.getItem("startTime");
-        if (startTime) {
-            const endTime = Date.now();
-            const timeSpent = (endTime - startTime) / 1000;
-            const seconds = Math.floor(timeSpent % 60);
-            const minutes = Math.floor((timeSpent / 60) % 60);
-            const hours = Math.floor((timeSpent / (60 * 60)) % 24);
-            return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
-        }
-        return "Not available";
-    };
+    // const calculateCompletionTime = () => {
+    //     const startTime = sessionStorage.getItem("startTime");
+    //     if (startTime) {
+    //         const endTime = Date.now();
+    //         const timeSpent = (endTime - startTime) / 1000;
+    //         const seconds = Math.floor(timeSpent % 60);
+    //         const minutes = Math.floor((timeSpent / 60) % 60);
+    //         const hours = Math.floor((timeSpent / (60 * 60)) % 24);
+    //         return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
+    //     }
+    //     return "Not available";
+    // };
 
     useEffect(() => {
         const aiResponse = sessionStorage.getItem("AIResponse") || "No analysis available";
@@ -53,15 +54,9 @@ const Results = () => {
                 console.error("Error fetching image URL: ", error);
             });
 
-        setCompletionTime(calculateCompletionTime());
+        
     }, []);
 
-    const handleTest = () => {
-        userHistoryWrite(auth.currentUser.uid, sessionId.toString(), 0, completionTime, oralAnalysis)
-        console.log(getQuestionFromStorage());
-        console.log(sessionId)
-        console.log(new Date(sessionId - 10000000000).toLocaleDateString())
-    }
 
     return (
         <Container maxWidth="lg" style={{ textAlign: 'left', paddingTop: "70px", padding: '30px', backgroundColor: darkMode ? '#202124' : 'white' }}>
@@ -103,8 +98,6 @@ const Results = () => {
                         </Box>
                     </Paper>
                 </Grid>
-
-                <button onClick={handleTest}>TEST</button>
 
                 {/* AI Analysis */}
                 <Grid item xs={12}>

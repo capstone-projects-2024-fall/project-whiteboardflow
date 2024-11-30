@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import MicPrompt from '../../components/MicPrompt/MicPrompt';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useNavigate, useOutletContext } from 'react-router-dom'; // Import useNavigate
-import { getIdToken, auth } from '../../firebase'
+import { getIdToken, auth, userHistoryWrite } from '../../firebase'
 import './OralTest.css';
+import { getQuestionFromStorage } from '../Whiteboard/QuestionDisplay';
 import { useSessionId } from '../../SessionIdContext';
 
 function OralTest() {
@@ -17,6 +18,21 @@ function OralTest() {
 	const [isLoading, setIsLoading] = useState(false)
 
 	const { sessionId} = useSessionId();
+
+	const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
+
+    const calculateCompletionTime = () => {
+        const startTime = sessionStorage.getItem("startTime");
+        if (startTime) {
+            const endTime = Date.now();
+            const timeSpent = (endTime - startTime) / 1000;
+            const seconds = Math.floor(timeSpent % 60);
+            const minutes = Math.floor((timeSpent / 60) % 60);
+            const hours = Math.floor((timeSpent / (60 * 60)) % 24);
+            return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
+        }
+        return "Not available";
+    };
 
 	useEffect(() => {
 
@@ -33,6 +49,8 @@ function OralTest() {
             });
 
 	},[])
+
+	
 	
 	const setNotEmpty = () => {
 		setIsEmpty(false);
@@ -75,6 +93,19 @@ function OralTest() {
 			// Get ChatGPT response
 			const result = await response.json();
 			sessionStorage.setItem("AIResponse", result.message);
+
+			//end completion time 
+			setCompletionTime(calculateCompletionTime());
+
+			userHistoryWrite(
+				auth.currentUser.uid, 
+				sessionId.toString(), 
+				getQuestionFromStorage.id, 
+				completionTime, 
+				sessionStorage.getItem("AIResponse") || "No analysis available"
+			)
+			console.log(sessionId)
+			console.log(new Date(sessionId - 10000000000).toLocaleDateString())
 
 			// Navigate to Results page after successful response
 			navigate('/results');
@@ -125,24 +156,24 @@ function OralTest() {
 
 }
 
-                    <Paper elevation={3} style={{ marginTop: "40px", marginBottom: "40px", padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                        <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode? '#fff' : '#1976d2' }} gutterBottom>
-                            Your work:
-                        </Typography>
-                        <Box textAlign="center" style={{ paddingTop: '10px', flex: 1 }}>
-                            <img
-                                src={imageUrl}
-                                alt="User's Handwriting Response"
-                                style={{
-                                    maxWidth: '100%',
-                                    maxHeight: '300px',
-                                    borderRadius: '8px',
-                                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
-                                    margin: '0 auto',
-                                }}
-                            />
-                        </Box>
-                    </Paper>
+		<Paper elevation={3} style={{ marginTop: "40px", marginBottom: "40px", padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
+				<Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode? '#fff' : '#1976d2' }} gutterBottom>
+						Your work:
+				</Typography>
+				<Box textAlign="center" style={{ paddingTop: '10px', flex: 1 }}>
+						<img
+								src={imageUrl}
+								alt="User's Handwriting Response"
+								style={{
+										maxWidth: '100%',
+										maxHeight: '300px',
+										borderRadius: '8px',
+										boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+										margin: '0 auto',
+								}}
+						/>
+				</Box>
+		</Paper>
 			
 		</div>
 	);

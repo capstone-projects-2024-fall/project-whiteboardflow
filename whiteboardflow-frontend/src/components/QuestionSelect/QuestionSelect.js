@@ -137,9 +137,10 @@ function QuestionSelect() {
   const [rows, setRows] = React.useState([]);
 
   React.useEffect(() => {
+    console.log(questions)
     if (questions) {
       const newRows = questions.map((question, index) => {
-
+          
         // Convert array of categories to a comma-separated string
         const formattedCategories = question.categories
           ? question.categories.join(', ')
@@ -154,6 +155,7 @@ function QuestionSelect() {
           question.difficulty,
           question.completed || false
         );
+
       });
 
       setRows(newRows);
