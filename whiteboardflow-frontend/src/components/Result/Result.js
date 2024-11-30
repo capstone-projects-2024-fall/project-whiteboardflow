@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box, Paper, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { useOutletContext } from 'react-router-dom'; // Import useNavigate
 import { auth } from "../../firebase";
 import DOMPurify from "dompurify";
 import './Results.css';
 import QuestionDisplay, { getQuestionFromStorage } from '../Whiteboard/QuestionDisplay';
 
 const Results = () => {
-    const [darkMode, setDarkMode] = useOutletContext();
-
+    const [darkMode, setDarkMode] = useState(false);
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
     const [questionJson, setQuestionJson] = useState(null); // Question object
     const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
+    const [dataPosted, setDataPosted] = useState(false); // Flag to indicate if data was posted
 
     const calculateCompletionTime = () => {
         const startTime = localStorage.getItem("startTime");
@@ -27,6 +27,28 @@ const Results = () => {
             return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
         }
         return "Not available";
+    };
+
+    const postResultsToFirebase = async () => {
+        const userId = auth.currentUser.uid;
+        const db = getFirestore();
+
+        try {
+            const sessionId = Date.now().toString(); // Generate a unique session ID
+            const resultData = {
+                questionID: questionJson?.id || "unknown",
+                response: oralAnalysis,
+                completionTime,
+                sessionId,
+                imageUrl,
+            };
+
+            await addDoc(collection(db, "userhistory", userId, "sessions"), resultData);
+            console.log("Results posted successfully:", resultData);
+            setDataPosted(true); // Mark data as posted
+        } catch (error) {
+            console.error("Error posting results to Firebase:", error);
+        }
     };
 
     useEffect(() => {
@@ -51,7 +73,12 @@ const Results = () => {
             });
 
         setCompletionTime(calculateCompletionTime());
-    }, []);
+
+        // Post results to Firebase only once
+        if (!dataPosted && questionJson) {
+            postResultsToFirebase();
+        }
+    }, [questionJson, dataPosted]);
 
     return (
         <Container maxWidth="lg" style={{ textAlign: 'left', paddingTop: "70px", padding: '30px', backgroundColor: darkMode ? '#202124' : 'white' }}>
@@ -59,7 +86,6 @@ const Results = () => {
                 Practice Results Dashboard
             </Typography>
             <Grid container spacing={3}>
-
                 {/* Practice Question */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : 'white', height: '100%', display: 'flex', flexDirection: 'column' }}>
