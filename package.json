@@ -3,6 +3,7 @@
     "bootstrap": "^5.3.3",
     "firebase": "^11.0.1",
     "react-router-dom": "^6.26.2",
+    "react-unity-webgl": "^9.6.0",
     "ws": "^8.18.0"
   }
 }
