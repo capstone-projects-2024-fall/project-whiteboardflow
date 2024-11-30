@@ -21,16 +21,16 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchUserAttempts = async () => {
             try {
-                //const user = auth.currentUser;
-                const user = "gdr0wZx2v4PuNFYWLHgUyMWc5pD2";
+                const user = auth.currentUser;
+                //const user = "gdr0wZx2v4PuNFYWLHgUyMWc5pD2";
 
                 if (!user) {
                     console.error("No authenticated user found.");
                     return;
                 }
 
-                //const userId = user.uid;
-                const userId = "gdr0wZx2v4PuNFYWLHgUyMWc5pD2";
+                const userId = user.uid;
+                //const userId = "gdr0wZx2v4PuNFYWLHgUyMWc5pD2";
                 console.log("Fetching data for user ID:", userId);
 
                 const db = getFirestore();
