@@ -11,9 +11,9 @@ from routers.AI.ai_assistant import router as ai_router
 from routers.firebase.questions import router as questions_router
 
 
-app = FastAPI(debug=True)
+app = FastAPI(debug=False)
 
-origins = ["http://localhost:3000", "localhost:3000"]
+origins = ["https://project-whiteboardflow-eowa.vercel.app"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -33,6 +33,6 @@ def read_root():
     return {"test_data": ["data1", "data2"]}
 
 
-if __name__ == "__main__":
-    # TODO Remove reload parameter in production
-    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
+#if __name__ == "__main__":
+# TODO Remove reload parameter in production
+#   uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
