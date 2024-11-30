@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box, Paper, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { useOutletContext } from 'react-router-dom'; // Import useNavigate
 import { auth } from "../../firebase";
-import DOMPurify from "dompurify";
 import './Results.css';
 import QuestionDisplay, { getQuestionFromStorage } from '../Whiteboard/QuestionDisplay';
 
 const Results = () => {
-    const [darkMode, setDarkMode] = useState(false);
+
+    // eslint-disable-next-line
+    const [darkMode, setDarkMode] = useOutletContext();
+
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
     const [questionJson, setQuestionJson] = useState(null); // Question object
     const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
-    const [dataPosted, setDataPosted] = useState(false); // Flag to indicate if data was posted
 
     const calculateCompletionTime = () => {
         const startTime = localStorage.getItem("startTime");
@@ -27,28 +28,6 @@ const Results = () => {
             return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
         }
         return "Not available";
-    };
-
-    const postResultsToFirebase = async () => {
-        const userId = auth.currentUser.uid;
-        const db = getFirestore();
-
-        try {
-            const sessionId = Date.now().toString(); // Generate a unique session ID
-            const resultData = {
-                questionID: questionJson?.id || "unknown",
-                response: oralAnalysis,
-                completionTime,
-                sessionId,
-                imageUrl,
-            };
-
-            await addDoc(collection(db, "userhistory", userId, "sessions"), resultData);
-            console.log("Results posted successfully:", resultData);
-            setDataPosted(true); // Mark data as posted
-        } catch (error) {
-            console.error("Error posting results to Firebase:", error);
-        }
     };
 
     useEffect(() => {
@@ -73,27 +52,23 @@ const Results = () => {
             });
 
         setCompletionTime(calculateCompletionTime());
-
-        // Post results to Firebase only once
-        if (!dataPosted && questionJson) {
-            postResultsToFirebase();
-        }
-    }, [questionJson, dataPosted]);
+    }, []);
 
     return (
         <Container maxWidth="lg" style={{ textAlign: 'left', paddingTop: "70px", padding: '30px', backgroundColor: darkMode ? '#202124' : 'white' }}>
-            <Typography variant="h4" style={{ fontWeight: 'bold', marginBottom: '20px', color: darkMode ? "white" : '#1976d2' }}>
+            <Typography variant="h4" style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', color: darkMode ? "white" : '#1976d2' }}>
                 Practice Results Dashboard
             </Typography>
             <Grid container spacing={3}>
+
                 {/* Practice Question */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : 'white', height: '100%', display: 'flex', flexDirection: 'column' }}>
                         <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? 'white' : '#202124' }} gutterBottom>
                             Practice Question
                         </Typography>
-                        <Box style={{ padding: '10px', backgroundColor: darkMode ? '#C7C7C8' : "#fff", borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
-                            <QuestionDisplay question={questionJson} />
+                        <Box style={{ padding: '10px', backgroundColor: darkMode ? '#202124' : "#fff", borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
+                            <QuestionDisplay darkMode={darkMode} question={questionJson} />
                         </Box>
                     </Paper>
                 </Grid>
@@ -129,9 +104,10 @@ const Results = () => {
                         <Box style={{
                             overflowY: 'auto',
                             padding: '10px',
-                            backgroundColor: darkMode ? '#C7C7C8' : "#fff",
+                            backgroundColor: darkMode ? '#202124' : "#fff",
                             borderRadius: '8px',
-                            flex: 1
+                            flex: 1,
+                            color: darkMode ? "#fff" : "#202124"
                         }}>
                             <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
                         </Box>
@@ -144,7 +120,7 @@ const Results = () => {
                         <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? '#fff' : '#1976d2' }} gutterBottom>
                             Completion Time
                         </Typography>
-                        <Typography variant="body1" style={{ color: darkMode ? '#fff' : '#1976d2', marginTop: '10px', flex: 1 }}>
+                        <Typography variant="body1" style={{ color: darkMode ? '#fff' : '#202124', marginTop: '10px', flex: 1 }}>
                             {completionTime}
                         </Typography>
                     </Paper>

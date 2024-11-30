@@ -10,36 +10,50 @@ import {
     ListItemText,
 } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { auth } from "../../firebase";
-
-
-import ReactMarkdown from 'react-markdown';
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import DOMPurify from "dompurify";
-import './Dashboard.css';
-
-
 
 const Dashboard = () => {
     const [darkMode, setDarkMode] = useOutletContext();
     const [userAttempts, setUserAttempts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUserAttempts = async () => {
-            const db = getFirestore();
-            const userId = auth.currentUser.uid; // Get the current user's UID
-            const userHistoryRef = collection(db, "userhistory", userId, "sessions"); // Reference to userhistory
+            try {
+                //const user = auth.currentUser;
+                const user = "gdr0wZx2v4PuNFYWLHgUyMWc5pD2";
 
-            const snapshot = await getDocs(userHistoryRef);
-            const attempts = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setUserAttempts(attempts);
+                if (!user) {
+                    console.error("No authenticated user found.");
+                    return;
+                }
+
+                //const userId = user.uid;
+                const userId = "gdr0wZx2v4PuNFYWLHgUyMWc5pD2";
+                console.log("Fetching data for user ID:", userId);
+
+                const db = getFirestore();
+                const userHistoryRef = collection(db, "userhistory", userId, "sessions"); // Reference to Firestore collection
+
+                const snapshot = await getDocs(userHistoryRef);
+                if (!snapshot.empty) {
+                    const attempts = snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data(),
+                    }));
+                    setUserAttempts(attempts);
+                } else {
+                    console.warn("No attempts found for user.");
+                }
+            } catch (error) {
+                console.error("Error fetching user attempts:", error);
+            } finally {
+                setLoading(false);
+            }
         };
 
-        fetchUserAttempts().catch((error) => console.error("Error fetching user attempts:", error));
+        fetchUserAttempts();
     }, []);
 
     return (
@@ -62,63 +76,88 @@ const Dashboard = () => {
             >
                 User Practice Dashboard
             </Typography>
-            <Grid container spacing={3}>
-                {/* User Attempts */}
-                <Grid item xs={12}>
-                    <Paper
-                        elevation={3}
-                        style={{
-                            padding: "20px",
-                            borderRadius: "10px",
-                            backgroundColor: darkMode ? "#202124" : "#fff",
-                            display: "flex",
-                            flexDirection: "column",
-                        }}
-                    >
-                        <Typography
-                            variant="h6"
+
+            {loading ? (
+                <Typography variant="h6" style={{ color: darkMode ? "#fff" : "#000" }}>
+                    Loading user attempts...
+                </Typography>
+            ) : (
+                <Grid container spacing={3}>
+                    {/* User Attempts */}
+                    <Grid item xs={12}>
+                        <Paper
+                            elevation={3}
                             style={{
-                                fontWeight: "bold",
-                                color: darkMode ? "#fff" : "#1976d2",
+                                padding: "20px",
+                                borderRadius: "10px",
+                                backgroundColor: darkMode ? "#202124" : "#fff",
+                                display: "flex",
+                                flexDirection: "column",
                             }}
-                            gutterBottom
                         >
-                            Your Attempts
-                        </Typography>
-                        <List>
-                            {userAttempts.map((attempt) => (
-                                <ListItem key={attempt.id} alignItems="flex-start">
-                                    <ListItemText
-                                        primary={`Question ID: ${attempt.questionID}`}
-                                        secondary={
-                                            <>
-                                                <Typography
-                                                    variant="body2"
-                                                    style={{ color: darkMode ? "#C7C7C8" : "#000" }}
-                                                >
-                                                    Completion Time: {attempt.completionTime}
-                                                </Typography>
-                                                <Typography
-                                                    variant="body2"
-                                                    style={{ color: darkMode ? "#C7C7C8" : "#000" }}
-                                                >
-                                                    Response: {attempt.response}
-                                                </Typography>
-                                                <Typography
-                                                    variant="body2"
-                                                    style={{ color: darkMode ? "#C7C7C8" : "#000" }}
-                                                >
-                                                    Session ID: {attempt.sessionId}
-                                                </Typography>
-                                            </>
-                                        }
-                                    />
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Paper>
+                            <Typography
+                                variant="h6"
+                                style={{
+                                    fontWeight: "bold",
+                                    color: darkMode ? "#fff" : "#1976d2",
+                                }}
+                                gutterBottom
+                            >
+                                Your Attempts
+                            </Typography>
+                            {userAttempts.length > 0 ? (
+                                <List>
+                                    {userAttempts.map((attempt) => (
+                                        <ListItem key={attempt.id} alignItems="flex-start">
+                                            <ListItemText
+                                                primary={`Question ID: ${attempt.questionID}`}
+                                                secondary={
+                                                    <>
+                                                        <Typography
+                                                            variant="body2"
+                                                            style={{
+                                                                color: darkMode ? "#C7C7C8" : "#000",
+                                                            }}
+                                                        >
+                                                            Completion Time: {attempt.completionTime}
+                                                        </Typography>
+                                                        <Typography
+                                                            variant="body2"
+                                                            style={{
+                                                                color: darkMode ? "#C7C7C8" : "#000",
+                                                            }}
+                                                        >
+                                                            Response: {attempt.response}
+                                                        </Typography>
+                                                        <Typography
+                                                            variant="body2"
+                                                            style={{
+                                                                color: darkMode ? "#C7C7C8" : "#000",
+                                                            }}
+                                                        >
+                                                            Session ID: {attempt.sessionId}
+                                                        </Typography>
+                                                    </>
+                                                }
+                                            />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            ) : (
+                                <Typography
+                                    variant="body1"
+                                    style={{
+                                        color: darkMode ? "#C7C7C8" : "#000",
+                                        marginTop: "20px",
+                                    }}
+                                >
+                                    No attempts found. Start practicing to see your results here!
+                                </Typography>
+                            )}
+                        </Paper>
+                    </Grid>
                 </Grid>
-            </Grid>
+            )}
         </Container>
     );
 };
