@@ -60,7 +60,7 @@ const Results = () => {
         userHistoryWrite(auth.currentUser.uid, sessionId.toString(), 0, completionTime, oralAnalysis)
         console.log(getQuestionFromStorage());
         console.log(sessionId)
-        console.log(Date(sessionId))
+        console.log(new Date(sessionId - 10000000000).toLocaleDateString())
     }
 
     return (
