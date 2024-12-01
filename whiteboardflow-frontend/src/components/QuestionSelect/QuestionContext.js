@@ -9,7 +9,7 @@ export const QuestionProvider = ({ children }) => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch("/questions/all");
+        const response = await fetch("https://project-whiteboardflow-1.onrender.com/questions/all");
         const { question_list } = await response.json();
         setQuestions(question_list);
       } catch (error) {
