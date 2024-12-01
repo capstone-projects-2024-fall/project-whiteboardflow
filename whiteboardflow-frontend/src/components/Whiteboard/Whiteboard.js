@@ -4,7 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 // Material-UI Imports for UI components
 import { Box } from '@mui/material';
-
+// TODO:
+// Get text selection bug fixed
+// Get open question area bug fixed
+// Get writing experience bug fixed
 // Import components
 import QuestionArea from './QuestionArea';
 import SubmitButton from './SubmitButton';
@@ -235,8 +238,7 @@ const Whiteboard = () => {
                 <button id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex: '1000', border: 'none', background: "transparent"}}>
                     <img src="/img/info.svg" alt="Info" />
                 </button>
-                <HelpModal isVisible={modalVisible} onClose={() => setModalVisible(false)} />
-                {/* Submit Area */}
+=                {/* Submit Area */}
                 <Box sx={{
                     height: '7vh',
                     width: '100%',
@@ -248,6 +250,7 @@ const Whiteboard = () => {
                     <SubmitButton onExport={handleExportAndSubmit} />
                 </Box>
             </div>
+            <HelpModal isVisible={modalVisible} onClose={() => setModalVisible(false)} />
         </div>
     );
 };
