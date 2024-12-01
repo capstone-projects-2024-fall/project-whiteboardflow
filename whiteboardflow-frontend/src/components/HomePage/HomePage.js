@@ -75,22 +75,26 @@ const HomePage = ({ user }) => {
                 >
                     Get Started
                 </Button>
-                <Button
-                    variant="outlined"
-                    style={{ marginTop: '20px', marginLeft: '10px' }}
-                    onClick={handleOpenDashboard}
-                >
-                    View Dashboard
-                </Button>
+                {user && (
+                    <Button
+                        variant="outlined"
+                        style={{ marginTop: '20px', marginLeft: '10px' }}
+                        onClick={handleOpenDashboard}
+                    >
+                        View Dashboard
+                    </Button>
+                )}
             </section>
 
-            {/* Embedded Dashboard Section */}
-            <Box sx={embeddedDashboardStyle}>
-                <Typography variant="h6" style={{ marginBottom: '20px' }}>
-                    Embedded Dashboard
-                </Typography>
-                <Dashboard />
-            </Box>
+            {/* Embedded Dashboard Section - Only If User is Logged In */}
+            {user && (
+                <Box sx={embeddedDashboardStyle}>
+                    <Typography variant="h6" style={{ marginBottom: '20px' }}>
+                        Embedded Dashboard
+                    </Typography>
+                    <Dashboard />
+                </Box>
+            )}
 
             {/* Modal for the Dashboard */}
             <Modal
