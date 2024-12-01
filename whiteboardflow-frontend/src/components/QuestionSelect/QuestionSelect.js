@@ -132,7 +132,6 @@ function EnhancedTableHead(props) {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
@@ -142,7 +141,7 @@ EnhancedTableHead.propTypes = {
 function QuestionSelect() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
-  const [selected, setSelected] = React.useState([0]);
+  const [selected, setSelected] = React.useState(-1);
   const [page, setPage] = React.useState(0);
   //eslint-disable-next-line
   const [dense, setDense] = React.useState(false);
@@ -236,19 +235,13 @@ function QuestionSelect() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setSelected([0]);
+    setSelected(-1);
     setOpen(false);
   }
 
   const handleClick = (event, id) => {
-    const selectedIndex = selected.indexOf(id);
-
-    if (selectedIndex === -1) {
-      setSelected([id]);
-      handleOpen();
-    } else {
-      setSelected([0]);
-    }
+    setSelected(id);
+    handleOpen();
   };
 
   return (
@@ -262,7 +255,6 @@ function QuestionSelect() {
             size={dense ? 'small' : 'medium'}
           >
             <EnhancedTableHead
-              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
@@ -270,30 +262,23 @@ function QuestionSelect() {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = selected.includes(row.id);
-                if (row.id === 0) {
 
-                } else {
-
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => { handleClick(event, row.id); }}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.id}
-                      selected={isItemSelected}
-                      sx={{ cursor: 'pointer' }}
-                    >
-                      <TableCell align="center">{row.completed ? <Checkbox color='white' checked disabled /> : <Checkbox color='white' disabled />}</TableCell>
-                      <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.title}</TableCell>
-                      <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.category}</TableCell>
-                      <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.difficulty}</TableCell>
-                      {/* <TableCell align="left">{row.completed ? "True" : "False"}</TableCell> */}
-                    </TableRow>
-                  );
-                }
+                return (
+                  <TableRow
+                    hover
+                    onClick={(event) => { handleClick(event, row.id); }}
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.id}
+                    sx={{ cursor: 'pointer' }}
+                  >
+                    <TableCell align="center">{row.completed ? <Checkbox color='white' checked disabled /> : <Checkbox color='white' disabled />}</TableCell>
+                    <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.title}</TableCell>
+                    <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.category}</TableCell>
+                    <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.difficulty}</TableCell>
+                    {/* <TableCell align="left">{row.completed ? "True" : "False"}</TableCell> */}
+                  </TableRow>
+                );
               })}
               {emptyRows > 0 && (
                 <TableRow
@@ -344,15 +329,17 @@ function QuestionSelect() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Confirm question selection:
           </Typography>
-          <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2 }}>
-            <strong style={{ color: darkMode ? 'white' : '#202124' }}>
-              "{selected[0] == 0 ? "" : rows.find(data => data.id === selected[0]).title}"
-            </strong>
-          </Typography>
-          {questions && (
-            <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
-              {questions[selected].question_text}
-            </Typography>
+          {(questions && selected != -1) && (
+            <>
+              <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2 }}>
+                <strong style={{ color: darkMode ? 'white' : '#202124' }}>
+                  "{questions[selected].title}"
+                </strong>
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
+                {questions[selected].question_text}
+              </Typography>
+            </>
           )}
           <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
         </Box>
