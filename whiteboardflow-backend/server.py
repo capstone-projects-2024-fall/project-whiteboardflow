@@ -11,7 +11,7 @@ from routers.AI.ai_assistant import router as ai_router
 from routers.firebase.questions import router as questions_router
 
 
-app = FastAPI(debug=False)
+app = FastAPI(debug=True)
 
 origins = ["https://project-whiteboardflow-eowa.vercel.app"]
 
@@ -25,7 +25,7 @@ app.add_middleware(
 
 app.include_router(ai_router, prefix="/assistant")
 app.include_router(questions_router, prefix="/questions")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+#app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 @app.get("/")
