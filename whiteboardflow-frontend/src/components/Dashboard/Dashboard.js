@@ -1,165 +1,115 @@
-import React, { useEffect, useState } from "react";
-import {
-    Container,
-    Typography,
-    Box,
-    Paper,
-    Grid,
-    List,
-    ListItem,
-    ListItemText,
-} from "@mui/material";
-import { useOutletContext } from "react-router-dom";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { auth } from "../../firebase";
+import React, { useState, useMemo, useEffect } from 'react';
+import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Modal } from '@mui/material';
+import { visuallyHidden } from '@mui/utils';
+import PropTypes from 'prop-types';
 
-const Dashboard = () => {
-    const [darkMode, setDarkMode] = useOutletContext();
-    const [userAttempts, setUserAttempts] = useState([]);
-    const [loading, setLoading] = useState(true);
+const rows = [
+    { id: 1, title: 'Sum even numbers', score: '76%', date: '2024/11/11', category: 'Coding problems', difficulty: 'Basic', feedback: 'You did fine' },
+    { id: 2, title: 'How many licks...', score: '32%', date: '2024/11/13', category: 'Coding problems', difficulty: 'Basic', feedback: 'You suck' },
+    { id: 3, title: 'Sum even numbers', score: '100%', date: '2024/11/20', category: 'Coding problems', difficulty: 'Basic', feedback: 'You are great' },
+];
 
-    useEffect(() => {
-        const fetchUserAttempts = async () => {
-            try {
-                const user = auth.currentUser;
-                //const user = "gdr0wZx2v4PuNFYWLHgUyMWc5pD2";
-
-                if (!user) {
-                    console.error("No authenticated user found.");
-                    return;
-                }
-
-                const userId = user.uid;
-                //const userId = "gdr0wZx2v4PuNFYWLHgUyMWc5pD2";
-                console.log("Fetching data for user ID:", userId);
-
-                const db = getFirestore();
-                const userHistoryRef = collection(db, "userhistory", userId, "sessions"); // Reference to Firestore collection
-
-                const snapshot = await getDocs(userHistoryRef);
-                if (!snapshot.empty) {
-                    const attempts = snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        ...doc.data(),
-                    }));
-                    setUserAttempts(attempts);
-                } else {
-                    console.warn("No attempts found for user.");
-                }
-            } catch (error) {
-                console.error("Error fetching user attempts:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUserAttempts();
-    }, []);
+function EnhancedTableHead({ order, orderBy, onRequestSort }) {
+    const createSortHandler = (property) => (event) => onRequestSort(event, property);
+    const headCells = [
+        { id: 'title', label: 'Question' },
+        { id: 'score', label: 'Score' },
+        { id: 'date', label: 'Date' },
+        { id: 'category', label: 'Category' },
+        { id: 'difficulty', label: 'Difficulty' },
+    ];
 
     return (
-        <Container
-            maxWidth="lg"
-            style={{
-                textAlign: "left",
-                paddingTop: "70px",
-                padding: "30px",
-                backgroundColor: darkMode ? "#202124" : "white",
-            }}
-        >
-            <Typography
-                variant="h4"
-                style={{
-                    fontWeight: "bold",
-                    marginBottom: "20px",
-                    color: darkMode ? "white" : "#1976d2",
-                }}
-            >
-                User Practice Dashboard
-            </Typography>
-
-            {loading ? (
-                <Typography variant="h6" style={{ color: darkMode ? "#fff" : "#000" }}>
-                    Loading user attempts...
-                </Typography>
-            ) : (
-                <Grid container spacing={3}>
-                    {/* User Attempts */}
-                    <Grid item xs={12}>
-                        <Paper
-                            elevation={3}
-                            style={{
-                                padding: "20px",
-                                borderRadius: "10px",
-                                backgroundColor: darkMode ? "#202124" : "#fff",
-                                display: "flex",
-                                flexDirection: "column",
-                            }}
+        <TableHead>
+            <TableRow>
+                {headCells.map((headCell) => (
+                    <TableCell
+                        key={headCell.id}
+                        sortDirection={orderBy === headCell.id ? order : false}
+                    >
+                        <TableSortLabel
+                            active={orderBy === headCell.id}
+                            direction={orderBy === headCell.id ? order : 'asc'}
+                            onClick={createSortHandler(headCell.id)}
                         >
-                            <Typography
-                                variant="h6"
-                                style={{
-                                    fontWeight: "bold",
-                                    color: darkMode ? "#fff" : "#1976d2",
-                                }}
-                                gutterBottom
-                            >
-                                Your Attempts
-                            </Typography>
-                            {userAttempts.length > 0 ? (
-                                <List>
-                                    {userAttempts.map((attempt) => (
-                                        <ListItem key={attempt.id} alignItems="flex-start">
-                                            <ListItemText
-                                                primary={`Question ID: ${attempt.questionID}`}
-                                                secondary={
-                                                    <>
-                                                        <Typography
-                                                            variant="body2"
-                                                            style={{
-                                                                color: darkMode ? "#C7C7C8" : "#000",
-                                                            }}
-                                                        >
-                                                            Completion Time: {attempt.completionTime}
-                                                        </Typography>
-                                                        <Typography
-                                                            variant="body2"
-                                                            style={{
-                                                                color: darkMode ? "#C7C7C8" : "#000",
-                                                            }}
-                                                        >
-                                                            Response: {attempt.response}
-                                                        </Typography>
-                                                        <Typography
-                                                            variant="body2"
-                                                            style={{
-                                                                color: darkMode ? "#C7C7C8" : "#000",
-                                                            }}
-                                                        >
-                                                            Session ID: {attempt.sessionId}
-                                                        </Typography>
-                                                    </>
-                                                }
-                                            />
-                                        </ListItem>
-                                    ))}
-                                </List>
-                            ) : (
-                                <Typography
-                                    variant="body1"
-                                    style={{
-                                        color: darkMode ? "#C7C7C8" : "#000",
-                                        marginTop: "20px",
-                                    }}
-                                >
-                                    No attempts found. Start practicing to see your results here!
-                                </Typography>
-                            )}
-                        </Paper>
-                    </Grid>
-                </Grid>
-            )}
-        </Container>
+                            {headCell.label}
+                            {orderBy === headCell.id ? (
+                                <Box component="span" sx={visuallyHidden}>
+                                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                </Box>
+                            ) : null}
+                        </TableSortLabel>
+                    </TableCell>
+                ))}
+            </TableRow>
+        </TableHead>
     );
+}
+
+EnhancedTableHead.propTypes = {
+    order: PropTypes.string.isRequired,
+    orderBy: PropTypes.string.isRequired,
+    onRequestSort: PropTypes.func.isRequired,
 };
 
-export default Dashboard;
+export default function Dashboard() {
+    const [order, setOrder] = useState('asc');
+    const [orderBy, setOrderBy] = useState('title');
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const handleRequestSort = (event, property) => {
+        const isAsc = orderBy === property && order === 'asc';
+        setOrder(isAsc ? 'desc' : 'asc');
+        setOrderBy(property);
+    };
+
+    const handleChangePage = (event, newPage) => setPage(newPage);
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
+    const sortedRows = useMemo(() => {
+        const comparator = (a, b) =>
+            order === 'desc'
+                ? b[orderBy].localeCompare(a[orderBy])
+                : a[orderBy].localeCompare(b[orderBy]);
+        return rows.slice().sort(comparator);
+    }, [order, orderBy]);
+
+    const displayedRows = sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
+    return (
+        <Box sx={{ width: '100%' }}>
+            <TableContainer>
+                <Table>
+                    <EnhancedTableHead
+                        order={order}
+                        orderBy={orderBy}
+                        onRequestSort={handleRequestSort}
+                    />
+                    <TableBody>
+                        {displayedRows.map((row) => (
+                            <TableRow key={row.id}>
+                                <TableCell>{row.title}</TableCell>
+                                <TableCell>{row.score}</TableCell>
+                                <TableCell>{row.date}</TableCell>
+                                <TableCell>{row.category}</TableCell>
+                                <TableCell>{row.difficulty}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TablePagination
+                component="div"
+                rowsPerPage={rowsPerPage}
+                page={page}
+                count={rows.length}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+        </Box>
+    );
+}
