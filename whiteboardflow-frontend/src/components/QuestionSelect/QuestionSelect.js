@@ -82,6 +82,8 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
+  const [darkMode, setDarkMode] = useOutletContext();
+
   const { order, orderBy, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
@@ -99,6 +101,19 @@ function EnhancedTableHead(props) {
           >
             <TableSortLabel
               // active={orderBy === headCell.id}
+              sx={{
+                fontWeight: 'bold',
+                color: darkMode ? 'white' : 'text.primary',
+                '&:hover': {
+                  color: 'primary.main',
+                },
+                '&:focus': {
+                  color: darkMode ? 'white' : 'text.primary',
+                },
+                '&:hover:focus': {
+                  color: 'primary.main',
+                },
+              }}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
@@ -181,6 +196,13 @@ function QuestionSelect() {
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
+  };
+
+  const paginationButtonStyles = {
+    color: darkMode ? "white" : "#202124",
+    '&.Mui-disabled': {
+      color: darkMode ? '#666666' : '#B0B0B0',
+    },
   };
 
   const handleChangePage = (event, newPage) => {
@@ -286,7 +308,22 @@ function QuestionSelect() {
           </Table>
         </TableContainer>
         <TablePagination
-          sx={{ color: darkMode ? "white" : "#202124" }}
+          sx={{
+            color: paginationButtonStyles.color,
+            '& .MuiTablePagination-selectIcon': {
+              color: paginationButtonStyles.color
+            },
+          }}
+          slotProps={{
+            actions: {
+              previousButton: {
+                sx: paginationButtonStyles,
+              },
+              nextButton: {
+                sx: paginationButtonStyles,
+              },
+            },
+          }}
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={rows.length}
@@ -307,12 +344,16 @@ function QuestionSelect() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Confirm question selection:
           </Typography>
-          <Typography id="modal-modal-question" sx={{ textAlign: 'left', mt: 2 }}>
-            <strong>"{selected[0] == 0 ? "" : rows.find(data => data.id === selected[0]).title}"</strong>
+          <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2 }}>
+            <strong style={{ color: darkMode ? 'white' : '#202124' }}>
+              "{selected[0] == 0 ? "" : rows.find(data => data.id === selected[0]).title}"
+            </strong>
           </Typography>
-          <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
-            {questions[selected].question_text}
-          </Typography>
+          {questions && (
+            <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
+              {questions[selected].question_text}
+            </Typography>
+          )}
           <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
         </Box>
       </Modal>
