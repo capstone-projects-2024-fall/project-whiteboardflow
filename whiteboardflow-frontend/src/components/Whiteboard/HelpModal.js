@@ -9,6 +9,7 @@ const HelpModal = ({ isVisible, onClose }) => {
     const modalStyle = {
         display: isVisible ? 'block' : 'none',
         zIndex: 2000,
+        userSelect: 'none',
     };
     const modalContent = (
         <div id="help-modal" className="help-modal" style={modalStyle}>
