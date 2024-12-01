@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Typography, Container, Modal } from '@mui/material';
+import { Button, Typography, Container, Modal, Box } from '@mui/material';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import RotatingText from '../RotatingText/RotatingText';
 import Dashboard from '../Dashboard/Dashboard'; // Adjust the path to your Dashboard.js
@@ -13,12 +13,10 @@ const HomePage = ({ user }) => {
 
     // Handlers for opening/closing the modal
     const handleOpenDashboard = () => {
-        console.log('Opening Dashboard Modal');
         setOpenDashboard(true);
     };
 
     const handleCloseDashboard = () => {
-        console.log('Closing Dashboard Modal');
         setOpenDashboard(false);
     };
 
@@ -43,6 +41,16 @@ const HomePage = ({ user }) => {
         outline: 'none',
     };
 
+    // Style for the embedded dashboard
+    const embeddedDashboardStyle = {
+        marginTop: '50px',
+        padding: '20px',
+        backgroundColor: darkMode ? '#2e2e2e' : '#f9f9f9',
+        color: darkMode ? '#fff' : '#000',
+        borderRadius: '8px',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    };
+
     return (
         <Container>
             {/* Header Section */}
@@ -60,7 +68,6 @@ const HomePage = ({ user }) => {
 
             {/* Action Section */}
             <section style={{ padding: '60px 0', textAlign: 'center', fontSize: '2rem', fontWeight: 'bold' }}>
-                {/* Ensure the button appears by removing unnecessary conditions */}
                 <Button
                     variant="contained"
                     style={{ marginTop: '20px', marginRight: '10px' }}
@@ -76,6 +83,14 @@ const HomePage = ({ user }) => {
                     View Dashboard
                 </Button>
             </section>
+
+            {/* Embedded Dashboard Section */}
+            <Box sx={embeddedDashboardStyle}>
+                <Typography variant="h6" style={{ marginBottom: '20px' }}>
+                    Embedded Dashboard
+                </Typography>
+                <Dashboard />
+            </Box>
 
             {/* Modal for the Dashboard */}
             <Modal
