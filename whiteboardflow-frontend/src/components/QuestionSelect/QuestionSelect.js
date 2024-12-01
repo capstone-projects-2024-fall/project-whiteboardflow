@@ -18,6 +18,7 @@ import './QuestionSelect.css'
 import { color } from 'framer-motion';
 import { useQuestionContext } from './QuestionContext';
 import { saveQuestionToStorage } from '../Whiteboard/QuestionDisplay';
+import { ReactMarkdownSpan } from '../Whiteboard/QuestionDisplay';
 
 function createData(id, title, question, category, difficulty, completed) {
   return {
@@ -337,7 +338,7 @@ function QuestionSelect() {
                 </strong>
               </Typography>
               <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
-                {questions[selected].question_text}
+                <ReactMarkdownSpan text={questions[selected].question_text} />
               </Typography>
             </>
           )}

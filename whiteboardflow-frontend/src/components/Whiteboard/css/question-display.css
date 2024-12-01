@@ -5,6 +5,11 @@ body {
     margin: 20px;
 }
 
+p {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
 .question-container {
     padding: 0px;
     margin: auto;
