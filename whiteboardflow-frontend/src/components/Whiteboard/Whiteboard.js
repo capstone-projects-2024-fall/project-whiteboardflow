@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 // Material-UI Imports for UI components
 import { Box } from '@mui/material';
 // TODO:
-// Get text selection bug fixed
 // Get open question area bug fixed
 // Get writing experience bug fixed
 // Import components
@@ -31,6 +30,19 @@ const Whiteboard = () => {
     const [modalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => setModalVisible(!modalVisible);
+
+    // const handlePointerDown = (event) => {
+    //     if (editor.current && editor.current.behaviors) {
+    //         if (event.pointerType === 'pen' && editor.current.behaviors.intention !== 'write') {
+    //             // Switch to Write mode
+    //             editor.current.behaviors.intention = 'write';
+    //         } else {
+    //             console.log('Move mode');
+    //             // Switch to Move mode
+    //             editor.current.behaviors.intention = 'erase';
+    //         }
+    //     }
+    // };
     // Effect for editor initialization and event handling
     useEffect(() => {
         // Function to handle window resizing to adjust editor dimensions
@@ -69,7 +81,8 @@ const Whiteboard = () => {
                         },
                         modules: {
                             eraser: true,
-                            transcript: true
+                            transcript: true,
+                            hand: true,
                         },
                         triggers: {
                             exportContent: "ONDEMAND"
@@ -224,6 +237,7 @@ const Whiteboard = () => {
             }}>
                 <div
                     ref={editorElement}
+                    onPointerDown={handlePointerDown}
                     style={{
                         flexGrow: 1,
                         height: '93vh',

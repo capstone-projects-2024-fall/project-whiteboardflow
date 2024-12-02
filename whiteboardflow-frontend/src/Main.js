@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
+import LayoutWhiteboard from "./components/Layout/LayoutWhiteboard";
 import HomePage from './components/HomePage/HomePage';
 import Whiteboard from './components/Whiteboard/Whiteboard';
 import OralTest from './components/OralTest/OralTest';
@@ -40,7 +41,9 @@ function Main() {
                             <Route path="difficulty" element={<PrivateRoute><DifficultySelect /></PrivateRoute>} />
                             <Route path="questionSelect" element={<PrivateRoute><QuestionSelect /></PrivateRoute>} />
                         </Route>
-                        <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
+                        <Route element={<LayoutWhiteboard user={user} />}>
+                            <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
+                        </Route>
                     </Routes>
                 </QuestionProvider>
             </AvatarProvider>
