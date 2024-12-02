@@ -17,7 +17,7 @@ origins = ["https://project-whiteboardflow-eowa.vercel.app"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
