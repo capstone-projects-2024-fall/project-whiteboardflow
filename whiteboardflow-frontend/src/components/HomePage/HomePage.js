@@ -59,6 +59,8 @@ const HomePage = ({ user}) => {
 
             </section>
 
+						TEST
+
             {/* Add the rotating text at the bottom */}
             <section style={{ marginTop: '60px', textAlign: 'center' }}>
                 <RotatingText darkMode={darkMode}/>

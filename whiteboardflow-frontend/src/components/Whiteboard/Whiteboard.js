@@ -65,9 +65,7 @@ const Whiteboard = () => {
                         },
                         grabber: {
                             listenerOptions:{
-                                capture: true,
                             },
-                            delayLongTouch: 500
                         },
                         recognition: {
                             alwaysConnected: true,
