@@ -20,6 +20,7 @@ import { useQuestionContext } from './QuestionContext';
 import { saveQuestionToStorage } from '../Whiteboard/QuestionDisplay';
 import { getAllHistory } from '../../firebase';
 import { ReactMarkdownSpan } from '../Whiteboard/QuestionDisplay';
+import { useSessionId } from '../../SessionIdContext';
 
 
 function createData(id, questionId, title, question, category, difficulty, completed) {
@@ -152,6 +153,7 @@ function QuestionSelect() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { questions } = useQuestionContext();
   const [rows, setRows] = React.useState([]);
+  const { setSessionId } = useSessionId()
 
   React.useEffect(() => {
     console.log(questions)
@@ -243,6 +245,8 @@ function QuestionSelect() {
 
   const handleNav = () => {
     sessionStorage.setItem("startTime", Date.now());
+    const tempSessionId = Date.now()
+    setSessionId(tempSessionId)
     saveQuestionToStorage(questions[selected])
     navigate("/whiteboard");
   };
