@@ -238,7 +238,7 @@ const Whiteboard = () => {
                 <button id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex: '1000', border: 'none', background: "transparent", userSelect: 'none'}}>
                     <img src="/img/info.svg" alt="Info" />
                 </button>
-=                {/* Submit Area */}
+                {/* Submit Area */}
                 <Box sx={{
                     height: '7vh',
                     width: '100%',
