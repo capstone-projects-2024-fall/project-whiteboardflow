@@ -18,6 +18,7 @@ import './QuestionSelect.css'
 // import { color } from 'framer-motion';
 import { useQuestionContext } from './QuestionContext';
 import { saveQuestionToStorage } from '../Whiteboard/QuestionDisplay';
+import { getAllHistory } from '../../firebase';
 
 function createData(id, questionId, title, question, category, difficulty, completed) {
   return {
@@ -139,12 +140,17 @@ function QuestionSelect() {
   React.useEffect(() => {
     console.log(questions)
     if (questions) {
+
+      getAllHistory().then((history) => {
+
       const newRows = questions.map((question, index) => {
           
         // Convert array of categories to a comma-separated string
         const formattedCategories = question.categories
           ? question.categories.join(', ')
           : '';
+
+        const checked = history.some(i => i.questionID === question.id)
 
         return createData(
           index,
@@ -153,12 +159,15 @@ function QuestionSelect() {
           question.question_text || '',
           formattedCategories,
           question.difficulty,
-          question.completed || false
+          // question.completed || false
+          checked
         );
 
       });
 
       setRows(newRows);
+
+    })
     }
   }, [questions]);
 

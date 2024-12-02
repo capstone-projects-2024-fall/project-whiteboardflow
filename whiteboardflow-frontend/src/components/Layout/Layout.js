@@ -177,7 +177,7 @@ const Layout = ({ children, user }) => { // Accept user as a prop
                             <Typography variant="h6" component="div" sx={{ mr: 2 }}>
                                 Welcome, {user.displayName}
                             </Typography>
-                            <Button color="inherit" onClick={handleHistory}>
+                            <Button color="inherit" onClick={(e) => {handleHistory(); handleCloseUserMenu()}}>
                                 History
                             </Button>
                             <Button color="inherit" onClick={handleLogout}>

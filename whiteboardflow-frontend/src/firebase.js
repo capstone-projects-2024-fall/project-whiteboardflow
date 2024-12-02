@@ -98,6 +98,13 @@ async function getAllHistory() {
 
 }
 
+async function getAllQuestions() {
+	const querySnapshot = await getDocs(collection(qdb, "questions"));
 
-export { auth, provider, signInWithPopup, signOut, getIdToken, testWrite, userHistoryWrite, getOneHistory, getOneQuestion, getAllHistory }; // Make sure signOut is exported
+		// doc.data() is never undefined for query doc snapshots
+		return querySnapshot.docs.map(doc => doc.data());
+}
+
+
+export { auth, provider, signInWithPopup, signOut, getIdToken, testWrite, userHistoryWrite, getOneHistory, getOneQuestion, getAllHistory, getAllQuestions }; // Make sure signOut is exported
 export default app;

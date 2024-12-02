@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Button, Checkbox } from '@mui/material';
+import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,10 +12,8 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
 import { useNavigate } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import './History.css'
-import { getAllHistory, getOneQuestion } from '../../firebase';
+import { getAllHistory, getAllQuestions } from '../../firebase';
 
 function createData(id, title, question, category, difficulty, date, session_id) {
   return {
@@ -28,47 +26,6 @@ function createData(id, title, question, category, difficulty, date, session_id)
     session_id
   };
 }
-
-
-
-// const rows = [
-//   createData(
-//     0,
-//     '',
-//     '',
-//     '',
-//     '',
-//     false
-//   ),createData(
-//     1,
-//     'Sum even numbers',
-//     'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
-//     'Coding problems',
-//     'Basic',
-//     '76%',
-//     '2024/11/11',
-//     'You did fine'
-//   ),
-//   createData(
-//     2,
-//     'How many licks does it take to get to the Tootsie Roll center of a Tootsie Pop?',
-//     'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
-//     'Coding problems',
-//     'Basic',
-//     '32%',
-//     '2024/11/13',
-//     'You suck'
-//   ),createData(
-//     3,
-//     'Sum even numbers',
-//     'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
-//     'Coding problems',
-//     'Basic',
-//     '100%',
-//     '2024/11/20',
-//     'You are great'
-//   ),
-// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -121,8 +78,6 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
 
-  
-
   return (
     <TableHead>
       <TableRow>
@@ -170,38 +125,26 @@ function History() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const [question, setQuestion] = React.useState([])
+  // const [question, setQuestion] = React.useState([])
 
   const [rows, setRows] = React.useState([])
 
   React.useEffect(() => {
 
     getAllHistory().then((history) => {
-      // console.log(history);
 
-      const newRows = history.map((history, index) => {
-            
-        getOneQuestion(history.questionID).then((ques) => {
+      getAllQuestions().then((questions => {
 
-          // const question = ques;
-          // console.log("ques:")
-          console.log(ques)
-          // setTimeout(100)
-          setQuestion(ques)
+        const newRows = history.map((history, index) => {
 
+          const question = questions.find(q => q.id === history.questionID)
           
-        })
-
-        console.log("logging q")
-        console.log(question)
-
-          // Convert array of categories to a comma-separated string
           const formattedCategories = question.categories
             ? question.categories.join(', ')
             : '';
 
           const day = new Date(parseInt(history.sessionId)).toLocaleString()
-
+          
           return createData(
             index,
             question.title,
@@ -211,15 +154,16 @@ function History() {
             day,
             history.sessionId
           );
+
         })
+
         setRows(newRows)
 
-    })
-
-    console.log("End of UE, here are the rows: ")
-    console.log(rows)
-    // window.location.reload();
-  }, [])
+      })
+            
+    )}
+    
+  )},[])
 
 	// eslint-disable-next-line
 	const [darkMode, setDarkMode] = useOutletContext();
@@ -228,22 +172,6 @@ function History() {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
-  };
-
-  const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: darkMode ? '#202124' : 'white',
-    color: darkMode ? 'white' : '#202124',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
   };
 
   React.useEffect(() => {
@@ -272,30 +200,13 @@ function History() {
 
   const navigate = useNavigate();
 
-  const handleNav = () => {
-    // Set the start time in localStorage
-    localStorage.setItem("startTime", Date.now());
-    // Redirect to the whiteboard page
-    navigate("/whiteboard");
-  };
-
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setSelected([-1]);
-    setOpen(false);
-  }
-
-
   const handleClick = (event, id) => {
     const selectedIndex = selected.indexOf(id);
 
     if (selectedIndex === -1) {
       setSelected([id]);
-      console.log(rows[id])
       navigate('/results', { state: rows[id].session_id })
-      handleOpen();
+      // handleOpen();
     } else {
       setSelected([-1])
     }
@@ -322,7 +233,8 @@ function History() {
               />
               <TableBody>
                 {/* eslint-disable-next-line */}
-                { visibleRows.map((row, index) => {
+                {console.log("Right before error: " + rows)}
+                { rows.length > 0 && visibleRows.map((row, index) => {
                   const isItemSelected = selected.includes(row.id);
                   // if (row.id === 0){
 

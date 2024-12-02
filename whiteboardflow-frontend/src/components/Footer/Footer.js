@@ -34,6 +34,8 @@ const Footer = ({darkMode}) => {
                 <Typography variant="body2" color="white" align="center" style={{ marginTop: '20px' }}>
                     © {new Date().getFullYear()} Whiteboard Assistant. All Rights Reserved.
                 </Typography>
+                
+                <a color="white" href="https://www.flaticon.com/free-icons/whiteboard" title="whiteboard icons">Whiteboard icons created by Freepik - Flaticon</a>
 
                 {/* Back to Top Button */}
                 <div className="back-to-top" onClick={handleScrollToTop}>
