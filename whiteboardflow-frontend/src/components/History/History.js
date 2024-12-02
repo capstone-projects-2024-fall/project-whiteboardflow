@@ -15,59 +15,60 @@ import { useOutletContext } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import './History.css'
+import { getAllHistory, getOneQuestion } from '../../firebase';
 
-
-function createData(id, title, question, category, difficulty, score, date, feedback) {
+function createData(id, title, question, category, difficulty, date, session_id) {
   return {
     id,
     title,
     question,
     category,
     difficulty,
-    score,
     date,
-    feedback
+    session_id
   };
 }
 
-const rows = [
-  createData(
-    0,
-    '',
-    '',
-    '',
-    '',
-    false
-  ),createData(
-    1,
-    'Sum even numbers',
-    'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
-    'Coding problems',
-    'Basic',
-    '76%',
-    '2024/11/11',
-    'You did fine'
-  ),
-  createData(
-    2,
-    'How many licks does it take to get to the Tootsie Roll center of a Tootsie Pop?',
-    'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
-    'Coding problems',
-    'Basic',
-    '32%',
-    '2024/11/13',
-    'You suck'
-  ),createData(
-    3,
-    'Sum even numbers',
-    'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
-    'Coding problems',
-    'Basic',
-    '100%',
-    '2024/11/20',
-    'You are great'
-  ),
-];
+
+
+// const rows = [
+//   createData(
+//     0,
+//     '',
+//     '',
+//     '',
+//     '',
+//     false
+//   ),createData(
+//     1,
+//     'Sum even numbers',
+//     'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
+//     'Coding problems',
+//     'Basic',
+//     '76%',
+//     '2024/11/11',
+//     'You did fine'
+//   ),
+//   createData(
+//     2,
+//     'How many licks does it take to get to the Tootsie Roll center of a Tootsie Pop?',
+//     'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
+//     'Coding problems',
+//     'Basic',
+//     '32%',
+//     '2024/11/13',
+//     'You suck'
+//   ),createData(
+//     3,
+//     'Sum even numbers',
+//     'Write a function that takes a list of numbers and returns the sum of all even numbers in the list.',
+//     'Coding problems',
+//     'Basic',
+//     '100%',
+//     '2024/11/20',
+//     'You are great'
+//   ),
+// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -92,12 +93,8 @@ const headCells = [
     numeric: false,
     disablePadding: true,
     label: 'Question',
-  },{
-    id: 'score',
-    numeric: false,
-    disablePadding: true,
-    label: 'Score',
-  },{
+  },
+  {
     id: 'date',
     numeric: false,
     disablePadding: true,
@@ -173,6 +170,57 @@ function History() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  const [question, setQuestion] = React.useState([])
+
+  const [rows, setRows] = React.useState([])
+
+  React.useEffect(() => {
+
+    getAllHistory().then((history) => {
+      // console.log(history);
+
+      const newRows = history.map((history, index) => {
+            
+        getOneQuestion(history.questionID).then((ques) => {
+
+          // const question = ques;
+          // console.log("ques:")
+          console.log(ques)
+          // setTimeout(100)
+          setQuestion(ques)
+
+          
+        })
+
+        console.log("logging q")
+        console.log(question)
+
+          // Convert array of categories to a comma-separated string
+          const formattedCategories = question.categories
+            ? question.categories.join(', ')
+            : '';
+
+          const day = new Date(parseInt(history.sessionId)).toLocaleString()
+
+          return createData(
+            index,
+            question.title,
+            question.id,
+            formattedCategories,
+            question.difficulty,
+            day,
+            history.sessionId
+          );
+        })
+        setRows(newRows)
+
+    })
+
+    console.log("End of UE, here are the rows: ")
+    console.log(rows)
+    // window.location.reload();
+  }, [])
+
 	// eslint-disable-next-line
 	const [darkMode, setDarkMode] = useOutletContext();
 
@@ -215,13 +263,12 @@ function History() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const visibleRows = React.useMemo(
-    () =>
-      [...rows]
+    const visibleRows = React.useMemo(() => {
+      if (!rows || !Array.isArray(rows)) return [];
+      return [...rows]
         .sort(getComparator(order, orderBy))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage],
-  );
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    }, [order, orderBy, page, rowsPerPage, rows]);
 
   const navigate = useNavigate();
 
@@ -236,7 +283,7 @@ function History() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setSelected([0]);
+    setSelected([-1]);
     setOpen(false);
   }
 
@@ -246,9 +293,11 @@ function History() {
 
     if (selectedIndex === -1) {
       setSelected([id]);
+      console.log(rows[id])
+      navigate('/results', { state: rows[id].session_id })
       handleOpen();
     } else {
-      setSelected([0])
+      setSelected([-1])
     }
     
   };
@@ -273,11 +322,11 @@ function History() {
               />
               <TableBody>
                 {/* eslint-disable-next-line */}
-                {visibleRows.map((row, index) => {
+                { visibleRows.map((row, index) => {
                   const isItemSelected = selected.includes(row.id);
-                  if (row.id === 0){
+                  // if (row.id === 0){
 
-                  } else {
+                  // } else {
 
                     return (
                       <TableRow
@@ -292,7 +341,6 @@ function History() {
                       >
                         {/* <TableCell align="center">{row.completed ? <Checkbox color='white' checked disabled/> : <Checkbox color='white' disabled/>}</TableCell> */}
                         <TableCell sx={{color: darkMode ? "white" : "#202124"}} align="left">{row.title}</TableCell>
-                        <TableCell sx={{color: darkMode ? "white" : "#202124"}} align="left">{row.score}</TableCell>
                         <TableCell sx={{color: darkMode ? "white" : "#202124"}} align="left">{row.date}</TableCell>
                         <TableCell sx={{color: darkMode ? "white" : "#202124"}}align="left">{row.category}</TableCell>
                         <TableCell sx={{color: darkMode ? "white" : "#202124"}}align="left">{row.difficulty}</TableCell>
@@ -302,7 +350,8 @@ function History() {
                   }
 
                   
-                })}
+                // }
+              )}
                 {emptyRows > 0 && (
                   <TableRow
                     style={{
@@ -327,7 +376,7 @@ function History() {
           />
         </Box>
         {/* <Button onClick={handleOpen}>Open modal</Button> */}
-        <Modal
+        {/* <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
@@ -341,7 +390,7 @@ function History() {
               {selected == null ? "" : rows.find(data => data.id === selected[0]).feedback}
             </Typography>
           </Box>
-        </Modal>
+        </Modal> */}
       </Box>
   );
 }

@@ -17,7 +17,7 @@ function OralTest() {
 	const [isRecording, setIsRecording] = useState(true)
 	const [isLoading, setIsLoading] = useState(false)
 
-	const { sessionId} = useSessionId();
+	const { sessionId } = useSessionId();
 
 	const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
 
@@ -84,6 +84,7 @@ function OralTest() {
 				body: JSON.stringify({
 					// Data to send to FastAPI
 					token: idToken,
+					session: sessionId.toString(),
 					question: sessionStorage.getItem("question_text"),
 					image: "",
 					transcript: sessionStorage.getItem("finalTranscript")
@@ -94,21 +95,20 @@ function OralTest() {
 			const result = await response.json();
 			sessionStorage.setItem("AIResponse", result.message);
 
-			//end completion time 
-			setCompletionTime(calculateCompletionTime());
-
+			// sending results to database
 			userHistoryWrite(
 				auth.currentUser.uid, 
 				sessionId.toString(), 
-				getQuestionFromStorage.id, 
-				completionTime, 
+				getQuestionFromStorage().id,
+				calculateCompletionTime(), 
+				sessionStorage.getItem("finalTranscript"),
 				sessionStorage.getItem("AIResponse") || "No analysis available"
 			)
 			console.log(sessionId)
 			console.log(new Date(sessionId - 10000000000).toLocaleDateString())
 
 			// Navigate to Results page after successful response
-			navigate('/results');
+			navigate('/results', {state: sessionId});
 
 		} catch (error) {
 			console.error("Error:", error);

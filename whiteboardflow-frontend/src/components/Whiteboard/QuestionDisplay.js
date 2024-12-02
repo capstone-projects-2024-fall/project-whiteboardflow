@@ -20,7 +20,7 @@ const QuestionDisplay = ({darkMode}) => {
             )}
             {/* Render Explanation*/}
             {question.explanation && (
-                <div><strong>Explanation:</strong> {question.explanation}</div>
+                <div className={darkMode ? "question-dark" : "question-light"}><strong>Explanation:</strong> {question.explanation}</div>
             )}
             {/* Render Examples */}
             {question.examples && question.examples.length > 0 && (

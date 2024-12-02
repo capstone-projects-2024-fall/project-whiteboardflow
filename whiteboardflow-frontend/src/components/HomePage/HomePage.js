@@ -8,7 +8,7 @@ import { auth, provider, signInWithPopup } from '../../firebase';
 import './HomePage.css';
 import '../Avatar/RetroAvatar.css';
 
-import { testWrite } from '../../firebase';
+import { testWrite, getOneHistory, getAllHistory } from '../../firebase';
 
 // import { useSessionId } from '../../SessionIdContext';
 
@@ -40,25 +40,11 @@ const HomePage = ({ user}) => {
                 setLoading(false);
             });
     };
-
-    const handleTest = () => {
-        testWrite();
-    }
   
   const navigate = useNavigate();
 
-    // const handleGetStarted = () => {
-    //     // Set the start time in localStorage
-    //     localStorage.setItem("startTime", Date.now());
-    //     // Redirect to the whiteboard page
-    //     navigate("/whiteboard");
-    // };
 
     const handleGetStarted = () => {
-            // Set the start time in localStorage
-            // localStorage.setItem("startTime", Date.now());
-            // Redirect to the whiteboard page
-            // navigate("/difficulty");
             navigate("/questionSelect")
         };
     
@@ -70,20 +56,13 @@ const HomePage = ({ user}) => {
                     <span className={darkMode ? "heading-main-dark" : "heading-main-light"}>Whiteboard</span>
                     <span className="heading-highlight">.assistant</span>
                 </Typography>
-                {/* <Typography variant="body1" paragraph>
-                    Prepare for your whiteboard interview with hands-on practice.
-                </Typography> */}
 
-                
             </section>
 
             {/* Add the rotating text at the bottom */}
             <section style={{ marginTop: '60px', textAlign: 'center' }}>
                 <RotatingText darkMode={darkMode}/>
             </section>
-
-            <button onClick={handleTest}>TEST</button>
-
         
             <section style={{ padding: '60px 0', textAlign: 'center', fontSize: '2rem', fontWeight: 'bold' }}>
 

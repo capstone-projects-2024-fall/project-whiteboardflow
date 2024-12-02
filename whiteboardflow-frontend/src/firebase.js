@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore"
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore"
 
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -25,6 +25,7 @@ try {
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app, 'userhistory');
+const qdb = getFirestore(app);
 
 console.log(db)
 
@@ -39,14 +40,46 @@ async function getIdToken() {
 	}
 }
 
-async function userHistoryWrite(userId, sessionId, questionId, completeionTime, response) {
+async function userHistoryWrite(userId, sessionId, questionId, completeionTime, transcript, response) {
 	await setDoc(doc(db, userId, sessionId), {
 		sessionId: sessionId,
 		questionID: questionId,
-		completeionTime: completeionTime,
+		completionTime: completeionTime,
+		transcript: transcript,
 		response: response
 	});
 }
+
+async function getOneHistory(userId, sessionId) {
+
+	const docRef = doc(db, userId, sessionId);
+	const docSnap = await getDoc(docRef);
+
+	if (docSnap.exists()) {
+		// console.log("Document data:", docSnap.data());
+		return docSnap.data();
+	} else {
+		// docSnap.data() will be undefined in this case
+		// console.log("No such document!");
+	}
+
+}
+
+async function getOneQuestion(questionId) {
+
+	const docRef = doc(qdb, "questions", questionId);
+	const docSnap = await getDoc(docRef);
+
+	if (docSnap.exists()) {
+		// console.log("Document data:", docSnap.data());
+		return docSnap.data()
+	} else {
+		// docSnap.data() will be undefined in this case
+		// console.log("No such document!");
+	}
+}
+
+
 
 async function testWrite() {
 	await setDoc(doc(db, "user_history", 'test'), {
@@ -54,6 +87,17 @@ async function testWrite() {
 	});
 }
 
+async function getAllHistory() {
 
-export { auth, provider, signInWithPopup, signOut, getIdToken, testWrite, userHistoryWrite }; // Make sure signOut is exported
+	// console.log(auth.currentUser.uid)
+
+	const querySnapshot = await getDocs(collection(db, auth.currentUser.uid));
+
+		// doc.data() is never undefined for query doc snapshots
+		return querySnapshot.docs.map(doc => doc.data());
+
+}
+
+
+export { auth, provider, signInWithPopup, signOut, getIdToken, testWrite, userHistoryWrite, getOneHistory, getOneQuestion, getAllHistory }; // Make sure signOut is exported
 export default app;
