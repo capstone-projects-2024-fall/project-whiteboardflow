@@ -69,7 +69,7 @@ const Results = () => {
 
     return (
         <Container maxWidth="lg" style={{ textAlign: 'left', paddingTop: "70px", padding: '30px', backgroundColor: darkMode ? '#202124' : 'white' }}>
-            <Typography variant="h4" style={{ fontWeight: 'bold', marginBottom: '20px', color: darkMode ? "white" : '#1976d2' }}>
+            <Typography variant="h4" style={{ fontWeight: 'bold', marginTop:'30px',marginBottom: '20px', color: darkMode ? "white" : '#1976d2' }}>
                 Practice Results Dashboard
             </Typography>
             <Grid container spacing={3}>
