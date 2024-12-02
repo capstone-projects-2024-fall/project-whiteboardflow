@@ -35,7 +35,7 @@ const Whiteboard = () => {
     // eslint-disable-next-line
     const [darkMode, setDarkMode] = useOutletContext();
 
-    const { setSessionId} = useSessionId();
+    const { sessionId } = useSessionId();
 
     const toggleModal = () => setModalVisible(!modalVisible);
     // Effect for editor initialization and event handling
@@ -196,8 +196,8 @@ const Whiteboard = () => {
                     const userId = auth.currentUser.uid;
                     const storage = getStorage();
                     // const testId = Date.now()
-                    const tempSessionId = Date.now()
-                    setSessionId(tempSessionId)
+                    const tempSessionId = sessionId
+                    // setSessionId(tempSessionId)
                     const storageRef = ref(storage, `user-files/${userId}/${tempSessionId}/static.png`);
 
                     try {
