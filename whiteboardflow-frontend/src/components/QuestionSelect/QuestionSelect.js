@@ -319,7 +319,10 @@ function QuestionSelect() {
           <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
             {questions[selected].question_text}
           </Typography>
-          <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
+          <div className='button-container'>
+            <Button sx={{ width: "100px", marginTop: '20px', marginRight: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
+            <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleClose}>Cancel</Button>
+          </div>
         </Box>
       </Modal>
     </Box>
