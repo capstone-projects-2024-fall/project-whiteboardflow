@@ -39,8 +39,8 @@ function Main() {
                             <Route path="results" element={<PrivateRoute><Results /></PrivateRoute>} />
                             <Route path="difficulty" element={<PrivateRoute><DifficultySelect /></PrivateRoute>} />
                             <Route path="questionSelect" element={<PrivateRoute><QuestionSelect /></PrivateRoute>} />
+                            <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
                         </Route>
-                        <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
                     </Routes>
                 </QuestionProvider>
             </AvatarProvider>
