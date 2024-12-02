@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Box, Paper, Grid } from '@mui/material';
+import { Button, Container, Typography, Box, Paper, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useOutletContext } from 'react-router-dom'; // Import useNavigate
@@ -7,9 +7,11 @@ import { auth } from "../../firebase";
 import DOMPurify from "dompurify";
 import './Results.css';
 import QuestionDisplay, { getQuestionFromStorage } from '../Whiteboard/QuestionDisplay';
+import { useNavigate } from 'react-router-dom';
 
 const Results = () => {
     const [darkMode, setDarkMode] = useOutletContext();
+    const navigate = useNavigate();
 
     const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
@@ -52,6 +54,18 @@ const Results = () => {
 
         setCompletionTime(calculateCompletionTime());
     }, []);
+
+    const handleNav = (path) => {
+        if (path === '/' || path === '/questionSelect') {
+            sessionStorage.clear();
+        } else if (path === '/whiteboard') {
+            sessionStorage.setItem("startTime", Date.now());
+            sessionStorage.removeItem("finalTranscript");
+            sessionStorage.removeItem("AIResponse");
+        }
+
+        navigate(path);
+    }
 
     return (
         <Container maxWidth="lg" style={{ textAlign: 'left', paddingTop: "70px", padding: '30px', backgroundColor: darkMode ? '#202124' : 'white' }}>
@@ -123,6 +137,43 @@ const Results = () => {
                         </Typography>
                     </Paper>
                 </Grid>
+                <Box
+                    style={{
+                        position: 'relative',
+                        top: 30,
+                        bottom: 0,
+                        left: 0,
+                        width: '100%',
+                        padding: '20px',
+                        backgroundColor: darkMode ? '#202124' : '#fff',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        borderTop: '1px solid #ccc',
+                    }}
+                >
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handleNav("/")}
+                    >
+                        Home
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handleNav("/whiteboard")}
+                    >
+                        Try Again
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handleNav("/questionSelect")}
+                    >
+                        New Question
+                    </Button>
+                </Box>
             </Grid>
         </Container>
     );

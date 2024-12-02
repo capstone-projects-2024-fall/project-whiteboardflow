@@ -1,5 +1,24 @@
 import React from 'react';
 import './css/question-display.css';
+import ReactMarkdown from 'react-markdown';
+
+/**
+ * The ReactMarkdown component turns into a `<p>`, which produces a new line. 
+ * This component replaces `<p>` with `<span>` to avoid this.
+ */
+export const ReactMarkdownSpan = ({ text }) => {
+    if (!text) return null;
+
+    return (
+        <ReactMarkdown
+            components={{
+                p: ({ node, ...props }) => <span {...props} />,
+            }}
+        >
+            {text}
+        </ReactMarkdown>
+    );
+};
 
 const QuestionDisplay = () => {
     const question = getQuestionFromStorage();
@@ -15,11 +34,17 @@ const QuestionDisplay = () => {
         <div className="question-container">
             {/* Render Question Text */}
             {question.question_text && (
-                <div className="question"><strong>Question:</strong> {question.question_text}</div>
+                <div className="question">
+                    <strong>Question: </strong>
+                    <ReactMarkdownSpan text={question.question_text} />
+                </div>
             )}
             {/* Render Explanation*/}
             {question.explanation && (
-                <div><strong>Explanation:</strong> {question.explanation}<br/><br/></div>
+                <div>
+                    <strong>Explanation: </strong>
+                    <ReactMarkdownSpan text={question.explanation} />
+                </div>
             )}
             {/* Render Function Definition*/}
             {question.function && (
@@ -41,7 +66,10 @@ const QuestionDisplay = () => {
                                         <div><strong>Output:</strong> <code>{example.output}</code></div>
                                     )}
                                     {example.explanation && (
-                                        <div><strong>Explanation:</strong> {example.explanation}</div>
+                                        <div>
+                                            <strong>Explanation: </strong>
+                                            <ReactMarkdown>{example.explanation}</ReactMarkdown>
+                                        </div>
                                     )}
                                 </div>
                             </div>

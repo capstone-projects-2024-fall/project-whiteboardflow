@@ -61,7 +61,7 @@ export const AvatarProvider = ({ children }) => {
                         <div className="hint-bubble">
                             <div className="hint-content">
                                 {hintLoading ? (
-                                    <CircularProgress size={40} /> // Show loader if loading
+                                    <CircularProgress size={38} /> // Show loader if loading
                                 ) : (
                                     <ReactMarkdown>{hintMessage}</ReactMarkdown> // Show hint message otherwise
                                 )}
