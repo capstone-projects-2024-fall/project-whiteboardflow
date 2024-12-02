@@ -62,10 +62,14 @@ const Whiteboard = () => {
                             guides: {
                                 enable: false
                             },
+                            penStyle: {
+                                width: 2, // Fixed pen width
+                            },
                         },
                         grabber: {
                             listenerOptions:{
                             },
+                            pressureType: 'none', // Disable pressure
                         },
                         recognition: {
                             alwaysConnected: true,
