@@ -50,7 +50,7 @@ export default class CustomMenuAction extends window.iink.OIMenuAction {
         this.wrapper.appendChild(this.menuIntention.createMenuErase());
         this.wrapper.appendChild(this.createMenuUndo());
         this.wrapper.appendChild(this.createMenuRedo());
-
+        this.wrapper.appendChild(this.createMenuClear());
         // const menuStroke = this.menuStyle.createMenuStroke();
         // menuStroke.style.width = '80px';
         //
