@@ -1,5 +1,24 @@
 import React from 'react';
 import './css/question-display.css';
+import ReactMarkdown from 'react-markdown';
+
+/**
+ * The ReactMarkdown component turns into a `<p>`, which produces a new line. 
+ * This component replaces `<p>` with `<span>` to avoid this.
+ */
+export const ReactMarkdownSpan = ({ text }) => {
+    if (!text) return null;
+
+    return (
+        <ReactMarkdown
+            components={{
+                p: ({ node, ...props }) => <span {...props} />,
+            }}
+        >
+            {text}
+        </ReactMarkdown>
+    );
+};
 
 const QuestionDisplay = ({darkMode}) => {
     const question = getQuestionFromStorage();
@@ -16,11 +35,23 @@ const QuestionDisplay = ({darkMode}) => {
             {console.log("Question Display " + darkMode)}
             {/* Render Question Text */}
             {question.question_text && (
-                <div className={darkMode ? "question-dark" : "question-light"}><strong>Question:</strong> {question.question_text}</div>
+
+                <div className="question">
+                    <strong>Question: </strong>
+                    <ReactMarkdownSpan text={question.question_text} />
+                </div>
             )}
             {/* Render Explanation*/}
             {question.explanation && (
-                <div className={darkMode ? "question-dark" : "question-light"}><strong>Explanation:</strong> {question.explanation}</div>
+                <div>
+                    <strong>Explanation: </strong>
+                    <ReactMarkdownSpan text={question.explanation} />
+                </div>
+            )}
+            {/* Render Function Definition*/}
+            {question.function && (
+                <div><strong>Function:</strong> <code>{question.function}</code></div>
+
             )}
             {/* Render Examples */}
             {question.examples && question.examples.length > 0 && (
@@ -32,13 +63,16 @@ const QuestionDisplay = ({darkMode}) => {
                                 <div className={darkMode ? "example-title-dark" : "example-title-light"}>Example {index + 1}:</div>
                                 <div className={darkMode ? "example-content-dark" : "example-content-light"}>
                                     {example.input && (
-                                        <div><strong>Input:</strong> {example.input}</div>
+                                        <div><strong>Input:</strong> <code>{example.input}</code></div>
                                     )}
                                     {example.output && (
-                                        <div><strong>Output:</strong> {example.output}</div>
+                                        <div><strong>Output:</strong> <code>{example.output}</code></div>
                                     )}
                                     {example.explanation && (
-                                        <div><strong>Explanation:</strong> {example.explanation}</div>
+                                        <div>
+                                            <strong>Explanation: </strong>
+                                            <ReactMarkdown>{example.explanation}</ReactMarkdown>
+                                        </div>
                                     )}
                                 </div>
                             </div>

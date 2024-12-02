@@ -20,4 +20,6 @@ def get_random_question():
 
 @router.get("/all")
 def get_question_list():
+    docs = questions_ref.stream()
+    question_list = [doc.to_dict() for doc in docs]
     return {"question_list": question_list}

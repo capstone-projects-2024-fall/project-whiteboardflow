@@ -1,15 +1,17 @@
-import React from 'react'; // Ensure to import useState
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const HelpModal = ({ isVisible, onClose }) => {
     // const [open, setOpen] = useState(false); // State to manage visibility internally if needed
+    if (!isVisible) return null;
 
     // Enhanced style object
     const modalStyle = {
         display: isVisible ? 'block' : 'none',
         zIndex: 2000,
+        //userSelect: 'none',
     };
-
-    return (
+    const modalContent = (
         <div id="help-modal" className="help-modal" style={modalStyle}>
             <div id="help-modal-content" className="help-modal-content">
                 <button className="close" onClick={onClose}>×</button>
@@ -47,6 +49,11 @@ const HelpModal = ({ isVisible, onClose }) => {
                 </div>
             </div>
         </div>
+    );
+    // Render modalContent into the document body
+    return ReactDOM.createPortal(
+        modalContent,
+        document.body
     );
 };
 

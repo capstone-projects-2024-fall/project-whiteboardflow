@@ -5,8 +5,14 @@ body {
     margin: 20px;
 }
 
-.question-container-light {
-    background: white;
+
+p {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.question-container {
+
     padding: 0px;
     margin: auto;
 }
@@ -27,6 +33,7 @@ body {
     font-size: 18px;
     margin-bottom: 20px;
     color: #202124;
+
 }
 
 .example {
@@ -37,6 +44,7 @@ body {
     font-size: 16px;
     font-weight: bold;
     color: #202124;
+
     margin-bottom: 10px;
 }
 

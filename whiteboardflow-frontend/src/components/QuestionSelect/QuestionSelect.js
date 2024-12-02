@@ -19,6 +19,8 @@ import './QuestionSelect.css'
 import { useQuestionContext } from './QuestionContext';
 import { saveQuestionToStorage } from '../Whiteboard/QuestionDisplay';
 import { getAllHistory } from '../../firebase';
+import { ReactMarkdownSpan } from '../Whiteboard/QuestionDisplay';
+
 
 function createData(id, questionId, title, question, category, difficulty, completed) {
   return {
@@ -84,6 +86,8 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
+  const [darkMode, setDarkMode] = useOutletContext();
+
   const { order, orderBy, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
@@ -101,6 +105,19 @@ function EnhancedTableHead(props) {
           >
             <TableSortLabel
               // active={orderBy === headCell.id}
+              sx={{
+                fontWeight: 'bold',
+                color: darkMode ? 'white' : 'text.primary',
+                '&:hover': {
+                  color: 'primary.main',
+                },
+                '&:focus': {
+                  color: darkMode ? 'white' : 'text.primary',
+                },
+                '&:hover:focus': {
+                  color: 'primary.main',
+                },
+              }}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
@@ -119,7 +136,6 @@ function EnhancedTableHead(props) {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
@@ -129,7 +145,7 @@ EnhancedTableHead.propTypes = {
 function QuestionSelect() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
-  const [selected, setSelected] = React.useState([0]);
+  const [selected, setSelected] = React.useState(-1);
   const [page, setPage] = React.useState(0);
   //eslint-disable-next-line
   const [dense, setDense] = React.useState(false);
@@ -196,6 +212,13 @@ function QuestionSelect() {
     alignItems: "center"
   };
 
+  const paginationButtonStyles = {
+    color: darkMode ? "white" : "#202124",
+    '&.Mui-disabled': {
+      color: darkMode ? '#666666' : '#B0B0B0',
+    },
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -227,21 +250,14 @@ function QuestionSelect() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setSelected([0]);
+    setSelected(-1);
     setOpen(false);
   }
 
   const handleClick = (event, id) => {
-    const selectedIndex = selected.indexOf(id);
 
-    // console.log()
-
-    if (selectedIndex === -1) {
-      setSelected([id]);
-      handleOpen();
-    } else {
-      setSelected([0]);
-    }
+    setSelected(id);
+    handleOpen();
   };
 
   return (
@@ -255,7 +271,6 @@ function QuestionSelect() {
             size={dense ? 'small' : 'medium'}
           >
             <EnhancedTableHead
-              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
@@ -263,30 +278,24 @@ function QuestionSelect() {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = selected.includes(row.id);
-                if (row.id === 0) {
 
-                } else {
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => { handleClick(event, row.id); console.log(row)}}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.id}
-                      selected={isItemSelected}
-                      sx={{ cursor: 'pointer' }}
-                    >
-                      <TableCell align="center">{row.completed ? <Checkbox color='white' checked disabled /> : <Checkbox color='white' disabled />}</TableCell>
-                      <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.title}</TableCell>
-                      <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.category}</TableCell>
-                      <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.difficulty}</TableCell>
-                      {/* <TableCell align="left">{row.completed ? "True" : "False"}</TableCell> */}
-                    </TableRow>
-                  );
-                }
+                return (
+                  <TableRow
+                    hover
+                    onClick={(event) => { handleClick(event, row.id); }}
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.id}
+                    sx={{ cursor: 'pointer' }}
+                  >
+                    <TableCell align="center">{row.completed ? <Checkbox color='white' checked disabled /> : <Checkbox color='white' disabled />}</TableCell>
+                    <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.title}</TableCell>
+                    <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.category}</TableCell>
+                    <TableCell sx={{ color: darkMode ? "white" : "#202124" }} align="left">{row.difficulty}</TableCell>
+                    {/* <TableCell align="left">{row.completed ? "True" : "False"}</TableCell> */}
+                  </TableRow>
+                );
               })}
               {emptyRows > 0 && (
                 <TableRow
@@ -301,7 +310,22 @@ function QuestionSelect() {
           </Table>
         </TableContainer>
         <TablePagination
-          sx={{ color: darkMode ? "white" : "#202124" }}
+          sx={{
+            color: paginationButtonStyles.color,
+            '& .MuiTablePagination-selectIcon': {
+              color: paginationButtonStyles.color
+            },
+          }}
+          slotProps={{
+            actions: {
+              previousButton: {
+                sx: paginationButtonStyles,
+              },
+              nextButton: {
+                sx: paginationButtonStyles,
+              },
+            },
+          }}
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={rows.length}
@@ -332,6 +356,7 @@ function QuestionSelect() {
             <Button sx={{ width: "100px", marginTop: '20px', marginRight: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
             <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleClose}>Cancel</Button>
           </div>
+
         </Box>
       </Modal>
     </Box>

@@ -31,6 +31,8 @@ const MicPrompt = ({darkMode, setRecording, setNotRecording, setEmpty, setNotEmp
 
 		recognition.onstart = () => {
 			console.log("Listening!");
+			document.getElementById('final').innerHTML = "";
+			sessionStorage.setItem("finalTranscript", "");
 		};
 
 		let finalTranscript = '';
