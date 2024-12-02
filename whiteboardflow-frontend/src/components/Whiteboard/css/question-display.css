@@ -36,6 +36,22 @@ p {
 
 }
 
+.explanation-dark {
+    color: white
+}
+
+.explanation-light {
+    color: #202124
+}
+
+.function-dark {
+    color: white
+}
+
+.function-light {
+    color: #202124
+}
+
 .example {
     margin-bottom: 20px;
 }

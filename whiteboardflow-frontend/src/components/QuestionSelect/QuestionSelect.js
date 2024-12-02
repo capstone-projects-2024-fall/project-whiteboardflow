@@ -346,12 +346,18 @@ function QuestionSelect() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Confirm question selection:
           </Typography>
-          <Typography id="modal-modal-question" sx={{ textAlign: 'left', mt: 2 }}>
-            <strong>"{selected[0] == 0 ? "" : rows.find(data => data.id === selected[0]).title}"</strong>
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
-            {questions[selected].question_text}
-          </Typography>
+          {(questions && selected != -1) && (
+            <>
+              <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2 }}>
+                <strong style={{ color: darkMode ? 'white' : '#202124' }}>
+                  "{questions[selected].title}"
+                </strong>
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ textAlign: 'left', mt: 2 }}>
+                <ReactMarkdownSpan text={questions[selected].question_text} />
+              </Typography>
+            </>
+          )}
           <div className='button-container'>
             <Button sx={{ width: "100px", marginTop: '20px', marginRight: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
             <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleClose}>Cancel</Button>

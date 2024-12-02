@@ -35,22 +35,15 @@ const QuestionDisplay = ({darkMode}) => {
             {console.log("Question Display " + darkMode)}
             {/* Render Question Text */}
             {question.question_text && (
-
-                <div className="question">
-                    <strong>Question: </strong>
-                    <ReactMarkdownSpan text={question.question_text} />
-                </div>
+                <div className={darkMode ? "question-dark" : "question-light"}><strong>Question:</strong> {question.question_text}</div>
             )}
             {/* Render Explanation*/}
             {question.explanation && (
-                <div>
-                    <strong>Explanation: </strong>
-                    <ReactMarkdownSpan text={question.explanation} />
-                </div>
+                <div className={darkMode ? "explanation-dark" : "explanation-light"}><strong>Explanation:</strong> {question.explanation}</div>
             )}
             {/* Render Function Definition*/}
             {question.function && (
-                <div><strong>Function:</strong> <code>{question.function}</code></div>
+                <div className={darkMode ? "function-dark" : "function-light"}><strong>Function:</strong> <code>{question.function}</code></div>
 
             )}
             {/* Render Examples */}
