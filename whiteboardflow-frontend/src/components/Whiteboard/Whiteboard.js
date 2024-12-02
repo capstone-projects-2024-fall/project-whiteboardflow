@@ -4,7 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 // Material-UI Imports for UI components
 import { Box } from '@mui/material';
-
+// TODO:
+// Get text selection bug fixed
+// Get open question area bug fixed
+// Get writing experience bug fixed
 // Import components
 import QuestionArea from './QuestionArea';
 import SubmitButton from './SubmitButton';
@@ -50,12 +53,13 @@ const Whiteboard = () => {
                             minWidth: 1240,
                             minHeight: 2000,
                             guides: {
-                                enable: true,
-                                gap: 50,
-                                type: 'line'
-                            }
+                                enable: false
+                            },
                         },
                         grabber: {
+                            listenerOptions:{
+                                capture: true,
+                            },
                             delayLongTouch: 500
                         },
                         recognition: {
@@ -231,10 +235,9 @@ const Whiteboard = () => {
                         backgroundColor: '#fff',
                     }}
                 />
-                <button id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex: '1000', border: 'none', background: "transparent"}}>
+                <button id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex: '1000', border: 'none', background: "transparent", userSelect: 'none'}}>
                     <img src="/img/info.svg" alt="Info" />
                 </button>
-                <HelpModal isVisible={modalVisible} onClose={() => setModalVisible(false)} />
                 {/* Submit Area */}
                 <Box sx={{
                     height: '7vh',
@@ -247,6 +250,7 @@ const Whiteboard = () => {
                     <SubmitButton onExport={handleExportAndSubmit} />
                 </Box>
             </div>
+            <HelpModal isVisible={modalVisible} onClose={() => setModalVisible(false)} />
         </div>
     );
 };

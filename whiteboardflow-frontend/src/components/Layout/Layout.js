@@ -6,7 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { auth, provider, signInWithPopup, signOut } from '../../firebase.js';
 import Footer from '../Footer/Footer.js';
 import './Layout.css';
@@ -21,6 +21,7 @@ const Layout = ({ children, user }) => { // Accept user as a prop
     const [footer, setFooter] = useState(false);
     const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
     const navigate = useNavigate();
+    const location = useLocation();
 
     const homeButt = () => {
         navigate("/")
@@ -110,11 +111,13 @@ const Layout = ({ children, user }) => { // Accept user as a prop
                         onClick={homeButt}
                     > */}
                         {/* <HomeIcon sx={darkMode ? { color: "pink", fontSize: 40} : { color: "red", fontSize: 40}}/> */}
-                        <HomeIcon 
-                            className={darkMode ? "darkmode-home-button" : "lightmode-home-button"}
-                            fontSize='large'
-                            onClick={homeButt}
-                        />
+                        {(location.pathname !== "/whiteboard") && (
+                            <HomeIcon 
+                                className={darkMode ? "darkmode-home-button" : "lightmode-home-button"}
+                                fontSize='large'
+                                onClick={homeButt}
+                            />
+                        )}
                     {/* </IconButton> */}
                     {user && (
                         // <IconButton
@@ -214,8 +217,10 @@ const Layout = ({ children, user }) => { // Accept user as a prop
                 />
             </div>
 
-            <ExpandCircleDownIcon className={footer ? "footer-toggle-button-up" : "footer-toggle-button-down"} onClick={toggleFooter}/>
-            {/* <button onClick={toggleFooter}></button> */}
+            {(location.pathname !== "/whiteboard") && (
+                <ExpandCircleDownIcon className={footer ? "footer-toggle-button-up" : "footer-toggle-button-down"} onClick={toggleFooter}/>
+            )}
+            
 
             {footer && <Footer darkMode={darkMode}/>}
 
