@@ -1,7 +1,26 @@
 import React from 'react';
 import './css/question-display.css';
+import ReactMarkdown from 'react-markdown';
 
-const QuestionDisplay = () => {
+/**
+ * The ReactMarkdown component turns into a `<p>`, which produces a new line. 
+ * This component replaces `<p>` with `<span>` to avoid this.
+ */
+export const ReactMarkdownSpan = ({ text }) => {
+    if (!text) return null;
+
+    return (
+        <ReactMarkdown
+            components={{
+                p: ({ node, ...props }) => <span {...props} />,
+            }}
+        >
+            {text}
+        </ReactMarkdown>
+    );
+};
+
+const QuestionDisplay = ({darkMode}) => {
     const question = getQuestionFromStorage();
 
     // If question is not available, show an empty div or a message
@@ -12,18 +31,20 @@ const QuestionDisplay = () => {
     }
 
     return (
-        <div className="question-container">
+        <div className={darkMode ? "question-container-dark" : "question-container-light"}>
+            {console.log("Question Display " + darkMode)}
             {/* Render Question Text */}
             {question.question_text && (
-                <div className="question"><strong>Question:</strong> {question.question_text}</div>
+                <div className={darkMode ? "question-dark" : "question-light"}><strong>Question:</strong> {question.question_text}</div>
             )}
             {/* Render Explanation*/}
             {question.explanation && (
-                <div><strong>Explanation:</strong> {question.explanation}<br/><br/></div>
+                <div className={darkMode ? "explanation-dark" : "explanation-light"}><strong>Explanation:</strong> {question.explanation}</div>
             )}
             {/* Render Function Definition*/}
             {question.function && (
-                <div><strong>Function:</strong> <code>{question.function}</code></div>
+                <div className={darkMode ? "function-dark" : "function-light"}><strong>Function:</strong> <code>{question.function}</code></div>
+
             )}
             {/* Render Examples */}
             {question.examples && question.examples.length > 0 && (
@@ -32,8 +53,8 @@ const QuestionDisplay = () => {
                     <div>
                         {question.examples.map((example, index) => (
                             <div key={index} className="example">
-                                <div className="example-title">Example {index + 1}:</div>
-                                <div className="example-content">
+                                <div className={darkMode ? "example-title-dark" : "example-title-light"}>Example {index + 1}:</div>
+                                <div className={darkMode ? "example-content-dark" : "example-content-light"}>
                                     {example.input && (
                                         <div><strong>Input:</strong> <code>{example.input}</code></div>
                                     )}
@@ -41,7 +62,10 @@ const QuestionDisplay = () => {
                                         <div><strong>Output:</strong> <code>{example.output}</code></div>
                                     )}
                                     {example.explanation && (
-                                        <div><strong>Explanation:</strong> {example.explanation}</div>
+                                        <div>
+                                            <strong>Explanation: </strong>
+                                            <ReactMarkdown>{example.explanation}</ReactMarkdown>
+                                        </div>
                                     )}
                                 </div>
                             </div>

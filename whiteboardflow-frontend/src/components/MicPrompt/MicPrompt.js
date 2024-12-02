@@ -11,6 +11,7 @@ recognition.lang = 'en-US';
 
 const MicPrompt = ({darkMode, setRecording, setNotRecording, setEmpty, setNotEmpty}) => {
 	const [listening, setListening] = useState(false);
+	
 
 	const handleListen = () => {
 		console.log('listening?', listening);
@@ -30,6 +31,8 @@ const MicPrompt = ({darkMode, setRecording, setNotRecording, setEmpty, setNotEmp
 
 		recognition.onstart = () => {
 			console.log("Listening!");
+			document.getElementById('final').innerHTML = "";
+			sessionStorage.setItem("finalTranscript", "");
 		};
 
 		let finalTranscript = '';
