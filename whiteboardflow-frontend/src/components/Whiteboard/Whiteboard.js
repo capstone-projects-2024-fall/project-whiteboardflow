@@ -237,7 +237,7 @@ const Whiteboard = () => {
             }}>
                 <div
                     ref={editorElement}
-                    onPointerDown={handlePointerDown}
+                    // onPointerDown={handlePointerDown}
                     style={{
                         flexGrow: 1,
                         height: '93vh',
