@@ -164,7 +164,7 @@ EnhancedTableHead.propTypes = {
 function History() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
-  const [selected, setSelected] = React.useState([0]);
+  const [selected, setSelected] = React.useState([-1]);
   const [page, setPage] = React.useState(0);
   //eslint-disable-next-line
   const [dense, setDense] = React.useState(false);
@@ -248,7 +248,7 @@ function History() {
 
   React.useEffect(() => {
     
-  },[selected])
+  })
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -368,7 +368,7 @@ function History() {
             sx={{color: darkMode ? "white" : "#202124"}}
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={rows.length - 1}
+            count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
