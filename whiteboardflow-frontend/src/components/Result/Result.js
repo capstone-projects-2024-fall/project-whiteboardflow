@@ -1,85 +1,67 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Container, Typography, Box, Paper, Grid } from '@mui/material';
+import { Button, Paper, Container, Typography, Box, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useOutletContext } from 'react-router-dom'; // Import useNavigate
-import { auth, getOneHistory, getOneQuestion } from "../../firebase";
-import './Results.css';
-import { useLocation } from 'react-router-dom';
-import QuestionDisplay from '../Whiteboard/QuestionDisplay';
+import { auth } from "../../firebase";
 import { useNavigate } from 'react-router-dom';
-
+import './Result.css';
 
 const Results = () => {
-
-    //this gets the sesion ID from the navigation
-    const { state } = useLocation();
-    console.log(state)
-    const session_id = state
-
-    // eslint-disable-next-line
     const [darkMode, setDarkMode] = useOutletContext();
     const navigate = useNavigate();
 
-    //analysis
-    const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
-    
-    //image url
+    const [questionText, setQuestionText] = useState(""); // Question text
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
-   
-    //question
-    const [questionJson, setQuestionJson] = useState(null); // Question object
-    
-    // completion time
+    const [transcript, setTranscript] = useState("");
+    const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
     const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
 
+    const paperStyle = {
+        backgroundColor: darkMode ? '#202124' : 'white',
+        color: darkMode ? 'white' : '#202124',
+    };
 
-    //voice transription
-    const [transcript, setTranscript] = useState("")
-
+    const headerStyle = {
+        color: 'primary.main',
+    };
 
     useEffect(() => {
-   
-        //getting the results from the database
-        console.log(session_id)
-        getOneHistory(auth.currentUser.uid, session_id.toString()).then((res) => {
-            const dbResponse = res;
+        const aiResponse = sessionStorage.getItem("AIResponse") || "No analysis available";
+        setOralAnalysis(aiResponse);
 
-            //setting verbal response
-            const aiResponse = dbResponse.response || "No analysis available";
-            setOralAnalysis(aiResponse);
+        setQuestionText(sessionStorage.getItem("question_text"));
 
-            // setting transcript
-            setTranscript(dbResponse.transcript)
+        const userId = auth.currentUser.uid;
+        const storage = getStorage();
+        const storageRef = ref(storage, `user-files/${userId}/static.png`);
 
-            //getting question from question db based on question id in result
-            const savedQuestion = getOneQuestion(dbResponse.questionID);
-            if (savedQuestion) {
-                setQuestionJson(savedQuestion); 
-            }
-
-            //this is all getting the url
-            const userId = auth.currentUser.uid;
-            const storage = getStorage();
-            const storageRef = ref(storage, `user-files/${userId}/${dbResponse.sessionId}/static.png`);
-            getDownloadURL(storageRef)
-                .then((url) => {
-                    setImageUrl(url);
-                })
-                .catch((error) => {
-                    console.error("Error fetching image URL: ", error);
+        getDownloadURL(storageRef)
+            .then((url) => {
+                setImageUrl(url);
+            })
+            .catch((error) => {
+                console.error("Error fetching image URL: ", error);
             });
 
-            //completion time
-            setCompletionTime(dbResponse.completionTime)
-
-        }).catch((error) => {
-            console.error("Error retrieving history from database: ", error);
-        });
-
+        setCompletionTime(calculateCompletionTime());
+        setTranscript(sessionStorage.getItem("finalTranscript"));
     }, []);
 
-  const handleNav = (path) => {
+    const calculateCompletionTime = () => {
+        const startTime = sessionStorage.getItem("startTime");
+        if (startTime) {
+            const endTime = Date.now();
+            const timeSpent = (endTime - startTime) / 1000;
+            const seconds = Math.floor(timeSpent % 60);
+            const minutes = Math.floor((timeSpent / 60) % 60);
+            const hours = Math.floor((timeSpent / (60 * 60)) % 24);
+            return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
+        }
+        return "Not available";
+    };
+
+    const handleNav = (path) => {
         if (path === '/' || path === '/questionSelect') {
             sessionStorage.clear();
         } else if (path === '/whiteboard') {
@@ -87,132 +69,75 @@ const Results = () => {
             sessionStorage.removeItem("finalTranscript");
             sessionStorage.removeItem("AIResponse");
         }
-
         navigate(path);
     }
 
-    return (
-        <Container maxWidth="lg" style={{ textAlign: 'left', paddingTop: "70px", padding: '30px', backgroundColor: darkMode ? '#202124' : 'white' }}>
-            <Typography variant="h4" style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', color: darkMode ? "white" : '#1976d2' }}>
+    const gridItems = [
+        {
+            xs: 12, md: 6,
+            title: "Practice Question",
+            content: <Typography className="box-text" variant="body1"><strong>Question: </strong>{questionText}</Typography>
+        },
+        {
+            xs: 12, md: 6,
+            title: "Your Handwritten Response",
+            content: <Box className="box" textAlign="center"><img className="box-image" src={imageUrl} alt="User's Handwriting Response" /></Box>
+        },
+        {
+            xs: 12,
+            title: "AI Analysis of Whiteboard Practice",
+            content: <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
+        },
+        {
+            xs: 12, md: 6,
+            title: "Completion Time",
+            content: <Typography className="box-text" variant="body1">{completionTime}</Typography>
+        },
+        {
+            xs: 12, md: 6,
+            title: "Verbal transcription",
+            content: <Typography variant="body1" style={{ color: darkMode ? '#fff' : '#202124' }}>{transcript}</Typography>
+        },
+    ];
 
+    return (
+        <Container className="container" maxWidth="lg">
+            <Typography
+                className="header"
+                variant="h4"
+                sx={{
+                    color: headerStyle.color,
+                    marginBottom: '25px'
+                }}
+            >
                 Practice Results Dashboard
             </Typography>
             <Grid container spacing={3}>
-
-                {/* Practice Question */}
-                <Grid item xs={12} md={6}>
-                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : 'white', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                        <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? 'white' : '#202124' }} gutterBottom>
-                            Practice Question
-                        </Typography>
-                        <Box style={{ padding: '10px', backgroundColor: darkMode ? '#202124' : "#fff", borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
-                            <QuestionDisplay darkMode = {darkMode} question={questionJson} />
-                        </Box>
-                    </Paper>
-                </Grid>
-
-                {/* Handwriting Image */}
-                <Grid item xs={12} md={6}>
-                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                        <Typography variant="h6" style={{ textAlign:'center', fontWeight: 'bold', color: darkMode ? '#fff' : '#1976d2' }} gutterBottom>
-                            Your Handwritten Response
-                        </Typography>
-                        <Box textAlign="center" style={{ paddingTop: '10px', flex: 1 }}>
-                            <img
-                                src={imageUrl}
-                                alt="User's Handwriting Response"
-                                style={{
-                                    maxWidth: '100%',
-                                    maxHeight: '300px',
-                                    borderRadius: '8px',
-                                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
-                                    margin: '0 auto',
+                {gridItems.map((item, index) => (
+                    <Grid item xs={item.xs} md={item.md} key={index}>
+                        <Paper className="paper" style={paperStyle} elevation={3}>
+                            <Typography
+                                className="paper-header"
+                                variant="h6"
+                                gutterBottom
+                                sx={{
+                                    color: headerStyle.color,
+                                    fontWeight: "bold"
                                 }}
-                            />
-                        </Box>
-                    </Paper>
-                </Grid>
+                            >
+                                {item.title}
+                            </Typography>
+                            <Box className="box">
+                                {item.content}
+                            </Box>
+                        </Paper>
+                    </Grid>
+                ))}
 
-                {/* AI Analysis */}
-                <Grid item xs={12}>
-                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                        <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? '#fff' : '#1976d2' }} gutterBottom>
-                            AI Analysis of Whiteboard Practice
-                        </Typography>
-                        <Box style={{
-                            overflowY: 'auto',
-                            padding: '10px',
-                            backgroundColor: darkMode ? '#202124' : "#fff",
-                            borderRadius: '8px',
-                            flex: 1,
-                            color: darkMode ? "#fff" : "#202124"
-                        }}>
-                            <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
-                        </Box>
-                    </Paper>
-                </Grid>
-
-                {/* Completion Time */}
-                <Grid item xs={12} md={6}>
-                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                        <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? '#fff' : '#1976d2' }} gutterBottom>
-                            Completion Time
-                        </Typography>
-                        <Typography variant="body1" style={{ color: darkMode ? '#fff' : '#202124', marginTop: '10px', flex: 1 }}>
-                            {completionTime}
-                        </Typography>
-                    </Paper>
-                </Grid>
-
-
-                {/* Trasncript */}
-                <Grid item xs={12} md={6}>
-                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : '#fff', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                        <Typography variant="h6" style={{ fontWeight: 'bold', color: darkMode ? '#fff' : '#1976d2' }} gutterBottom>
-                            Verbal transcription
-                        </Typography>
-                        <Typography variant="body1" style={{ color: darkMode ? '#fff' : '#202124', marginTop: '10px', flex: 1 }}>
-                            {transcript}
-                        </Typography>
-                    </Paper>
-                </Grid>
-
-                <Box
-                    style={{
-                        position: 'relative',
-                        top: 30,
-                        bottom: 0,
-                        left: 0,
-                        width: '100%',
-                        padding: '20px',
-                        backgroundColor: darkMode ? '#202124' : '#fff',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        gap: '10px',
-                        borderTop: '1px solid #ccc',
-                    }}
-                >
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleNav("/")}
-                    >
-                        Home
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleNav("/whiteboard")}
-                    >
-                        Try Again
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleNav("/questionSelect")}
-                    >
-                        New Question
-                    </Button>
+                <Box className="button-box">
+                    <Button variant="contained" color="primary" onClick={() => handleNav("/")}>Home</Button>
+                    <Button variant="contained" color="primary" onClick={() => handleNav("/whiteboard")}>Try Again</Button>
+                    <Button variant="contained" color="primary" onClick={() => handleNav("/questionSelect")}>New Question</Button>
                 </Box>
             </Grid>
         </Container>
