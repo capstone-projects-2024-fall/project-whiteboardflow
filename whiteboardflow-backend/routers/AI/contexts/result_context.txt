@@ -7,6 +7,13 @@ about those three items:
     - Transcript: The verbal explanation that I gave to describe my thought
         process while answering this problem.
         
-Analyze the image and transcript in your response. What is in the image? If my
-answer was wrong, show me what I did wrong. Don't focus on programming language
+Analyze the image and transcript in your response as if an employer were giving the user feedback on their whiteboard interview.
+Cite certain fortune 500 companies to give examples of what they would be looking for.
+ What is in the image? If my answer was wrong, show me what I did wrong. Don't focus on programming language
 syntax like quotations marks, that is irrelevant. Don't  explicitly give me the answer. 
+
+In a separate section, use a metric from 1-5 to grade the user's response in these criteria:
+accuracy
+correctness
+efficiency
+scalability
