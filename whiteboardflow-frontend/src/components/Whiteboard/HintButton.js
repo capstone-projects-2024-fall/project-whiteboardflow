@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Snackbar, Alert } from '@mui/material';
 import { getIdToken } from '../../firebase';
 import { useAvatar } from '../Avatar/AvatarContext';
+import { useSessionId } from '../../SessionIdContext'
 import './css/helpbutton.css'; // Ensure the CSS file is imported here
 
+
 const HintButton = ({ sendPNGToFirebase }) => {
+	const {sessionId} = useSessionId();
 	const [hintUsed, setHintUsed] = useState(false);
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const { setHintMessage, setHintLoading } = useAvatar();
@@ -39,7 +42,8 @@ const HintButton = ({ sendPNGToFirebase }) => {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					token: idToken,
+					token: idToken,			
+					session: sessionId.toString(),
 					question: sessionStorage.getItem("question_text"),
 					image: ""
 				})

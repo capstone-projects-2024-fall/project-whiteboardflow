@@ -20,7 +20,7 @@ export const ReactMarkdownSpan = ({ text }) => {
     );
 };
 
-const QuestionDisplay = () => {
+const QuestionDisplay = ({darkMode}) => {
     const question = getQuestionFromStorage();
 
     // If question is not available, show an empty div or a message
@@ -31,24 +31,20 @@ const QuestionDisplay = () => {
     }
 
     return (
-        <div className="question-container">
+        <div className={darkMode ? "question-container-dark" : "question-container-light"}>
+            {console.log("Question Display " + darkMode)}
             {/* Render Question Text */}
             {question.question_text && (
-                <div className="question">
-                    <strong>Question: </strong>
-                    <ReactMarkdownSpan text={question.question_text} />
-                </div>
+                <div className={darkMode ? "question-dark" : "question-light"}><strong>Question:</strong> {question.question_text}</div>
             )}
             {/* Render Explanation*/}
             {question.explanation && (
-                <div>
-                    <strong>Explanation: </strong>
-                    <ReactMarkdownSpan text={question.explanation} />
-                </div>
+                <div className={darkMode ? "explanation-dark" : "explanation-light"}><strong>Explanation:</strong> {question.explanation}</div>
             )}
             {/* Render Function Definition*/}
             {question.function && (
-                <div><strong>Function:</strong> <code>{question.function}</code></div>
+                <div className={darkMode ? "function-dark" : "function-light"}><strong>Function:</strong> <code>{question.function}</code></div>
+
             )}
             {/* Render Examples */}
             {question.examples && question.examples.length > 0 && (
@@ -57,8 +53,8 @@ const QuestionDisplay = () => {
                     <div>
                         {question.examples.map((example, index) => (
                             <div key={index} className="example">
-                                <div className="example-title">Example {index + 1}:</div>
-                                <div className="example-content">
+                                <div className={darkMode ? "example-title-dark" : "example-title-light"}>Example {index + 1}:</div>
+                                <div className={darkMode ? "example-content-dark" : "example-content-light"}>
                                     {example.input && (
                                         <div><strong>Input:</strong> <code>{example.input}</code></div>
                                     )}

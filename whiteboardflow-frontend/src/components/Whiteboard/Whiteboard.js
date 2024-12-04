@@ -1,6 +1,6 @@
 // React.js Imports
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 // Material-UI Imports for UI components
 import { Box } from '@mui/material';
@@ -15,6 +15,8 @@ import HelpModal from './HelpModal';
 import CustomMenuAction from './CustomMenuAction';
 import { auth } from "../../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { useSessionId } from '../../SessionIdContext';
+
 
 // Style imports
 import './css/reset.css';
@@ -29,6 +31,11 @@ const Whiteboard = () => {
     const navigate = useNavigate();
     const [isQuestionVisible, setQuestionVisible] = useState(true); // State to toggle question visibility
     const [modalVisible, setModalVisible] = useState(false);
+
+    // eslint-disable-next-line
+    const [darkMode, setDarkMode] = useOutletContext();
+
+    const { sessionId } = useSessionId();
 
     const toggleModal = () => setModalVisible(!modalVisible);
     // Effect for editor initialization and event handling
@@ -55,12 +62,14 @@ const Whiteboard = () => {
                             guides: {
                                 enable: false
                             },
+                            penStyle: {
+                                width: 2, // Fixed pen width
+                            },
                         },
                         grabber: {
                             listenerOptions:{
-                                capture: true,
                             },
-                            delayLongTouch: 500
+                            pressureType: 'none', // Disable pressure
                         },
                         recognition: {
                             alwaysConnected: true,
@@ -188,7 +197,10 @@ const Whiteboard = () => {
                 canvas.toBlob(async (pngBlob) => {
                     const userId = auth.currentUser.uid;
                     const storage = getStorage();
-                    const storageRef = ref(storage, `user-files/${userId}/static.png`);
+                    // const testId = Date.now()
+                    const tempSessionId = sessionId
+                    // setSessionId(tempSessionId)
+                    const storageRef = ref(storage, `user-files/${userId}/${tempSessionId}/static.png`);
 
                     try {
                         const snapshot = await uploadBytes(storageRef, pngBlob);
@@ -213,8 +225,8 @@ const Whiteboard = () => {
         <div style={{ width: '100%', height: '100vh', display: 'flex', position: 'fixed', overflow: 'hidden' }}>
 
             {/* Question Area */}
-            <QuestionArea isVisible={isQuestionVisible} onResizeStop={handleResizeStop} sendPNGToFirebase={sendPNGToFirebase} />
-
+            <QuestionArea darkMode={darkMode} isVisible={isQuestionVisible} onResizeStop={handleResizeStop} sendPNGToFirebase={sendPNGToFirebase} />
+            {console.log("whiteboard " + darkMode)}
             {/* Editor Section */}
             <div style={{
                 display: 'flex',
@@ -232,7 +244,7 @@ const Whiteboard = () => {
                         border: '1px solid #ddd',
                         padding: '10px',
                         boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-                        backgroundColor: '#fff',
+                        backgroundColor: darkMode ? '#bbb' : '#fff',
                     }}
                 />
                 <button id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex: '1000', border: 'none', background: "transparent", userSelect: 'none'}}>

@@ -15,14 +15,18 @@ import { useOutletContext } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import './QuestionSelect.css'
-import { color } from 'framer-motion';
+// import { color } from 'framer-motion';
 import { useQuestionContext } from './QuestionContext';
 import { saveQuestionToStorage } from '../Whiteboard/QuestionDisplay';
+import { getAllHistory } from '../../firebase';
 import { ReactMarkdownSpan } from '../Whiteboard/QuestionDisplay';
+import { useSessionId } from '../../SessionIdContext';
 
-function createData(id, title, question, category, difficulty, completed) {
+
+function createData(id, questionId, title, question, category, difficulty, completed) {
   return {
     id,
+    questionId,
     title,
     question,
     category,
@@ -149,27 +153,39 @@ function QuestionSelect() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { questions } = useQuestionContext();
   const [rows, setRows] = React.useState([]);
+  const { setSessionId } = useSessionId()
 
   React.useEffect(() => {
+    console.log(questions)
     if (questions) {
-      const newRows = questions.map((question, index) => {
 
+      getAllHistory().then((history) => {
+
+      const newRows = questions.map((question, index) => {
+          
         // Convert array of categories to a comma-separated string
         const formattedCategories = question.categories
           ? question.categories.join(', ')
           : '';
 
+        const checked = history.some(i => i.questionID === question.id)
+
         return createData(
           index,
+          question.id,
           question.title || '',
           question.question_text || '',
           formattedCategories,
           question.difficulty,
-          question.completed || false
+          // question.completed || false
+          checked
         );
+
       });
 
       setRows(newRows);
+
+    })
     }
   }, [questions]);
 
@@ -229,6 +245,8 @@ function QuestionSelect() {
 
   const handleNav = () => {
     sessionStorage.setItem("startTime", Date.now());
+    const tempSessionId = Date.now()
+    setSessionId(tempSessionId)
     saveQuestionToStorage(questions[selected])
     navigate("/whiteboard");
   };
@@ -241,6 +259,7 @@ function QuestionSelect() {
   }
 
   const handleClick = (event, id) => {
+
     setSelected(id);
     handleOpen();
   };
@@ -263,6 +282,7 @@ function QuestionSelect() {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
+
 
                 return (
                   <TableRow
@@ -342,7 +362,11 @@ function QuestionSelect() {
               </Typography>
             </>
           )}
-          <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
+          <div className='button-container'>
+            <Button sx={{ width: "100px", marginTop: '20px', marginRight: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
+            <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleClose}>Cancel</Button>
+          </div>
+
         </Box>
       </Modal>
     </Box>
