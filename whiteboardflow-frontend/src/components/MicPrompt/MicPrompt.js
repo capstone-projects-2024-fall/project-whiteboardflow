@@ -13,6 +13,7 @@ if (recognition) {
 
 const MicPrompt = ({darkMode, setRecording, setNotRecording, setEmpty, setNotEmpty}) => {
 	const [listening, setListening] = useState(false);
+	
 
 	const handleListen = () => {
 		console.log('listening?', listening);

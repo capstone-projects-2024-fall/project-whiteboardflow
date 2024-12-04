@@ -24,6 +24,7 @@ class HintData(BaseModel):
             string.
     """
     token: str
+    session: str
     question: str
     image: str
 
@@ -60,7 +61,7 @@ def get_hint(data: HintData):
     decoded_token = auth.verify_id_token(data.token)
     uid = decoded_token["uid"]
 
-    image_data = get_firebase_image(uid)
+    image_data = get_firebase_image(uid, data.session)
 
     # Convert image to base64 encoding
     data.image = base64.b64encode(image_data).decode("utf-8")
@@ -78,7 +79,7 @@ def get_result(data: AIData):
     decoded_token = auth.verify_id_token(data.token)
     uid = decoded_token["uid"]
 
-    image_data = get_firebase_image(uid)
+    image_data = get_firebase_image(uid, data.session)
 
     # Convert image to base64 encoding
     data.image = base64.b64encode(image_data).decode("utf-8")
@@ -147,7 +148,7 @@ def get_ai_response(data: AIData, context_file: str):
     return {"message": response.choices[0].message.content}
 
 
-def get_firebase_image(user_id):
+def get_firebase_image(user_id, session_id):
     """
     Retrieves an image file associated with the specified user from Firebase
     Storage. 
@@ -161,7 +162,7 @@ def get_firebase_image(user_id):
             Storage. 
     """
     bucket = storage.bucket()
-    blob = bucket.blob(f"user-files/{user_id}/static.png")
+    blob = bucket.blob(f"user-files/{user_id}/{session_id}/static.png")
     image_data = blob.download_as_bytes()
 
     return image_data
