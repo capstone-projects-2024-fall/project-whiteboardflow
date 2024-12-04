@@ -1,14 +1,13 @@
 import uvicorn
-import shutil
-import config.firebase_config
+import config.firebase_config # Initializes Firebase
 
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
 from routers.AI.ai_assistant import router as ai_router
-from routers.firebase.questions import router as questions_router
+from routers.database.questions import router as questions_router
+from routers.database.history import router as history_router
 
 
 app = FastAPI(debug=True)
@@ -25,7 +24,7 @@ app.add_middleware(
 
 app.include_router(ai_router, prefix="/assistant")
 app.include_router(questions_router, prefix="/questions")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.include_router(questions_router, prefix="/history")
 
 
 @app.get("/")
