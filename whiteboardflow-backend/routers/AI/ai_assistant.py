@@ -28,16 +28,13 @@ def get_hint(data: HintData, current_user: dict = Depends(get_current_user)):
         API.
     """
     image_data = get_firebase_image(current_user.uid)
-
-    # Convert image to base64 encoding
     data.image = base64.b64encode(image_data).decode("utf-8")
-
     return get_ai_response(data, "hint_context")
 
 
 @router.post("/result/")
 def get_result(data: AIData, current_user: dict = Depends(get_current_user)):
-    image_data = get_firebase_image(current_user.uid)
+    image_data = get_firebase_image(current_user.uid, data.sessionId)
     data.image = base64.b64encode(image_data).decode("utf-8")
     return get_ai_response(data, "result_context")
 

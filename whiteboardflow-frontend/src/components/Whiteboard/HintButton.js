@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { Snackbar, Alert } from '@mui/material';
 import { getIdToken } from '../../firebase';
 import { useAvatar } from '../Avatar/AvatarContext';
-import { useSessionId } from '../../SessionIdContext'
+import { makeRequest } from '../../utils/api';
 import './css/helpbutton.css'; // Ensure the CSS file is imported here
 
-
 const HintButton = ({ sendPNGToFirebase }) => {
-	const {sessionId} = useSessionId();
 	const [hintUsed, setHintUsed] = useState(false);
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const { setHintMessage, setHintLoading } = useAvatar();
@@ -21,41 +19,21 @@ const HintButton = ({ sendPNGToFirebase }) => {
 		setHintUsed(true);
 		setHintLoading(true);
 
-		try {
-			await sendPNGToFirebase(false);
-			const response = await fetchHint();
-			setHintMessage(response);
-		} catch (error) {
-			console.error("Error during image upload or hint response:", error);
-		} finally {
-			setHintLoading(false);
-		}
-	}
-
-	const fetchHint = async () => {
+		await sendPNGToFirebase(false);
 		const idToken = await getIdToken();
+		const hintResponse = await makeRequest(
+			'/assistant/hint',
+			'POST',
+			{
+				question: sessionStorage.getItem("question_text"),
+				image: "",
+				sessionId: sessionStorage.getItem("startTime")
+			},
+			idToken
+		);
 
-		try {
-			const response = await fetch("/assistant/hint", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					token: idToken,			
-					session: sessionId.toString(),
-					question: sessionStorage.getItem("question_text"),
-					image: ""
-				})
-			});
-
-			// Get ChatGPT response
-			const result = await response.json();
-			return result.message;
-
-		} catch (error) {
-			console.error("Error:", error);
-		}
+		setHintMessage(hintResponse.message);
+		setHintLoading(false);
 	}
 
 	const handleSnackbarClose = () => setSnackbarOpen(false);

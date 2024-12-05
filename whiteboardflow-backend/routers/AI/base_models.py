@@ -13,7 +13,6 @@ class HintData(BaseModel):
         image (str): The image received from Firebase, base64 encoded as a
             string.
     """
-
     question: str
     image: str
 
@@ -29,3 +28,4 @@ class AIData(HintData):
     """
 
     transcript: str
+    sessionId: str

@@ -61,7 +61,6 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode}) => {
                 right: <div style={{ width: '15px', cursor: 'ew-resize' }}></div>
             }}
         >
-            {console.log("Question Area " + darkMode)}
             {isVisible && (
                 <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden' }}>
                     <QuestionDisplay darkMode = {darkMode} />

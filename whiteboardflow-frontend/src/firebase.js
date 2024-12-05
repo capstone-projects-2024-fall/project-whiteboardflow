@@ -27,9 +27,6 @@ const provider = new GoogleAuthProvider();
 const db = getFirestore(app, 'userhistory');
 const qdb = getFirestore(app);
 
-console.log(db)
-
-
 async function getIdToken() {
 	const user = auth.currentUser;
 	if (user) {

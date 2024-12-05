@@ -4,19 +4,12 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 
 // Material-UI Imports for UI components
 import { Box } from '@mui/material';
-// TODO:
-// Get text selection bug fixed
-// Get open question area bug fixed
-// Get writing experience bug fixed
-// Import components
 import QuestionArea from './QuestionArea';
 import SubmitButton from './SubmitButton';
 import HelpModal from './HelpModal';
 import CustomMenuAction from './CustomMenuAction';
 import { auth } from "../../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { useSessionId } from '../../SessionIdContext';
-
 
 // Style imports
 import './css/reset.css';
@@ -34,8 +27,6 @@ const Whiteboard = () => {
 
     // eslint-disable-next-line
     const [darkMode, setDarkMode] = useOutletContext();
-
-    const { sessionId } = useSessionId();
 
     const toggleModal = () => setModalVisible(!modalVisible);
     // Effect for editor initialization and event handling
@@ -67,7 +58,7 @@ const Whiteboard = () => {
                             },
                         },
                         grabber: {
-                            listenerOptions:{
+                            listenerOptions: {
                             },
                             pressureType: 'none', // Disable pressure
                         },
@@ -197,10 +188,7 @@ const Whiteboard = () => {
                 canvas.toBlob(async (pngBlob) => {
                     const userId = auth.currentUser.uid;
                     const storage = getStorage();
-                    // const testId = Date.now()
-                    const tempSessionId = sessionId
-                    // setSessionId(tempSessionId)
-                    const storageRef = ref(storage, `user-files/${userId}/${tempSessionId}/static.png`);
+                    const storageRef = ref(storage, `user-files/${userId}/static.png`);
 
                     try {
                         const snapshot = await uploadBytes(storageRef, pngBlob);
@@ -226,7 +214,7 @@ const Whiteboard = () => {
 
             {/* Question Area */}
             <QuestionArea darkMode={darkMode} isVisible={isQuestionVisible} onResizeStop={handleResizeStop} sendPNGToFirebase={sendPNGToFirebase} />
-            {console.log("whiteboard " + darkMode)}
+
             {/* Editor Section */}
             <div style={{
                 display: 'flex',
@@ -247,7 +235,7 @@ const Whiteboard = () => {
                         backgroundColor: darkMode ? '#bbb' : '#fff',
                     }}
                 />
-                <button id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex: '1000', border: 'none', background: "transparent", userSelect: 'none'}}>
+                <button id="link-info" className="link-info" onClick={toggleModal} style={{ cursor: 'pointer', zIndex: '1000', border: 'none', background: "transparent", userSelect: 'none' }}>
                     <img src="/img/info.svg" alt="Info" />
                 </button>
                 {/* Submit Area */}

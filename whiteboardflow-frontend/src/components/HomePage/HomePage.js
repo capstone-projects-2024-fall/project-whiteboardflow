@@ -10,9 +10,6 @@ import '../Avatar/RetroAvatar.css';
 
 import { testWrite, getOneHistory, getAllHistory } from '../../firebase';
 
-// import { useSessionId } from '../../SessionIdContext';
-
-
 
 const HomePage = ({ user}) => {
 
