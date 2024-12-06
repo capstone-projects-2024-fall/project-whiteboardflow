@@ -1,41 +1,65 @@
-Key Evaluation Areas:
+### Key Evaluation Areas:
 Rate my performance on a scale of 1-5 in the following areas:
 
-Problem-Solving Ability: How effectively I break down problems, devise efficient solutions, and adapt my approach when necessary.
-Communication and Clarity: How clearly and effectively I articulate my thought process and explain my approach.
-Analytical Depth: How well I address edge cases, optimize solutions, and consider alternative approaches.
-Adaptability: How effectively I respond to changes, challenges, or feedback during the interview.
-Time Management: How well I structure and execute solutions within the given time constraints.
-Feedback Structure:
-1. Ratings and Summary:
-Provide explicit numeric ratings for each of the areas listed above on a scale of 1-5, using the following format:
-diff
-Copy code
-- Problem-Solving Ability: X/5  
-- Communication and Clarity: X/5  
-- Analytical Depth: X/5  
-- Adaptability: X/5  
-- Time Management: X/5
-Include a brief explanation for each rating, highlighting strengths and areas for improvement.
-2. Visual Representation:
-Describe a bar chart to visually represent the ratings. Ensure the chart includes:
-Proper labels for each metric.
-A scale from 1-5 clearly marked on the chart.
-3. Whiteboard Analysis:
-Review the provided whiteboard or written solution for:
-Correctness, clarity, and effectiveness.
-Areas of strength and opportunities for improvement aligned with expectations of Fortune 500 companies.
-4. Transcript Analysis:
-Assess the effectiveness of my verbal explanations, focusing on:
-Clarity and structure.
-Alignment with the collaborative standards of top companies like Google or Meta.
-5. Actionable Feedback:
-Provide actionable suggestions for improvement in each area:
-Relate improvements to real-world expectations at companies like Google, Amazon, or Meta.
-Focus on conceptual changes rather than syntax or typographical errors.
-Avoid providing the correct solution or any actual code.
-Important Notes:
-Always include numeric ratings explicitly for each category.
-Concentrate on evaluating thought process, reasoning, and ability to explain solutions.
-**Do not respond with code**, focus on guidance.
-Minimize emphasis on minor syntax issues or typographical errors.
+1. **Problem-Solving Ability**: How effectively I break down problems, devise efficient solutions, and adapt my approach when necessary.
+2. **Communication and Clarity**: How clearly and effectively I articulate my thought process and explain my approach.
+3. **Analytical Depth**: How well I address edge cases, optimize solutions, and consider alternative approaches.
+4. **Adaptability**: How effectively I respond to changes, challenges, or feedback during the interview.
+5. **Time Management**: How well I structure and execute solutions within the given time constraints.
+
+---
+
+### Feedback Structure:
+Provide feedback using the consistent headings below:
+
+---
+
+#### **1. Ratings**
+- Provide **explicit numeric ratings** for each area listed above on a scale of 1-5. Use the following format:
+  ```
+  - Problem-Solving Ability: X/5  
+  - Communication and Clarity: X/5  
+  - Analytical Depth: X/5  
+  - Adaptability: X/5  
+  - Time Management: X/5
+  ```
+- Include a brief explanation for each rating to highlight strengths and areas for improvement.
+
+---
+
+#### **2. Visual Representation**
+- Describe a **bar chart** that visually represents the ratings. Ensure the chart includes:
+  - Proper labels for each metric.
+  - A scale from 1-5 clearly marked on the chart.
+
+---
+
+#### **3. Whiteboard Analysis**
+- Examine the whiteboard or written solution for:
+  - **Correctness**: Identify errors or inaccuracies in the approach or execution.
+  - **Clarity**: Evaluate how clearly the solution is presented and structured.
+  - **Effectiveness**: Assess whether the solution achieves the desired outcome efficiently.
+
+---
+
+#### **4. Transcript Analysis**
+- Review the verbal explanation provided during the interview for:
+  - **Clarity**: Assess the ease of understanding the explanation.
+  - **Structure**: Evaluate how logically and cohesively the explanation flows.
+  - **Alignment**: Consider whether the explanation aligns with collaborative standards of top companies like Google or Meta.
+
+---
+
+#### **5. Actionable Feedback**
+- Provide specific, actionable suggestions for improvement in each area:
+  - Relate these suggestions to real-world expectations at companies like Google, Amazon, or Meta.
+  - Focus on **conceptual improvements**, not syntax or typographical details.
+  - Avoid providing the correct solution or any actual code.
+
+---
+
+### Important Notes:
+- Always include numeric ratings explicitly for each category.
+- Concentrate on evaluating **thought process, reasoning**, and ability to explain solutions.
+- Do not respond with code; focus on guidance.
+- Minimize emphasis on minor syntax issues or typographical errors.
