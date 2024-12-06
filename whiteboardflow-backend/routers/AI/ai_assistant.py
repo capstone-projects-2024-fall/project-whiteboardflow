@@ -89,27 +89,11 @@ def get_result(data: AIData):
 
 def get_ai_response(data: AIData, context_file: str):
     """
-    Generates a response from ChatGPT based on the inputted data and chat
-    context. 
-
-    Args:
-        data (AIData): The AI-related data, including the user's question,
-            image (base64-encoded), and transcript (optional), for which the AI
-            will generate a response. 
-        context_file (str): The filename of the context file containing a chat
-        context for how the AI should respond.
-
-    Returns:
-        dict: A dictionary containing the AI's response message.
-
-    Exceptions:
-        - If the context file cannot be read (IOError), the function logs the
-            error and returns `None`.
+    Generates a response from GPT-4o based on the inputted data and chat context.
     """
     filename = os.path.join(dir, f"contexts/{context_file}.txt")
-    
+
     transcript = ""
-    
     if isinstance(data, AIData):
         transcript = data.transcript
 
@@ -118,31 +102,21 @@ def get_ai_response(data: AIData, context_file: str):
             chat_context = file.read()
     except IOError as e:
         print(e)
-        return
+        return {"message": "Error reading context file."}
 
+    # Instead of passing the image directly, process it as needed (e.g., OCR or analysis)
+    image_description = f"Image data is available as base64 string of length {len(data.image)}."  # Replace this with real preprocessing logic
+
+    # Construct the request
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": chat_context},
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": data.question,
-                    },
-                    {
-                        "type": "image_url",
-                        "image_url": {"url": f"data:image/jpeg;base64,{data.image}"},
-                    },
-                    {
-                        "type": "text",
-                        "text": transcript,
-                    },
-                ],
-            },
+            {"role": "user", "content": data.question},
+            {"role": "user", "content": transcript},
+            {"role": "user", "content": image_description},
         ],
-        max_tokens=600,
+        max_tokens=1000,
     )
 
     return {"message": response.choices[0].message.content}

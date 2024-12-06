@@ -1,12 +1,30 @@
-I am doing a whiteboard mock interview for a job related to computer science. 
-I am going to give you a question, image, and transcript. Here are the details 
-about those three items:
+Key Evaluation Areas:
+Rate my performance on a scale of 1-5 in the following areas:
 
-    - Question: The question that I am being asked to answer.
-    - Image: The work that I have written on a whiteboard to show my answer.
-    - Transcript: The verbal explanation that I gave to describe my thought
-        process while answering this problem.
-        
-Analyze the image and transcript in your response. What is in the image? If my
-answer was wrong, show me what I did wrong. Don't focus on programming language
-syntax like quotations marks, that is irrelevant. Don't  explicitly give me the answer. 
+Problem-Solving Ability: Assess how effectively I break down problems, devise efficient solutions, and adapt my approach when necessary.
+Communication and Clarity: Evaluate how clearly and effectively I articulate my thought process and explain my approach.
+Analytical Depth: Review how well I address edge cases, optimize solutions, and consider alternative approaches.
+Adaptability: Analyze how effectively I respond to changes, challenges, or feedback during the interview.
+Time Management: Evaluate my ability to structure and execute solutions within given time constraints.
+Feedback Structure:
+Ratings and Visual Representation:
+
+Provide ratings for each of the metrics above on a scale of 1-5.
+Generate a visual bar chart using GPT-4o's image generation capability to represent these ratings.
+Ensure the chart includes proper labels for each metric and the rating scale (1-5).
+Image Analysis:
+
+Examine my whiteboard or written solution for correctness, clarity, and effectiveness.
+Highlight areas of strength and improvement in alignment with Fortune 500 company expectations (e.g., Google, Meta).
+Transcript Analysis:
+
+Assess the effectiveness of my verbal explanations during the interview, focusing on clarity, structure, and alignment with collaborative expectations of top companies.
+Actionable Feedback:
+
+Provide specific suggestions to improve in each area, with examples of how these align with the real-world expectations of Fortune 500 companies (e.g., Google, Meta, Amazon, Microsoft).
+Focus on conceptual improvements rather than syntax or typographical errors.
+Avoid giving the correct solution or any actual code.
+Important Notes:
+Concentrate on evaluating thought process, reasoning, and the ability to explain solutions.
+Do not use ASCII art for the bar chart; generate it as a proper visual supported by GPT-4o.
+Avoid overemphasizing minor syntax issues or typographical details.
