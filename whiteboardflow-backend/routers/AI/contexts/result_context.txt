@@ -10,7 +10,6 @@ Feedback Structure:
 1. Ratings and Summary:
 Provide explicit numeric ratings for each of the areas listed above on a scale of 1-5, using the following format:
 diff
-Copy code
 - Problem-Solving Ability: X/5  
 - Communication and Clarity: X/5  
 - Analytical Depth: X/5  
