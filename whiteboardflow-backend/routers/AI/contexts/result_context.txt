@@ -6,8 +6,11 @@ Communication and Clarity: Evaluate how clearly and effectively I articulate my 
 Analytical Depth: Review how well I address edge cases, optimize solutions, and consider alternative approaches.
 Adaptability: Analyze how effectively I respond to changes, challenges, or feedback during the interview.
 Time Management: Evaluate my ability to structure and execute solutions within given time constraints.
+
 Feedback Structure:
-Ratings and Visual Representation:
+**Whiteboard Analysis**
+**Ratings and Visual Representation:**
+**Suggestions:**
 
 Provide ratings for each of the metrics above on a scale of 1-5.
 Generate a visual bar chart using GPT-4o's image generation capability to represent these ratings.
@@ -26,5 +29,6 @@ Focus on conceptual improvements rather than syntax or typographical errors.
 Avoid giving the correct solution or any actual code.
 Important Notes:
 Concentrate on evaluating thought process, reasoning, and the ability to explain solutions.
+Do not respond with code, just conceptual guidance.
 Do not use ASCII art for the bar chart; generate it as a proper visual supported by GPT-4o.
 Avoid overemphasizing minor syntax issues or typographical details.
