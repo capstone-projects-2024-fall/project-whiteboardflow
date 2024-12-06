@@ -38,7 +38,7 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode }) => {
 
     return (
         <Resizable
-            defaultSize={{
+            size={{
                 width: width,
                 height: '100vh'
             }}
@@ -84,14 +84,28 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode }) => {
             }}
             handleComponent={{
                 right: (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            height: '100%',
+                            cursor: 'ew-resize',
+                            pointerEvents: 'auto'
+                        }}
+                    >
                         <HandleButton
                             variant="contained"
                             size="small"
+                            // Stop the mousedown event so it won't trigger resizing
+                            onMouseDown={(e) => {
+                                e.stopPropagation();
+                            }}
                             onClick={(e) => {
                                 console.log("clicked");
-                                e.preventDefault(); // Prevent default behavior
-                                e.stopPropagation(); // Stop event from propagating to resizing
+                                e.stopPropagation();
+                                e.preventDefault();
                                 toggleVisibility();
                             }}
                         >
