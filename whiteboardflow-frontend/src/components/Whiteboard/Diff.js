@@ -79,19 +79,34 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode }) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    // Disable pointer events on the handle itself
                     pointerEvents: 'none',
                 }
             }}
             handleComponent={{
                 right: (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            height: '100%',
+                            // Re-enable pointer events inside this container
+                            pointerEvents: 'auto'
+                        }}
+                    >
                         <HandleButton
                             variant="contained"
                             size="small"
+                            // Stop the mousedown event so it won't trigger resizing
+                            onMouseDown={(e) => {
+                                e.stopPropagation();
+                            }}
                             onClick={(e) => {
                                 console.log("clicked");
-                                e.preventDefault(); // Prevent default behavior
-                                e.stopPropagation(); // Stop event from propagating to resizing
+                                e.stopPropagation();
+                                e.preventDefault();
                                 toggleVisibility();
                             }}
                         >
@@ -102,15 +117,25 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode }) => {
             }}
         >
             {isVisible && (
-                <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden' }}>
-                    <QuestionDisplay darkMode = {darkMode} />
+                <Box sx={{ padding: '20px', height: '93vh', overflowY: 'auto' }}>
+                    <QuestionDisplay darkMode={darkMode} />
                 </Box>
-
             )}
-            {isVisible && (<Box sx={{ height: '7vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'left', borderTop: '1px solid #ccc' }}>
-                <AvatarToggleButton />
-                <HintButton sendPNGToFirebase={sendPNGToFirebase} />
-            </Box>)}
+            {isVisible && (
+                <Box
+                    sx={{
+                        height: '7vh',
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'left',
+                        borderTop: '1px solid #ccc'
+                    }}
+                >
+                    <AvatarToggleButton />
+                    <HintButton sendPNGToFirebase={sendPNGToFirebase} />
+                </Box>
+            )}
         </Resizable>
     );
 };
