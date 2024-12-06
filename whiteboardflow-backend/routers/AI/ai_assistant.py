@@ -34,7 +34,7 @@ def get_hint(data: HintData, current_user: dict = Depends(get_current_user)):
 
 @router.post("/result/")
 def get_result(data: AIData, current_user: dict = Depends(get_current_user)):
-    image_data = get_firebase_image(current_user.uid, data.sessionId)
+    image_data = get_firebase_image(current_user.uid)
     data.image = base64.b64encode(image_data).decode("utf-8")
     return get_ai_response(data, "result_context")
 

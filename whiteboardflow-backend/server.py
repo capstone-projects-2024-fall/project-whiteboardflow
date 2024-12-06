@@ -24,7 +24,7 @@ app.add_middleware(
 
 app.include_router(ai_router, prefix="/assistant")
 app.include_router(questions_router, prefix="/questions")
-app.include_router(questions_router, prefix="/history")
+app.include_router(history_router)
 
 
 @app.get("/")

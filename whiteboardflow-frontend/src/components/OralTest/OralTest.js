@@ -15,7 +15,6 @@ function OralTest() {
 	const [isEmpty, setIsEmpty] = useState(true)
 	const [isRecording, setIsRecording] = useState(true)
 	const [isLoading, setIsLoading] = useState(false)
-	const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
 
 	const calculateCompletionTime = () => {
 		const startTime = sessionStorage.getItem("startTime");
@@ -65,22 +64,40 @@ function OralTest() {
 	}
 
 	const onSubmit = async () => {
+		const completionTime = calculateCompletionTime();
 		const idToken = await getIdToken();
-		setCompletionTime(calculateCompletionTime());
+		const question = sessionStorage.getItem("question_text");
+		const image = "";
+		const transcript = sessionStorage.getItem("finalTranscript");
+		const sessionId = sessionStorage.getItem("startTime");
 
 		// Get AI response and store in sessionStorage
-		const response = await makeRequest(
+		const result = await makeRequest(
 			'/assistant/result',
 			'POST',
 			{
-				question: sessionStorage.getItem("question_text"),
-				image: "",
-				transcript: sessionStorage.getItem("finalTranscript"),
-				sessionId: sessionStorage.getItem("startTime")
+				question: question,
+				image: image,
+				transcript: transcript,
 			},
 			idToken
 		);
-		sessionStorage.setItem("AIResponse", response.message)
+		sessionStorage.setItem("AIResponse", result.message)
+
+		// Save history entry to database
+		await makeRequest(
+			"/history",
+			"POST",
+			{
+				question: question,
+				image: image,
+				transcript: transcript,
+				response: result.message,
+				completionTime: completionTime,
+				sessionId: sessionId
+			},
+			idToken
+		);
 
 		// Navigate to Results page after successful response
 		navigate('/results', {});

@@ -26,6 +26,4 @@ class AIData(HintData):
         transcript (str): The transcript text from the user's verbal
             explanation, used as additional context for the AI.
     """
-
     transcript: str
-    sessionId: str
