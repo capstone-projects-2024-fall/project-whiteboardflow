@@ -1,0 +1,146 @@
+{
+    "04okZl4FKcZiVuXRgF49": {
+        "question_id": null,
+        "answer": "output_file = os.path.join(output_dir, f'{sheet}.json') df.to_json(output_file, orient='records') print(\"JSON files saved to:\", output_dir)",
+        "difficulty": "easy",
+        "question_text": "Write a function to check if a string is a palindrome.",
+        "correct": null,
+        "category": null
+    },
+    "0dKFcUqC0akQcXHLaEdo": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "medium",
+        "question_text": "Find the length of the longest substring without repeating characters.",
+        "correct": null,
+        "category": null
+    },
+    "8JhpEPPNR2rWrZdZdOQw": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "hard",
+        "question_text": "Given two words, find the shortest transformation sequence.",
+        "correct": null,
+        "category": null
+    },
+    "Ax5I9UCPntedfeBRHtrj": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "hard",
+        "question_text": "Design a Least Recently Used (LRU) cache.",
+        "correct": null,
+        "category": null
+    },
+    "GOFyn7HWYEurt608PneO": {
+        "question_id": null,
+        "answer": "# Loop through the sheets and save each one as a JSON file in the same directory for sheet in excel_file.sheet_names: df = pd.read_excel(excel_file, sheet_name=sheet) # Check if this is the 'questions' sheet to cast the 'answer' field to a string if sheet == 'questions': df['answer'] = df['answer'].astype(str) # Ensure 'answer' column is cast to string",
+        "difficulty": "easy",
+        "question_text": "Given an array of integers, return indices of two numbers that add up to a specific target.",
+        "correct": null,
+        "category": "coding"
+    },
+    "JZ8PH3ZMTA4Sm7hSt4pR": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "hard",
+        "question_text": "Design a Least Recently Used (LRU) cache.",
+        "correct": null,
+        "category": null
+    },
+    "NO3oxmtfW0Ididg2ykQz": {
+        "question_id": null,
+        "answer": "{ \"question_id\": \"q1\", \"question_text\": \"What is 2+2?\", \"difficulty_level\": \"easy\", \"category_id\": \"math\", \"answer\": \"4\" }",
+        "difficulty": "easy",
+        "question_text": "Write a function to return the nth Fibonacci number.",
+        "correct": null,
+        "category": null
+    },
+    "QvsL3siYEgrpzz427Xqf": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "medium",
+        "question_text": "Given a collection of intervals, merge all overlapping intervals.",
+        "correct": null,
+        "category": null
+    },
+    "Waz9I3jZwxsOGIlHBGJV": {
+        "question_id": null,
+        "answer": "output_file = os.path.join(output_dir, f'{sheet}.json') df.to_json(output_file, orient='records') print(\"JSON files saved to:\", output_dir)",
+        "difficulty": "easy",
+        "question_text": "Write a function to check if a string is a palindrome.",
+        "correct": null,
+        "category": null
+    },
+    "XQMISEc6fUrn3Zeca6KH": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "hard",
+        "question_text": "Given two words, find the shortest transformation sequence.",
+        "correct": null,
+        "category": null
+    },
+    "YupSmRK88EZcIfbcnHzA": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "hard",
+        "question_text": "Calculate how much water can be trapped between bars in a histogram.",
+        "correct": null,
+        "category": null
+    },
+    "bqD8CXb6XWzFBKVcWNOX": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "medium",
+        "question_text": "Given a collection of intervals, merge all overlapping intervals.",
+        "correct": null,
+        "category": null
+    },
+    "eOraDciFbBpZH8UxUwdX": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "medium",
+        "question_text": "Detect if a linked list has a cycle.",
+        "correct": null,
+        "category": null
+    },
+    "eWmss3k71aq9P6E4HSdO": {
+        "question_id": null,
+        "answer": "# Loop through the sheets and save each one as a JSON file in the same directory for sheet in excel_file.sheet_names: df = pd.read_excel(excel_file, sheet_name=sheet) # Check if this is the 'questions' sheet to cast the 'answer' field to a string if sheet == 'questions': df['answer'] = df['answer'].astype(str) # Ensure 'answer' column is cast to string",
+        "difficulty": "easy",
+        "question_text": "Given an array of integers, return indices of two numbers that add up to a specific target.",
+        "correct": null,
+        "category": "coding"
+    },
+    "mbD2Y1iXt8xQN1egqiee": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "hard",
+        "question_text": "Calculate how much water can be trapped between bars in a histogram.",
+        "correct": null,
+        "category": null
+    },
+    "oRZay7Gnla8sDYO7z2x2": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "medium",
+        "question_text": "Find the length of the longest substring without repeating characters.",
+        "correct": null,
+        "category": null
+    },
+    "pQZMpRcDzsfx5MQRvALA": {
+        "question_id": null,
+        "answer": "nan",
+        "difficulty": "medium",
+        "question_text": "Detect if a linked list has a cycle.",
+        "correct": null,
+        "category": null
+    },
+    "rtTkCRde1lfcK5SZq9U2": {
+        "question_id": null,
+        "answer": "{ \"question_id\": \"q1\", \"question_text\": \"What is 2+2?\", \"difficulty_level\": \"easy\", \"category_id\": \"math\", \"answer\": \"4\" }",
+        "difficulty": "easy",
+        "question_text": "Write a function to return the nth Fibonacci number.",
+        "correct": null,
+        "category": null
+    }
+}

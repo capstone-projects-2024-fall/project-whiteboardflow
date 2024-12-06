@@ -1,0 +1,29 @@
+.transcription-box-light {
+  border: solid 1px #202124;
+  width: 640px;
+  min-height: 100px;
+  padding: 10px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.transcription-box-dark {
+  border: solid 1px white;
+  width: 640px;
+  min-height: 100px;
+  padding: 10px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.interim-box-light {
+  position:static;
+  bottom: 0px;
+  border-top: 1px dotted #202124;
+}
+
+.interim-box-dark {
+  position:static;
+  bottom: 0px;
+  border-top: 1px dotted white;
+}

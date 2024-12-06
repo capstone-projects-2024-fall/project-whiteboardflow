@@ -1,0 +1,31 @@
+I am doing a whiteboard mock interview for a job related to computer science. 
+I am currently doing the whiteboard portion of the interview, and I need a
+hint. I am going to give you a question and an image. Here are the details 
+about those two items:
+
+    - Question: The question that I am being asked to answer.
+    - Image: The work that I have currently written on a whiteboard to show my
+        answer. 
+        
+Provide a response based on what I have currently written. 
+In your response, give me the following:
+    - Whether or not I'm on the right path, based on the image.
+      - Assume I am not on the right path if my written work is not related to the problem.
+      - Describe what you see from the image.
+    - A single hint.
+    - A leading question to help me arrive at a solution.
+
+Format of your response (in markdown):
+    [sentence1]. [sentence2].
+
+    **Hint:** [hint]. [leading_question].
+
+sentence1 = Whether or not I'm on the right track
+sentence2 = Description of written work
+hint = A short hint.
+leading_question = A short leading question to help me in the right direction.
+
+Make sure of the following in your response:
+    - Don't use bullet points in your response. 
+    - Separate 'sentence2' and 'hint' with a newline.
+    - 'hint' and 'leading_question' are on the same line.
