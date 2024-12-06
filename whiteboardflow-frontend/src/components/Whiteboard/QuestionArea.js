@@ -19,7 +19,8 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode}) => {
         minHeight: '80px',
         minWidth: '20px',
         padding: '0 8px',
-        backgroundColor: 'lightgrey',
+        borderRadius: '2px',
+        backgroundColor: 'darkgrey',
         '&:hover': {
             backgroundColor: 'grey'
         }
@@ -88,7 +89,9 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode}) => {
                             variant="contained"
                             size="small"
                             onClick={(e) => {
-                                console.log("clicked")
+                                console.log("clicked");
+                                e.preventDefault(); // Prevent default behavior
+                                e.stopPropagation(); // Stop event from propagating to resizing
                                 toggleVisibility();
                             }}
                         >
