@@ -1,5 +1,6 @@
 import { Resizable } from 're-resizable';
-import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { Box, Button } from '@mui/material';
 import React, { useState, useLayoutEffect} from 'react';
 import HintButton from './HintButton';
 import AvatarToggleButton from '../Avatar/AvatarToggleButton';
@@ -13,6 +14,25 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode}) => {
     useLayoutEffect(() => {
         setIsVisible(width > '0px');
     }, [width]);
+
+    const HandleButton = styled(Button)(({ theme }) => ({
+        minHeight: '80px',
+        minWidth: '20px',
+        padding: '0 8px',
+        backgroundColor: 'lightgrey',
+        '&:hover': {
+            backgroundColor: 'grey'
+        }
+    }));
+    const toggleVisibility = () => {
+        if (isVisible) {
+            setWidth('0px');
+            setIsVisible(false);
+        } else {
+            setWidth('30%');
+            setIsVisible(true);
+        }
+    };
 
     return (
         <Resizable
@@ -54,14 +74,30 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode}) => {
                 right: {
                     width: '20px',
                     background: 'rgba(0, 0, 0, 0.1)',
-                    cursor: 'ew-resize'
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'ew-resize',
+                    pointerEvents: 'auto',
                 }
             }}
             handleComponent={{
-                right: <div style={{ width: '15px', cursor: 'ew-resize' }}></div>
+                right: (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                        <HandleButton
+                            variant="contained"
+                            size="small"
+                            onClick={(e) => {
+                                console.log("clicked")
+                                toggleVisibility();
+                            }}
+                        >
+                            {isVisible ? '<' : '>'}
+                        </HandleButton>
+                    </div>
+                )
             }}
         >
-            {console.log("Question Area " + darkMode)}
             {isVisible && (
                 <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden' }}>
                     <QuestionDisplay darkMode = {darkMode} />
