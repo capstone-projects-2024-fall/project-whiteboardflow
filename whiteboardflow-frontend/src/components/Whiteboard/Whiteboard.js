@@ -68,6 +68,7 @@ const Whiteboard = () => {
                         },
                         grabber: {
                             listenerOptions:{
+
                             },
                             pressureType: 'none', // Disable pressure
                         },

@@ -31,7 +31,7 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode }) => {
             setWidth('0px');
             setIsVisible(false);
         } else {
-            setWidth('30%');
+            setWidth('50%');
             setIsVisible(true);
         }
     };
