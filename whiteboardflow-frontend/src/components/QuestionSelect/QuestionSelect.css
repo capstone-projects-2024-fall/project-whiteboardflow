@@ -1,15 +1,16 @@
-.q-header-light{
-  color: #1664C0;
-  padding-bottom: 20px;
+.category-column {
+  text-align: left;
 }
 
-.q-header-dark{
-  color: white;
-  padding-bottom: 20px;
+.difficulty-column {
+  text-align: left;
 }
 
-.button_container{
+.completed-column {
+  margin-left: 15px !important;
+}
+
+.button_container {
   display: flex;
   flex-direction: row;
-  
 }
