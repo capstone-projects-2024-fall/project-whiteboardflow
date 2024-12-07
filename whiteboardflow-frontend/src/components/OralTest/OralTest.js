@@ -83,7 +83,8 @@ function OralTest() {
 			},
 			idToken
 		);
-		sessionStorage.setItem("AIResponse", result.message)
+		const oralAnalysis = result.message;
+		sessionStorage.setItem("AIResponse", oralAnalysis);
 
 		// Save history entry to database
 		await makeRequest(
@@ -93,15 +94,29 @@ function OralTest() {
 				question: question,
 				questionId: questionId,
 				transcript: transcript,
-				response: result.message,
+				response: oralAnalysis,
 				completionTime: completionTime,
 				sessionId: sessionId
 			},
 			idToken
 		);
 
+		// Get image url
+		const userId = auth.currentUser.uid;
+		const storage = getStorage();
+		const storageRef = ref(storage, `user-files/${userId}/static.png`);
+		const imageUrl = await getDownloadURL(storageRef);
+
 		// Navigate to Results page after successful response
-		navigate('/results', {});
+		navigate('/results', {
+			state: {
+				question,
+				imageUrl,
+				transcript,
+				oralAnalysis,
+				completionTime,
+			}
+		});
 	};
 
 	return (

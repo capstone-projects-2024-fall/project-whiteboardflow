@@ -85,7 +85,7 @@ function DataTable({
   data,
   onRowSelect,
   defaultOrder = 'asc',
-  defaultOrderBy = 'title',
+  defaultOrderBy = 'id',
   customComparators,
   renderCellContent,
 }) {
@@ -97,7 +97,7 @@ function DataTable({
 
   function descendingComparator(a, b, orderBy) {
     // Check for custom comparator from props
-    if (customComparators[orderBy]) {
+    if (customComparators && customComparators[orderBy]) {
       return customComparators[orderBy](a, b);
     }
 
@@ -164,7 +164,7 @@ function DataTable({
               <TableRow
                 hover
                 key={row.id}
-                onClick={(event) => handleClick(event, row.id)}
+                onClick={(event) => handleClick(event, row)}
                 sx={{ cursor: 'pointer' }}
               >
                 {headers.map((header) => (

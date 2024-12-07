@@ -77,8 +77,8 @@ const QuestionSelect = () => {
     return value;
   }
 
-  const handleOpen = (id) => {
-    setSelected(id);
+  const handleOpen = (row) => {
+    setSelected(row.id);
     setOpen(true);
   };
 
@@ -118,7 +118,7 @@ const QuestionSelect = () => {
         <DataTable
           headers={headers}
           data={rows}
-          onRowSelect={(id) => handleOpen(id)}
+          onRowSelect={(row) => handleOpen(row)}
           customComparators={customComparators}
           renderCellContent={renderCellContent}
         />

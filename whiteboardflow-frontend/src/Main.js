@@ -12,6 +12,7 @@ import { auth } from './firebase';
 import { AvatarProvider } from './components/Avatar/AvatarContext';
 import { QuestionProvider } from './components/QuestionSelect/QuestionContext';
 import History from './components/History/History'
+import HistoryEntry from './components/History/HistoryEntry';
 
 function Main() {
     const [user, setUser] = useState(null);
@@ -42,6 +43,7 @@ function Main() {
                             <Route path="difficulty" element={<PrivateRoute><DifficultySelect /></PrivateRoute>} />
                             <Route path="questionSelect" element={<PrivateRoute><QuestionSelect /></PrivateRoute>} />
                             <Route path="history" element={<PrivateRoute><History /></PrivateRoute>} />
+                            <Route path="history/:entry_id" element={<PrivateRoute><HistoryEntry /></PrivateRoute>} />
                         </Route>
                     </Routes>
                 </QuestionProvider>

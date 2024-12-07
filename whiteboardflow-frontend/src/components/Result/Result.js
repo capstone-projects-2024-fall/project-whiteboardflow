@@ -1,21 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button, Paper, Container, Typography, Box, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { useOutletContext } from 'react-router-dom'; // Import useNavigate
-import { auth } from "../../firebase";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import './Result.css';
 
-const Results = () => {
+const Results = ({
+    question,
+    imageUrl,
+    transcript,
+    oralAnalysis,
+    completionTime,
+}) => {
     const [darkMode, setDarkMode] = useOutletContext();
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const [questionText, setQuestionText] = useState(""); // Question text
-    const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
-    const [transcript, setTranscript] = useState("");
-    const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
-    const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
+    // Destructure state from location if available, otherwise use props.
+    const { state } = location;
+    const {
+        question: stateQuestion,
+        imageUrl: stateImageUrl,
+        transcript: stateTranscript,
+        oralAnalysis: stateOralAnalysis,
+        completionTime: stateCompletionTime,
+    } = state || {};
+
+    // Fallback to props if location.state is undefined
+    const effectiveQuestion = stateQuestion || question;
+    const effectiveImageUrl = stateImageUrl || imageUrl;
+    const effectiveTranscript = stateTranscript || transcript;
+    const effectiveOralAnalysis = stateOralAnalysis || oralAnalysis;
+    const effectiveCompletionTime = stateCompletionTime || completionTime;
 
     const paperStyle = {
         backgroundColor: darkMode ? '#202124' : 'white',
@@ -24,41 +39,6 @@ const Results = () => {
 
     const headerStyle = {
         color: 'primary.main',
-    };
-
-    useEffect(() => {
-        const aiResponse = sessionStorage.getItem("AIResponse") || "No analysis available";
-        setOralAnalysis(aiResponse);
-
-        setQuestionText(sessionStorage.getItem("question_text"));
-
-        const userId = auth.currentUser.uid;
-        const storage = getStorage();
-        const storageRef = ref(storage, `user-files/${userId}/static.png`);
-
-        getDownloadURL(storageRef)
-            .then((url) => {
-                setImageUrl(url);
-            })
-            .catch((error) => {
-                console.error("Error fetching image URL: ", error);
-            });
-
-        setCompletionTime(calculateCompletionTime());
-        setTranscript(sessionStorage.getItem("finalTranscript"));
-    }, []);
-
-    const calculateCompletionTime = () => {
-        const startTime = sessionStorage.getItem("startTime");
-        if (startTime) {
-            const endTime = Date.now();
-            const timeSpent = (endTime - startTime) / 1000;
-            const seconds = Math.floor(timeSpent % 60);
-            const minutes = Math.floor((timeSpent / 60) % 60);
-            const hours = Math.floor((timeSpent / (60 * 60)) % 24);
-            return `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m ` : ""}${seconds}s`;
-        }
-        return "Not available";
     };
 
     const handleNav = (path) => {
@@ -76,27 +56,27 @@ const Results = () => {
         {
             xs: 12, md: 6,
             title: "Practice Question",
-            content: <Typography className="box-text" variant="body1"><strong>Question: </strong>{questionText}</Typography>
+            content: <Typography className="box-text" variant="body1"><strong>Question: </strong>{effectiveQuestion}</Typography>
         },
         {
             xs: 12, md: 6,
             title: "Your Handwritten Response",
-            content: <Box className="box" textAlign="center"><img className="box-image" src={imageUrl} alt="User's Handwriting Response" /></Box>
+            content: <Box className="box" textAlign="center"><img className="box-image" src={effectiveImageUrl} alt="User's Handwriting Response" /></Box>
         },
         {
             xs: 12,
             title: "AI Analysis of Whiteboard Practice",
-            content: <ReactMarkdown>{oralAnalysis}</ReactMarkdown>
+            content: <ReactMarkdown>{effectiveOralAnalysis}</ReactMarkdown>
         },
         {
             xs: 12, md: 6,
             title: "Completion Time",
-            content: <Typography className="box-text" variant="body1">{completionTime}</Typography>
+            content: <Typography className="box-text" variant="body1">{effectiveCompletionTime}</Typography>
         },
         {
             xs: 12, md: 6,
             title: "Verbal transcription",
-            content: <Typography variant="body1" style={{ color: darkMode ? '#fff' : '#202124' }}>{transcript}</Typography>
+            content: <Typography variant="body1" style={{ color: darkMode ? '#fff' : '#202124' }}>{effectiveTranscript}</Typography>
         },
     ];
 

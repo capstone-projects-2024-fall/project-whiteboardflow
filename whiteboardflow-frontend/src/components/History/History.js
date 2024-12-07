@@ -32,7 +32,7 @@ const History = () => {
 
           return createData(
             rowKeys,
-            index,
+            index + 1, // Start index at 1 so 1st entry is /history/1
             question.title,
             question.id,
             formattedCategories,
@@ -50,8 +50,12 @@ const History = () => {
     return value;
   }
 
-  const handleEntryOpen = (id) => {
-    console.log(id);
+  const handleEntryOpen = (row) => {
+    navigate(`/history/${row.id}`, {
+      state: {
+        rowData: row,
+      }
+    });
   };
 
   if (!rows) return null;
@@ -63,7 +67,7 @@ const History = () => {
         <DataTable
           headers={headers}
           data={rows}
-          onRowSelect={(id) => handleEntryOpen(id)}
+          onRowSelect={(row) => handleEntryOpen(row)}
           renderCellContent={renderCellContent}
         />
       )}
