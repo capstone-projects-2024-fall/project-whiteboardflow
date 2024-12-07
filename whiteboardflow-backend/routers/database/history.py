@@ -36,10 +36,7 @@ async def add_history_entry(
     user_id = current_user.uid
     history_ref = db.collection("users").document(user_id).collection("history")
 
-    # Parse out sessionId from entry
-    entry_data = entry.model_dump(
-        include={"question", "questionId", "transcript", "response", "completionTime"}
-    )
+    entry_data = entry.model_dump()
     history_ref.document(entry.sessionId).set(entry_data)
 
     return {"message": "success"}
