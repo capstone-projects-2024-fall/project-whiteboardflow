@@ -9,14 +9,14 @@ router = APIRouter()
 
 class HistoryEntry(BaseModel):
     question: str
-    image: str
+    questionId: str
     transcript: str
     response: str
     completionTime: str
     sessionId: str
 
 
-@router.get("/history/", response_model=list[HistoryEntry])
+@router.get("/history/")
 async def get_history(current_user: dict = Depends(get_current_user)):
     user_id = current_user.uid
     history_ref = db.collection("users").document(user_id).collection("history")
@@ -26,7 +26,7 @@ async def get_history(current_user: dict = Depends(get_current_user)):
     for doc in docs:
         history_entries.append(doc.to_dict())
 
-    return history_entries
+    return {"message": history_entries}
 
 
 @router.post("/history/")
@@ -38,7 +38,7 @@ async def add_history_entry(
 
     # Parse out sessionId from entry
     entry_data = entry.model_dump(
-        include={"question", "image", "transcript", "response", "completionTime"}
+        include={"question", "questionId", "transcript", "response", "completionTime"}
     )
     history_ref.document(entry.sessionId).set(entry_data)
 

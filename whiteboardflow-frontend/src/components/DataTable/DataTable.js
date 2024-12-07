@@ -13,6 +13,18 @@ import { visuallyHidden } from '@mui/utils';
 import { useOutletContext } from 'react-router-dom';
 import './DataTable.css';
 
+export function createData(keys, ...args) {
+  // Create an object with the keys mapped to the arguments
+  const data = {};
+
+  keys.forEach((key, index) => {
+    // If there's an argument for this key, assign it; otherwise, assign an empty string.
+    data[key] = args[index] !== undefined ? args[index] : '';
+  });
+
+  return data;
+}
+
 function EnhancedTableHead(props) {
   const { headers, order, orderBy, onRequestSort } = props;
   const [darkMode, setDarkMode] = useOutletContext();

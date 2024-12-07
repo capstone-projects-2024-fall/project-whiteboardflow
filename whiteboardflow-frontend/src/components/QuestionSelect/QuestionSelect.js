@@ -1,29 +1,22 @@
 import React from 'react';
 import DataTable from "../DataTable/DataTable";
 import { Box, Button, Checkbox, Modal, Typography } from '@mui/material';
+import { createData } from '../DataTable/DataTable';
+import { getAllHistory } from '../../firebase';
 import { ReactMarkdownSpan } from '../Whiteboard/QuestionDisplay';
 import { saveQuestionToStorage } from '../Whiteboard/QuestionDisplay';
 import { useQuestionContext } from './QuestionContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './QuestionSelect.css';
 
-function createData(id, questionId, title, question, category, difficulty, completed = false) {
-  return {
-    id,
-    questionId,
-    title,
-    question,
-    category,
-    difficulty,
-    completed
-  };
-}
-
 const QuestionSelect = () => {
   const [selected, setSelected] = React.useState(-1);
   const [open, setOpen] = React.useState(false);
   const [darkMode, setDarkMode] = useOutletContext();
+  const [rows, setRows] = React.useState(null);
   const navigate = useNavigate();
+
+  const rowKeys = ['id', 'questionId', 'title', 'question', 'category', 'difficulty', 'completed'];
 
   const headers = [
     { id: 'completed', numeric: false, disablePadding: true, label: 'Completed' },
@@ -34,28 +27,33 @@ const QuestionSelect = () => {
 
   const { questions } = useQuestionContext();
 
-  if (!questions) return null;
+  React.useEffect(() => {
+    if (questions) {
+      getAllHistory().then((history) => {
+        const newRows = questions.map((question, index) => {
 
-  const rows = questions.map((question, index) => {
+          // Convert array of categories to a comma-separated string
+          const formattedCategories = question.categories
+            ? question.categories.join(', ')
+            : '';
 
-    // Convert array of categories to a comma-separated string
-    const formattedCategories = question.categories
-      ? question.categories.join(', ')
-      : '';
+          const checked = history.some(i => i.questionId === question.id)
 
-    // const checked = history.some(i => i.questionID === question.id)
-
-    return createData(
-      index,
-      question.id,
-      question.title || '',
-      question.question_text || '',
-      formattedCategories,
-      question.difficulty,
-      // question.completed || false
-      // checked
-    );
-  });
+          return createData(
+            rowKeys,
+            index,
+            question.id,
+            question.title || '',
+            question.question_text || '',
+            formattedCategories,
+            question.difficulty,
+            checked
+          );
+        });
+        setRows(newRows);
+      })
+    }
+  }, [questions]);
 
   // Empty string for Fermi questions
   const difficultyOrder = { Basic: 1, Intermediate: 2, Advanced: 3, "": 4 };
@@ -111,16 +109,20 @@ const QuestionSelect = () => {
     alignItems: "center"
   };
 
+  if (!rows) return null;
+
   return (
     <div>
       <h1 style={{ textAlign: 'center', paddingTop: '50px' }}>Choose a question from the list below:</h1>
-      <DataTable
-        headers={headers}
-        data={rows}
-        onRowSelect={(id) => handleOpen(id)}
-        customComparators={customComparators}
-        renderCellContent={renderCellContent}
-      />
+      {rows && (
+        <DataTable
+          headers={headers}
+          data={rows}
+          onRowSelect={(id) => handleOpen(id)}
+          customComparators={customComparators}
+          renderCellContent={renderCellContent}
+        />
+      )}
       <Modal
         open={open}
         onClose={handleClose}

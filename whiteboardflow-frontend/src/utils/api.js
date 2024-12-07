@@ -27,3 +27,4 @@ export const makeRequest = async (endpoint, method = 'GET', data = {}, idToken =
     throw error;
   }
 };
+

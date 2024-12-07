@@ -67,6 +67,7 @@ function OralTest() {
 		const completionTime = calculateCompletionTime();
 		const idToken = await getIdToken();
 		const question = sessionStorage.getItem("question_text");
+		const questionId = JSON.parse(sessionStorage.getItem('question') || '{}').id;
 		const image = "";
 		const transcript = sessionStorage.getItem("finalTranscript");
 		const sessionId = sessionStorage.getItem("startTime");
@@ -90,7 +91,7 @@ function OralTest() {
 			"POST",
 			{
 				question: question,
-				image: image,
+				questionId: questionId,
 				transcript: transcript,
 				response: result.message,
 				completionTime: completionTime,

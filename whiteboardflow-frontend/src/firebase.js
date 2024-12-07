@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore"
+import { makeRequest } from "./utils/api";
 
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -85,14 +86,9 @@ async function testWrite() {
 }
 
 async function getAllHistory() {
-
-	// console.log(auth.currentUser.uid)
-
-	const querySnapshot = await getDocs(collection(db, auth.currentUser.uid));
-
-		// doc.data() is never undefined for query doc snapshots
-		return querySnapshot.docs.map(doc => doc.data());
-
+	const idToken = await getIdToken();
+	const response = await makeRequest('/history', 'GET', {}, idToken);
+	return response.message;
 }
 
 async function getAllQuestions() {
