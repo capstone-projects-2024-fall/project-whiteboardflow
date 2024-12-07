@@ -14,6 +14,7 @@ const Results = ({
     const [darkMode, setDarkMode] = useOutletContext();
     const navigate = useNavigate();
     const location = useLocation();
+    const isHistory = location.pathname.startsWith('/history/');
 
     // Destructure state from location if available, otherwise use props.
     const { state } = location;
@@ -82,16 +83,39 @@ const Results = ({
 
     return (
         <Container className="container" maxWidth="lg">
-            <Typography
-                className="header"
-                variant="h4"
-                sx={{
-                    color: headerStyle.color,
-                    marginBottom: '25px'
-                }}
-            >
-                Practice Results Dashboard
-            </Typography>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                width: '100%',
+                marginBottom: '40px'
+            }}>
+                {isHistory && (
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => navigate(-1)}
+                        sx={{
+                            fontSize: '16px',
+                            padding: '4px 2px',
+                            minWidth: '125px',
+                        }}
+                    >
+                        Back
+                    </Button>
+                )}
+                <Typography
+                    className="header"
+                    variant="h4"
+                    sx={{
+                        color: headerStyle.color,
+                        textAlign: 'center',
+                        flexGrow: 1,
+                        marginRight: isHistory ? '100px' : '0px',
+                    }}
+                >
+                    Practice Results Dashboard
+                </Typography>
+            </Box>
             <Grid container spacing={3}>
                 {gridItems.map((item, index) => (
                     <Grid item xs={item.xs} md={item.md} key={index}>
@@ -113,14 +137,15 @@ const Results = ({
                         </Paper>
                     </Grid>
                 ))}
-
-                <Box className="button-box">
-                    <Button variant="contained" color="primary" onClick={() => handleNav("/")}>Home</Button>
-                    <Button variant="contained" color="primary" onClick={() => handleNav("/whiteboard")}>Try Again</Button>
-                    <Button variant="contained" color="primary" onClick={() => handleNav("/questionSelect")}>New Question</Button>
-                </Box>
+                {location.pathname === '/results' && (
+                    <Box className="button-box">
+                        <Button variant="contained" color="primary" onClick={() => handleNav("/")}>Home</Button>
+                        <Button variant="contained" color="primary" onClick={() => handleNav("/whiteboard")}>Try Again</Button>
+                        <Button variant="contained" color="primary" onClick={() => handleNav("/questionSelect")}>New Question</Button>
+                    </Box>
+                )}
             </Grid>
-        </Container>
+        </Container >
     );
 };
 
