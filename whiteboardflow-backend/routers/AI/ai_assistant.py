@@ -24,7 +24,7 @@ def get_hint(data: HintData, current_user: dict = Depends(get_current_user)):
         data (HintData): The hint request data.
 
     Returns:
-        (dict[str, str | None] | None): The hint response generated from OpenAI
+        dict: The hint response generated from OpenAI
         API.
     """
     image_data = get_firebase_image(current_user.uid)

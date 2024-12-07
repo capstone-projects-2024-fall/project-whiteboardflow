@@ -22,14 +22,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(ai_router, prefix="/assistant")
-app.include_router(questions_router, prefix="/questions")
-app.include_router(history_router)
-
-
-@app.get("/")
-def read_root():
-    return {"test_data": ["data1", "data2"]}
+app.include_router(ai_router, prefix="/assistant", tags=["assistant"])
+app.include_router(questions_router, prefix="/questions", tags=["questions"])
+app.include_router(history_router, prefix="/history", tags=["history"])
 
 
 if __name__ == "__main__":

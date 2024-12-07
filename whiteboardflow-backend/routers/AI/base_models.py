@@ -7,12 +7,11 @@ class HintData(BaseModel):
     hint.
 
     Attributes:
-        token (str): Token used to identify user through their Firebase user
-            ID.
         question (str): The interview question.
         image (str): The image received from Firebase, base64 encoded as a
             string.
     """
+
     question: str
     image: str
 
@@ -26,4 +25,5 @@ class AIData(HintData):
         transcript (str): The transcript text from the user's verbal
             explanation, used as additional context for the AI.
     """
+
     transcript: str
