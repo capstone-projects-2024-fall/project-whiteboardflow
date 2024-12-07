@@ -1,6 +1,7 @@
 // React.js Imports
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useWhiteboard } from './WhiteboardContext';
 
 // Material-UI Imports for UI components
 import { Box } from '@mui/material';
@@ -9,7 +10,6 @@ import SubmitButton from './SubmitButton';
 import HelpModal from './HelpModal';
 import CustomMenuAction from './CustomMenuAction';
 import { auth } from "../../firebase";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Style imports
 import './css/reset.css';
@@ -19,16 +19,17 @@ import './css/custom-menu-action.css';
 
 const Whiteboard = () => {
     // Refs for DOM elements and editor instance
-    const editor = useRef(null)
-    const editorElement = useRef(null)
-    const navigate = useNavigate();
+    const { editor, sendPNGToFirebase, isLoaded, setIsLoaded } = useWhiteboard();
+    const editorElement = useRef(null);
     const [isQuestionVisible, setQuestionVisible] = useState(true); // State to toggle question visibility
     const [modalVisible, setModalVisible] = useState(false);
+    const navigate = useNavigate();
 
     // eslint-disable-next-line
     const [darkMode, setDarkMode] = useOutletContext();
 
     const toggleModal = () => setModalVisible(!modalVisible);
+
     // Effect for editor initialization and event handling
     useEffect(() => {
         // Function to handle window resizing to adjust editor dimensions
@@ -95,6 +96,7 @@ const Whiteboard = () => {
                 };
                 editor.current = new window.iink.Editor(editorElement.current, options);
                 await editor.current.initialize();
+                setIsLoaded(true);
                 // deleteElements();
                 if (!editor.current) {
                     console.error("Editor is not initialized.");
@@ -111,13 +113,14 @@ const Whiteboard = () => {
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, []);
+    }, [isLoaded, editor, setIsLoaded]);
 
     // Function to handle export and submission of editor content
     const handleExportAndSubmit = async () => {
         try {
             if (editor.current) {
-                await sendPNGToFirebase(editor.current.behaviors.haveSymbolsSelected);
+                const userId = auth.currentUser.uid;
+                await sendPNGToFirebase(editor.current.behaviors.haveSymbolsSelected, `user-files/${userId}/static.png`);
                 navigate('/oraltest'); // Navigate to the OralTest page after export
             }
         } catch (error) {
@@ -164,50 +167,6 @@ const Whiteboard = () => {
     //         stateElement.remove();
     //     }
     // }
-
-    const sendPNGToFirebase = async (i = false) => {
-        return new Promise((resolve, reject) => {
-            const behaviors = editor.current.behaviors;
-            const symbols = i ? behaviors.model.symbolsSelected : behaviors.model.symbols;
-            const bounds = behaviors.getSymbolsBounds(symbols);
-            const svgBlob = behaviors.buildBlobFromSymbols(symbols, bounds);
-            const svgUrl = URL.createObjectURL(svgBlob);
-            const img = new Image();
-
-            img.onload = async () => {
-                const canvas = document.createElement('canvas');
-                canvas.width = img.width;
-                canvas.height = img.height;
-                const ctx = canvas.getContext('2d');
-                ctx.fillStyle = '#FFFFFF'; // Set the background color to white
-                ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas
-                ctx.drawImage(img, 0, 0);
-                URL.revokeObjectURL(svgUrl); // Clean up the SVG blob URL
-
-                // Convert the canvas to PNG
-                canvas.toBlob(async (pngBlob) => {
-                    const userId = auth.currentUser.uid;
-                    const storage = getStorage();
-                    const storageRef = ref(storage, `user-files/${userId}/static.png`);
-
-                    try {
-                        const snapshot = await uploadBytes(storageRef, pngBlob);
-                        console.log("Image uploaded to Firebase successfully.");
-
-                        const downloadURL = await getDownloadURL(snapshot.ref);
-                        resolve(downloadURL); // Resolve with the download URL
-                    } catch (error) {
-                        console.error("Error uploading image to Firebase:", error);
-                        reject(error); // Reject in case of an error
-                    }
-                }, 'image/png');
-            };
-            img.onerror = (error) => {
-                reject(error); // Reject if there’s an image load error
-            };
-            img.src = svgUrl;
-        });
-    };
 
     return (
         <div style={{ width: '100%', height: '100vh', display: 'flex', position: 'fixed', overflow: 'hidden' }}>

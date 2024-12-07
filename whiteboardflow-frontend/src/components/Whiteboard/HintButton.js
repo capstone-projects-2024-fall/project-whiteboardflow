@@ -3,6 +3,7 @@ import { Snackbar, Alert } from '@mui/material';
 import { getIdToken } from '../../firebase';
 import { useAvatar } from '../Avatar/AvatarContext';
 import { makeRequest } from '../../utils/api';
+import { auth } from '../../firebase';
 import './css/helpbutton.css'; // Ensure the CSS file is imported here
 
 const HintButton = ({ sendPNGToFirebase }) => {
@@ -19,7 +20,8 @@ const HintButton = ({ sendPNGToFirebase }) => {
 		setHintUsed(true);
 		setHintLoading(true);
 
-		await sendPNGToFirebase(false);
+		const userId = auth.currentUser.uid;
+		await sendPNGToFirebase(false, `user-files/${userId}/static.png`);
 		const idToken = await getIdToken();
 		const hintResponse = await makeRequest(
 			'/assistant/hint',

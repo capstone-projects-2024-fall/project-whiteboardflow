@@ -5,6 +5,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useNavigate, useOutletContext } from 'react-router-dom'; // Import useNavigate
 import { getIdToken, auth } from '../../firebase'
 import { makeRequest } from '../../utils/api';
+import { useWhiteboard } from '../Whiteboard/WhiteboardContext';
 import './OralTest.css';
 
 function OralTest() {
@@ -15,6 +16,7 @@ function OralTest() {
 	const [isEmpty, setIsEmpty] = useState(true)
 	const [isRecording, setIsRecording] = useState(true)
 	const [isLoading, setIsLoading] = useState(false)
+	const { editor, sendPNGToFirebase } = useWhiteboard();
 
 	const calculateCompletionTime = () => {
 		const startTime = sessionStorage.getItem("startTime");
@@ -101,11 +103,13 @@ function OralTest() {
 			idToken
 		);
 
-		// Get image url
+		// Store the image in the entry separately
 		const userId = auth.currentUser.uid;
+		await sendPNGToFirebase(false, `user-files/${userId}/${sessionId}/static.png`)
 		const storage = getStorage();
 		const storageRef = ref(storage, `user-files/${userId}/static.png`);
 		const imageUrl = await getDownloadURL(storageRef);
+
 
 		// Navigate to Results page after successful response
 		navigate('/results', {
