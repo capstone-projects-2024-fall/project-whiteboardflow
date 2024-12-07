@@ -48,6 +48,17 @@ const History = () => {
     });
   }, [history, questions]);
 
+  // Empty string for Fermi questions
+  const difficultyOrder = { Basic: 1, Intermediate: 2, Advanced: 3, "": 4 };
+
+  const customComparators = {
+    difficulty: (a, b) => {
+      const aValue = difficultyOrder[a.difficulty] || 4;
+      const bValue = difficultyOrder[b.difficulty] || 4;
+      return bValue - aValue;
+    },
+  };
+
   function renderCellContent(key, value) {
     return value;
   }
@@ -70,6 +81,7 @@ const History = () => {
           headers={headers}
           data={rows}
           onRowSelect={(row) => handleEntryOpen(row)}
+          customComparators={customComparators}
           renderCellContent={renderCellContent}
         />
       )}
