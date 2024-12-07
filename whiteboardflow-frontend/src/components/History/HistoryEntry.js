@@ -19,11 +19,10 @@ function HistoryEntry() {
 
       const userId = auth.currentUser.uid;
       const storage = getStorage();
-      const storageRef = ref(storage, `user-files/${userId}/static.png`);
+      const storageRef = ref(storage, `user-files/${userId}/${rowData.session_id}/static.png`);
       const imageUrl = await getDownloadURL(storageRef);
       setImageUrl(imageUrl);
     };
-
     fetchData();
   }, [rowData.session_id]);
 

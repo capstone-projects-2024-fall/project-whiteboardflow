@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import DataTable from "../DataTable/DataTable";
 import { Box, Button, Checkbox, Modal, Typography } from '@mui/material';
 import { createData } from '../DataTable/DataTable';
@@ -10,10 +10,10 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import './QuestionSelect.css';
 
 const QuestionSelect = () => {
-  const [selected, setSelected] = React.useState(-1);
-  const [open, setOpen] = React.useState(false);
+  const [selected, setSelected] = useState(-1);
+  const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useOutletContext();
-  const [rows, setRows] = React.useState(null);
+  const [history, setHistory] = useState([]);
   const navigate = useNavigate();
 
   const rowKeys = ['id', 'questionId', 'title', 'question', 'category', 'difficulty', 'completed'];
@@ -27,33 +27,35 @@ const QuestionSelect = () => {
 
   const { questions } = useQuestionContext();
 
-  React.useEffect(() => {
-    if (questions) {
-      getAllHistory().then((history) => {
-        const newRows = questions.map((question, index) => {
+  useEffect(() => {
+    getAllHistory().then(setHistory);
+  }, []);
 
-          // Convert array of categories to a comma-separated string
-          const formattedCategories = question.categories
-            ? question.categories.join(', ')
-            : '';
+  const historySet = useMemo(() => {
+    return new Set(history.map(h => h.questionId));
+  }, [history]);
 
-          const checked = history.some(i => i.questionId === question.id)
+  const rows = useMemo(() => {
+    if (!questions || !history) return [];
+    return questions.map((question, index) => {
+      const formattedCategories = question.categories
+        ? question.categories.join(', ')
+        : '';
 
-          return createData(
-            rowKeys,
-            index,
-            question.id,
-            question.title || '',
-            question.question_text || '',
-            formattedCategories,
-            question.difficulty,
-            checked
-          );
-        });
-        setRows(newRows);
-      })
-    }
-  }, [questions]);
+      const checked = historySet.has(question.id);
+
+      return createData(
+        rowKeys,
+        index,
+        question.id,
+        question.title || '',
+        question.question_text || '',
+        formattedCategories,
+        question.difficulty,
+        checked
+      );
+    });
+  }, [questions, history]);
 
   // Empty string for Fermi questions
   const difficultyOrder = { Basic: 1, Intermediate: 2, Advanced: 3, "": 4 };

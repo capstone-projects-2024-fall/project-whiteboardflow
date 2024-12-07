@@ -1,13 +1,15 @@
-import React from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import DataTable from "../DataTable/DataTable";
 import { createData } from '../DataTable/DataTable';
-import { getAllHistory, getAllQuestions } from '../../firebase';
+import { getAllHistory } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import './History.css';
+import { useQuestionContext } from '../QuestionSelect/QuestionContext';
 
 const History = () => {
-  const [rows, setRows] = React.useState(null);
   const navigate = useNavigate();
+  const [history, setHistory] = useState(null);
+  const { questions } = useQuestionContext();
 
   const rowKeys = ['id', 'title', 'question', 'category', 'difficulty', 'date', 'session_id'];
 
@@ -18,33 +20,33 @@ const History = () => {
     { id: 'difficulty', numeric: false, disablePadding: false, label: 'Difficulty' }
   ];
 
-  React.useEffect(() => {
-    getAllHistory().then((history) => {
-      getAllQuestions().then((questions => {
-        const newRows = history.map((history, index) => {
-          const question = questions.find(q => q.id === history.questionId)
+  useEffect(() => {
+    getAllHistory().then(setHistory);
+  }, []);
 
-          const formattedCategories = question.categories
-            ? question.categories.join(', ')
-            : '';
+  const rows = useMemo(() => {
+    if (!history || !questions) return [];
+    return history.map((historyItem, index) => {
+      const question = questions.find((q) => q.id === historyItem.questionId);
 
-          const day = new Date(parseInt(history.sessionId)).toLocaleString()
+      const formattedCategories = question.categories
+        ? question.categories.join(', ')
+        : '';
 
-          return createData(
-            rowKeys,
-            index + 1, // Start index at 1 so 1st entry is /history/1
-            question.title,
-            question.id,
-            formattedCategories,
-            question.difficulty,
-            day,
-            history.sessionId
-          );
-        })
-        setRows(newRows)
-      }))
-    })
-  }, [])
+      const day = new Date(parseInt(historyItem.sessionId)).toLocaleString();
+
+      return createData(
+        rowKeys,
+        index + 1, // Start index at 1 so 1st entry is /history/1
+        question.title,
+        question.id,
+        formattedCategories,
+        question.difficulty,
+        day,
+        historyItem.sessionId
+      );
+    });
+  }, [history, questions]);
 
   function renderCellContent(key, value) {
     return value;

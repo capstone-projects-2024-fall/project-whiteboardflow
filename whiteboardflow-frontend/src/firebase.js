@@ -77,8 +77,6 @@ async function getOneQuestion(questionId) {
 	}
 }
 
-
-
 async function testWrite() {
 	await setDoc(doc(db, "user_history", 'test'), {
 		test: "hi"
@@ -87,7 +85,7 @@ async function testWrite() {
 
 async function getAllHistory() {
 	const idToken = await getIdToken();
-	const response = await makeRequest('/history', 'GET', {}, idToken);
+	const response = await makeRequest('/history/all', 'GET', {}, idToken);
 	return response.message;
 }
 
@@ -95,7 +93,6 @@ async function getAllQuestions() {
 	const response = await makeRequest('/questions/all', 'GET');
 	return response.question_list;
 }
-
 
 export { auth, provider, signInWithPopup, signOut, getIdToken, testWrite, userHistoryWrite, getOneHistory, getOneQuestion, getAllHistory, getAllQuestions }; // Make sure signOut is exported
 export default app;
