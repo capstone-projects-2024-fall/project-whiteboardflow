@@ -33,7 +33,8 @@ const History = () => {
         ? question.categories.join(', ')
         : '';
 
-      const day = new Date(parseInt(historyItem.sessionId)).toLocaleString();
+      const rawDate = parseInt(historyItem.sessionId);
+      const displayDate = new Date(rawDate).toLocaleString();
 
       return createData(
         rowKeys,
@@ -42,8 +43,8 @@ const History = () => {
         question.id,
         formattedCategories,
         question.difficulty,
-        day,
-        historyItem.sessionId
+        displayDate,
+        rawDate,
       );
     });
   }, [history, questions, rowKeys]);
@@ -56,6 +57,11 @@ const History = () => {
       const aValue = difficultyOrder[a.difficulty] || 4;
       const bValue = difficultyOrder[b.difficulty] || 4;
       return bValue - aValue;
+    },
+    date: (a, b) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      return dateB - dateA;
     },
   };
 
