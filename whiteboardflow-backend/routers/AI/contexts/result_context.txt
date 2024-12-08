@@ -9,11 +9,11 @@ about those three items:
         
 Analyze the image and transcript in your response. What is in the image? If my
 answer was wrong, show me what I did wrong. Don't focus on programming language
-syntax like quotations marks, that is irrelevant. Don't  explicitly give me the answer. 
+syntax like quotations marks, that is irrelevant. Don't explicitly give me the answer. 
 Don't respond back with code examples, just explain it conceptually.
-Rate the responses to the question numerically from 1-5, based on the following criteria:
+You must rate the responses to the question numerically from 1-5, based on the following criteria:
 Communication and clarity
 Analytical Depth
 Adaptability
 Time Management
-All feedback must be based on what interviewers from Google, Amazon, or Meta use.
+All feedback must be based on interview strategies from Google, Amazon, or Meta use.
