@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { makeRequest } from "../../utils/api";
 import { auth, getIdToken } from "../../firebase";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import Results from "../Result/Result";
-import { Button } from "@mui/material";
 
 function HistoryEntry() {
   const location = useLocation();
   const { rowData } = location.state || {};
   const [entryData, setEntryData] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {

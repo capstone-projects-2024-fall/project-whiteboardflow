@@ -11,7 +11,7 @@ const History = () => {
   const [history, setHistory] = useState(null);
   const { questions } = useQuestionContext();
 
-  const rowKeys = ['id', 'title', 'question', 'category', 'difficulty', 'date', 'session_id'];
+  const rowKeys = useMemo(() => ['id', 'title', 'question', 'category', 'difficulty', 'date', 'session_id'], []);
 
   const headers = [
     { id: 'title', numeric: false, disablePadding: true, label: 'Question' },
@@ -46,7 +46,7 @@ const History = () => {
         historyItem.sessionId
       );
     });
-  }, [history, questions]);
+  }, [history, questions, rowKeys]);
 
   // Empty string for Fermi questions
   const difficultyOrder = { Basic: 1, Intermediate: 2, Advanced: 3, "": 4 };

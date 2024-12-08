@@ -12,11 +12,11 @@ import './QuestionSelect.css';
 const QuestionSelect = () => {
   const [selected, setSelected] = useState(-1);
   const [open, setOpen] = useState(false);
-  const [darkMode, setDarkMode] = useOutletContext();
+  const [darkMode] = useOutletContext();
   const [history, setHistory] = useState([]);
   const navigate = useNavigate();
 
-  const rowKeys = ['id', 'questionId', 'title', 'question', 'category', 'difficulty', 'completed'];
+  const rowKeys = useMemo(() => ['id', 'questionId', 'title', 'question', 'category', 'difficulty', 'completed'], []);
 
   const headers = [
     { id: 'completed', numeric: false, disablePadding: true, label: 'Completed' },
@@ -55,7 +55,7 @@ const QuestionSelect = () => {
         checked
       );
     });
-  }, [questions, history]);
+  }, [questions, history, historySet, rowKeys]);
 
   // Empty string for Fermi questions
   const difficultyOrder = { Basic: 1, Intermediate: 2, Advanced: 3, "": 4 };
@@ -135,7 +135,7 @@ const QuestionSelect = () => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Confirm question selection:
           </Typography>
-          {(questions && selected != -1) && (
+          {(questions && selected !== -1) && (
             <>
               <Typography id="modal-modal-description" sx={{ textAlign: 'center', mt: 2 }}>
                 <strong style={{ color: darkMode ? 'white' : '#202124' }}>
@@ -148,8 +148,8 @@ const QuestionSelect = () => {
             </>
           )}
           <div className='button-container'>
-            <Button sx={{ width: "100px", marginTop: '20px', marginRight: '20px'  }} color="error" variant="contained" onClick={handleClose}>Cancel</Button>
-            <Button sx={{ width: "100px", marginTop: '20px'}} variant="contained" onClick={handleNav}>Confirm</Button>
+            <Button sx={{ width: "100px", marginTop: '20px', marginRight: '20px' }} color="error" variant="contained" onClick={handleClose}>Cancel</Button>
+            <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
           </div>
         </Box>
       </Modal>

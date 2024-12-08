@@ -8,9 +8,6 @@ import { auth, provider, signInWithPopup } from '../../firebase';
 import './HomePage.css';
 import '../Avatar/RetroAvatar.css';
 
-import { testWrite, getOneHistory, getAllHistory } from '../../firebase';
-
-
 const HomePage = ({ user}) => {
 
     // eslint-disable-next-line

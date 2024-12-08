@@ -11,12 +11,12 @@ import './OralTest.css';
 function OralTest() {
 	const navigate = useNavigate(); // Initialize navigate hook
 	// eslint-disable-next-line
-	const [darkMode, setDarkMode] = useOutletContext();
+	const [darkMode] = useOutletContext();
 	const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
 	const [isEmpty, setIsEmpty] = useState(true)
 	const [isRecording, setIsRecording] = useState(true)
 	const [isLoading, setIsLoading] = useState(false)
-	const { editor, sendPNGToFirebase } = useWhiteboard();
+	const { sendPNGToFirebase } = useWhiteboard();
 
 	const calculateCompletionTime = () => {
 		const startTime = sessionStorage.getItem("startTime");
