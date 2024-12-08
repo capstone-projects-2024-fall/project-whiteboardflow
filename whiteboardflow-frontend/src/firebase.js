@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore"
+import { getFirestore, doc, setDoc, getDoc} from "firebase/firestore"
 import { makeRequest } from "./utils/api";
 
 const firebaseConfig = {

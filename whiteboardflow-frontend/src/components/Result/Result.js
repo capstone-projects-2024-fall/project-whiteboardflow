@@ -11,7 +11,7 @@ const Results = ({
     oralAnalysis,
     completionTime,
 }) => {
-    const [darkMode, setDarkMode] = useOutletContext();
+    const [darkMode] = useOutletContext();
     const navigate = useNavigate();
     const location = useLocation();
     const isHistory = location.pathname.startsWith('/history/');

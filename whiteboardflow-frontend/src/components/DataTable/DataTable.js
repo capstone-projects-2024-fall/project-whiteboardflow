@@ -27,7 +27,7 @@ export function createData(keys, ...args) {
 
 function EnhancedTableHead(props) {
   const { headers, order, orderBy, onRequestSort } = props;
-  const [darkMode, setDarkMode] = useOutletContext();
+  const [darkMode] = useOutletContext();
 
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -93,9 +93,9 @@ function DataTable({
   const [orderBy, setOrderBy] = React.useState(defaultOrderBy);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [darkMode, setDarkMode] = useOutletContext();
+  const [darkMode] = useOutletContext();
 
-  function descendingComparator(a, b, orderBy) {
+  const descendingComparator = React.useCallback((a, b, orderBy) => {
     // Check for custom comparator from props
     if (customComparators && customComparators[orderBy]) {
       return customComparators[orderBy](a, b);
@@ -105,13 +105,13 @@ function DataTable({
     if (b[orderBy] < a[orderBy]) return -1;
     if (b[orderBy] > a[orderBy]) return 1;
     return 0;
-  }
+  }, [customComparators]);
 
-  function getComparator(order, orderBy) {
+  const getComparator = React.useCallback((order, orderBy) => {
     return order === 'desc'
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy);
-  }
+  }, [descendingComparator]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -133,7 +133,7 @@ function DataTable({
     return [...data]
       .sort(getComparator(order, orderBy))
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-  }, [order, orderBy, page, rowsPerPage, data]);
+  }, [order, orderBy, page, rowsPerPage, data, getComparator]);
 
   const paginationButtonStyles = {
     color: darkMode ? "white" : "#202124",

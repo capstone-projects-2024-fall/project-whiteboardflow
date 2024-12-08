@@ -11,7 +11,7 @@ const History = () => {
   const [history, setHistory] = useState(null);
   const { questions } = useQuestionContext();
 
-  const rowKeys = ['id', 'title', 'question', 'category', 'difficulty', 'date', 'session_id'];
+  const rowKeys = useMemo(() => ['id', 'title', 'question', 'category', 'difficulty', 'date', 'session_id'], []);
 
   const headers = [
     { id: 'title', numeric: false, disablePadding: true, label: 'Question' },
@@ -33,7 +33,8 @@ const History = () => {
         ? question.categories.join(', ')
         : '';
 
-      const day = new Date(parseInt(historyItem.sessionId)).toLocaleString();
+      const rawDate = parseInt(historyItem.sessionId);
+      const displayDate = new Date(rawDate).toLocaleString();
 
       return createData(
         rowKeys,
@@ -42,11 +43,11 @@ const History = () => {
         question.id,
         formattedCategories,
         question.difficulty,
-        day,
-        historyItem.sessionId
+        displayDate,
+        rawDate,
       );
     });
-  }, [history, questions]);
+  }, [history, questions, rowKeys]);
 
   // Empty string for Fermi questions
   const difficultyOrder = { Basic: 1, Intermediate: 2, Advanced: 3, "": 4 };
@@ -56,6 +57,11 @@ const History = () => {
       const aValue = difficultyOrder[a.difficulty] || 4;
       const bValue = difficultyOrder[b.difficulty] || 4;
       return bValue - aValue;
+    },
+    date: (a, b) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      return dateB - dateA;
     },
   };
 
