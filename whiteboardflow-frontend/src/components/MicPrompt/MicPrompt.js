@@ -3,11 +3,13 @@ import { Button } from '@mui/material';
 import "./MicPrompt.css"
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-const recognition = new SpeechRecognition();
+const recognition = SpeechRecognition ? new SpeechRecognition() : null;
 
-recognition.continuous = true;
-recognition.interimResults = true;
-recognition.lang = 'en-US';
+if (recognition) {
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+}
 
 const MicPrompt = ({darkMode, setRecording, setNotRecording, setEmpty, setNotEmpty}) => {
 	const [listening, setListening] = useState(false);

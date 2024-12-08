@@ -1,0 +1,67 @@
+.teddy {
+  max-width: 125px;
+  height: auto;
+  margin-left: 30px;
+}
+
+.browser-container {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.browser-container h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.browser-container p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.browser-container .error-message {
+  font-size: 20px;
+  color: #f44336;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.browser-list {
+  list-style-type: none;
+  padding: 0;
+  display: inline-block;
+  text-align: left;
+  margin-left: 40px;
+}
+
+.browser-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.browser-link {
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.browser-link:hover {
+  text-decoration: underline;
+}
+
+.browser-icon {
+  max-width: 40px;
+  height: auto;
+}
+
+.browser-item span {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #888;
+}

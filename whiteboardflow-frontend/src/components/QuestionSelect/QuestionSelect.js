@@ -148,8 +148,8 @@ const QuestionSelect = () => {
             </>
           )}
           <div className='button-container'>
-            <Button sx={{ width: "100px", marginTop: '20px', marginRight: '20px' }} variant="contained" onClick={handleNav}>Confirm</Button>
-            <Button sx={{ width: "100px", marginTop: '20px' }} variant="contained" onClick={handleClose}>Cancel</Button>
+            <Button sx={{ width: "100px", marginTop: '20px', marginRight: '20px'  }} color="error" variant="contained" onClick={handleClose}>Cancel</Button>
+            <Button sx={{ width: "100px", marginTop: '20px'}} variant="contained" onClick={handleNav}>Confirm</Button>
           </div>
         </Box>
       </Modal>
