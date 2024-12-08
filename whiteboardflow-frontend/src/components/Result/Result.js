@@ -2,84 +2,73 @@ import React, { useEffect, useState } from 'react';
 import { Button, Container, Typography, Box, Paper, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { useOutletContext } from 'react-router-dom'; // Import useNavigate
+import { useOutletContext } from 'react-router-dom';
 import { auth, getOneHistory, getOneQuestion } from "../../firebase";
 import './Results.css';
 import { useLocation } from 'react-router-dom';
 import QuestionDisplay from '../Whiteboard/QuestionDisplay';
 import { useNavigate } from 'react-router-dom';
 
-
 const Results = () => {
-
-    //this gets the sesion ID from the navigation
+    // Get session ID from navigation state
     const { state } = useLocation();
-    console.log(state)
-    const session_id = state
+    const session_id = state;
 
-    // eslint-disable-next-line
+    // State variables
     const [darkMode, setDarkMode] = useOutletContext();
     const navigate = useNavigate();
-
-    //analysis
-    const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of the oral response
-    
-    //image url
+    const [oralAnalysis, setOralAnalysis] = useState(""); // AI analysis of verbal response
+    const [barChart, setBarChart] = useState(""); // Base64 image for bar chart
     const [imageUrl, setImageUrl] = useState(""); // URL for the handwriting image
-   
-    //question
     const [questionJson, setQuestionJson] = useState(null); // Question object
-    
-    // completion time
     const [completionTime, setCompletionTime] = useState(""); // Formatted completion time
-
-
-    //voice transription
-    const [transcript, setTranscript] = useState("")
-
+    const [transcript, setTranscript] = useState(""); // Verbal transcript
 
     useEffect(() => {
-   
-        //getting the results from the database
-        console.log(session_id)
-        getOneHistory(auth.currentUser.uid, session_id.toString()).then((res) => {
-            const dbResponse = res;
+        // Fetch results from the database
+        getOneHistory(auth.currentUser.uid, session_id.toString())
+            .then((res) => {
+                const dbResponse = res;
 
-            //setting verbal response
-            const aiResponse = dbResponse.response || "No analysis available";
-            setOralAnalysis(aiResponse);
+                // Set AI response analysis
+                const aiResponse = dbResponse.response || "No analysis available";
+                setOralAnalysis(aiResponse);
 
-            // setting transcript
-            setTranscript(dbResponse.transcript)
+                // Set transcript
+                setTranscript(dbResponse.transcript);
 
-            //getting question from question db based on question id in result
-            const savedQuestion = getOneQuestion(dbResponse.questionID);
-            if (savedQuestion) {
-                setQuestionJson(savedQuestion); 
-            }
+                // Set bar chart image (if available)
+                if (dbResponse.barChart) {
+                    setBarChart(dbResponse.barChart); // Assume base64 string
+                }
 
-            //this is all getting the url
-            const userId = auth.currentUser.uid;
-            const storage = getStorage();
-            const storageRef = ref(storage, `user-files/${userId}/${dbResponse.sessionId}/static.png`);
-            getDownloadURL(storageRef)
-                .then((url) => {
-                    setImageUrl(url);
-                })
-                .catch((error) => {
-                    console.error("Error fetching image URL: ", error);
+                // Get question data
+                const savedQuestion = getOneQuestion(dbResponse.questionID);
+                if (savedQuestion) {
+                    setQuestionJson(savedQuestion);
+                }
+
+                // Get handwriting image URL from Firebase
+                const userId = auth.currentUser.uid;
+                const storage = getStorage();
+                const storageRef = ref(storage, `user-files/${userId}/${dbResponse.sessionId}/static.png`);
+                getDownloadURL(storageRef)
+                    .then((url) => {
+                        setImageUrl(url);
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching image URL: ", error);
+                    });
+
+                // Set completion time
+                setCompletionTime(dbResponse.completionTime);
+            })
+            .catch((error) => {
+                console.error("Error retrieving history from database: ", error);
             });
+    }, [session_id]);
 
-            //completion time
-            setCompletionTime(dbResponse.completionTime)
-
-        }).catch((error) => {
-            console.error("Error retrieving history from database: ", error);
-        });
-
-    }, []);
-
-  const handleNav = (path) => {
+    const handleNav = (path) => {
         if (path === '/' || path === '/questionSelect') {
             sessionStorage.clear();
         } else if (path === '/whiteboard') {
@@ -89,16 +78,14 @@ const Results = () => {
         }
 
         navigate(path);
-    }
+    };
 
     return (
         <Container maxWidth="lg" style={{ textAlign: 'left', paddingTop: "70px", padding: '30px', backgroundColor: darkMode ? '#202124' : 'white' }}>
             <Typography variant="h4" style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', color: darkMode ? "white" : '#1976d2' }}>
-
                 Practice Results Dashboard
             </Typography>
             <Grid container spacing={3}>
-
                 {/* Practice Question */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : 'white', height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -106,7 +93,7 @@ const Results = () => {
                             Practice Question
                         </Typography>
                         <Box style={{ padding: '10px', backgroundColor: darkMode ? '#202124' : "#fff", borderRadius: '8px', overflowY: 'auto', flex: 1 }}>
-                            <QuestionDisplay darkMode = {darkMode} question={questionJson} />
+                            <QuestionDisplay darkMode={darkMode} question={questionJson} />
                         </Box>
                     </Paper>
                 </Grid>
@@ -114,7 +101,7 @@ const Results = () => {
                 {/* Handwriting Image */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} style={{ padding: '20px', borderRadius: '10px', backgroundColor: darkMode ? '#202124' : '#fff', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                        <Typography variant="h6" style={{ textAlign:'center', fontWeight: 'bold', color: darkMode ? '#fff' : '#1976d2' }} gutterBottom>
+                        <Typography variant="h6" style={{ textAlign: 'center', fontWeight: 'bold', color: darkMode ? '#fff' : '#1976d2' }} gutterBottom>
                             Your Handwritten Response
                         </Typography>
                         <Box textAlign="center" style={{ paddingTop: '10px', flex: 1 }}>

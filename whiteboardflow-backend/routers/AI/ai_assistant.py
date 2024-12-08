@@ -90,12 +90,12 @@ def get_result(data: AIData):
 def get_ai_response(data: AIData, context_file: str):
     """
     Generates a response from ChatGPT based on the inputted data and chat
-    context. 
+    context.
 
     Args:
         data (AIData): The AI-related data, including the user's question,
             image (base64-encoded), and transcript (optional), for which the AI
-            will generate a response. 
+            will generate a response.
         context_file (str): The filename of the context file containing a chat
         context for how the AI should respond.
 
@@ -107,9 +107,9 @@ def get_ai_response(data: AIData, context_file: str):
             error and returns `None`.
     """
     filename = os.path.join(dir, f"contexts/{context_file}.txt")
-    
+
     transcript = ""
-    
+
     if isinstance(data, AIData):
         transcript = data.transcript
 
@@ -142,7 +142,7 @@ def get_ai_response(data: AIData, context_file: str):
                 ],
             },
         ],
-        max_tokens=600,
+        max_tokens=1000,
     )
 
     return {"message": response.choices[0].message.content}
