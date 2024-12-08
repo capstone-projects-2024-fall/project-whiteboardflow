@@ -112,7 +112,7 @@ const Whiteboard = () => {
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    });
+    }, [editor]);
 
     // Function to handle export and submission of editor content
     const handleExportAndSubmit = async () => {
