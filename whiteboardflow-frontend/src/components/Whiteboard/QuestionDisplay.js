@@ -32,7 +32,6 @@ const QuestionDisplay = ({darkMode}) => {
 
     return (
         <div className={darkMode ? "question-container-dark" : "question-container-light"}>
-            {console.log("Question Display " + darkMode)}
             {/* Render Question Text */}
             {question.question_text && (
                 <div className={darkMode ? "question-dark" : "question-light"}><strong>Question:</strong> {question.question_text}</div>

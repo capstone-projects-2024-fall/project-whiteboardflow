@@ -1,22 +1,44 @@
 import { Resizable } from 're-resizable';
-import { Box } from '@mui/material';
-import React, { useState, useLayoutEffect} from 'react';
+import { styled } from '@mui/material/styles';
+import { Box, Button } from '@mui/material';
+import React, { useState, useLayoutEffect } from 'react';
 import HintButton from './HintButton';
 import AvatarToggleButton from '../Avatar/AvatarToggleButton';
 import QuestionDisplay from './QuestionDisplay';
 
-const QuestionArea = ({ sendPNGToFirebase, darkMode}) => {
+const HandleButton = styled(Button)(({ theme }) => ({
+    minHeight: '80px',
+    minWidth: '20px',
+    padding: '0 8px',
+    borderRadius: '2px',
+    backgroundColor: 'darkgrey',
+    '&:hover': {
+        backgroundColor: 'grey'
+    }
+}));
+
+const QuestionArea = ({ sendPNGToFirebase, darkMode }) => {
     const minWidth = 15;
-    const [width, setWidth] = useState('50%'); // Start with default visible width
-    const [isVisible, setIsVisible] = useState(true); // Manage visibility state
+    const [width, setWidth] = useState('50%');
+    const [isVisible, setIsVisible] = useState(true);
 
     useLayoutEffect(() => {
-        setIsVisible(width > '0px');
+        setIsVisible(width !== '0px');
     }, [width]);
+
+    const toggleVisibility = () => {
+        if (isVisible) {
+            setWidth('0px');
+            setIsVisible(false);
+        } else {
+            setWidth('50%');
+            setIsVisible(true);
+        }
+    };
 
     return (
         <Resizable
-            defaultSize={{
+            size={{
                 width: width,
                 height: '100vh'
             }}
@@ -46,7 +68,7 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode}) => {
             onResizeStop={(e, direction, ref, d) => {
                 const finalWidth = parseInt(ref.style.width, 10);
                 if (finalWidth > 0 && finalWidth < minWidth) {
-                    ref.style.width = `${minWidth}px`; // Ensure it snaps back to minWidth
+                    ref.style.width = `${minWidth}px`;
                     setWidth(`${minWidth}px`);
                 }
             }}
@@ -54,14 +76,45 @@ const QuestionArea = ({ sendPNGToFirebase, darkMode}) => {
                 right: {
                     width: '20px',
                     background: 'rgba(0, 0, 0, 0.1)',
-                    cursor: 'ew-resize'
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
                 }
             }}
             handleComponent={{
-                right: <div style={{ width: '15px', cursor: 'ew-resize' }}></div>
+                right: (
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            height: '100%',
+                            cursor: 'ew-resize',
+                            pointerEvents: 'auto'
+                        }}
+                    >
+                        <HandleButton
+                            variant="contained"
+                            size="small"
+                            // Stop the mousedown event so it won't trigger resizing
+                            onMouseDown={(e) => {
+                                e.stopPropagation();
+                            }}
+                            onClick={(e) => {
+                                console.log("clicked");
+                                e.stopPropagation();
+                                e.preventDefault();
+                                toggleVisibility();
+                            }}
+                        >
+                            {isVisible ? '<' : '>'}
+                        </HandleButton>
+                    </div>
+                )
             }}
         >
-            {console.log("Question Area " + darkMode)}
             {isVisible && (
                 <Box sx={{ padding: '20px', height: '93vh', overflowY: isVisible ? 'auto' : 'hidden' }}>
                     <QuestionDisplay darkMode = {darkMode} />
