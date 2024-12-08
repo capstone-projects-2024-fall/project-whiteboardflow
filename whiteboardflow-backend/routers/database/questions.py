@@ -1,11 +1,10 @@
 import random
 
+from config.firebase_config import db
 from fastapi import APIRouter
-from firebase_admin import firestore
 
 router = APIRouter()
 
-db = firestore.client()
 questions_ref = db.collection("questions")
 docs = questions_ref.stream()
 question_list = [doc.to_dict() for doc in docs]

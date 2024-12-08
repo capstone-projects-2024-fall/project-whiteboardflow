@@ -6,13 +6,13 @@ import Whiteboard from './components/Whiteboard/Whiteboard';
 import OralTest from './components/OralTest/OralTest';
 import Results from './components/Result/Result';
 import QuestionSelect from './components/QuestionSelect/QuestionSelect';
+import History from './components/History/History'
+import HistoryEntry from './components/History/HistoryEntry';
+import UnsupportedBrowser from './components/UnsupportedBrowser/UnsupportedBrowser';
 import { auth } from './firebase';
 import { AvatarProvider } from './components/Avatar/AvatarContext';
 import { QuestionProvider } from './components/QuestionSelect/QuestionContext';
-import UnsupportedBrowser from './components/UnsupportedBrowser/UnsupportedBrowser';
-
-import { SessionIdProvider } from './SessionIdContext';
-import History from './components/History/History'
+import { WhiteboardProvider } from './components/Whiteboard/WhiteboardContext';
 
 
 function Main() {
@@ -51,26 +51,25 @@ function Main() {
 
     return (
         <Router>
-            <AvatarProvider>
-                <QuestionProvider>
-
-                    <SessionIdProvider>
+            <WhiteboardProvider>
+                <AvatarProvider>
+                    <QuestionProvider>
                         <Routes>
                             <Route element={<Layout user={user} />}>
                                 <Route index element={<HomePage user={user} />} />
                                 {/* Only allow access to these routes if user is logged in */}
+                                <Route path="questionSelect" element={<PrivateRoute><QuestionSelect /></PrivateRoute>} />
+                                <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
                                 <Route path="OralTest" element={<PrivateRoute><OralTest /></PrivateRoute>} />
                                 <Route path="results" element={<PrivateRoute><Results /></PrivateRoute>} />
                                 <Route path="whiteboard" element={<PrivateRoute><Whiteboard /></PrivateRoute>} />
-                                <Route path="questionSelect" element={<PrivateRoute><QuestionSelect /></PrivateRoute>} />
                                 <Route path="history" element={<PrivateRoute><History /></PrivateRoute>} />
+                                <Route path="history/:entry_id" element={<PrivateRoute><HistoryEntry /></PrivateRoute>} />
                             </Route>
                         </Routes>
-                    </SessionIdProvider>                   
-
-
-                </QuestionProvider>
-            </AvatarProvider>
+                    </QuestionProvider>
+                </AvatarProvider>
+            </WhiteboardProvider>
         </Router>
     );
 }

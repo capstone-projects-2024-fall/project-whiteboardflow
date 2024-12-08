@@ -4,25 +4,25 @@
   margin-left: 30px;
 }
 
-.container {
+.browser-container {
   text-align: center;
   padding: 20px;
   font-family: Arial, sans-serif;
   color: #333;
 }
 
-.container h1 {
+.browser-container h1 {
   font-size: 36px;
   margin-bottom: 20px;
 }
 
-.container p {
+.browser-container p {
   font-size: 18px;
   color: #555;
   margin-bottom: 5px;
 }
 
-.container .error-message {
+.browser-container .error-message {
   font-size: 20px;
   color: #f44336;
   font-weight: bold;

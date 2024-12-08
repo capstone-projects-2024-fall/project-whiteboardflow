@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore"
+import { makeRequest } from "./utils/api";
 
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -10,7 +11,7 @@ const firebaseConfig = {
 	storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
 	messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
 	appId: process.env.REACT_APP_FIREBASE_APP_ID,
- 	measurementId: process.env.REACT_APP_MEASUREMENT_ID
+	measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 let app;
@@ -26,9 +27,6 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app, 'userhistory');
 const qdb = getFirestore(app);
-
-console.log(db)
-
 
 async function getIdToken() {
 	const user = auth.currentUser;
@@ -79,8 +77,6 @@ async function getOneQuestion(questionId) {
 	}
 }
 
-
-
 async function testWrite() {
 	await setDoc(doc(db, "user_history", 'test'), {
 		test: "hi"
@@ -88,23 +84,15 @@ async function testWrite() {
 }
 
 async function getAllHistory() {
-
-	// console.log(auth.currentUser.uid)
-
-	const querySnapshot = await getDocs(collection(db, auth.currentUser.uid));
-
-		// doc.data() is never undefined for query doc snapshots
-		return querySnapshot.docs.map(doc => doc.data());
-
+	const idToken = await getIdToken();
+	const response = await makeRequest('/history/all', 'GET', {}, idToken);
+	return response.message;
 }
 
 async function getAllQuestions() {
-	const querySnapshot = await getDocs(collection(qdb, "questions"));
-
-		// doc.data() is never undefined for query doc snapshots
-		return querySnapshot.docs.map(doc => doc.data());
+	const response = await makeRequest('/questions/all', 'GET');
+	return response.question_list;
 }
-
 
 export { auth, provider, signInWithPopup, signOut, getIdToken, testWrite, userHistoryWrite, getOneHistory, getOneQuestion, getAllHistory, getAllQuestions }; // Make sure signOut is exported
 export default app;
