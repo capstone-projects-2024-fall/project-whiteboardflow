@@ -19,7 +19,7 @@ import './css/custom-menu-action.css';
 
 const Whiteboard = () => {
     // Refs for DOM elements and editor instance
-    const { editor, sendPNGToFirebase, isLoaded, setIsLoaded } = useWhiteboard();
+    const { editor, sendPNGToFirebase } = useWhiteboard();
     const editorElement = useRef(null);
     const [isQuestionVisible, setQuestionVisible] = useState(true); // State to toggle question visibility
     const [modalVisible, setModalVisible] = useState(false);
@@ -96,7 +96,6 @@ const Whiteboard = () => {
                 };
                 editor.current = new window.iink.Editor(editorElement.current, options);
                 await editor.current.initialize();
-                setIsLoaded(true);
                 // deleteElements();
                 if (!editor.current) {
                     console.error("Editor is not initialized.");
@@ -113,7 +112,7 @@ const Whiteboard = () => {
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, [isLoaded, editor, setIsLoaded]);
+    });
 
     // Function to handle export and submission of editor content
     const handleExportAndSubmit = async () => {
