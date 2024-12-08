@@ -73,7 +73,7 @@ def get_ai_response(data: AIData, context_file: str):
         return
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": chat_context},
             {
