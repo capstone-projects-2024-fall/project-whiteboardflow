@@ -21,7 +21,7 @@ const browsers = [
 
 export default function UnsupportedBrowser() {
   return (
-    <div className="container">
+    <div className="browser-container">
       <h1>Browser Not Supported</h1>
       <img
         className='teddy'
