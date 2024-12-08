@@ -1,5 +1,5 @@
 export const makeRequest = async (endpoint, method = 'GET', data = {}, idToken = null, options = {}) => {
-  const url = `http://localhost:8000${endpoint}`;
+  const url = `https://project-whiteboardflow-1.onrender.com${endpoint}`;
   const headers = {
     'Content-Type': 'application/json',
     ...options.headers,
