@@ -14,15 +14,16 @@ client = openai.OpenAI()
 class HintData(BaseModel):
     """
     A data model class to represent the data passed when the user requests a
-    hint. 
-    
+    hint.
+
     Attributes:
         token (str): Token used to identify user through their Firebase user
-            ID. 
+            ID.
         question (str): The interview question.
         image (str): The image received from Firebase, base64 encoded as a
             string.
     """
+
     token: str
     session: str
     question: str
@@ -33,11 +34,12 @@ class AIData(HintData):
     """
     AIData extends HintData to include a transcript of the user's verbal
     explanation.
-    
+
     Attributes:
         transcript (str): The transcript text from the user's verbal
-            explanation, used as additional context for the AI. 
+            explanation, used as additional context for the AI.
     """
+
     transcript: str
 
 
@@ -48,7 +50,7 @@ dir = os.path.dirname(__file__)
 def get_hint(data: HintData):
     """
     Processes a hint request by verifying the user token, retrieving an
-    associated image from Firebase, and generating a hint response. 
+    associated image from Firebase, and generating a hint response.
 
     Args:
         data (HintData): The hint request data, including a Firebase
@@ -142,7 +144,7 @@ def get_ai_response(data: AIData, context_file: str):
                 ],
             },
         ],
-        max_tokens=1000,
+        max_tokens=600,
     )
 
     return {"message": response.choices[0].message.content}
@@ -151,15 +153,15 @@ def get_ai_response(data: AIData, context_file: str):
 def get_firebase_image(user_id, session_id):
     """
     Retrieves an image file associated with the specified user from Firebase
-    Storage. 
+    Storage.
 
     Args:
         user_id (str): The unique identifier for the user whose image is being
-            retrieved. 
+            retrieved.
 
     Returns:
         bytes: The image data as a byte array, downloaded from Firebase
-            Storage. 
+            Storage.
     """
     bucket = storage.bucket()
     blob = bucket.blob(f"user-files/{user_id}/{session_id}/static.png")
