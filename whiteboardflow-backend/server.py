@@ -12,7 +12,7 @@ from routers.database.history import router as history_router
 
 app = FastAPI(debug=True)
 
-origins = ["http://localhost:3000", "localhost:3000"]
+origins = ["https://project-whiteboardflow-eowa.vercel.app"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,6 +27,6 @@ app.include_router(questions_router, prefix="/questions", tags=["questions"])
 app.include_router(history_router, prefix="/history", tags=["history"])
 
 
-if __name__ == "__main__":
-    # TODO Remove reload parameter in production
-    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
+#if __name__ == "__main__":
+# TODO Remove reload parameter in production
+#   uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=True)
