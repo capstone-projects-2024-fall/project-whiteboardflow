@@ -51,17 +51,15 @@ slug: /
    - Result: Seamless OAuth verification and creation of a new account.
 
 
-
-
-
-### **Use Case 6: User Practice History**
+### **Use Case 5: User Practice History**
 
 1. **History Retrieval and Display**
-
    - Mock Inputs: User’s practice history.
-
    - Result: Display of past questions, AI feedback, and speech emotion scores.
 
+2. **Sort History**
+   - Mock Inputs: Sort criteria (e.g., date, question type, or score).
+   - Result: Display of Sorted results according to user input.
 
 ### **Use Case 7: Hints**
 
