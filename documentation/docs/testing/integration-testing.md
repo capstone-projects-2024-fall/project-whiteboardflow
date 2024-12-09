@@ -77,3 +77,12 @@ slug: /
    - Mock Inputs: User who is not logged in clicks the **Get Started** button or attempts to access the app.
    - Result:
      - The user is redirected to the login page if they are not authenticated.
+
+
+### **Use Case 8: Dark Mode**
+
+1. **Enable Dark Mode**
+   - Mock Inputs: User toggles the **Dark Mode** switch in the settings.
+   - Result:
+     - The app interface transitions to a dark theme.
+     - All UI components, including text, buttons, and backgrounds, adjust to maintain readability.
