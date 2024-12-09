@@ -40,19 +40,15 @@ slug: /
 ### **Use Case 3: AI Assistant**
 
 1. **Hint Request Processing**
-
    - Mock Inputs: User's current answer progress.
-
    - Result: Relevant hint or leading question generated based on progress.
 
 
 ### **Use Case 4: Account Creation**
 
 1. **OAuth Account Linking**
-
-   - Mock Inputs: User credentials.
-
-   - Result: Successful OAuth verification and new account creation.
+   - Mock Inputs: User credentials 
+   - Result: Seamless OAuth verification and creation of a new account.
 
 
 ### **Use Case 5: Account Deletion**
