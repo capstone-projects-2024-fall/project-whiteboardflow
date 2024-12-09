@@ -46,12 +46,6 @@ sidebar_position: 4
     - Log-out option.
     - Previous questions and results.
 
-### Account Preferences
-- The preferences page will allow users to:
-  - Change the Facebook or Google account linked to their profile.
-  - Delete their account.
-  - Adjust language settings.
-
 ### Account Deletion
 - The application will allow secure account deletion, which includes:
   - Re-authentication through OAuth (Facebook or Google) for security.
