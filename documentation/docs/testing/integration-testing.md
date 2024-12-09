@@ -51,13 +51,7 @@ slug: /
    - Result: Seamless OAuth verification and creation of a new account.
 
 
-### **Use Case 5: Account Deletion**
 
-1. **OAuth Confirmation and Deletion**
-
-   - Mock Inputs: Confirmation of account deletion.
-
-   - Result: Account and associated data are permanently deleted.
 
 
 ### **Use Case 6: User Practice History**
