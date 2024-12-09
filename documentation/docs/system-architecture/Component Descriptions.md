@@ -30,7 +30,7 @@ Routing is defined in `Main.js` and managed by **React Router**, enabling naviga
 
 ---
 
-## Backend and Database
+## Database
 
 **Technology**: Firebase Authentication and Firestore
 
@@ -41,23 +41,20 @@ Routing is defined in `Main.js` and managed by **React Router**, enabling naviga
 
 ---
 
+
 ## Hosting and Deployment
 
-**Technology**: Vercel
+**Technology**: Vercel and Render
 
-The app is hosted on **Vercel**, which offers optimized static and dynamic content delivery, automatic SSL, and continuous deployment via GitHub.
+- The **frontend** is hosted on **Vercel**, providing optimized static and dynamic content delivery, automatic SSL, and continuous deployment via GitHub.
+- The **backend** is hosted on **Render**, ensuring reliable and scalable server-side operations with continuous deployment from Git repositories.
+
 
 ### Key Features:
 - **CI/CD**: Automatically deploys changes from GitHub upon each push, ensuring the latest version is live.
 - **Performance Optimization**: Provides global CDN and analytics for monitoring traffic and optimizing load times.
 
 ---
-
-## Real-Time Communication
-
-**Technology**: WebSocket
-
-The app leverages **WebSocket** for real-time communication, essential for features like collaborative whiteboarding and live feedback.
 
 ### Key Features:
 - **Bidirectional Communication**: Allows instant updates between clients and server.
