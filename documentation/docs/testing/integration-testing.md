@@ -22,16 +22,19 @@ slug: /
 ### **Use Case 2: Digital Whiteboard**
 
 1. **Drawing on Whiteboard**
-
    - Mock Inputs: Stylus or touchscreen input.
-
-   - Result: Display of accurate pen strokes on the digital whiteboard.
+   - Result: Precise pen strokes reflecting real-time input with no lag.
 
 2. **Undo/Redo Functionality**
-
    - Mock Inputs: Sequence of drawing, undo and redo commands.
-
    - Result: The whiteboard restores previous strokes correctly.
+
+3. **Save and Export Whiteboard**
+   - Mock Inputs: User clicks the **Submit** button after completing their work on the whiteboard.
+   - Result:
+     - The whiteboard content is saved in Firebase.
+     - A confirmation message is logged in the browser console upon successful saving.
+     - If there’s an error during the process, an error message is logged in the console with details for troubleshooting.
 
 
 ### **Use Case 3: AI Assistant**
