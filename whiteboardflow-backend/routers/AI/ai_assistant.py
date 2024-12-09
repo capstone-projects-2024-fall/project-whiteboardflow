@@ -94,7 +94,7 @@ def get_ai_response(data: AIData, context_file: str):
                 ],
             },
         ],
-        max_tokens=600,
+        max_tokens=1000,
     )
 
     return {"message": response.choices[0].message.content}
