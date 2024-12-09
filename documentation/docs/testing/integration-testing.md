@@ -12,8 +12,8 @@ slug: /
    - Result: Confirmation of successful login and redirection to the mock interview dashboard.
 
 2. **Performance Analytics**
-   - **Mock Inputs**: User's responses, completion time, and accuracy.
-   - **Result**: Dashboard showing comprehensive performance metrics such as response time, correctness, and overall rating.
+   - Mock Inputs: User's responses, completion time, and accuracy.
+   - Result: Dashboard showing comprehensive performance metrics such as response time, correctness, and overall rating.
 
 3. **Feedback Retrieval**
    - Mock Inputs: User’s written and oral answers.
@@ -69,6 +69,7 @@ slug: /
    - Result:
      - User session is terminated securely.
      - User is redirected to the login page.
+
 
 ### **Use Case 7: Login Requirement for Access**
 
