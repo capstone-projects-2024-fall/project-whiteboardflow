@@ -5,6 +5,11 @@ slug: /
 
 # Integration Tests
 
+## **How Tests Are Being Conducted**
+
+   All integration tests are being conducted using **Testim**, a robust automated testing platform. Detailed test results and cases have been documented in an attached **Excel sheet** for reference and tracking.
+
+
 ### Use Case 1: Mock Interview
 
 1. **Login and Begin the Interview**
