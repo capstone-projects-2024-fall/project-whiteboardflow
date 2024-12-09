@@ -61,19 +61,18 @@ slug: /
    - Mock Inputs: Sort criteria (e.g., date, question type, or score).
    - Result: Display of Sorted results according to user input.
 
-### **Use Case 7: Hints**
 
-1. **Hint Generation Based on Progress**
+### **Use Case 6: Logout**
 
-   - Mock Inputs: Current answer.
+1. **Logout Functionality**
+   - Mock Inputs: User clicks the **Logout** button or link.
+   - Result:
+     - User session is terminated securely.
+     - User is redirected to the login page.
 
-   - Result: AI assistant provides relevant hint or leading question.
+### **Use Case 7: Login Requirement for Access**
 
-
-### **Use Case 8: Unexpected Exit**
-
-1. **Session Restoration**
-
-   - Mock Inputs: User data saved before exit.
-
-   - Result: Restore whiteboard content and timer.
+1. **Redirect to Login**
+   - Mock Inputs: User who is not logged in clicks the **Get Started** button or attempts to access the app.
+   - Result:
+     - The user is redirected to the login page if they are not authenticated.
