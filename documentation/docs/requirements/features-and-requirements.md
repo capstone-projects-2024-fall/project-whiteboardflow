@@ -35,24 +35,16 @@ sidebar_position: 4
   - Offer hints or feedback upon request based on the user’s progress.
 
 ### Account Sign-Up and Login
-- Users will sign up and log in using Facebook or Google authentication.
+- Users will sign up and log in using Google authentication.
 - User profiles will be securely stored in a Firebase database.
 - After signing in, users will be directed to the home page.
 
 ### Home Page
 - The application’s home page will feature:
-  - A personalized greeting.
   - A button to start a mock interview.
   - A navigation menu (hamburger menu) with:
-    - User preferences.
     - Log-out option.
     - Previous questions and results.
-
-### Account Preferences
-- The preferences page will allow users to:
-  - Change the Facebook or Google account linked to their profile.
-  - Delete their account.
-  - Adjust language settings.
 
 ### Account Deletion
 - The application will allow secure account deletion, which includes:
