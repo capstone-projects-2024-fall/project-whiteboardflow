@@ -86,3 +86,12 @@ slug: /
    - Result:
      - The app interface transitions to a dark theme.
      - All UI components, including text, buttons, and backgrounds, adjust to maintain readability.
+
+
+### Use Case 9: Toggle to Hide Teddy 
+
+1. **Toggle Visibility**
+   - Mock Inputs: User clicks the **Toggle Teddy** button.
+   - Result:
+     - Teddy assistant is hidden from the interface.
+     - Clicking the button again makes Teddy reappear.
