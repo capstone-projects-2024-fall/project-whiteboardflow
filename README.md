@@ -7,6 +7,11 @@
 [![Documentation Website Link](https://img.shields.io/badge/-Documentation%20Website-brightgreen)](https://capstone-projects-2024-fall.github.io/project-whiteboardflow/)
 </div>
 
+<p align="center" justifyContent="space-between" display="flex">
+  <img src="https://github.com/user-attachments/assets/36a4cbaa-2f41-4d56-ae7f-29cc0d8e0515" alt="Image 1" width="45%" style={{ marginRight: "30px"}}/>
+  <img src="https://github.com/user-attachments/assets/a2bda6fb-1403-4cb8-8d8c-4878f4f9a65b" alt="Image 2" width="45%" />
+</p>
+
 ## Keywords
 
 Section 001, coding exercises, speech-to-text/dictation software, handwriting
