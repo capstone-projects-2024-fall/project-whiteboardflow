@@ -24,8 +24,7 @@ def get_hint(data: HintData, current_user: dict = Depends(get_current_user)):
         data (HintData): The hint request data.
 
     Returns:
-        dict: The hint response generated from OpenAI
-        API.
+        dict: The hint response generated from OpenAI API.
     """
     image_data = get_firebase_image(current_user.uid)
     data.image = base64.b64encode(image_data).decode("utf-8")
@@ -41,7 +40,7 @@ def get_result(data: AIData, current_user: dict = Depends(get_current_user)):
 
 def get_ai_response(data: AIData, context_file: str):
     """
-    Generates a response from ChatGPT based on the inputted data and chat
+    Generates a response from ChatGPT based on the input data and chat
     context.
 
     Args:
