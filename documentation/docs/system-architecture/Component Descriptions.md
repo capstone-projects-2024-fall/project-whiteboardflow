@@ -37,7 +37,7 @@ Routing is defined in `Main.js` and managed by **React Router**, enabling naviga
 **Firebase** provides authentication and a NoSQL database (Firestore) for real-time data management.
 
 - **Authentication**: Firebase Authentication handles user sessions and login/logout functionality, especially with Google Sign-In.
-- **Database**: Firestore enables storing and syncing user data in real time, allowing components like `BackEndTest` to fetch and display data dynamically.
+- **Database**: Firestore enables storing and syncing user data in real time, allowing components like `QuestionArea` to fetch and display data dynamically.
 
 ---
 
@@ -102,7 +102,7 @@ The **iink-ts** library is used for digital whiteboard functionality, providing 
 ## Developer Tooling and Workflow
 
 - **GitHub**: Version control is managed through GitHub, facilitating collaboration and version tracking.
-- **JIRA**: Used for project management and task tracking, enabling efficient workflow and project organization.
+- **Jira**: Used for project management and task tracking, enabling efficient workflow and project organization.
 - **Linting and Formatting**: ESLint and Prettier enforce consistent code formatting and quality.
 - **Babel and Webpack**: Ensure compatibility with modern JavaScript features and optimize assets for Vercel deployment.
 
@@ -114,6 +114,6 @@ This tech stack ensures a feature-rich, scalable, and interactive application th
 
 - **React + Firebase + Vercel**: A powerful setup for real-time interactivity, user management, and rapid deployment.
 - **Material-UI + Framer Motion**: Delivers a polished UI with animations and customizable themes.
-- **GitHub + JIRA + Vercel**: Effective project management and deployment flow, supporting version control, issue tracking, and CI/CD for automated production updates.
+- **GitHub + Jira + Vercel**: Effective project management and deployment flow, supporting version control, issue tracking, and CI/CD for automated production updates.
 
 This documentation provides an overview of how each component and technology fits into the application to deliver an engaging, efficient, and scalable user experience.
