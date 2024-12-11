@@ -100,3 +100,5 @@ slug: /
    - Result:
      - Teddy assistant is hidden from the interface.
      - Clicking the button again makes Teddy reappear.
+
+<p>Here is the link to the file: <a href="https://drive.google.com/file/d/1lAIAgCy66ZCI_M9GVb6Iq1dGMLhlUrzr/view?usp=sharing" target="_blank" rel="noopener noreferrer">View CSV File</a></p>
