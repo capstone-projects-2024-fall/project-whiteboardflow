@@ -28,6 +28,50 @@ graph TD
 
 ```
 
+## Back End Diagram
+
+```mermaid
+
+graph TD
+    %% Main Components
+    A[FastAPI Server] --> B[ai_assistant.py]
+    A --> C[questions.py]
+    A --> D[history.py]
+
+    %% Firebase Integration
+    B --> F(Firebase Config)
+    C --> F
+    D --> F
+    G[Firebase Storage] --> F
+
+    %% Supporting Components
+    B --> H[base_models.py]
+    B --> I[utils.py]
+    A --> J[dependencies.py]
+
+    %% Description of Each Component
+    subgraph Backend
+        A
+        B
+        C
+        D
+        F
+    end
+
+    subgraph Firebase
+        G
+    end
+
+    subgraph Helpers
+        H
+        I
+        J
+    end
+
+```
+
+
+
 ## Components diagrams
 
 ```mermaid
