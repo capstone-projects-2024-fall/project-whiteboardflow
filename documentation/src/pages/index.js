@@ -18,7 +18,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="https://project-whiteboardflow-eowa.vercel.app/">
-            Whiteboard Assistance
+            Whiteboard Assistant
           </Link>
         </div>
       </div>

@@ -1,7 +1,7 @@
 from firebase_admin import storage
 
 
-def get_firebase_image(user_id, session_id=None):
+def get_firebase_image(user_id: str, session_id: str=None):
     """
     Retrieves an image file associated with the specified user from Firebase
     Storage.

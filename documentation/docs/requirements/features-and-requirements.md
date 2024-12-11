@@ -9,8 +9,14 @@ sidebar_position: 4
 ### Interview Questions
 - The application will include a database of interview questions for users to answer.
 - The question categories will include:
-  - **Fermi Approximation questions** (estimation and problem-solving based on limited information).
-  - **Coding interview questions**.
+  - Fermi approximation questions (estimation and problem-solving based on limited information).
+  - Conditional statements
+  - Loops
+  - Strings
+  - Arrays
+  - Data structures
+  - Algorithms
+  - Recursion
 
 ### Question Process
 - The application will follow a structured question flow:
@@ -48,7 +54,7 @@ sidebar_position: 4
 
 ### Account Deletion
 - The application will allow secure account deletion, which includes:
-  - Re-authentication through OAuth (Facebook or Google) for security.
+  - Re-authentication through OAuth (Google) for security.
   - A confirmation email.
   - Removal of all user records from the Firebase database.
 
@@ -60,7 +66,7 @@ sidebar_position: 4
 ### AI Assistant Flexibility
 - The AI assistant will:
   - Provide specific feedback tailored to the user’s work.
-  - Offer rephrased hints or feedback upon the user’s request.
+  - Offer hints and feedback upon the user’s request.
 
 ### Accessibility
 - The application will be accessible through:
@@ -72,10 +78,4 @@ sidebar_position: 4
 - The application will support both dark and light modes.
 
 ### Security
-- The application will employ secure data solutions, such as Firebase and OAuth, for user authentication and data management.
-
-### Resiliency
-- To ensure data safety:
-  - Users will be prompted for confirmation before navigating away from a page if they have unsaved work.
-  - The application will automatically save progress within a question to handle unexpected exits.
-
+- The application will employ secure data solutions, such as Firebase, OAuth, and bearer token authentication for user authentication and data management.

@@ -6,9 +6,9 @@ sidebar_position: 5
 
 ## Use Case 1: Mock Interview
 
-**Actor**: A recent graduate who is somewhat uncertain about their problem-solving skills and wants to prepare for upcoming job interviews by practicing on WhiteboardFlow.
+**Actor**: A recent graduate is somewhat uncertain about their problem-solving skills and wants to prepare for upcoming job interviews by practicing on Whiteboard Assistant.
 
-**Pre-Condition**: The user is logged into the WhiteboardFlow application and on the main dashboard.
+**Pre-Condition**: The user is logged into the Whiteboard Assistant application and is on the main dashboard.
 
 **Post-Condition**: The user receives immediate feedback on their answer.
 
@@ -48,31 +48,32 @@ sidebar_position: 5
 ### Main Success Scenario
 1. The user selects a question to answer.
 2. The user becomes unsure of how to proceed.
-3. The user clicks a "Request Help" button.
+3. The user clicks the "Request a Hint" button.
 4. The system generates a hint or guiding question based on the user's current work.
 
 ---
 
 ## Use Case 4: Account Creation
 
-**Actor**: A new user who has recently downloaded WhiteboardFlow and wants to set up their profile quickly to start practicing.
+**Actor**: A new user who wants to use Whiteboard Assistant and set up their profile quickly to start practicing.
 
-**Pre-Condition**: The user has opened the WhiteboardFlow application for the first time.
+**Pre-Condition**: The user has opened the Whiteboard Assistant application for the first time.
 
 **Post-Condition**: A new account is created for the user, and they are logged in.
 
 ### Main Success Scenario
-1. The user opens the WhiteboardFlow application.
+1. The user opens the Whiteboard Assistant application.
 2. The user selects "Create Account."
 3. The user links an existing Google or Facebook account through OAuth.
 4. The system confirms the account creation and logs the user in.
 
 ---
+
 ## Use Case 5: Account Deletion
 
-**Actor**: A user who has decided to stop using WhiteboardFlow and wants to remove their account and all related data.
+**Actor**: A user who has decided to stop using Whiteboard Assistant and wants to remove their account and all related data.
 
-**Pre-Condition**: The user is logged into WhiteboardFlow and has navigated to their settings/preferences menu.
+**Pre-Condition**: The user is logged into Whiteboard Assistant and has navigated to their settings/preferences menu.
 
 **Post-Condition**: The user's account and data are removed from the Firebase database.
 
@@ -88,12 +89,12 @@ sidebar_position: 5
 
 **Actor**: A user who wants to track their progress and review feedback on previous practice problems.
 
-**Pre-Condition**: The user is logged into WhiteboardFlow.
+**Pre-Condition**: The user is logged into Whiteboard Assistant.
 
 **Post-Condition**: The user can review past questions and feedback.
 
 ### Main Success Scenario
-1. The user logs into their WhiteboardFlow account.
+1. The user logs into their Whiteboard Assistant account.
 2. The user accesses the "Previous Questions" table via the hamburger menu on the homepage.
 3. The user clicks on a specific question from the history list.
 4. The system displays the question, AI-generated feedback, and the user’s speech emotion score.
@@ -127,8 +128,8 @@ sidebar_position: 5
 
 ### Main Success Scenario
 1. The user is actively answering a question.
-2. The user accidentally exits the WhiteboardFlow tab.
-3. The user reopens WhiteboardFlow and logs back in.
+2. The user accidentally exits the Whiteboard Assistant tab.
+3. The user reopens Whiteboard Assistant and logs back in.
 4. The system prompts the user to restore their previous session.
 5. The user selects "Yes" to continue.
 6. The system restores the previous session, including whiteboard drawings and time remaining.
