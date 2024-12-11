@@ -8,6 +8,6 @@ Demonstration of all of the functional and non-functional requirements. This can
 ## Document
 
 The spreadsheet below shows a demonstration of the project's acceptance testing.
-[Link to spreadsheet](https://docs.google.com/spreadsheets/d/13fP8GMfXUzr0D6VnoWtkCTZfZ-XnYcqLYH1rIQXKFNo/export?gid=0#gid=0).
+[Link to spreadsheet](https://docs.google.com/spreadsheets/d/1m6Q_IWDviawDrm7CYnIuqKnqPwNEtJ0E/edit?usp=sharing&ouid=105497353319689691938&rtpof=true&sd=true).
 
-![1728844611967-8fec3def-081d-45d1-ae63-d28d537f5c60_1](https://github.com/user-attachments/assets/245528b4-1d96-490c-8391-a1e9a4b97905)
+This spreadsheet contains detailed logs and outcomes of the acceptance tests, providing a comprehensive overview of the system's functionality and compliance with the specified requirements. Each row represents a test scenario with its corresponding outcomes, observations, and statuses. This document ensures that all aspects of the project have been rigorously evaluated and meet the expected standards.
