@@ -164,6 +164,46 @@ to practice interview questions and attempt to solve them through handwritten
 input. The application will then analyze your response and provide feedback on
 your solution.
 
+## Features
+
+### Handwriting Analysis
+- Ability to analyze handwritten input to understand and interpret problem-solving strategies and logic.
+
+### Microphone Integration for Speech Detection
+- Incorporates speech recognition to allow verbal commands and explanations, enhancing user interaction and input versatility.
+
+### AI-Powered Feedback and Performance Tracking
+- Provides real-time, intelligent feedback on the user's problem-solving techniques and solutions.
+- Features a comprehensive analytics page that tracks and displays progress in problem-solving efficiency and accuracy.
+- Delivers personalized insights into strengths and developmental areas, aiding in targeted skill improvement and ensuring a tailored learning experience.
+
+### Expanded Problem Library
+- Extensive collection of coding and estimation problems ranging across various difficulty levels and programming languages.
+
+### Customizable Interface
+- Includes a Dark Mode setting to reduce eye strain and improve visibility during extended use.
+  
+### Security Enhancements
+- Integration with Google account for secure and streamlined user authentication.
+- Uses Firebase for secure backend services, including data storage and handling, ensuring that all user information is protected with the latest security standards.
+
+## Known Bugs
+
+### Apple Pencil Compatibility
+- Users may experience intermittent loss of pen strokes when using the Apple Pencil.
+
+### Session Timeouts
+- On some devices, users might encounter "session timed out" errors occasionally.
+
+### Whiteboard Interface Adjustment
+- Occasionally, resizing the problem area on the whiteboard interface by dragging (not using buttons) may fail to adjust properly.
+
+### Tool Button Hover State
+- After using certain tools on the whiteboard (e.g., eraser, undo), the hover state on buttons may not disappear as expected.
+
+### Initial Problem List Loading
+- Some users may experience longer than usual loading times when accessing the problem list for the first time.
+
 ## Collaborators
 
 [//]: # ( readme: collaborators -start )
