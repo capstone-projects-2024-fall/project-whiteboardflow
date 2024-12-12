@@ -4,7 +4,8 @@ sidebar_position: 2
 
 # System Block Diagram
 
-![image](https://github.com/user-attachments/assets/30911914-885c-448b-b5ed-771c3eaf601f)
+![image](https://github.com/user-attachments/assets/2f5b1659-23a5-4450-bea8-3f64e3a2ae82)
+
 
 
 #### Figure 1. High-level design of the Whiteboard Assistant application.
